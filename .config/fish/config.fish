@@ -17,3 +17,8 @@ set -x NVM_DIR ~/.nvm
 nvm use default --silent
 
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+alias nvimConf='nvim ~/.config/nvim/init.vim'
+alias fishConf='nvim ~/.config/fish/config.fish'
+alias xmonadConf='nvim ~/.xmonad/xmonad.hs'
+alias xmobarConf='nvim ~/.config/xmobar/xmobarrc'
