@@ -243,7 +243,7 @@ myEventHook = mempty
 
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
+
 myLogHook = return ()
 
 ------------------------------------------------------------------------
@@ -262,7 +262,8 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
+    xmproc <- spawnPipe "/home/frans/.cabal/bin/xmobar -x 0"
+    xmproc <- spawnPipe "/home/frans/.cabal/bin/xmobar -x 1"
     xmonad $ docks defaults
 
 -- A structure containing your configuration settings, overriding
