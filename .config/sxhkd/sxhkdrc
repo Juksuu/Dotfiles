@@ -1,0 +1,15 @@
+#
+# Global keybinds
+#
+
+# Open terminal
+super + Return
+      kitty
+
+# Open rofi
+super + d
+      rofi -modi drun -show drun
+
+# Screenshot
+Print
+  scrot -e 'mv $f ~/Pictures/ 2>/dev/null'
