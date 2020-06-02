@@ -63,6 +63,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
+Plug 'djoshea/vim-autoread'
 
 call plug#end()
 
