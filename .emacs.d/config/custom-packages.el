@@ -11,11 +11,16 @@
 (use-package evil
   :straight t
   :init
-  (setq evil-want-keybinding nil)
+  (setq evil-want-abbrev-expand-on-insert-exit nil
+        evil-want-C-i-jump nil
+        evil-want-keybinding nil
+        evil-search-module 'isearch
+        evil-ex-search-vim-style-regexp t)
   :config
   (define-key evil-motion-state-map (kbd "TAB") nil)
   (add-to-list 'evil-emacs-state-modes 'magit-mode)
-  (add-to-list 'evil-emacs-state-modes 'sidebar-mode)
+  (add-to-list 'evil-emacs-state-modes 'magit-blame-mode)
+  (add-to-list 'evil-emacs-state-modes 'xref--xref-buffer-mode)
   (evil-mode))
 
 (use-package evil-surround
@@ -38,7 +43,7 @@
 
 (use-package magit
   :straight t
-  :hook (with-editor-mode-hook . evil-insert-state))
+  :hook (with-editor-mode . evil-insert-state))
 
 (use-package projectile
   :straight t
@@ -214,6 +219,7 @@
   :hook ((js-mode         ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
           lua-mode
+          haskell-mode
           ) . lsp)
   :commands lsp
   :init
@@ -254,6 +260,14 @@
 
 (use-package rustic
   :straight t)
+
+(use-package haskell-mode
+  :straight t)
+
+(use-package lsp-haskell
+  :straight t
+  :init
+  (setq lsp-haskell-process-path-hie "hie-wrapper"))
 
 (provide 'custom-packages)
 ;;; custom-packages.el ends here
