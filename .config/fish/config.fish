@@ -1,4 +1,4 @@
-set -x PATH $PATH /home/frans/.local/bin /home/frans/.yarn/bin $HOME/.cargo/bin
+set -x PATH $PATH /home/frans/.local/bin /home/frans/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $HOME/.cabal/bin
 
 set -x GTK_IM_MODULE ibus
 set -x XMODIFIERS @im=ibus
