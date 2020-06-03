@@ -9,13 +9,9 @@ import System.IO (hPutStrLn)
 import System.Exit (exitSuccess)
 import qualified XMonad.StackSet as W
 
--- Data
-import qualified Data.Map as M
-
 -- Utilities
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.NamedScratchpad
-import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce
 
 -- Hooks
@@ -27,34 +23,26 @@ import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcompo
 
 -- Actions
 import XMonad.Actions.Promote
-import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
-import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
-import XMonad.Actions.WindowGo (runOrRaise)
+import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.WithAll (sinkAll, killAll)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
-import XMonad.Actions.GridSelect
+import XMonad.Actions.CycleWS (shiftToNext, shiftToPrev, WSType(..), nextScreen, prevScreen)
 import XMonad.Actions.MouseResize
 
 -- Layouts modifiers
 import XMonad.Layout.LayoutModifier
-import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
-import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), Toggle(..), (??))
+import XMonad.Layout.LimitWindows (limitWindows)
+import XMonad.Layout.MultiToggle (mkToggle, EOT(EOT), Toggle(..), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
-import XMonad.Layout.Reflect (REFLECTX(..), REFLECTY(..))
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.Spacing
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
 
 -- Layouts
-import XMonad.Layout.GridVariants (Grid(Grid))
 import XMonad.Layout.OneBig
-import XMonad.Layout.SimplestFloat
-import XMonad.Layout.Spiral
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
-import XMonad.Layout.ZoomRow (zoomRow, zoomReset, ZoomMessage(ZoomFullToggle))
 
 ------------------------------------------------------------------------
 -- VARIABLES
@@ -107,6 +95,7 @@ myWorkspaces    = ["code","web1", "web2", "files"] ++ map show [5..9]
 ------------------------------------------------------------------------
 -- LAYOUTS
 ------------------------------------------------------------------------
+
 -- Makes setting the spacingRaw simpler to write. The spacingRaw
 -- module adds a configurable amount of space around windows.
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
@@ -140,122 +129,56 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
              where
                myDefaultLayout = tall ||| noBorders monocle ||| threeCol ||| threeRow
 
-
 ------------------------------------------------------------------------
--- Key bindings. Add, modify or remove key bindings here.
---
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-
-    -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
-
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
-
-     -- Rotate through the available layout algorithms
-    , ((modm,               xK_space ), sendMessage NextLayout)
-
-    --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
-
-    -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
-
-    -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
-
-    -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
-
-    -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
-
-    -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
-
-    -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-
-    -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-
-    -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
-
-    -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
-
-    -- Push window back into tiling
-    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
-
-    -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
-
-    -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-
-    -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-    ]
-    ++
-
-    --
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
-    --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
-
-    --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
-
+-- KEYBINDINGS
 ------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
---
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
+myKeys :: [([Char], X ())]
+myKeys = [
+    -- xmonad
+    ("M-C-r", spawn "xmonad --recompile"),      -- Recompiles xmonad
+    ("M-S-r", spawn "xmonad --restart"),        -- Restarts xmonad
+    ("M-S-q", io exitSuccess),                  -- Quits xmonad
 
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+    -- Windows
+    ("M-S-c", kill1),                           -- Kill the currently focused client
+    ("M-S-a", killAll),                         -- Kill all the windows on current workspace
+    ("M-t", withFocused $ windows . W.sink),    -- Push floating window back to tile.
+    ("M-S-t", sinkAll),                         -- Push ALL floating windows back to tile.
 
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
+    -- Windows navigation
+    ("M-m", windows W.focusMaster),             -- Move focus to the master window
+    ("M-j", windows W.focusDown),               -- Move focus to the next window
+    ("M-k", windows W.focusUp),                 -- Move focus to the prev window
+    ("M-C-j", windows W.swapDown),              -- Swap the focused window with the next window
+    ("M-C-k", windows W.swapUp),                -- Swap the focused window with the prev window
+    ("M-S-m", promote),                         -- Moves focused window to master, all others maintain order
 
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    -- Layouts
+    ("M-<Space>", sendMessage NextLayout),                               -- Switch to next layout
+    ("M-S-n", sendMessage $ Toggle NOBORDERS),                           -- Toggles noborder
+    ("M-S-f", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts),  -- Toggles noborder/full
+    ("M-h", sendMessage Shrink),                                         -- Decrease split size
+    ("M-l", sendMessage Expand),                                         -- Increase split size
+
+    -- Workspaces
+    ("M-M1-l", nextScreen),         -- Switch focus to next monitor
+    ("M-M1-h", prevScreen),         -- Switch focus to prev monitor
+    ("M-S-l", shiftToNext),         -- Shifts focused window to next workspace
+    ("M-S-h", shiftToPrev),         -- Shifts focused window to previous workspace
+
+    -- My Applications (Super+Alt+Key)
+    -- ("M-M1-n", spawn (myTerminal ++ " -e nvim"))
+
+    -- Multimedia Keys
+    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
+    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+
     ]
 
 ------------------------------------------------------------------------
--- Window rules:
+-- WINDOW RULES
+------------------------------------------------------------------------
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
@@ -276,7 +199,8 @@ myManageHook = composeAll
     , resource  =? "kdesktop"       --> doIgnore ]
 
 ------------------------------------------------------------------------
--- Startup hook
+-- STARTUP
+------------------------------------------------------------------------
 
 -- Perform an arbitrary action each time xmonad starts or is restarted
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
@@ -315,4 +239,4 @@ main = do
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         }
-        }
+        } `additionalKeysP` myKeys
