@@ -28,12 +28,6 @@ set cmdheight=2
 " delays and poor user experience.
 set updatetime=50
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
 "setup vim-plug {{{
 
   "Note: install vim-plug if not present
@@ -69,6 +63,7 @@ call plug#end()
 
 colorscheme gruvbox
 set background=dark
+hi Normal guibg=NONE ctermbg=NONE
 
 if executable('rg')
     let g:rg_derive_root='true'
