@@ -50,17 +50,16 @@
   :init
   (setq projectile-sort-order 'recentf
         projectile-indexing-method 'hybrid)
-  (setq projectile-git-submodule-command nil)
   :config
   (projectile-mode))
+
+(use-package projectile-ripgrep
+  :straight t)
 
 (use-package helm
   :straight t)
 
 (use-package helm-projectile
-  :straight t)
-
-(use-package helm-rg
   :straight t)
 
 (use-package swiper-helm

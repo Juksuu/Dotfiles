@@ -69,15 +69,14 @@
    "cd" '(xref-find-definitions :which-key "Find definitions")
    "cr" '(xref-find-references :which-key "Find references")
    "cf" '(format-all-buffer :which-key "Format buffer")
-   "cc" '(goto-last-change :which-key "Goto last change")
-   "cs" '(xref-find-apropos :which-key "Find symbol in workspace")
+   "cs" '(helm-lsp-workspace-symbol :which-key "Find symbol in workspace")
    "cS" '(helm-lsp-global-workspace-symbol :which-key "Find symbol in all workspaces")
    "ca" '(helm-lsp-code-actions :which-key "LSP code actions")
 
    ;; Search actions
    "s"  '(:ignore t :which-key "Search")
-   "sp" '(helm-projectile-rg :which-key "Search project")
-   "sb" '(swiper :which-key "Search buffer")
+   "sp" '(projectile-ripgrep :which-key "Search project")
+   "sb" '(swiper-helm :which-key "Search buffer")
 
    ;; Reload actions
    "r"  '(:ignore t :which-key "Reload actions")
