@@ -58,6 +58,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
 Plug 'djoshea/vim-autoread'
+Plug 'maxbrunsfeld/vim-yankstack'
 
 call plug#end()
 
