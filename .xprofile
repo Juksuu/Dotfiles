@@ -2,6 +2,6 @@ picom &
 sxhkd &
 ibus-daemon -drx &
 nitrogen --restore &
-np-applet &
+nm-applet &
 dropbox &
 unclutter &
