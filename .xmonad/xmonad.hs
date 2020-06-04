@@ -202,12 +202,9 @@ myManageHook = composeAll
 -- STARTUP
 ------------------------------------------------------------------------
 
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
-myStartupHook = return ()
+myStartupHook :: X ()
+myStartupHook = do
+    spawnOnce "trayer --edge top --align center --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
 
 ------------------------------------------------------------------------
 -- MAIN

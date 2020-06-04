@@ -15,9 +15,10 @@ Config {
         Run Memory ["-t","\xf233 Mem: <usedratio>%"] 20,
         Run Com "uname" ["-s","-r"] "" 36000,
         Run Date "%b %d %Y (%H:%M)" "date" 50,
+        Run Com "/home/frans/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 10,
         Run UnsafeStdinReader
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%UnsafeStdinReader% }{ %cpu% | %memory% | %date% | %uname%"
+    template = "%UnsafeStdinReader% }{ %trayerpad% | %cpu% | %memory% | %date% | %uname%"
 }
