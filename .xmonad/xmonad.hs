@@ -171,8 +171,8 @@ myKeys = [
     -- ("M-M1-n", spawn (myTerminal ++ " -e nvim"))
 
     -- Multimedia Keys
-    ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
-    ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+    ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/adjustVolume.sh 5%-"),
+    ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/adjustVolume.sh 5%+")
 
     ]
 
