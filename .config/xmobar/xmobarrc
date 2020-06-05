@@ -20,5 +20,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%UnsafeStdinReader% }{ %trayerpad% | %cpu% | %memory% | %date% | %uname%"
+    template = "%UnsafeStdinReader% }{ %cpu% | %memory% | %date% | %uname% | %trayerpad%"
 }
