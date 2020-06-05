@@ -20,6 +20,7 @@ set undofile
 set incsearch
 set termguicolors
 set scrolloff=8
+set laststatus=2
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -49,7 +50,6 @@ set updatetime=50
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -62,21 +62,19 @@ Plug 'maxbrunsfeld/vim-yankstack'
 
 call plug#end()
 
+" Colorscheme
 colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
 set background=dark
-hi Normal guibg=NONE ctermbg=NONE
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
 
 if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-let loaded_matchparen = 1
 let mapleader = " "
-
-let g:netrw_browse_split = 2
-let g:vrfr_rg = 'true'
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -93,22 +91,6 @@ nnoremap <Leader>- :vertical resize -5<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-vnoremap X "_d
-inoremap <C-c> <esc>
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <C-space> coc#refresh()
-
 " GoTo code navigation.
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gt <Plug>(coc-type-definition)
@@ -120,11 +102,6 @@ nmap <leader>g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
 nnoremap <leader>cr :CocRestart
-
-" Sweet Sweet FuGITive
-nmap <leader>gh :diffget //3<CR>
-nmap <leader>gg :diffget //2<CR>
-nmap <leader>gs :G<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
