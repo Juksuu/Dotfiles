@@ -25,7 +25,7 @@ import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcompo
 import XMonad.Actions.Promote
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.WithAll (sinkAll, killAll)
-import XMonad.Actions.CycleWS (shiftToNext, shiftToPrev, WSType(..), nextScreen, prevScreen)
+import XMonad.Actions.CycleWS (shiftNextScreen, shiftPrevScreen, WSType(..), nextScreen, prevScreen)
 import XMonad.Actions.MouseResize
 
 -- Layouts modifiers
@@ -82,14 +82,14 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
-myClickJustFocuses = False
+myClickJustFocuses = True
 
 -- Workspaces
-myWorkspaces    = ["code","web1", "web2", "files"] ++ map show [5..9]
+myWorkspaces    = ["code","web1", "web2", "files", "dev-env"] ++ map show [6..9]
 
 
 ------------------------------------------------------------------------
@@ -164,8 +164,8 @@ myKeys = [
     -- Workspaces
     ("M-M1-l", nextScreen),         -- Switch focus to next monitor
     ("M-M1-h", prevScreen),         -- Switch focus to prev monitor
-    ("M-S-l", shiftToNext),         -- Shifts focused window to next workspace
-    ("M-S-h", shiftToPrev),         -- Shifts focused window to previous workspace
+    ("M-S-l", shiftNextScreen >> nextScreen),     -- Shifts focused window to next screen
+    ("M-S-h", shiftPrevScreen >> prevScreen),     -- Shifts focused window to previous screen
 
     -- My Applications (Super+Alt+Key)
     -- ("M-M1-n", spawn (myTerminal ++ " -e nvim"))
@@ -205,7 +205,7 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "dunst &"
-    spawnOnce "trayer --edge top --align center --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
+    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
 
 ------------------------------------------------------------------------
 -- MAIN
@@ -225,6 +225,8 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myBorderNormColor
         , focusedBorderColor = myBorderFocusColor
+        , focusFollowsMouse  = myFocusFollowsMouse
+        , clickJustFocuses   = myClickJustFocuses
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
