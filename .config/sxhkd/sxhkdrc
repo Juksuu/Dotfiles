@@ -4,12 +4,15 @@
 
 # Open terminal
 super + Return
-      kitty
+    kitty
 
 # Open rofi
 super + d
-      rofi -modi drun -show drun
+    dmenu_run -fn 'Code New Roman-10'
+
+super + shift + d
+    $HOME/.config/dmenu/edit-configs.sh
 
 # Screenshot
 Print
-  scrot -e 'mv $f ~/Pictures/ 2>/dev/null'
+    scrot -e 'mv $f ~/Pictures/ 2>/dev/null'
