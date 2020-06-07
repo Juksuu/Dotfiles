@@ -21,6 +21,7 @@ set incsearch
 set termguicolors
 set scrolloff=8
 set laststatus=2
+set clipboard=unnamedplus
 
 " Give more space for displaying messages.
 set cmdheight=2
