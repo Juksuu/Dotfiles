@@ -205,6 +205,7 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "dunst &"
+    spawnOnce "pasystray &"
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
 
 ------------------------------------------------------------------------
@@ -213,8 +214,8 @@ myStartupHook = do
 
 main :: IO ()
 main = do
-    xmproc0 <- spawnPipe "/home/frans/.cabal/bin/xmobar -x 0 /home/frans/.config/xmobar/xmobarrc"
-    xmproc1 <- spawnPipe "/home/frans/.cabal/bin/xmobar -x 1 /home/frans/.config/xmobar/xmobarrc"
+    xmproc0 <- spawnPipe "/home/frans/.cabal/bin/xmobar -x 0 /home/frans/.config/xmobar/xmobarrc0"
+    xmproc1 <- spawnPipe "/home/frans/.cabal/bin/xmobar -x 1 /home/frans/.config/xmobar/xmobarrc1"
     xmonad $ ewmh desktopConfig
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageHook desktopConfig <+> manageDocks
         , modMask            = myModMask
