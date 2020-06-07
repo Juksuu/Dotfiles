@@ -101,7 +101,7 @@
 (use-package gruvbox-theme
   :straight t
   :config
-  (load-theme 'gruvbox-dark-soft t))
+  (load-theme 'gruvbox-dark-hard t))
 
 (use-package dashboard
   :straight t
