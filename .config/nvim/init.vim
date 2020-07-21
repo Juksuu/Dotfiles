@@ -60,6 +60,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
 Plug 'djoshea/vim-autoread'
 Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'ThePrimeagen/vim-be-good'
 
 call plug#end()
 
