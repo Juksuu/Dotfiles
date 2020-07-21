@@ -219,6 +219,7 @@
           typescript-mode ; ts-ls (tsserver wrapper)
           lua-mode
           haskell-mode
+          web-mode
           ) . lsp)
   :commands lsp
   :init
@@ -246,7 +247,8 @@
   :straight t
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'"   . web-mode)
-         ("\\.json\\'"  . web-mode)))
+         ("\\.json\\'"  . web-mode)
+         ("\\.tsx\\'"  . web-mode)))
 
 (use-package lua-mode
   :straight t)
