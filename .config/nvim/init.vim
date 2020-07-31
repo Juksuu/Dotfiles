@@ -1,37 +1,32 @@
 syntax on
 
-set guicursor=
-set noshowmatch
-set relativenumber
-set nohlsearch
-set hidden
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+" Indentation
+set tabstop=4
+set softtabstop=4
 set expandtab
-set smartindent
-set nu
-set nowrap
-set smartcase
-set noswapfile
-set nobackup
-set undodir=~/.config/nvim/undodir
-set undofile
+set autoindent
+set copyindent
+
+" Title
+set title
+set titlestring=%t
+
+" Misc
+set ruler
+set confirm
+set autoread
 set incsearch
-set termguicolors
-set scrolloff=8
-set laststatus=2
+set cursorline
+set relativenumber
+
 set clipboard=unnamedplus
 
-" Give more space for displaying messages.
-set cmdheight=2
+set undofile
+set undodir=~/.config/nvim/undodir
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=50
+set background=dark
 
 "setup vim-plug {{{
-
   "Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -45,70 +40,63 @@ set updatetime=50
     " Required:
     call plug#begin()
   endif
-
 "}}}
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Util
 Plug 'tpope/vim-commentary'
 Plug 'mbbill/undotree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'sheerun/vim-polyglot'
 Plug 'djoshea/vim-autoread'
 Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Theme
+Plug 'gruvbox-community/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'sheerun/vim-polyglot'
+
+" For fun
 Plug 'ThePrimeagen/vim-be-good'
 
 call plug#end()
 
 " Colorscheme
-colorscheme gruvbox
+colorscheme onedark
+
 let g:gruvbox_contrast_dark = 'hard'
-set background=dark
+let g:gruvbox_invert_selection='0'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='onedark'
 
-if executable('rg')
-    let g:rg_derive_root='true'
-endif
+" Polyglot
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
 
+" Binds
 let mapleader = " "
+nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
-nnoremap <Leader>+ :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>gf :GFiles<CR>
+nnoremap <leader>gs :Gstatus<CR>
 
-" GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gt <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rr <Plug>(coc-rename)
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
-nnoremap <leader>cr :CocRestart
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-autocmd BufWritePre * :call TrimWhitespace()
