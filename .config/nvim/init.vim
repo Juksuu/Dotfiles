@@ -64,6 +64,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
