@@ -54,6 +54,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Util
 Plug 'tpope/vim-commentary'
@@ -65,6 +66,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'machakann/vim-highlightedyank'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'prettier/vim-prettier'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
@@ -90,6 +94,9 @@ let g:airline_theme='onedark'
 " Fzf
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
+
+" Editor config
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " Polyglot
 let g:go_highlight_build_constraints = 1
@@ -117,6 +124,8 @@ nnoremap <leader>b :Buffer<CR>
 
 nnoremap <leader>gf :GFiles<CR>
 nnoremap <leader>gs :Gstatus<CR>
+
+nmap <Leader>fb <Plug>(Prettier)
 
 nmap <leader>ce :CocDiagnostics<CR>
 nmap <leader>cd <Plug>(coc-definition)
