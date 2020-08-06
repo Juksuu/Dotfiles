@@ -85,14 +85,6 @@
   (define-key company-active-map (kbd "RET") nil)
   (define-key company-active-map (kbd "SPC") nil))
 
-(use-package company-lsp
-  :straight t
-  :init
-  (setq company-lsp-cache-candidates nil)
-  (setq company-lsp-enable-recompletion t)
-  :config
-  (add-to-list 'company-backends #'company-lsp))
-
 (use-package editorconfig
   :straight t
   :config
@@ -231,8 +223,7 @@
         (vector
          (list :name "typescript-tslint-plugin"
                :location "<home>/.nvm/versions/node/v13.12.0/lib/node_modules/typescript-tslint-plugin/")))
-  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
-  (add-to-list 'company-lsp-filter-candidates '(lsp-emmy-lua . t)))
+  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
 
 (use-package lsp-ui
   :straight t
