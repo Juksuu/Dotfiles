@@ -1,11 +1,10 @@
 syntax on
 
 " Indentation
-set tabstop=4
-set softtabstop=4
 set expandtab
 set autoindent
-set copyindent
+set shiftwidth=4
+set softtabstop=4
 
 " Title
 set title
@@ -13,11 +12,19 @@ set titlestring=%t
 
 " Misc
 set ruler
+set hidden
 set confirm
 set autoread
 set incsearch
 set cursorline
+set cmdheight=2
+set shortmess+=c
+set updatetime=300
 set relativenumber
+
+set nobackup
+set noswapfile
+set nowritebackup
 
 set clipboard=unnamedplus
 
@@ -25,6 +32,7 @@ set undofile
 set undodir=~/.config/nvim/undodir
 
 set background=dark
+
 
 "setup vim-plug {{{
   "Note: install vim-plug if not present
@@ -77,6 +85,10 @@ let g:gruvbox_invert_selection='0'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='onedark'
 
+" Fzf
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+
 " Polyglot
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -97,6 +109,29 @@ let g:go_auto_sameids = 1
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
+nnoremap <leader>f :Files<CR>
+
+nnoremap <leader>b :Buffer<CR>
+
 nnoremap <leader>gf :GFiles<CR>
 nnoremap <leader>gs :Gstatus<CR>
+
+nmap <leader>ce :CocDiagnostics<CR>
+nmap <leader>cd <Plug>(coc-definition)
+nmap <leader>ct <Plug>(coc-type-definition)
+nmap <leader>ci <Plug>(coc-implementation)
+nmap <leader>cr <Plug>(coc-references)
+nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <leader>cn <Plug>(coc-diagnostic-next-error)
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 
