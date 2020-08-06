@@ -63,6 +63,7 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-surround'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
