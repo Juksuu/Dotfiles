@@ -206,7 +206,7 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "dunst &"
     spawnOnce "pasystray &"
-    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
+    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
 
 ------------------------------------------------------------------------
 -- MAIN
