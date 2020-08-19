@@ -16,9 +16,11 @@ set hidden
 set confirm
 set autoread
 set incsearch
+set nohlsearch
 set cursorline
 set cmdheight=2
 set shortmess+=c
+set termguicolors
 set updatetime=300
 set relativenumber
 
@@ -34,8 +36,7 @@ set undodir=~/.config/nvim/undodir
 set background=dark
 
 
-"setup vim-plug {{{
-  "Note: install vim-plug if not present
+"setup vim-plug {{{ Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
@@ -114,6 +115,9 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
 
+" Auto pairs
+let g:AutoPairsShortcutToggle = ''
+
 " Binds
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
@@ -123,7 +127,7 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffer<CR>
 
 nnoremap <leader>gf :GFiles<CR>
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
 nmap <Leader>fb <Plug>(Prettier)
 
@@ -134,6 +138,8 @@ nmap <leader>ci <Plug>(coc-implementation)
 nmap <leader>cr <Plug>(coc-references)
 nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>cn <Plug>(coc-diagnostic-next-error)
+nmap <leader>cf  <Plug>(coc-fix-current)
+nnoremap <silent> <leader>cs :<C-u>CocList -I -N symbols<CR>
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -145,4 +151,15 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
