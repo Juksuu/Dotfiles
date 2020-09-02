@@ -75,18 +75,19 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Util
-Plug 'tpope/vim-commentary'
 Plug 'mbbill/undotree'
 Plug 'djoshea/vim-autoread'
+Plug 'tpope/vim-commentary'
 Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier'
+Plug 'preservim/nerdtree'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
@@ -149,6 +150,9 @@ let g:AutoPairsShortcutToggle = ''
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
+nnoremap <silent> <M-j> :bprev<CR>
+nnoremap <silent> <M-k> :bnext<CR>
+
 nnoremap <leader>f :Files<CR>
 
 nnoremap <leader>b :Buffer<CR>
@@ -158,8 +162,7 @@ nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
 nmap <Leader>fb <Plug>(Prettier)
 
-nnoremap <silent> <M-j> :bprev<CR>
-nnoremap <silent> <M-k> :bnext<CR>
+nmap <Leader>t :NERDTreeToggle<CR>
 
 nmap <leader>ce :CocDiagnostics<CR>
 nmap <leader>cd <Plug>(coc-definition)
@@ -195,4 +198,11 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Open nerdtree if no file is specified on startup
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close vim when only nerdtree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
