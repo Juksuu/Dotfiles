@@ -1,32 +1,50 @@
 syntax on
+set encoding=utf-8
 
-" Indentation
+set nu
+set ruler
+set hidden
+set confirm
+set hlsearch
+set smarttab
+set autoread
+set wildmenu
+set incsearch
+set cursorline
+set termguicolors
+
+set complete-=i
+set cmdheight=2
+set history=1000
+set laststatus=2
+set shortmess+=c
+set tabpagemax=50
+set updatetime=300
+set nrformats-=octal
+set display+=lastline
+
+set title
+set titlestring=%t
+
 set expandtab
 set autoindent
 set shiftwidth=4
 set softtabstop=4
 
-" Title
-set title
-set titlestring=%t
+set viewoptions-=options
+set sessionoptions-=options
 
-" Misc
-set ruler
-set hidden
-set confirm
-set autoread
-set incsearch
-set nohlsearch
-set cursorline
-set cmdheight=2
-set shortmess+=c
-set termguicolors
-set updatetime=300
-set relativenumber
+set scrolloff=1
+set sidescrolloff=5
+
+set ttimeout
+set ttimeoutlen=100
 
 set nobackup
 set noswapfile
 set nowritebackup
+
+set backspace=indent,eol,start
 
 set clipboard=unnamedplus
 
@@ -34,7 +52,6 @@ set undofile
 set undodir=~/.config/nvim/undodir
 
 set background=dark
-
 
 "setup vim-plug {{{ Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -73,24 +90,33 @@ Plug 'prettier/vim-prettier'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
-Plug 'joshdick/onedark.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
 
 call plug#end()
 
+" Vim
+let g:enable_bold_font = 1
+let g:enable_italic_font = 1
+
 " Colorscheme
-colorscheme onedark
+let g:hybrid_transparent_background = 1
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection='0'
 
+colorscheme hybrid_material
+
 " Airline
+let g:airline_theme = 'hybrid'
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='onedark'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Fzf
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
@@ -140,6 +166,9 @@ nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>cn <Plug>(coc-diagnostic-next-error)
 nmap <leader>cf  <Plug>(coc-fix-current)
 nnoremap <silent> <leader>cs :<C-u>CocList -I -N symbols<CR>
+
+" Clear highlight after search
+nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
