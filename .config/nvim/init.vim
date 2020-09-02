@@ -145,6 +145,7 @@ let g:go_auto_sameids = 1
 let g:AutoPairsShortcutToggle = ''
 
 " Binds
+
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
@@ -156,6 +157,9 @@ nnoremap <leader>gf :GFiles<CR>
 nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
 nmap <Leader>fb <Plug>(Prettier)
+
+nnoremap <silent> <M-j> :bprev<CR>
+nnoremap <silent> <M-k> :bnext<CR>
 
 nmap <leader>ce :CocDiagnostics<CR>
 nmap <leader>cd <Plug>(coc-definition)
