@@ -95,6 +95,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'cocopon/iceberg.vim'
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
@@ -106,15 +107,15 @@ let g:enable_bold_font = 1
 let g:enable_italic_font = 1
 
 " Colorscheme
-let g:hybrid_transparent_background = 1
+" let g:hybrid_transparent_background = 1
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection='0'
 
-colorscheme hybrid_material
+colorscheme iceberg
 
 " Airline
-let g:airline_theme = 'hybrid'
+let g:airline_theme = 'iceberg'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
