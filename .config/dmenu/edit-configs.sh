@@ -21,7 +21,7 @@ xprofile
 
 quit")
 
-choice=$(echo -e "${options[@]}" | dmenu -i -p 'Edit config: ')
+choice=$(echo -e "${options[@]}" | dmenu -i -p 'Edit config: ' -fn 'Code New Roman-10')
 
 case "$choice" in
     quit)
@@ -49,7 +49,7 @@ case "$choice" in
         choice="$HOME/.config/xmobar/"
         ;;
     polybar)
-        choice="$HOME/.config/polybar/config"
+        choice="$HOME/.config/polybar/"
         ;;
 
     fish)
