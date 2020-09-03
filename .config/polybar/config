@@ -39,21 +39,21 @@ screenchange-reload = true
 margin-top = 0
 margin-bottom = 0
 
-[bar/bar]
+[bar/primary]
 monitor = ${env:MONITOR:}
 wm-restack = bspwm
-bottom = true
+bottom = false
 enable-ipc = true
 separator =
 
-width = 100%
+width = 91%
 height = 24
-offset-x = 0
-offset-y = 0
-radius = 0.0
+offset-x = 2%
+offset-y = 5
+radius = 7
 
 module-margin-left = 0
-module-margin-right = 1
+module-margin-right = 0
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -62,15 +62,70 @@ font-0 = CodeNewRoman:pixelsize=11;
 font-1 = HackNerdFont:pixelsize=11;
 font-2 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false;
 
-modules-left = bspwm xwindow
+modules-left = bspwm empty xwindow
 modules-right = cpu-load linux time
 
-tray-position = right
-tray-padding = 1
-tray-background = ${colors.background-alt}
+[bar/secondary]
+monitor = ${env:MONITOR:}
+wm-restack = bspwm
+bottom = false
+enable-ipc = true
+separator =
+
+width = 96%
+height = 24
+offset-x = 2%
+offset-y = 5
+radius = 7
+
+module-margin-left = 0
+module-margin-right = 0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = CodeNewRoman:pixelsize=11;
+font-1 = HackNerdFont:pixelsize=11;
+font-2 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false;
+
+modules-left = bspwm empty xwindow
+modules-right = cpu-load linux time
+
+[bar/tray]
+monitor = ${env:MONITOR:}
+wm-restack = bspwm
+bottom = false
+enable-ipc = true
+separator =
+
+tray-position = center
 tray-offset-x = 0
 tray-offset-y = 0
 tray-scale = 1.0
+
+width = 5%
+height = 24
+offset-x = 94%
+offset-y = 3
+radius = 7
+
+module-margin-left = 0
+module-margin-right = 0
+
+background = ${colors.background}
+
+font-0 = CodeNewRoman:pixelsize=11;
+font-1 = HackNerdFont:pixelsize=11;
+font-2 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false;
+
+modules-left = empty
+modules-right = empty
+
+[module/empty]
+type = custom/text
+content = "    "
+content-background =
+content-foreground =
 
 [module/bspwm]
 type = internal/bspwm
@@ -121,7 +176,7 @@ format-padding =
 
 [module/time]
 type = custom/script
-exec = date '+%d/%m/%Y %H:%M:%S'
+exec = date '+%H:%M %d.%m.%y'
 label = "%output%"
 interval = 5
 
