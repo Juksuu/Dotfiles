@@ -2,17 +2,22 @@
 # Dmenu script for opening config files
 
 declare options=("
+bspwm
+xmonad
 awesome
+
 emacs
-fish
-kitty
 neovim
+
+xmobar
+
+fish
+dmenu
+kitty
 picom
 sxhkd
-xmobar
-xmonad
 xprofile
-dmenu
+
 quit")
 
 choice=$(echo -e "${options[@]}" | dmenu -i -p 'Edit config: ')
@@ -21,35 +26,42 @@ case "$choice" in
     quit)
         echo "Program terminated." && exit 1
         ;;
+
+    bspwm)
+        choice="$HOME/.config/bspwm/bspwmrc"
+        ;;
+    xmonad)
+        choice="$HOME/.xmonad/xmonad.hs"
+        ;;
     awesome)
         choice="$HOME/.config/awesome/"
         ;;
+
     emacs)
         choice="$HOME/.emacs.d/"
-        ;;
-    fish)
-        choice="$HOME/.config/fish/"
-        ;;
-    kitty)
-        choice="$HOME/.config/kitty/"
         ;;
     neovim)
         choice="$HOME/.config/nvim/init.vim"
         ;;
+
+    xmobar)
+        choice="$HOME/.config/xmobar/"
+        ;;
+
+    fish)
+        choice="$HOME/.config/fish/"
+        ;;
     dmenu)
         choice="$HOME/.config/dmenu/edit-configs.sh"
+        ;;
+    kitty)
+        choice="$HOME/.config/kitty/"
         ;;
     picom)
         choice="$HOME/.config/picom/picom.conf"
         ;;
     sxhkd)
         choice="$HOME/.config/sxhkd/sxhkdrc"
-        ;;
-    xmobar)
-        choice="$HOME/.config/xmobar/"
-        ;;
-    xmonad)
-        choice="$HOME/.xmonad/xmonad.hs"
         ;;
     xprofile)
         choice="$HOME/.xprofile"
