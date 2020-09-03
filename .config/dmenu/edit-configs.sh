@@ -10,6 +10,7 @@ emacs
 neovim
 
 xmobar
+polybar
 
 fish
 dmenu
@@ -46,6 +47,9 @@ case "$choice" in
 
     xmobar)
         choice="$HOME/.config/xmobar/"
+        ;;
+    polybar)
+        choice="$HOME/.config/polybar/config"
         ;;
 
     fish)
