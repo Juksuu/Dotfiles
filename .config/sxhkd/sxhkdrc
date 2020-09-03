@@ -2,11 +2,15 @@
 # Global keybinds
 #
 
-# Open terminal
+# Make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Terminal
 super + Return
     kitty
 
-# Open rofi
+# Dmenu
 super + d
     dmenu_run -fn 'Code New Roman-10'
 
@@ -16,3 +20,36 @@ super + shift + d
 # Screenshot
 Print
     scrot -e 'mv $f ~/Pictures/ 2>/dev/null'
+
+# Audio events
+XF86Audio{Lower,Raise}Volume
+    $HOME/scripts/adjustVolume.sh 5%{-,+}
+
+
+#
+# Bspwm binds
+#
+
+# Quit bspwm
+super + shift + q
+    bspc quit
+
+# Close node
+super + c
+    bspc node -c
+
+# Set the window state
+super + {t,shift + t,s,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Focus or send to desktop local
+super + {_, shift + } {1-4}
+    bspc {desktop -f, node -d} focused:'^{1-4}'
+
+# Focus or send to desktop global
+super + alt + {_, shift + } {1-8}
+    bspc {desktop -f, node -d} '^{1-8}'
+
+# focus or switch the node in the given direction
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}

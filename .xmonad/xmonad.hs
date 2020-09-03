@@ -171,8 +171,8 @@ myKeys = [
     -- ("M-M1-n", spawn (myTerminal ++ " -e nvim"))
 
     -- Multimedia Keys
-    ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/adjustVolume.sh 5%-"),
-    ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/adjustVolume.sh 5%+")
+    -- ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/adjustVolume.sh 5%-"),
+    -- ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/adjustVolume.sh 5%+")
 
     ]
 
@@ -204,7 +204,7 @@ myManageHook = composeAll
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "dunst &"
+    -- spawnOnce "dunst &"
     spawnOnce "pasystray &"
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 70 --tint 0x000000 --height 20 &"
 
