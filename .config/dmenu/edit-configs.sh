@@ -62,7 +62,7 @@ case "$choice" in
         choice="$HOME/.config/kitty/"
         ;;
     picom)
-        choice="$HOME/.config/picom/picom.conf"
+        choice="$HOME/.config/picom.conf"
         ;;
     sxhkd)
         choice="$HOME/.config/sxhkd/sxhkdrc"
