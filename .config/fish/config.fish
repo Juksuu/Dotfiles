@@ -1,8 +1,9 @@
-set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $HOME/.cabal/bin /var/lib/flatpak/exports/bin/
-
 set -x GTK_IM_MODULE ibus
 set -x XMODIFIERS @im=ibus
 set -x QT_IM_MODULE ibus
+set -x GOPATH $HOME/projects/go
+
+set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin /var/lib/flatpak/exports/bin $GOPATH/bin
 
 set -x VISUAL nvim
 set -x EDITOR $VISUAL
