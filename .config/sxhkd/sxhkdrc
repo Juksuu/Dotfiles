@@ -34,6 +34,10 @@ XF86Audio{Lower,Raise}Volume
 super + shift + q
     bspc quit
 
+# Restart bspwm
+super + q
+  bspc wm -r
+
 # Close node
 super + c
     bspc node -c
@@ -53,3 +57,11 @@ super + alt + {_, shift + } {1-8}
 # focus or switch the node in the given direction
 super + {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
+
+# Expand a window by moving one of its side outward
+ctrl + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Contract a window by moving one of its side inward
+ctrl + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
