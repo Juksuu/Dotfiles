@@ -88,6 +88,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier'
 Plug 'preservim/nerdtree'
+Plug 'editorconfig/editorconfig-vim'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
@@ -111,7 +112,8 @@ let g:enable_italic_font = 1
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection='0'
-
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 colorscheme iceberg
 
 " Airline
@@ -146,8 +148,10 @@ let g:go_auto_sameids = 1
 " Auto pairs
 let g:AutoPairsShortcutToggle = ''
 
-" Binds
+" NERDTree
+let NERDTreeShowHidden = 1
 
+" Binds
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
@@ -175,8 +179,14 @@ nmap <silent> <leader>cn <Plug>(coc-diagnostic-next-error)
 nmap <leader>cf  <Plug>(coc-fix-current)
 nnoremap <silent> <leader>cs :<C-u>CocList -I -N symbols<CR>
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " Clear highlight after search
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+
+" Search/Highlight word under cursor in file
+nnoremap <leader>h :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -207,3 +217,5 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim when only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
