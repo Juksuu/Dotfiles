@@ -8,7 +8,7 @@ super + Escape
 
 # Terminal
 super + Return
-    kitty
+    alacritty
 
 # Dmenu
 super + d
