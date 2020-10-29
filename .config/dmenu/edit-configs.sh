@@ -13,8 +13,8 @@ xmobar
 polybar
 
 fish
+alacritty
 dmenu
-kitty
 picom
 sxhkd
 xprofile
@@ -55,11 +55,11 @@ case "$choice" in
     fish)
         choice="$HOME/.config/fish/"
         ;;
+    alacritty)
+        choice="$HOME/.config/alacritty/alacritty.yml"
+        ;;
     dmenu)
         choice="$HOME/.config/dmenu/edit-configs.sh"
-        ;;
-    kitty)
-        choice="$HOME/.config/kitty/"
         ;;
     picom)
         choice="$HOME/.config/picom.conf"
@@ -74,5 +74,5 @@ case "$choice" in
         exit 1
         ;;
 esac
-kitty -e nvim "$choice"
+alacritty -e nvim "$choice"
 
