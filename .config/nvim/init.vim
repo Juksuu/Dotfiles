@@ -90,6 +90,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier'
 Plug 'preservim/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Asheq/close-buffers.vim'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
@@ -178,8 +179,11 @@ nnoremap <silent> <M-j> :bprev<CR>
 nnoremap <silent> <M-k> :bnext<CR>
 
 nnoremap <leader>f :Files<CR>
+nnoremap <leader>fc :Files %:p:h<CR>
 
 nnoremap <leader>b :Buffer<CR>
+nnoremap <leader>bo :Bdelete other<CR>
+nnoremap <silent> <leader>bc :NERDTreeClose<bar> bd<CR>
 
 nnoremap <leader>gf :GFiles<CR>
 nnoremap <leader>gc :GBranches<CR>
