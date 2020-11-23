@@ -51,8 +51,6 @@ set clipboard=unnamedplus
 set undofile
 set undodir=~/.config/nvim/undodir
 
-set background=dark
-
 "setup vim-plug {{{ Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -91,6 +89,7 @@ Plug 'prettier/vim-prettier'
 Plug 'preservim/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Asheq/close-buffers.vim'
+Plug 'Yggdroot/indentLine'
 
 " Theme
 Plug 'gruvbox-community/gruvbox'
@@ -99,6 +98,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'cocopon/iceberg.vim'
+Plug 'glepnir/oceanic-material'
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
@@ -110,16 +110,23 @@ let g:enable_bold_font = 1
 let g:enable_italic_font = 1
 
 " Colorscheme
-" let g:hybrid_transparent_background = 1
+set background=dark
 
 let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection='0'
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-colorscheme iceberg
+let g:gruvbox_invert_selection = '0'
+
+let g:oceanic_material_transparent_background = 0
+let g:oceanic_material_background = 'ocean'
+let g:oceanic_material_allow_bold = 1
+let g:oceanic_material_allow_italic = 1
+let g:oceanic_material_allow_underline = 1
+let g:oceanic_material_allow_undercurl = 1
+let g:oceanic_material_allow_reverse = 1
+
+colorscheme oceanic_material
 
 " Airline
-let g:airline_theme = 'iceberg'
+let g:airline_theme = 'bubblegum'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -191,7 +198,8 @@ nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
 nmap <Leader>fb <Plug>(Prettier)
 
-nmap <Leader>t :NERDTreeToggle<CR>
+nmap <Leader>tt :NERDTreeToggle<CR>
+nmap <Leader>ti :IndentLinesToggle<CR>
 
 nmap <leader>ce :CocDiagnostics<CR>
 nmap <leader>cd <Plug>(coc-definition)
