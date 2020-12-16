@@ -2,7 +2,14 @@
 source "${HOME}/.cache/squash/colors"
 
 ~/.config/polybar/launch.sh &
+pgrep -x picom > /dev/null || picom &
+pgrep -x sxhkd > /dev/null || sxhkd &
+pgrep -x sxhkd > /dev/null || sxhkd &
+pgrep -x nm-applet > /dev/null || nm-applet &
+pgrep -x dropbox > /dev/null || dropbox &
 pgrep -x dunst > /dev/null || dunst &
+
+nitrogen --restore &
 
 bspc monitor DP-2 -d 1 2 3 4
 bspc monitor DP-0 -d 5 6 7 8
