@@ -1,7 +1,0 @@
-picom &
-sxhkd &
-ibus-daemon -drx &
-nitrogen --restore &
-nm-applet &
-dropbox &
-unclutter &
