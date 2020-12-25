@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import re
 import subprocess
 from libqtile.config import Screen
@@ -10,49 +9,15 @@ class Screens():
     resolution_delimiters = "x", "+"
     cmd = "xrandr | grep -v disconnected | grep connected"
 
-    widget_defaults = dict(
-        font='JetBrainsMono Nerd Font',
-        fontsize=14,
-        padding=2
-    )
+    colors = {}
 
-    widgets_primary = [
-        widget.CurrentLayout(),
-        widget.GroupBox(),
-        widget.Prompt(),
-        widget.WindowName(),
-        widget.Chord(
-            chords_colors={
-                'launch': ("#ff0000", "#ffffff"),
-            },
-            name_transform=lambda name: name.upper(),
-        ),
-        widget.TextBox("default config", name="default"),
-        widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-        widget.Systray(),
-        widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-        widget.QuickExit()
-    ]
+    widgets_primary = []
+    widgets_secondary = []
 
-    widgets_secondary = [
-        widget.CurrentLayout(),
-        widget.GroupBox(),
-        widget.Prompt(),
-        widget.WindowName(),
-        widget.Chord(
-            chords_colors={
-                'launch': ("#ff0000", "#ffffff"),
-            },
-            name_transform=lambda name: name.upper(),
-        ),
-        widget.TextBox("default config", name="default"),
-        widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-        widget.Systray(),
-        widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-        widget.QuickExit()
-    ]
+    def __init__(self, colorDefinitions):
+        self.colors = colorDefinitions
+        self.init_widgets()
 
-    def __init__(self):
         output = self.get_screen_info()
         parsed_screen_info = self.parse_screen_info(output)
         self.init_screens(parsed_screen_info)
@@ -63,7 +28,7 @@ class Screens():
             resolution = screen_info["resolution"]
             self.screens.append(
                 Screen(
-                    top=bar.Bar(widgets=self.screen_widgets(screen_info["name"]), opacity=1.0, size=20),
+                    bottom=bar.Bar(widgets=self.screen_widgets(screen_info["name"]), opacity=1.0, size=20, margin=[0, 0, 0, 0], background=self.colors["bg"]),
                     width=resolution[0],
                     height=resolution[1],
                     x=resolution[2],
@@ -97,3 +62,199 @@ class Screens():
                 "resolution": resolution_parsed
             })
         return parsed_screen_info
+
+    def init_widgets(self):
+        widget_defaults = {
+            "font": 'JetBrainsMono Nerd Font',
+            "fontsize": 10
+        }
+
+        self.widgets_primary.extend([
+            widget.Sep(
+                **widget_defaults,
+                linewidth = 0,
+                padding = 6
+            ),
+            widget.GroupBox(
+                **widget_defaults,
+                margin_y = 4,
+                padding_y = 4,
+                borderwidth = 1,
+                active = self.colors["accent"],
+                inactive = self.colors["accent"],
+                rounded = False,
+                highlight_color = self.colors["shadow"],
+                highlight_method = "line",
+                this_current_screen_border = self.colors["accent"],
+                this_screen_border = self.colors["accent"],
+                # other_current_screen_border = colors[0],
+                # other_screen_border = colors[0],
+                foreground = self.colors["fg"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                linewidth = 0,
+                padding = 20
+            ),
+            widget.WindowName(
+                **widget_defaults,
+                foreground = self.colors["fg"]
+            ),
+            widget.ThermalSensor(
+                **widget_defaults,
+                threshold = 80,
+                foreground = self.colors["string"],
+                foreground_alert = self.colors["error"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.Pacman(
+                **widget_defaults,
+                update_interval = 1800,
+                foreground = self.colors["fg"]
+            ),
+            widget.TextBox(
+                **widget_defaults,
+                text = "Updates",
+                padding = 5,
+                foreground = self.colors["fg"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.TextBox(
+                **widget_defaults,
+                text = " Vol:",
+                padding = 0,
+                foreground = self.colors["fg"]
+            ),
+            widget.Volume(
+                **widget_defaults,
+                padding = 5,
+                foreground = self.colors["string"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.CurrentLayout(
+                **widget_defaults,
+                foreground = self.colors["fg"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.Clock(
+                **widget_defaults,
+                format = "%A, %B %d %H:%M",
+                foreground = self.colors["string"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.Systray(
+                **widget_defaults,
+            )
+        ])
+
+        self.widgets_secondary.extend([
+            widget.Sep(
+                **widget_defaults,
+                linewidth = 0,
+                padding = 6
+            ),
+            widget.GroupBox(
+                **widget_defaults,
+                margin_y = 4,
+                padding_y = 4,
+                borderwidth = 1,
+                active = self.colors["accent"],
+                inactive = self.colors["accent"],
+                rounded = False,
+                highlight_color = self.colors["shadow"],
+                highlight_method = "line",
+                this_current_screen_border = self.colors["accent"],
+                this_screen_border = self.colors["accent"],
+                # other_current_screen_border = colors[0],
+                # other_screen_border = colors[0],
+                foreground = self.colors["fg"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                linewidth = 0,
+                padding = 20
+            ),
+            widget.WindowName(
+                **widget_defaults,
+                foreground = self.colors["fg"]
+            ),
+            widget.ThermalSensor(
+                **widget_defaults,
+                threshold = 80,
+                foreground = self.colors["string"],
+                foreground_alert = self.colors["error"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.Pacman(
+                **widget_defaults,
+                update_interval = 1800,
+                foreground = self.colors["fg"]
+            ),
+            widget.TextBox(
+                **widget_defaults,
+                text = "Updates",
+                padding = 5,
+                foreground = self.colors["fg"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.TextBox(
+                **widget_defaults,
+                text = " Vol:",
+                padding = 0,
+                foreground = self.colors["fg"]
+            ),
+            widget.Volume(
+                **widget_defaults,
+                padding = 5,
+                foreground = self.colors["string"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.CurrentLayout(
+                **widget_defaults,
+                foreground = self.colors["fg"]
+            ),
+            widget.Sep(
+                **widget_defaults,
+                padding = 10,
+                foreground = self.colors["fg"]
+            ),
+            widget.Clock(
+                **widget_defaults,
+                format = "%A, %B %d %H:%M",
+                foreground = self.colors["string"]
+            )
+        ])
+
+

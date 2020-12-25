@@ -9,8 +9,9 @@ from libqtile import layout, hook
 from libqtile.config import Group
 from libqtile.lazy import lazy
 
-from screens import Screens
 from keys import Keys
+from colors import Colors
+from screens import Screens
 
 ## Startup programs ##
 @hook.subscribe.startup_once
@@ -32,24 +33,34 @@ def restart_on_randr(qtile, ev):
 ## Initialization ##
 if __name__ in ["config", "__main__"]:
 
+    # Colors initialization
+    color_class = Colors()
+    colorDefinitions = color_class.colorDefinitions
+
     # Screen initialization
-    screens_class = Screens()
-    extension_defaults = screens_class.widget_defaults.copy()
+    screens_class = Screens(colorDefinitions)
     screens = screens_class.screens
 
     # Groups initialization
-    groups = [Group(i) for i in "asdfuiop"]
+    group_names = [("DEV",      {'layout': 'monadtall'}),
+                   ("WWW",      {'layout': 'monadtall'}),
+                   ("FLS",      {'layout': 'monadtall'}),
+                   ("MUS",      {'layout': 'monadtall'}),
+                   ("DIS",      {'layout': 'monadtall'}),
+                   ("GFX",      {'layout': 'floating'}),
+                   ("SLACK",    {'layout': 'monadtall'})]
+    groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
     # Keys initialization
-    key_class = Keys(groups)
+    key_class = Keys(group_names)
     keys = Keys.keys
     mouse = Keys.mouse
-
 
     # Layouts
     layouts = [
         layout.MonadTall(),
-        # layout.Max(),
+        layout.Floating(),
+        layout.Max()
         # layout.Stack(num_stacks=2),
         # layout.Bsp(),
         # layout.Columns(),

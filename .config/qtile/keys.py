@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from libqtile.config import Click, Drag, Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -11,13 +10,13 @@ class Keys():
     # Key alias
     mod =   "mod4"
     alt =   "mod1"
-    
+
     terminal = guess_terminal()
 
-    def __init__(self, groups):
+    def __init__(self, group_names):
         self.init_keys()
         self.init_mouse()
-        self.init_group_binds(groups)
+        self.init_group_binds(group_names)
 
     def init_keys(self):
         self.keys.extend([
@@ -40,7 +39,7 @@ class Keys():
             Key([self.mod, "shift"], "q", lazy.shutdown(),
                 desc='Shutdown Qtile'),
 
-            
+
             ### Window controls
             Key([self.mod], "k", lazy.layout.down(),
                 desc='Move focus down in current stack pane'),
@@ -82,16 +81,11 @@ class Keys():
                 desc='Move focus to prev monitor'),
         ])
 
-    def init_group_binds(self, groups):
-        for i in groups:
+    def init_group_binds(self, group_names):
+        for i, (name, kwargs) in enumerate(group_names, 1):
             self.keys.extend([
-                # mod1 + letter of group = switch to group
-                Key([self.mod], i.name, lazy.group[i.name].toscreen(),
-                    desc="Switch to group {}".format(i.name)),
-
-                # mod1 + shift + letter of group = switch to & move focused window to group
-                Key([self.mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
-                    desc="Switch to & move focused window to group {}".format(i.name)),
+                Key([self.mod], str(i), lazy.group[name].toscreen()), # Switch to another group
+                Key([self.mod, "shift"], str(i), lazy.window.togroup(name)) # Send current window to another group
             ])
 
     def init_mouse(self):
