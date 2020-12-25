@@ -111,15 +111,15 @@ class Screens():
                 padding = 10,
                 foreground = self.colors["fg"]
             ),
-            widget.Pacman(
+            widget.CheckUpdates(
                 **widget_defaults,
+                distro = "Arch",
                 update_interval = 1800,
-                foreground = self.colors["fg"]
-            ),
-            widget.TextBox(
-                **widget_defaults,
-                text = "Updates",
-                padding = 5,
+                custom_command = "yay -Qu",
+                display_format = "Updates: {updates}",
+                no_update_string = "No updates",
+                colour_have_updates = self.colors["fg"],
+                colour_no_updates = self.colors["fg"],
                 foreground = self.colors["fg"]
             ),
             widget.Sep(
