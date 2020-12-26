@@ -13,7 +13,6 @@ set incsearch
 set cursorline
 set termguicolors
 
-set complete-=i
 set cmdheight=2
 set history=1000
 set laststatus=2
@@ -38,7 +37,7 @@ set scrolloff=1
 set sidescrolloff=5
 
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=50
 
 set nobackup
 set noswapfile
@@ -50,6 +49,8 @@ set clipboard=unnamedplus
 
 set undofile
 set undodir=~/.config/nvim/undodir
+
+set pyxversion=3
 
 "setup vim-plug {{{ Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -84,7 +85,6 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier'
 Plug 'preservim/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
@@ -99,6 +99,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'cocopon/iceberg.vim'
 Plug 'glepnir/oceanic-material'
+Plug 'ayu-theme/ayu-vim'
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
@@ -123,10 +124,12 @@ let g:oceanic_material_allow_underline = 1
 let g:oceanic_material_allow_undercurl = 1
 let g:oceanic_material_allow_reverse = 1
 
-colorscheme oceanic_material
+let ayucolor='mirage'
+
+colorscheme ayu
 
 " Airline
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'ayu_mirage'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
