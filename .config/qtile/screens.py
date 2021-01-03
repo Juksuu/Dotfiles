@@ -28,15 +28,11 @@ class Screens():
             resolution = screen_info["resolution"]
             self.screens.append(
                 Screen(
-                    bottom=bar.Bar(widgets=self.screen_widgets(screen_info["name"]), opacity=1.0, size=20, margin=[0, 0, 0, 0], background=self.colors["bg"]),
-                    width=resolution[0],
-                    height=resolution[1],
-                    x=resolution[2],
-                    y=resolution[3]
+                    top=bar.Bar(widgets=self.screen_widgets(screen_info["name"]), opacity=1.0, size=20, margin=[0, 0, 0, 0], background=self.colors["bg"])
                 ))
 
     def screen_widgets(self, screen_name):
-        if screen_name == "DP-0":
+        if screen_name == "DP-2":
             return self.widgets_primary
         else:
             return self.widgets_secondary
@@ -111,38 +107,6 @@ class Screens():
                 padding = 10,
                 foreground = self.colors["fg"]
             ),
-            widget.CheckUpdates(
-                **widget_defaults,
-                distro = "Arch",
-                update_interval = 1800,
-                custom_command = "yay -Qu",
-                display_format = "Updates: {updates}",
-                no_update_string = "No updates",
-                colour_have_updates = self.colors["fg"],
-                colour_no_updates = self.colors["fg"],
-                foreground = self.colors["fg"]
-            ),
-            widget.Sep(
-                **widget_defaults,
-                padding = 10,
-                foreground = self.colors["fg"]
-            ),
-            widget.TextBox(
-                **widget_defaults,
-                text = " Vol:",
-                padding = 0,
-                foreground = self.colors["fg"]
-            ),
-            widget.Volume(
-                **widget_defaults,
-                padding = 5,
-                foreground = self.colors["string"]
-            ),
-            widget.Sep(
-                **widget_defaults,
-                padding = 10,
-                foreground = self.colors["fg"]
-            ),
             widget.CurrentLayout(
                 **widget_defaults,
                 foreground = self.colors["fg"]
@@ -203,38 +167,6 @@ class Screens():
                 threshold = 80,
                 foreground = self.colors["string"],
                 foreground_alert = self.colors["error"]
-            ),
-            widget.Sep(
-                **widget_defaults,
-                padding = 10,
-                foreground = self.colors["fg"]
-            ),
-            widget.Pacman(
-                **widget_defaults,
-                update_interval = 1800,
-                foreground = self.colors["fg"]
-            ),
-            widget.TextBox(
-                **widget_defaults,
-                text = "Updates",
-                padding = 5,
-                foreground = self.colors["fg"]
-            ),
-            widget.Sep(
-                **widget_defaults,
-                padding = 10,
-                foreground = self.colors["fg"]
-            ),
-            widget.TextBox(
-                **widget_defaults,
-                text = " Vol:",
-                padding = 0,
-                foreground = self.colors["fg"]
-            ),
-            widget.Volume(
-                **widget_defaults,
-                padding = 5,
-                foreground = self.colors["string"]
             ),
             widget.Sep(
                 **widget_defaults,
