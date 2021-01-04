@@ -53,6 +53,9 @@ set undodir=~/.config/nvim/undodir
 
 set pyxversion=3
 
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 "setup vim-plug {{{ Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -99,6 +102,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'preservim/nerdtree'
 Plug 'Asheq/close-buffers.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Theme
 Plug 'sheerun/vim-polyglot'
@@ -182,7 +186,8 @@ let NERDTreeShowHidden = 1
 
 " Lua config setup
 lua require('init')
-lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
+lua require('telescope').setup({ defaults = { file_sorter = require('telescope.sorters').get_fzy_sorter }})
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 " Binds
 let mapleader = " "
