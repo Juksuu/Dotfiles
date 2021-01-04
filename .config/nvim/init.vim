@@ -78,6 +78,11 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
+
 " Util
 Plug 'mbbill/undotree'
 Plug 'djoshea/vim-autoread'
@@ -177,6 +182,7 @@ let NERDTreeShowHidden = 1
 
 " Lua config setup
 lua require('init')
+lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
 
 " Binds
 let mapleader = " "
@@ -191,19 +197,28 @@ nnoremap <silent> <M-k> :bnext<CR>
 nmap <Leader>tt :NERDTreeToggle<CR>
 nmap <Leader>ti :IndentLinesToggle<CR>
 
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>fc :Files %:p:h<CR>
-
-nnoremap <leader>b :Buffer<CR>
 nnoremap <leader>bo :Bdelete other<CR>
 nnoremap <silent> <leader>bc :NERDTreeClose<bar> bd<CR>
 
-nnoremap <leader>gf :GFiles<CR>
 nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
+" File formatting
 nmap <Leader>fb <Plug>(Prettier)
 
+" Clear highlight after search
+nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+
+" Command history
+nnoremap <Leader>h :lua require('telescope.builtin').command_history()<CR>
+
+" Search
+nnoremap <Leader>ff :lua require('telescope.builtin').find_files()<CR>
+nnoremap <leader>fg :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>fb :lua require('telescope.builtin').buffers()<CR>
+nnoremap <Leader>fcd :lua require('telescope.builtin').live_grep()<CR>
+
+" Lsp
 nnoremap <leader>cd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>ci :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>cr :lua vim.lsp.buf.references()<CR>
@@ -212,11 +227,6 @@ nnoremap <leader>cf :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>cl :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <silent>K :lua vim.lsp.buf.hover()<CR>
 
-" Clear highlight after search
-nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-
-" Search/Highlight word under cursor in file
-nnoremap <leader>h :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Open nerdtree if no file is specified on startup
 autocmd StdinReadPre * let s:std_in=1
