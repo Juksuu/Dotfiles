@@ -11,7 +11,7 @@ end
 lspconfig.tsserver.setup{ on_attach = on_attach }
 
 local eslint = require "efm/eslint"
--- local tslint = require "efm/tslint"
+local tslint = require "efm/tslint"
 
 -- https://github.com/mattn/efm-langserver
 lspconfig.efm.setup {
@@ -19,10 +19,10 @@ lspconfig.efm.setup {
     settings = {
         rootMarkers = { ".git/" },
         languages = {
-            typescript = { eslint },
-            javascript = { eslint },
-            typescriptreact = { eslint },
-            javascriptreact = { eslint }
+            typescript = { eslint, tslint },
+            javascript = { eslint, tslint },
+            typescriptreact = { eslint, tslint },
+            javascriptreact = { eslint, tslint }
         }
     }
 }
