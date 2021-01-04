@@ -11,7 +11,6 @@ set smarttab
 set autoread
 set wildmenu
 set incsearch
-set cursorline
 set termguicolors
 
 set cmdheight=2
@@ -130,6 +129,8 @@ let g:gruvbox_invert_selection = '0'
 let ayucolor='mirage'
 
 colorscheme ayu
+
+hi Normal guibg=NONE ctermbg=NONE
 
 " Airline
 let g:airline_theme = 'ayu_mirage'
