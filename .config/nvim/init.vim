@@ -1,5 +1,6 @@
 syntax on
 set encoding=utf-8
+filetype plugin indent on
 
 set nu
 set ruler
@@ -44,7 +45,7 @@ set noswapfile
 set nowritebackup
 
 set backspace=indent,eol,start
-
+set completeopt=menuone,noinsert,noselect
 set clipboard=unnamedplus
 
 set undofile
@@ -69,6 +70,10 @@ set pyxversion=3
 
 call plug#begin('~/.config/nvim/plugged')
 
+" Nvim lsp
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -82,23 +87,20 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
 Plug 'prettier/vim-prettier'
-Plug 'preservim/nerdtree'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'preservim/nerdtree'
 Plug 'Asheq/close-buffers.vim'
 Plug 'Yggdroot/indentLine'
 
 " Theme
-Plug 'gruvbox-community/gruvbox'
 Plug 'sheerun/vim-polyglot'
+Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'cocopon/iceberg.vim'
-Plug 'glepnir/oceanic-material'
 Plug 'ayu-theme/ayu-vim'
 
 " For fun
@@ -115,14 +117,6 @@ set background=dark
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = '0'
-
-let g:oceanic_material_transparent_background = 0
-let g:oceanic_material_background = 'ocean'
-let g:oceanic_material_allow_bold = 1
-let g:oceanic_material_allow_italic = 1
-let g:oceanic_material_allow_underline = 1
-let g:oceanic_material_allow_undercurl = 1
-let g:oceanic_material_allow_reverse = 1
 
 let ayucolor='mirage'
 
@@ -181,12 +175,21 @@ let g:AutoPairsShortcutToggle = ''
 " NERDTree
 let NERDTreeShowHidden = 1
 
+" Lua config setup
+lua require('init')
+
 " Binds
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 nnoremap <silent> <M-j> :bprev<CR>
 nnoremap <silent> <M-k> :bnext<CR>
+
+nmap <Leader>tt :NERDTreeToggle<CR>
+nmap <Leader>ti :IndentLinesToggle<CR>
 
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>fc :Files %:p:h<CR>
@@ -201,21 +204,13 @@ nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
 nmap <Leader>fb <Plug>(Prettier)
 
-nmap <Leader>tt :NERDTreeToggle<CR>
-nmap <Leader>ti :IndentLinesToggle<CR>
-
-nmap <leader>ce :CocDiagnostics<CR>
-nmap <leader>cd <Plug>(coc-definition)
-nmap <leader>ct <Plug>(coc-type-definition)
-nmap <leader>ci <Plug>(coc-implementation)
-nmap <leader>cr <Plug>(coc-references)
-nmap <silent> <leader>cp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>cn <Plug>(coc-diagnostic-next-error)
-nmap <leader>cf  <Plug>(coc-fix-current)
-nnoremap <silent> <leader>cs :<C-u>CocList -I -N symbols<CR>
-
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>cd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>ci :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>cr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>cR :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>cf :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>cl :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent>K :lua vim.lsp.buf.hover()<CR>
 
 " Clear highlight after search
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
@@ -223,34 +218,9 @@ nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR
 " Search/Highlight word under cursor in file
 nnoremap <leader>h :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
 " Open nerdtree if no file is specified on startup
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Close vim when only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
