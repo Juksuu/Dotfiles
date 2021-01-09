@@ -1,10 +1,10 @@
 #!/bin/bash
 
-mkdir -p tmp
-FILE="$(mktemp ./tmp/XXXXXXXX.ts)"
+mkdir -p tmp/tslint
+FILE="$(mktemp ./tmp/tslint/XXXXXXXX.ts)"
 
 cat > "$FILE"
 
 "$@" "$FILE"
 
-rm -f ./tmp/*
+rm -f ./tmp/tslint/*
