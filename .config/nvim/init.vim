@@ -2,9 +2,9 @@ syntax on
 set encoding=utf-8
 filetype plugin indent on
 
-set nu
 set ruler
 set hidden
+set nu rnu
 set confirm
 set hlsearch
 set smarttab
@@ -12,7 +12,6 @@ set autoread
 set wildmenu
 set incsearch
 set termguicolors
-
 set cmdheight=2
 set history=1000
 set laststatus=2
@@ -52,9 +51,6 @@ set undodir=~/.config/nvim/undodir
 
 set pyxversion=3
 
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
 "setup vim-plug {{{ Note: install vim-plug if not present
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -87,29 +83,29 @@ Plug 'nvim-lua/telescope.nvim'
 
 " Util
 Plug 'mbbill/undotree'
-Plug 'djoshea/vim-autoread'
-Plug 'tpope/vim-commentary'
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'stsewd/fzf-checkout.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'machakann/vim-highlightedyank'
-Plug 'prettier/vim-prettier'
-Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
-Plug 'Asheq/close-buffers.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'tpope/vim-commentary'
+Plug 'djoshea/vim-autoread'
+Plug 'Raimondi/delimitMate'
+Plug 'prettier/vim-prettier'
+Plug 'stsewd/fzf-checkout.vim'
+Plug 'Asheq/close-buffers.vim'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Theme
 Plug 'sheerun/vim-polyglot'
-Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'ayu-theme/ayu-vim'
+
+Plug 'arcticicestudio/nord-vim'
+Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
@@ -122,18 +118,12 @@ let g:enable_italic_font = 1
 
 " Colorscheme
 set background=dark
-
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = '0'
-
-let ayucolor='mirage'
-
-colorscheme ayu
+colorscheme Tomorrow-Night
 
 hi Normal guibg=NONE ctermbg=NONE
 
 " Airline
-let g:airline_theme = 'ayu_mirage'
+let g:airline_theme = 'tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -179,29 +169,19 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
 
-" Auto pairs
-let g:AutoPairsShortcutToggle = ''
-
 " NERDTree
 let NERDTreeShowHidden = 1
 
 " Lua config setup
 lua require('init')
 lua require('telescope').setup({ defaults = { file_sorter = require('telescope.sorters').get_fzy_sorter }})
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 " Binds
 let mapleader = " "
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
 nnoremap <silent> <M-j> :bprev<CR>
 nnoremap <silent> <M-k> :bnext<CR>
-
-nmap <Leader>tt :NERDTreeToggle<CR>
-nmap <Leader>ti :IndentLinesToggle<CR>
 
 nnoremap <leader>bo :Bdelete other<CR>
 nnoremap <silent> <leader>bc :NERDTreeClose<bar> bd<CR>
@@ -210,13 +190,17 @@ nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>gs :vert :botright :Gstatus<CR>
 
 " File formatting
-nmap <Leader>fb <Plug>(Prettier)
+nmap <Leader>fcb <Plug>(Prettier)
 
 " Clear highlight after search
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 " Command history
 nnoremap <Leader>h :lua require('telescope.builtin').command_history()<CR>
+
+" Toggles
+nmap <Leader>tt :NERDTreeToggle<CR>
+nmap <Leader>ti :IndentLinesToggle<CR>
 
 " Search
 nnoremap <Leader>ff :lua require('telescope.builtin').find_files()<CR>
