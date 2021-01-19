@@ -88,3 +88,9 @@ augroup JUKSU
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
+
+augroup CorrectFiletypes
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx   set filetype=typescript.tsx
+augroup END
+
