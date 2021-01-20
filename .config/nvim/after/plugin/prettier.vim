@@ -1,1 +1,1 @@
-nmap <Leader>fcb <Plug>(Prettier)
+nmap <Leader>p <Plug>(Prettier)

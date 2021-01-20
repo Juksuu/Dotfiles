@@ -1,7 +1,5 @@
 set completeopt=menuone,noinsert,noselect
 
-lua require('init')
-
 nnoremap <leader>cd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>ci :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>cr :lua vim.lsp.buf.references()<CR>
