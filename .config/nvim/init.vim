@@ -37,11 +37,15 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'prettier/vim-prettier'
 Plug 'editorconfig/editorconfig-vim'
 
+" Nerdtree & plugins
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 " Util
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
-Plug 'preservim/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
 Plug 'djoshea/vim-autoread'
@@ -54,6 +58,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " Theme
 Plug 'sheerun/vim-polyglot'
+Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
