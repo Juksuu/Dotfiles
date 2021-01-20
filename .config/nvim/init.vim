@@ -62,6 +62,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'ntk148v/vim-horizon'
 Plug 'arcticicestudio/nord-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
