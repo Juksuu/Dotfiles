@@ -18,7 +18,7 @@ local tslint = require "efm/tslint"
  lspconfig.efm.setup {
      on_attach = on_attach,
      settings = {
-         rootMarkers = { ".git/" },
+         rootMarkers = { ".git/", "package.json" },
          languages = {
              typescript = { eslint, tslint },
              javascript = { eslint, tslint },
