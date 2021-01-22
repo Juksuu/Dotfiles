@@ -3,7 +3,6 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-
 env:
   TERM: xterm-256color
 
@@ -35,35 +34,32 @@ draw_bold_text_with_bright_colors: true
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.96
+background_opacity: 0.98
 
-# Colors (One Half Dark)
 colors:
   # Default colors
   primary:
-    background: '#282c34'
-    foreground: '#abb2bf'
+    background: '#1b1519'
+    foreground: '#ffead6'
 
-  # Normal colors
+    # Normal colors
   normal:
-    # NOTE: Use '#131613' for the `black` color if you'd like to see
-    # black text on the background.
-    black: '#282c34'
-    red: '#e06c75'
-    green: '#98c379'
-    yellow: '#d19a66'
-    blue: '#61afef'
-    magenta: '#c678dd'
-    cyan: '#56b6c2'
-    white: '#abb2bf'
+    black:   '#1b181b'
+    red:     '#fc5133'
+    green:   '#80ac41'
+    yellow:  '#fec72f'
+    blue:    '#5f4494'
+    magenta: '#3f201a'
+    cyan:    '#7e5a5e'
+    white:   '#ffead6'
 
   # Bright colors
   bright:
-    black: '#5c6370'
-    red: '#e06c75'
-    green: '#98c379'
-    yellow: '#d19a66'
-    blue: '#61afef'
-    magenta: '#c678dd'
-    cyan: '#56b6c2'
-    white: '#ffffff'
+    black:   '#3a3634'
+    red:     '#fc5133'
+    green:   '#b4d973'
+    yellow:  '#f8fd63'
+    blue:    '#7b59c0'
+    magenta: '#673225'
+    cyan:    '#c3807a'
+    white:   '#ffead6'
