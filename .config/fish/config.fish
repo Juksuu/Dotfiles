@@ -12,5 +12,6 @@ set -x NVM_DIR ~/.nvm
 nvm use default --silent
 
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias tmx='$HOME/scripts/tmux.sh'
 
 fish_ssh_agent
