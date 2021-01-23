@@ -9,19 +9,19 @@ env:
 # Font configuration
 font:
   normal:
-    family: Mononoki Nerd Font
+    family: DejaVuSansMono Nerd Font
     style: Regular
 
   bold:
-    family: Mononoki Nerd Font
+    family: DejaVuSansMono Nerd Font
     style: Bold
 
   italic:
-    family: Mononoki Nerd Font
+    family: DejaVuSansMono Nerd Font
     style: Italic
 
   bold_italic:
-    family: Mononoki Nerd Font
+    family: DejaVuSansMono Nerd Font
     style: Bold Italic
 
   size: 12
@@ -63,3 +63,8 @@ colors:
     magenta: '#673225'
     cyan:    '#c3807a'
     white:   '#ffead6'
+
+key_bindings:
+  - { key: Key0,      mods: Control, action: ResetFontSize                }
+  - { key: Equals,    mods: Control, action: IncreaseFontSize             }
+  - { key: Minus,     mods: Control, action: DecreaseFontSize             }
