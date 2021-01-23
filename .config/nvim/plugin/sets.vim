@@ -2,6 +2,7 @@ set nu rnu
 set hidden
 set confirm
 set noshowmode
+set noshowmatch
 set noerrorbells
 set termguicolors
 

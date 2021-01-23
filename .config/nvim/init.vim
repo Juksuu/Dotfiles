@@ -64,6 +64,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'franbach/miramare'
 Plug 'ntk148v/vim-horizon'
+Plug 'sainnhe/forest-night'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
@@ -75,6 +76,8 @@ call plug#end()
 " Vim
 let g:enable_bold_font = 1
 let g:enable_italic_font = 1
+
+let g:loaded_matchparen = 1
 
 " Binds
 let mapleader = " "
