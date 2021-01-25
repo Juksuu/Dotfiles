@@ -4,7 +4,6 @@ set confirm
 set noshowmode
 set noshowmatch
 set noerrorbells
-set termguicolors
 
 set guicursor=
 set scrolloff=10
