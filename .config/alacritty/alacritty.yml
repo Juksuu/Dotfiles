@@ -34,37 +34,37 @@ draw_bold_text_with_bright_colors: true
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.98
+background_opacity: 1
 
 colors:
   # Default colors
   primary:
-    background: '#1b1519'
-    foreground: '#ffead6'
+    background: '#263238'
+    foreground: '#eeffff'
 
-    # Normal colors
+  # Normal colors
   normal:
-    black:   '#1b181b'
-    red:     '#fc5133'
-    green:   '#80ac41'
-    yellow:  '#fec72f'
-    blue:    '#5f4494'
-    magenta: '#3f201a'
-    cyan:    '#7e5a5e'
-    white:   '#ffead6'
+    black: '#000000' # Arbitrary
+    red: '#e53935'
+    green: '#91b859'
+    yellow: '#ffb62c'
+    blue: '#6182b8'
+    magenta: '#ff5370' # Dark pink of the original material theme
+    cyan: '#39adb5'
+    white: '#a0a0a0' # Arbitrary
 
   # Bright colors
   bright:
-    black:   '#3a3634'
-    red:     '#fc5133'
-    green:   '#b4d973'
-    yellow:  '#f8fd63'
-    blue:    '#7b59c0'
-    magenta: '#673225'
-    cyan:    '#c3807a'
-    white:   '#ffead6'
+    black: '#4e4e4e' # Arbitrary
+    red: '#ff5370'
+    green: '#c3e88d'
+    yellow: '#ffcb6b'
+    blue: '#82aaff'
+    magenta: '#f07178' # Pink of the original material theme
+    cyan: '#89ddff'
+    white: '#ffffff' # Arbitrary
 
 key_bindings:
-  - { key: Key0,      mods: Control, action: ResetFontSize                }
-  - { key: Equals,    mods: Control, action: IncreaseFontSize             }
-  - { key: Minus,     mods: Control, action: DecreaseFontSize             }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
