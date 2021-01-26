@@ -11,6 +11,9 @@ end
 -- https://github.com/theia-ide/typescript-language-server
 lspconfig.tsserver.setup{ on_attach = on_attach }
 
+-- https://github.com/microsoft/pyright
+lspconfig.pyright.setup{ on_attach = on_attach }
+
 local eslint = require "efm/eslint"
 local tslint = require "efm/tslint"
 
