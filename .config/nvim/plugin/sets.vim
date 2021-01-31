@@ -1,8 +1,10 @@
+set exrc
+set secure
+
 set nu rnu
 set hidden
 set confirm
 set noshowmode
-set noshowmatch
 set noerrorbells
 
 set guicursor=
@@ -12,8 +14,11 @@ set shortmess+=c
 set pyxversion=3
 set updatetime=50
 set display+=lastline
+set inccommand=nosplit
+set formatoptions-=cro
 set clipboard=unnamedplus
 
+set autoread
 set nobackup
 set noswapfile
 

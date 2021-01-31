@@ -16,21 +16,24 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Nvim lsp
+Plug 'glepnir/lspsaga.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Telescope
+" Lua
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+
+" Git
+Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'stsewd/fzf-checkout.vim'
 
 " Fzf
 Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Fileformat things
@@ -43,27 +46,27 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Util
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+Plug 'ThePrimeagen/harpoon'
+
+Plug 'sheerun/vim-polyglot'
+
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
-Plug 'tpope/vim-surround'
-Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-commentary'
 Plug 'djoshea/vim-autoread'
 Plug 'Raimondi/delimitMate'
-Plug 'tjdevries/vim-inyoface'
 Plug 'Asheq/close-buffers.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'machakann/vim-highlightedyank'
 
 " Theme
-Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'gruvbox-community/gruvbox'
-Plug 'franbach/miramare'
 Plug 'ntk148v/vim-horizon'
 Plug 'sainnhe/forest-night'
 Plug 'arcticicestudio/nord-vim'
@@ -77,8 +80,6 @@ call plug#end()
 " Vim
 let g:enable_bold_font = 1
 let g:enable_italic_font = 1
-
-let g:loaded_matchparen = 1
 
 " Binds
 let mapleader = " "
@@ -97,6 +98,7 @@ endfun
 augroup JUKSU
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
+    autocmd TextYankPost *  silent! lua require'vim.highlight'.on_yank()
 augroup END
 
 augroup CorrectFiletypes

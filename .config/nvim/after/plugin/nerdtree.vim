@@ -1,7 +1,7 @@
 let NERDTreeShowHidden = 1
 
 nnoremap <silent> <leader>bc :NERDTreeClose<bar> bd<CR>
-nnoremap <Leader>tt :NERDTreeToggle<CR>
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " Open nerdtree if no file is specified on startup
 autocmd StdinReadPre * let s:std_in=1
