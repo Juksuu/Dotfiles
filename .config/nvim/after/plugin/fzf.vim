@@ -16,5 +16,5 @@ let g:fzf_branch_actions = {
       \   'keymap': 'ctrl-t',
       \   'required': ['branch'],
       \   'confirm': v:false,
-      \ },
+      \ }
       \}

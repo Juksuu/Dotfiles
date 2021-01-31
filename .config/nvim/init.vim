@@ -62,6 +62,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'gruvbox-community/gruvbox'
 Plug 'franbach/miramare'
 Plug 'ntk148v/vim-horizon'
 Plug 'sainnhe/forest-night'
@@ -100,6 +101,5 @@ augroup END
 
 augroup CorrectFiletypes
     autocmd!
-    autocmd BufNewFile,BufRead *.tsx   set filetype=typescript.tsx
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 augroup END
-
