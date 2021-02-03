@@ -5,8 +5,8 @@ let fgcolor=synIDattr(synIDtrans(hlID("Normal")), "fg", "gui")
 let bgcolor=synIDattr(synIDtrans(hlID("Normal")), "bg", "gui")
 
 " Tabline/Buffer line
-set showtabline=2
-set tabline="%1T"
+" set showtabline=2
+" set tabline="%T"
 
 let g:currentmode={
       \ 'n'   : 'Normal ',
@@ -31,20 +31,14 @@ let g:currentmode={
       \}
 
 
-highlight User1 cterm=None gui=None ctermfg=007 guifg=fgcolor
-highlight User2 cterm=None gui=None ctermfg=008 guifg=bgcolor
-highlight User3 cterm=None gui=None ctermfg=008 guifg=bgcolor
-highlight User4 cterm=None gui=None ctermfg=008 guifg=bgcolor
-highlight User5 cterm=None gui=None ctermfg=008 guifg=bgcolor
-highlight User7 cterm=None gui=None ctermfg=008 guifg=bgcolor
-highlight User8 cterm=None gui=None ctermfg=008 guifg=bgcolor
-highlight User9 cterm=None gui=None ctermfg=007 guifg=fgcolor
+highlight User1 cterm=None gui=None ctermfg=008 guifg=fgcolor guibg=bgcolor
+highlight User2 cterm=None gui=None ctermfg=008 guifg=fgcolor guibg=bgcolor
 
 " Automatically change the statusline color depending on mode
 function! ChangeStatuslineColor()
   if (mode() =~# '\v(n|no)')
     exe 'hi! StatusLine ctermfg=008 guifg=fgcolor gui=None cterm=None'
-  elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
+  elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'Visual-Block' || get(g:currentmode, mode(), '') ==# 't')
     exe 'hi! StatusLine ctermfg=005 guifg=#00ff00 gui=None cterm=None'
   elseif (mode() ==# 'i')
     exe 'hi! StatusLine ctermfg=004 guifg=#6CBCE8 gui=None cterm=None'
@@ -81,14 +75,14 @@ endfunction
 " http://stackoverflow.com/a/10416234/213124
 set laststatus=2
 set statusline=
-set statusline+=%{ChangeStatuslineColor()}                  " Changing the statusline color
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}      " Current mode
-set statusline+=%8*\ [%n]                                   " buffernr
-set statusline+=%8*\ %{GitInfo()}                           " Git Branch name
-set statusline+=%8*\ %<%F\ %{ReadOnly()}\ %m\ %w\           " File+path
+set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
+set statusline+=%1*\ [%n]                                " buffernr
+set statusline+=%1*\ %{GitInfo()}                        " Git Branch name
+set statusline+=%1*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
 set statusline+=%*
-set statusline+=%9*\ %=                                     " Space
-set statusline+=%8*\ %y\                                    " FileType
-set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\    " Encoding & Fileformat
-set statusline+=%8*\ %{LspStatus()}                         " Lsp status
-set statusline+=%0*\ %3p%%\ \ %l:%3c\                      " Rownumber/total (%)
+set statusline+=%1*\ %=                                  " Space
+set statusline+=%1*\ %y\                                 " FileType
+set statusline+=%1*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
+set statusline+=%1*\ %{LspStatus()}\                      " Lsp status
+set statusline+=%2*\ %-3l,%3c\ \|\ %L
