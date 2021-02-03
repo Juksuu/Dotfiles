@@ -18,8 +18,11 @@ call plug#begin('~/.config/nvim/plugged')
 " Nvim lsp
 Plug 'glepnir/lspsaga.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/lsp-status.nvim'
+
+" Completion
+Plug 'nvim-lua/completion-nvim'
+Plug 'steelsojka/completion-buffers'
 
 " Lua
 Plug 'nvim-lua/popup.nvim'

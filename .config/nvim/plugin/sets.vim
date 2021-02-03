@@ -12,8 +12,8 @@ set scrolloff=10
 set shortmess+=c
 set pyxversion=3
 set updatetime=50
+set inccommand=split
 set display+=lastline
-set inccommand=nosplit
 set formatoptions-=cro
 set clipboard=unnamedplus
 
