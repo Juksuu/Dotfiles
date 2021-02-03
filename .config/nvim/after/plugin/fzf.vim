@@ -18,3 +18,10 @@ let g:fzf_branch_actions = {
       \   'confirm': v:false,
       \ }
       \}
+
+" nnoremap <Leader>ff :Files<CR>
+" nnoremap <leader>fg :GFiles<CR>
+" nnoremap <Leader>fb :Buffer<CR>
+" nnoremap <Leader>fs :Rg<CR>
+
+" nnoremap <Leader>h :Commands<CR>

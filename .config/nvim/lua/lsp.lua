@@ -1,10 +1,13 @@
 local nvim_lsp = require "lspconfig"
+
 local saga = require "lspsaga"
+saga.init_lsp_saga()
+
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
 
 vim.g.completion_matching_smart_case = 1
 vim.g.completion_matching_strategy_list = {"exact", "substring"}
-
-saga.init_lsp_saga()
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -14,6 +17,9 @@ local on_attach = function(client, bufnr)
 
   -- Completion
   require'completion'.on_attach(client)
+
+  -- Lsp status
+  lsp_status.on_attach(client)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -27,12 +33,15 @@ local on_attach = function(client, bufnr)
 
 end
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
-local servers = { "pyls", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
+nvim_lsp.pyls.setup {
+    on_attach = on_attach,
+    capabilities = lsp_status.capabilities
+}
+
+nvim_lsp.tsserver.setup {
+    on_attach = on_attach,
+    capabilities = lsp_status.capabilities
+}
 
 local tslint = require "efm/tslint"
 

@@ -9,7 +9,6 @@ set noerrorbells
 
 set guicursor=
 set scrolloff=10
-set laststatus=2
 set shortmess+=c
 set pyxversion=3
 set updatetime=50

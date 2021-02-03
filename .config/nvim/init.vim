@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'glepnir/lspsaga.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/lsp-status.nvim'
 
 " Lua
 Plug 'nvim-lua/popup.nvim'
@@ -63,8 +64,6 @@ Plug 'maxbrunsfeld/vim-yankstack'
 
 " Theme
 Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'ntk148v/vim-horizon'
@@ -97,6 +96,9 @@ endfun
 
 augroup JUKSU
     autocmd!
+    " Use completion-nvim in every buffer
+    autocmd BufEnter * lua require'completion'.on_attach()
+
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd TextYankPost *  silent! lua require'vim.highlight'.on_yank()
 augroup END
