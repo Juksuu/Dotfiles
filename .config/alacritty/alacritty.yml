@@ -39,30 +39,30 @@ background_opacity: 1
 colors:
   # Default colors
   primary:
-    background: '#263238'
-    foreground: '#eeffff'
+    background: '#282a36'
+    foreground: '#f8f8f2'
 
   # Normal colors
   normal:
-    black: '#000000' # Arbitrary
-    red: '#e53935'
-    green: '#91b859'
-    yellow: '#ffb62c'
-    blue: '#6182b8'
-    magenta: '#ff5370' # Dark pink of the original material theme
-    cyan: '#39adb5'
-    white: '#a0a0a0' # Arbitrary
+    black: '#000000'
+    red: '#ff5555'
+    green: '#50fa7b'
+    yellow: '#f1fa8c'
+    blue: '#caa9fa'
+    magenta: '#ff79c6'
+    cyan: '#8be9fd'
+    white: '#bfbfbf'
 
   # Bright colors
   bright:
-    black: '#4e4e4e' # Arbitrary
-    red: '#ff5370'
-    green: '#c3e88d'
-    yellow: '#ffcb6b'
-    blue: '#82aaff'
-    magenta: '#f07178' # Pink of the original material theme
-    cyan: '#89ddff'
-    white: '#ffffff' # Arbitrary
+    black: '#575b70'
+    red: '#ff6e67'
+    green: '#5af78e'
+    yellow: '#f4f99d'
+    blue: '#caa9fa'
+    magenta: '#ff92d0'
+    cyan: '#9aedfe'
+    white: '#e6e6e6'
 
 key_bindings:
   - { key: Key0, mods: Control, action: ResetFontSize }

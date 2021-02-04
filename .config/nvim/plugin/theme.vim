@@ -1,6 +1,6 @@
 set termguicolors
 
-let g:theme = "forest-night"
+let g:theme = "horizon"
 
 fun! SetTheme()
     execute 'colorscheme ' . g:theme

@@ -67,12 +67,16 @@ Plug 'maxbrunsfeld/vim-yankstack'
 
 " Theme
 Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-treesitter/nvim-treesitter'
 
-Plug 'gruvbox-community/gruvbox'
+Plug 'glepnir/zephyr-nvim'
 Plug 'ntk148v/vim-horizon'
 Plug 'sainnhe/forest-night'
 Plug 'arcticicestudio/nord-vim'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'gruvbox-community/gruvbox'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
