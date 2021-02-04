@@ -29,11 +29,13 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 
 " Git
 Plug 'junegunn/gv.vim'
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'stsewd/fzf-checkout.vim'
 
 " Fzf
@@ -60,7 +62,6 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
-Plug 'djoshea/vim-autoread'
 Plug 'Raimondi/delimitMate'
 Plug 'Asheq/close-buffers.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
@@ -76,7 +77,6 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'christianchiarulli/nvcode-color-schemes.vim'
 
 " For fun
 Plug 'ThePrimeagen/vim-be-good'
