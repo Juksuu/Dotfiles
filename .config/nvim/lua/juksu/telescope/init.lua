@@ -44,7 +44,7 @@ require('telescope').setup {
             i = {
                 ["<esc>"] = actions.close,
                 ["<C-x>"] = false,
-                ["<C-s>"] = actions.goto_file_selection_split,
+                ["<C-s>"] = actions.goto_file_selection_vsplit,
 
                 -- Experimental
                 ["<tab>"] = actions.toggle_selection,
@@ -84,7 +84,7 @@ require('telescope').load_extension('fzy_native')
 local M = {}
 function M.edit_neovim()
     require('telescope.builtin').find_files {
-        prompt_title = "~ dotfiles ~",
+        prompt_title = "~ Nvim config ~",
         shorten_path = true,
         cwd = "~/.config/nvim",
         width = .25,
@@ -114,15 +114,7 @@ end
 function M.live_grep()
     require('telescope.builtin').live_grep {
         shorten_path = true,
-        previewer = false,
         fzf_separator = "|>",
-    }
-end
-
-function M.grep_prompt()
-    require('telescope.builtin').grep_string {
-        shorten_path = true,
-        search = vim.fn.input("Grep String > "),
     }
 end
 
@@ -142,12 +134,6 @@ function M.curbuf()
         -- layout_strategy = 'current_buffer',
     }
     require('telescope.builtin').current_buffer_fuzzy_find(opts)
-end
-
-function M.search_all_files()
-    require('telescope.builtin').find_files {
-        find_command = { 'rg', '--no-ignore', '--files', },
-    }
 end
 
 return setmetatable({}, {

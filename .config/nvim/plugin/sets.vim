@@ -18,12 +18,12 @@ set updatetime=1000
 set fillchars=eob:~
 set inccommand=split
 set display+=lastline
-set formatoptions-=ta
-set formatoptions+=rn
+set formatoptions-=ato2
+set formatoptions+=crnj
 set clipboard=unnamedplus
 
-set splitbelow
 set splitright
+set splitbelow
 
 set autoread
 set nobackup

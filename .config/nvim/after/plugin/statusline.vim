@@ -1,6 +1,7 @@
 " Statusline & Tabline/Buffer line
 " Dynamically getting the fg/bg colors from the current colorscheme, returns hex which is enough for me to use in Neovim
 " Needs to figure out how to return cterm values too
+
 let fgcolor=synIDattr(synIDtrans(hlID("Normal")), "fg", "gui")
 let bgcolor=synIDattr(synIDtrans(hlID("Normal")), "bg", "gui")
 
@@ -72,11 +73,10 @@ function! LspStatus() abort
   return ''
 endfunction
 
-" http://stackoverflow.com/a/10416234/213124
 set laststatus=2
 set statusline=
 set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
+set statusline+=%0*\ %{g:currentmode[mode()]}   " Current mode
 set statusline+=%1*\ [%n]                                " buffernr
 set statusline+=%1*\ %{GitInfo()}                        " Git Branch name
 set statusline+=%1*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
@@ -85,4 +85,4 @@ set statusline+=%1*\ %=                                  " Space
 set statusline+=%1*\ %y\                                 " FileType
 set statusline+=%1*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
 set statusline+=%1*\ %{LspStatus()}\                      " Lsp status
-set statusline+=%2*\ %-3l,%3c\ \|\ %L
+set statusline+=%2*\ %-3l,%3c\ \|\ %-3L
