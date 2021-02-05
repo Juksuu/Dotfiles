@@ -112,8 +112,3 @@ augroup JUKSU
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd TextYankPost *  silent! lua require'vim.highlight'.on_yank()
 augroup END
-
-augroup CorrectFiletypes
-    autocmd!
-    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-augroup END
