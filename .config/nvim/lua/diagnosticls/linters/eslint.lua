@@ -1,6 +1,6 @@
 local eslint = {
     sourceName = 'eslint',
-    command = 'eslint',
+    command = 'eslint_d',
     debounce = 100,
     args = {
         '--stdin',

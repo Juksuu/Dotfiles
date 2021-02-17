@@ -1,6 +1,8 @@
-set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin
 set -x VISUAL nvim
 set -x EDITOR $VISUAL
+
+set -x GOPATH $HOME/go
+set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $GOPATH/bin
 
 set fish_greeting
 

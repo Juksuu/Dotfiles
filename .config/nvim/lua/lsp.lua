@@ -43,38 +43,49 @@ nvim_lsp.tsserver.setup {
     capabilities = lsp_status.capabilities
 }
 
-local tslint = require "efm/tslint"
+local tslint = require "juksu.efm.linters.tslint"
+local eslint = require "juksu.efm.linters.eslint"
+
+local languages = {
+  --lua = {luafmt},
+  typescript = {tslint, eslint},
+  javascript = {tslint, eslint},
+  typescriptreact = {tslint, eslint},
+  ['typescript.tsx'] = {tslint, eslint},
+  javascriptreact = {tslint, eslint},
+  ['javascript.jsx'] = {tslint, eslint},
+}
 
 -- https://github.com/mattn/efm-langserver
 nvim_lsp.efm.setup {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end,
+    filetypes = vim.tbl_keys(languages),
     settings = {
-        rootMarkers = { '.git/' },
-        languages = {
-            typescript = { tslint },
-            javascript = { tslint },
-            typescriptreact = { tslint },
-            javascriptreact = { tslint }
-        }
-    }
+        rootMarkers = { "package.json", ".git" },
+        lintDebounce = 100,
+        languages = languages
+    },
 }
 
-local eslint = require('diagnosticls.linters.eslint')
-nvim_lsp.diagnosticls.setup {
-    filetypes = {
-        'javascript',
-        'javascriptreact',
-        'typescript',
-        'typescriptreact'
-    },
-    init_options = {
-        filetypes = {
-            javascript = 'eslint',
-            javascriptreact = 'eslint',
-            typescript = 'eslint',
-            typescriptreact = 'eslint'
-        },
-        linters = {
-            eslint = eslint
-        }
-    }
-}
+-- local eslint = require('diagnosticls.linters.eslint')
+-- nvim_lsp.diagnosticls.setup {
+--     filetypes = {
+--         'javascript',
+--         'javascriptreact',
+--         'typescript',
+--         'typescriptreact'
+--     },
+--     init_options = {
+--         filetypes = {
+--             javascript = 'eslint',
+--             javascriptreact = 'eslint',
+--             typescript = 'eslint',
+--             typescriptreact = 'eslint'
+--         },
+--         linters = {
+--             eslint = eslint
+--         }
+--     }
+-- }
