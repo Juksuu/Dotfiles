@@ -6,17 +6,11 @@ saga.init_lsp_saga()
 local lsp_status = require('lsp-status')
 lsp_status.register_progress()
 
-vim.g.completion_matching_smart_case = 1
-vim.g.completion_matching_strategy_list = {"exact", "substring"}
-
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Completion
-  require'completion'.on_attach(client)
 
   -- Lsp status
   lsp_status.on_attach(client)
@@ -68,24 +62,3 @@ nvim_lsp.efm.setup {
         languages = languages
     },
 }
-
--- local eslint = require('diagnosticls.linters.eslint')
--- nvim_lsp.diagnosticls.setup {
---     filetypes = {
---         'javascript',
---         'javascriptreact',
---         'typescript',
---         'typescriptreact'
---     },
---     init_options = {
---         filetypes = {
---             javascript = 'eslint',
---             javascriptreact = 'eslint',
---             typescript = 'eslint',
---             typescriptreact = 'eslint'
---         },
---         linters = {
---             eslint = eslint
---         }
---     }
--- }

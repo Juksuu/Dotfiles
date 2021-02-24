@@ -65,11 +65,11 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
-Plug 'Raimondi/delimitMate'
 Plug 'Asheq/close-buffers.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 
-" Theme
+" Theme / UI
+Plug 'hrsh7th/nvim-compe'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter'
 
