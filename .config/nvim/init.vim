@@ -57,6 +57,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
+Plug 'cohama/lexima.vim'
+
 Plug 'mhinz/vim-startify'
 
 Plug 'ThePrimeagen/harpoon'
@@ -106,9 +108,6 @@ endfun
 
 augroup JUKSU
     autocmd!
-    " Use completion-nvim in every buffer
-    autocmd BufEnter * lua require'completion'.on_attach()
-
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd TextYankPost *  silent! lua require'vim.highlight'.on_yank()
 augroup END

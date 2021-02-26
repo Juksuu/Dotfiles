@@ -40,6 +40,7 @@ set nohlsearch
 set cindent
 set expandtab
 set autoindent
+set smartindent
 set shiftwidth=4
 set softtabstop=4
 
