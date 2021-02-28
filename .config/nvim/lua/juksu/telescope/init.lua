@@ -44,7 +44,7 @@ require('telescope').setup {
             i = {
                 ["<esc>"] = actions.close,
                 ["<C-x>"] = false,
-                ["<C-s>"] = actions.goto_file_selection_vsplit,
+                ["<C-s>"] = actions.file_vsplit,
 
                 -- Experimental
                 ["<tab>"] = actions.toggle_selection,

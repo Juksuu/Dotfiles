@@ -37,6 +37,11 @@ nvim_lsp.tsserver.setup {
     capabilities = lsp_status.capabilities
 }
 
+nvim_lsp.svelte.setup {
+    on_attach = on_attach,
+    capabilities = lsp_status.capabilities
+}
+
 local tslint = require "juksu.efm.linters.tslint"
 local eslint = require "juksu.efm.linters.eslint"
 

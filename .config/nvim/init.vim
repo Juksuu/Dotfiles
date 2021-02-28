@@ -14,7 +14,13 @@
   endif
 "}}}
 
+" Disable polyglot modules
+let g:polyglot_disabled = ['svelte']
+
 call plug#begin('~/.config/nvim/plugged')
+
+" Languages
+Plug 'leafOfTree/vim-svelte-plugin'
 
 " Nvim lsp
 Plug 'glepnir/lspsaga.nvim'

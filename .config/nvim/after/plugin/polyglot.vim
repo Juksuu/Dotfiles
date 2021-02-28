@@ -12,3 +12,9 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_auto_sameids = 1
+
+" let g:svelte_preprocessor_tags = [
+"   \ { 'name': 'ts', 'tag': 'script', 'as': 'typescript' },
+"   \ { 'name': 'scss', 'tag': 'style', 'as': 'scss' }
+"   \ ]
+" let g:svelte_preprocessors = ['ts', 'scss']
