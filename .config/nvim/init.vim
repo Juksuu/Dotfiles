@@ -63,7 +63,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
-Plug 'cohama/lexima.vim'
+Plug 'hrsh7th/nvim-compe'
+
+Plug 'Raimondi/delimitMate'
 
 Plug 'mhinz/vim-startify'
 
@@ -77,15 +79,10 @@ Plug 'Asheq/close-buffers.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 
 " Theme / UI
-Plug 'hrsh7th/nvim-compe'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter'
 
-Plug 'glepnir/zephyr-nvim'
 Plug 'ntk148v/vim-horizon'
-Plug 'sainnhe/forest-night'
-Plug 'arcticicestudio/nord-vim'
-Plug 'bluz71/vim-moonfly-colors'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
