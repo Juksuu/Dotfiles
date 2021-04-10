@@ -6,39 +6,70 @@ saga.init_lsp_saga()
 local lsp_status = require('lsp-status')
 lsp_status.register_progress()
 
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local custom_init = function(client)
+    client.config.flags = client.config.flags or {}
+    client.config.flags.allow_incremental_sync = true
+end
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+local custom_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- Lsp status
-  lsp_status.on_attach(client)
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
+    -- Lsp status
+    lsp_status.on_attach(client)
 
-  -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>cF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>cF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  end
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- Set some keybinds conditional on server capabilities
+    if client.resolved_capabilities.document_formatting then
+        buf_set_keymap("n", "<space>cF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    elseif client.resolved_capabilities.document_range_formatting then
+        buf_set_keymap("n", "<space>cF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    end
 
 end
 
+-- Load lua configuration from nlua.
+require('nlua.lsp.nvim').setup(nvim_lsp, {
+        on_init = custom_init,
+        on_attach = custom_attach,
+
+        root_dir = function(fname)
+            if string.find(vim.fn.fnamemodify(fname, ":p"), ".config/nvim/") then
+                return vim.fn.expand("~/.config/nvim/")
+            end
+
+            return lspconfig_util.find_git_ancestor(fname)
+            or lspconfig_util.path.dirname(fname)
+        end,
+
+        globals = {
+            -- Colorbuddy
+            "Color", "c", "Group", "g", "s",
+
+            -- Custom
+            "RELOAD",
+        }
+    })
+
 nvim_lsp.pyls.setup {
-    on_attach = on_attach,
+    on_init = custom_init,
+    on_attach = custom_attach,
     capabilities = lsp_status.capabilities
 }
 
 nvim_lsp.tsserver.setup {
-    on_attach = on_attach,
+    on_init = custom_init,
+    on_attach = custom_attach,
     capabilities = lsp_status.capabilities
 }
 
 nvim_lsp.svelte.setup {
-    on_attach = on_attach,
+    on_init = custom_init,
+    on_attach = custom_attach,
     capabilities = lsp_status.capabilities
 }
 
@@ -46,13 +77,13 @@ local tslint = require "juksu.efm.linters.tslint"
 local eslint = require "juksu.efm.linters.eslint"
 
 local languages = {
-  --lua = {luafmt},
-  typescript = {tslint, eslint},
-  javascript = {tslint, eslint},
-  typescriptreact = {tslint, eslint},
-  ['typescript.tsx'] = {tslint, eslint},
-  javascriptreact = {tslint, eslint},
-  ['javascript.jsx'] = {tslint, eslint},
+    --lua = {luafmt},
+    typescript = {tslint, eslint},
+    javascript = {tslint, eslint},
+    typescriptreact = {tslint, eslint},
+    ['typescript.tsx'] = {tslint, eslint},
+    javascriptreact = {tslint, eslint},
+    ['javascript.jsx'] = {tslint, eslint},
 }
 
 -- https://github.com/mattn/efm-langserver

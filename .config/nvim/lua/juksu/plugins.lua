@@ -23,6 +23,7 @@ return require('packer').startup {
     use 'norcalli/nvim-colorizer.lua'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use 'nvim-telescope/telescope-fzf-writer.nvim'
+    use 'tjdevries/nlua.nvim'
 
     -- Git
     use 'junegunn/gv.vim'
@@ -62,6 +63,7 @@ return require('packer').startup {
 
     -- Theme / UI
     use 'ryanoasis/vim-devicons'
+    use 'tjdevries/cyclist.vim'
     use 'nvim-treesitter/nvim-treesitter'
 
     use 'ntk148v/vim-horizon'
