@@ -5,68 +5,68 @@ return require('packer').startup {
     use 'wbthomason/packer.nvim'
 
     -- Languages
-    use 'leafOfTree/vim-svelte-plugin'
+    use { 'leafOfTree/vim-svelte-plugin', opt = true, ft = "svelte"}
 
     -- Nvim lsp
-    use 'glepnir/lspsaga.nvim'
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/lsp-status.nvim'
 
+    use 'glepnir/lspsaga.nvim'
+
     -- Completion
-    use 'nvim-lua/completion-nvim'
-    use 'steelsojka/completion-buffers'
+    use 'hrsh7th/nvim-compe'
 
     -- Lua
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-lua/telescope.nvim'
+    use 'tjdevries/nlua.nvim'
+    use 'tjdevries/astronauta.nvim'
+
+    use 'ThePrimeagen/harpoon'
     use 'norcalli/nvim-colorizer.lua'
+
+    use 'nvim-lua/plenary.nvim'
+    use 'nvim-lua/popup.nvim'
+
+    use { 'nvim-lua/telescope.nvim',
+        requires = 'kyazdani42/nvim-web-devicons'
+    }
+
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use 'nvim-telescope/telescope-fzf-writer.nvim'
-    use 'tjdevries/nlua.nvim'
+
+    use 'nvim-treesitter/nvim-treesitter'
 
     -- Git
     use 'junegunn/gv.vim'
     use 'mhinz/vim-signify'
     use 'tpope/vim-fugitive'
-    use 'stsewd/fzf-checkout.vim'
-
 
     -- Fileformat things
     use 'prettier/vim-prettier'
     use 'editorconfig/editorconfig-vim'
 
-    -- Nerdtree & plugins
-    use 'preservim/nerdtree'
-    use 'Xuyuanp/nerdtree-git-plugin'
-    use 'tiagofumo/vim-nerdtree-syntax-highlight'
+    -- Nvim-tree
+    use { 'kyazdani42/nvim-tree.lua',
+        cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
+        requires = 'kyazdani42/nvim-web-devicons'
+    }
 
     -- Util
     use 'tpope/vim-repeat'
     use 'tpope/vim-surround'
     use 'tpope/vim-commentary'
 
-    use 'hrsh7th/nvim-compe'
-
     use 'Raimondi/delimitMate'
-
     use 'mhinz/vim-startify'
-
-    use 'ThePrimeagen/harpoon'
-
-    use 'sheerun/vim-polyglot'
-
     use 'mbbill/undotree'
     use 'godlygeek/tabular'
-    use 'Asheq/close-buffers.vim'
     use 'maxbrunsfeld/vim-yankstack'
 
     -- Theme / UI
-    use 'ryanoasis/vim-devicons'
+    use 'tjdevries/colorbuddy.nvim'
     use 'tjdevries/cyclist.vim'
-    use 'nvim-treesitter/nvim-treesitter'
 
     use 'ntk148v/vim-horizon'
+    use 'tjdevries/gruvbuddy.nvim'
     use 'gruvbox-community/gruvbox'
   end,
   config = {

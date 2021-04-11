@@ -1,6 +1,7 @@
-local nvim_lsp = require "lspconfig"
+local nvim_lsp = require("lspconfig")
+local lspconfig_util = require('lspconfig.util')
 
-local saga = require "lspsaga"
+local saga = require("lspsaga")
 saga.init_lsp_saga()
 
 local lsp_status = require('lsp-status')
@@ -34,26 +35,26 @@ end
 
 -- Load lua configuration from nlua.
 require('nlua.lsp.nvim').setup(nvim_lsp, {
-        on_init = custom_init,
-        on_attach = custom_attach,
+    on_init = custom_init,
+    on_attach = custom_attach,
 
-        root_dir = function(fname)
-            if string.find(vim.fn.fnamemodify(fname, ":p"), ".config/nvim/") then
-                return vim.fn.expand("~/.config/nvim/")
-            end
+    root_dir = function(fname)
+        if string.find(vim.fn.fnamemodify(fname, ":p"), ".config/nvim/") then
+            return vim.fn.expand("~/.config/nvim/")
+        end
 
-            return lspconfig_util.find_git_ancestor(fname)
+        return lspconfig_util.find_git_ancestor(fname)
             or lspconfig_util.path.dirname(fname)
-        end,
+    end,
 
-        globals = {
-            -- Colorbuddy
-            "Color", "c", "Group", "g", "s",
+    globals = {
+        -- Colorbuddy
+        "Color", "c", "Group", "g", "s",
 
-            -- Custom
-            "RELOAD",
-        }
-    })
+        -- Custom
+        "RELOAD",
+    }
+})
 
 nvim_lsp.pyls.setup {
     on_init = custom_init,

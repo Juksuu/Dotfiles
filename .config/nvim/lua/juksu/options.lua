@@ -1,5 +1,4 @@
 -- These options are mostly taken from tjdevries
-
 local opt = vim.opt
 
 -- Ignore compiled files
@@ -16,6 +15,8 @@ opt.wildmode = opt.wildmode + { 'longest', 'full' }
 
 opt.wildoptions = 'pum'
 
+opt.guicursor      = ''
+opt.confirm        = true
 opt.showmode       = false
 opt.showcmd        = true
 opt.incsearch      = true  -- Makes search act like search in modern browsers
@@ -24,7 +25,6 @@ opt.number         = true  -- But show the actual number for the line we're on
 opt.ignorecase     = true  -- Ignore case when searching...
 opt.smartcase      = true  -- ... unless there is a capital letter in the query
 opt.hidden         = true  -- I like having buffers stay around
-opt.cursorline     = true  -- Highlight the current line
 opt.equalalways    = false -- I don't like my windows changing all the time
 opt.splitright     = true  -- Prefer windows splitting to the right
 opt.splitbelow     = true  -- Prefer windows splitting to the bottom
@@ -81,4 +81,3 @@ opt.joinspaces = false         -- Two spaces and grade school, we're done
 
 -- set fillchars=eob:~
 opt.fillchars = { eob = "~" }
-

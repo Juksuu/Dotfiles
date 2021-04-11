@@ -7,13 +7,23 @@ end
 vim.g.mapleader = " "
 
 -- Load global functions
-require("juksu.globals")
+require('juksu.globals')
 
 -- Load plugins
 require('juksu.plugins')
+
+-- Force loading of astronauta first.
+vim.cmd [[runtime plugin/astronauta.vim]]
 
 -- Load neovim options
 require('juksu.options')
 
 -- Load global autocommands
 require('juksu.autocommands')
+
+-- Setup lsp
+require('juksu.lsp')
+
+-- Setup telescope
+require("juksu.telescope")
+require("juksu.telescope.mappings")
