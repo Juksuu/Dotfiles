@@ -21,6 +21,7 @@ return require('packer').startup {
     use 'tjdevries/astronauta.nvim'
 
     use 'ThePrimeagen/harpoon'
+    use 'ThePrimeagen/git-worktree.nvim'
     use 'norcalli/nvim-colorizer.lua'
 
     use 'nvim-lua/plenary.nvim'
