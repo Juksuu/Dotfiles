@@ -67,30 +67,5 @@ return require('packer').startup {
         use 'ntk148v/vim-horizon'
         use 'tjdevries/gruvbuddy.nvim'
         use 'gruvbox-community/gruvbox'
-    end,
-    config = {
-        _display = {
-            open_fn = function(name)
-                -- Can only use plenary when we have our plugins.
-                --  We can only get plenary when we don't have our plugins ;)
-                local ok, float_win = pcall(function()
-                    return require('plenary.window.float').percentage_range_window(0.8, 0.8)
-                end)
-
-                if not ok then
-                    vim.cmd [[65vnew  [packer] ]]
-
-                    return vim.api.nvim_get_current_win(), vim.api.nvim_get_current_buf()
-                end
-
-                local bufnr = float_win.bufnr
-                local win = float_win.win_id
-
-                vim.api.nvim_buf_set_name(bufnr, name)
-                vim.api.nvim_win_set_option(win, 'winblend', 10)
-
-                return win, bufnr
-            end
-        },
-    }
+    end
 }

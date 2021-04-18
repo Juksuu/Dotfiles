@@ -3,7 +3,7 @@ vim.opt.completeopt = { "menuone" , "noinsert", "noselect" }
 -- Don't show the dumb matching stuff.
 vim.cmd [[set shortmess+=c]]
 
-require'compe'.setup({
+require('compe').setup({
     enabled = true,
     source = {
         path = true,

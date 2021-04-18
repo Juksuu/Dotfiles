@@ -1,0 +1,132 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.002  000.002: --- NVIM STARTING ---
+000.161  000.159: locale set
+000.315  000.154: inits 1
+000.321  000.006: window checked
+000.323  000.002: parsing arguments
+000.381  000.058: expanding arguments
+000.406  000.025: inits 2
+000.630  000.224: init highlight
+000.630  000.001: waiting for UI
+001.156  000.525: done waiting for UI
+001.167  000.012: initialized screen early for UI
+018.582  000.003  000.003: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/gruvbuddy.nvim/colors/gruvbuddy.vim
+043.550  034.491  034.488: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/astronauta.nvim/plugin/astronauta.vim
+052.340  016.681: sourcing vimrc file(s)
+055.190  000.009  000.009: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/query.vim
+055.201  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-fugitive/ftdetect/fugitive.vim
+055.212  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/css.vim
+055.224  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/graphql.vim
+055.234  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/html.vim
+055.248  000.008  000.008: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/javascript.vim
+055.258  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/json.vim
+055.268  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/less.vim
+055.279  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/lua.vim
+055.293  000.009  000.009: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/markdown.vim
+055.303  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/php.vim
+055.314  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/ruby.vim
+055.325  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/scss.vim
+055.337  000.007  000.007: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/typescript.vim
+055.347  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/vue.vim
+055.359  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/xml.vim
+055.373  000.009  000.009: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/yaml.vim
+055.487  003.125  003.023: sourcing /usr/local/share/nvim/runtime/filetype.vim
+055.689  000.015  000.015: sourcing /usr/local/share/nvim/runtime/ftplugin.vim
+055.889  000.013  000.013: sourcing /usr/local/share/nvim/runtime/indent.vim
+056.237  000.003  000.003: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/gruvbuddy.nvim/colors/gruvbuddy.vim
+056.474  000.360  000.358: sourcing /usr/local/share/nvim/runtime/syntax/synload.vim
+056.510  000.424  000.064: sourcing /usr/local/share/nvim/runtime/syntax/syntax.vim
+057.709  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/opt/vim-svelte-plugin/ftdetect/svelte.vim
+057.716  000.270  000.263: sourcing /home/juksu/.config/nvim/plugin/packer_compiled.vim
+057.859  000.007  000.007: sourcing /usr/local/share/nvim/runtime/plugin/gzip.vim
+057.869  000.005  000.005: sourcing /usr/local/share/nvim/runtime/plugin/health.vim
+057.920  000.046  000.046: sourcing /usr/local/share/nvim/runtime/plugin/man.vim
+057.932  000.005  000.005: sourcing /usr/local/share/nvim/runtime/plugin/matchit.vim
+057.942  000.005  000.005: sourcing /usr/local/share/nvim/runtime/plugin/matchparen.vim
+057.954  000.008  000.008: sourcing /usr/local/share/nvim/runtime/plugin/netrwPlugin.vim
+058.025  000.004  000.004: sourcing /home/juksu/.local/share/nvim/rplugin.vim
+058.037  000.075  000.070: sourcing /usr/local/share/nvim/runtime/plugin/rplugin.vim
+058.105  000.062  000.062: sourcing /usr/local/share/nvim/runtime/plugin/shada.vim
+058.130  000.011  000.011: sourcing /usr/local/share/nvim/runtime/plugin/spellfile.vim
+058.146  000.007  000.007: sourcing /usr/local/share/nvim/runtime/plugin/tarPlugin.vim
+058.157  000.004  000.004: sourcing /usr/local/share/nvim/runtime/plugin/tohtml.vim
+058.170  000.007  000.007: sourcing /usr/local/share/nvim/runtime/plugin/tutor.vim
+058.184  000.007  000.007: sourcing /usr/local/share/nvim/runtime/plugin/zipPlugin.vim
+058.192  001.756: loading plugins
+059.111  000.003  000.003: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/gruvbuddy.nvim/colors/gruvbuddy.vim
+060.034  001.655  001.652: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/astronauta.nvim/plugin/astronauta.vim
+060.230  000.053  000.053: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/cyclist.vim/autoload/cyclist.vim
+060.281  000.195  000.142: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/cyclist.vim/plugin/cyclist.vim
+060.683  000.125  000.125: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/delimitMate/autoload/delimitMate.vim
+061.737  001.417  001.292: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/delimitMate/plugin/delimitMate.vim
+061.976  000.188  000.188: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/editorconfig-vim/plugin/editorconfig.vim
+062.127  000.079  000.079: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/gv.vim/plugin/gv.vim
+062.201  000.029  000.029: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/harpoon/plugin/harpoon.vim
+062.256  000.045  000.045: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/harpoon/plugin/mark.vim
+062.453  000.153  000.153: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/lspsaga.nvim/plugin/lspsaga.vim
+062.938  000.448  000.448: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nlua.nvim/plugin/nlua.vim
+062.993  000.018  000.018: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua/plugin/colorizer.vim
+063.091  000.067  000.067: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/plugin/compe.vim
+063.171  000.042  000.042: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/plugin/lspconfig.vim
+063.613  000.404  000.404: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.vim
+063.650  000.010  000.010: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/query.vim
+063.698  000.017  000.017: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-web-devicons/plugin/nvim-web-devicons.vim
+064.599  000.859  000.859: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
+064.738  000.088  000.088: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/tabular/plugin/Tabular.vim
+064.983  000.186  000.186: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/telescope.nvim/plugin/telescope.vim
+065.082  000.063  000.063: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/undotree/plugin/undotree.vim
+065.179  000.063  000.063: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-commentary/plugin/commentary.vim
+065.892  000.677  000.677: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-fugitive/plugin/fugitive.vim
+065.923  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-fugitive/ftdetect/fugitive.vim
+066.117  000.153  000.153: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/plugin/prettier.vim
+066.191  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/css.vim
+066.206  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/graphql.vim
+066.224  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/html.vim
+066.236  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/javascript.vim
+066.247  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/json.vim
+066.257  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/less.vim
+066.266  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/lua.vim
+066.280  000.008  000.008: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/markdown.vim
+066.293  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/php.vim
+066.303  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/ruby.vim
+066.313  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/scss.vim
+066.324  000.006  000.006: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/typescript.vim
+066.336  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/vue.vim
+066.346  000.004  000.004: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/xml.vim
+066.356  000.005  000.005: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-prettier/ftdetect/yaml.vim
+066.496  000.099  000.099: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-signify/plugin/signify.vim
+066.715  000.184  000.184: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-surround/plugin/surround.vim
+066.888  000.115  000.115: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-yankstack/autoload/yankstack.vim
+067.134  000.381  000.266: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/vim-yankstack/plugin/yankstack.vim
+067.230  001.437: loading packages
+067.460  000.106  000.106: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/tabular/autoload/tabular.vim
+068.264  000.998  000.891: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/tabular/after/plugin/TabularMaps.vim
+068.972  000.521  000.521: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_buffer.vim
+069.351  000.369  000.369: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_calc.vim
+069.723  000.363  000.363: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_emoji.vim
+070.545  000.812  000.812: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_luasnip.vim
+071.039  000.485  000.485: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_nvim_lsp.vim
+071.432  000.384  000.384: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_nvim_lua.vim
+071.810  000.369  000.369: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_omni.vim
+072.295  000.475  000.475: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_path.vim
+073.121  000.813  000.813: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_snippets_nvim.vim
+073.512  000.382  000.382: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_spell.vim
+073.895  000.372  000.372: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_tags.vim
+074.462  000.557  000.557: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_treesitter.vim
+074.482  000.011  000.011: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_ultisnips.vim
+074.497  000.008  000.008: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_vim_lsc.vim
+074.520  000.009  000.009: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_vim_lsp.vim
+074.894  000.368  000.368: sourcing /home/juksu/.local/share/nvim/site/pack/packer/start/nvim-compe/after/plugin/compe_vsnip.vim
+075.004  000.041  000.041: sourcing /home/juksu/.config/nvim/after/plugin/cyclist.vim
+075.081  000.069  000.069: sourcing /home/juksu/.config/nvim/after/plugin/statusline.vim
+075.132  000.495: loading after plugins
+075.136  000.004: inits 3
+076.269  001.133: reading ShaDa
+076.354  000.085: opening buffers
+077.602  001.248: BufEnter autocommands
+077.604  000.002: editing files in windows
