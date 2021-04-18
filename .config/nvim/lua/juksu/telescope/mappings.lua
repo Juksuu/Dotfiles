@@ -22,7 +22,7 @@ end
 map_tele('<leader>en', 'edit_neovim')
 
 -- Files
-map_tele('<leader>ff', 'fd')
+map_tele('<leader>ff', 'find_files')
 map_tele('<leader>fg', 'git_files')
 map_tele('<leader>fs', 'live_grep')
 

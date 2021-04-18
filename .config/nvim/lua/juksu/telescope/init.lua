@@ -1,18 +1,3 @@
-local should_reload = true
-local reloader = function()
-    if should_reload then
-        RELOAD('plenary')
-        RELOAD('popup')
-        RELOAD('telescope')
-    end
-end
-
-reloader()
-
-local actions = require('telescope.actions')
-local sorters = require('telescope.sorters')
-local themes = require('telescope.themes')
-
 require('telescope').setup {
     defaults = {
         prompt_prefix = ' >',
@@ -42,15 +27,12 @@ require('telescope').setup {
 
         mappings = {
             i = {
-                ["<esc>"] = actions.close,
-                ["<C-x>"] = false,
-                ["<C-s>"] = actions.file_vsplit,
+                ["<esc>"] = require('telescope.actions').close,
+                ["<C-s>"] = require('telescope.actions').file_vsplit,
 
                 -- Experimental
-                ["<tab>"] = actions.toggle_selection,
-
-                ["<C-q>"] = actions.send_to_qflist,
-                ["<M-q>"] = actions.send_selected_to_qflist,
+                ["<C-q>"] = require('telescope.actions').send_to_qflist,
+                ["<M-q>"] = require('telescope.actions').send_selected_to_qflist,
             },
         },
 
@@ -59,7 +41,7 @@ require('telescope').setup {
             preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
         },
 
-        file_sorter = sorters.get_fzy_sorter,
+        file_sorter = require('telescope.sorters').get_fzy_sorter,
 
         file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
         grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
@@ -67,42 +49,31 @@ require('telescope').setup {
     },
 
     extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
+        fzf = {
+            override_generic_sorter = true,
             override_file_sorter = true,
+            case_mode = "smart_case",
         },
 
         fzf_writer = {
             use_highlighter = false,
-            minimum_grep_characters = 4,
+            minimum_grep_characters = 1,
+            minimum_files_characters = 1,
         }
     },
 }
 
-require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf')
 require('telescope').load_extension('git_worktree')
 
 local M = {}
-function M.edit_neovim()
-    require('telescope.builtin').find_files {
-        prompt_title = "~ Nvim config ~",
-        shorten_path = true,
-        cwd = "~/.config/nvim",
-        width = .25,
 
-        layout_strategy = 'horizontal',
-        layout_config = {
-            preview_width = 0.65,
-        },
-    }
-end
-
-function M.fd()
-    require('telescope.builtin').fd()
+function M.find_files()
+    require('telescope').extensions.fzf_writer.files()
 end
 
 function M.git_files()
-    local opts = themes.get_dropdown {
+    local opts = require('telescope.themes').get_dropdown {
         winblend = 10,
         border = true,
         previewer = false,
@@ -113,9 +84,8 @@ function M.git_files()
 end
 
 function M.live_grep()
-    require('telescope.builtin').live_grep {
+    require('telescope').extensions.fzf_writer.staged_grep {
         shorten_path = true,
-        fzf_separator = "|>",
     }
 end
 
@@ -126,25 +96,21 @@ function M.buffers()
 end
 
 function M.curbuf()
-    local opts = themes.get_dropdown {
+    local opts = require('telescope.themes').get_dropdown {
         winblend = 10,
         border = true,
         previewer = false,
         shorten_path = false,
-
-        -- layout_strategy = 'current_buffer',
     }
     require('telescope.builtin').current_buffer_fuzzy_find(opts)
 end
 
 return setmetatable({}, {
-        __index = function(_, k)
-            reloader()
-
-            if M[k] then
-                return M[k]
-            else
-                return require('telescope.builtin')[k]
-            end
+    __index = function(_, k)
+        if M[k] then
+            return M[k]
+        else
+            return require('telescope.builtin')[k]
         end
-    })
+    end
+})
