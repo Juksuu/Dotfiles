@@ -5,7 +5,11 @@ git['ThePrimeagen/git-worktree.nvim'] = {
     config = config.git_worktree
 }
 
-git['tpope/vim-fugitive'] = {}
-git['junegunn/gv.vim'] = {}
+git['tpope/vim-fugitive'] = {
+    cmd = 'Git'
+}
+git['junegunn/gv.vim'] = {
+    cmd = "GV"
+}
 
 return git

@@ -2,6 +2,7 @@ local lsp = {}
 local config = require('modules.lsp.config')
 
 lsp['neovim/nvim-lspconfig'] = {
+    event = "BufReadPre",
     config = config.lspconfig,
     requires = {
         'tjdevries/nlua.nvim',
@@ -10,6 +11,7 @@ lsp['neovim/nvim-lspconfig'] = {
 }
 
 lsp['glepnir/lspsaga.nvim'] = {
+    cmd = "Lspsaga",
     config = config.lspsaga
 }
 
