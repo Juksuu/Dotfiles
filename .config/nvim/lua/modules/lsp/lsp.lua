@@ -1,11 +1,7 @@
 local nvim_lsp = require("lspconfig")
 local lspconfig_util = require('lspconfig.util')
 
-local saga = require("lspsaga")
-saga.init_lsp_saga()
-
 local lsp_status = require('lsp-status')
-lsp_status.register_progress()
 
 local custom_init = function(client)
     client.config.flags = client.config.flags or {}
@@ -74,8 +70,8 @@ nvim_lsp.svelte.setup {
     capabilities = lsp_status.capabilities
 }
 
-local tslint = require "juksu.efm.linters.tslint"
-local eslint = require "juksu.efm.linters.eslint"
+local tslint = require('modules.lsp.efm.linters.tslint')
+local eslint = require('modules.lsp.efm.linters.eslint')
 
 local languages = {
     --lua = {luafmt},
