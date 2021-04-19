@@ -7,14 +7,16 @@ ui['norcalli/nvim-colorizer.lua'] = {
     config = config.colorizer
 }
 
-ui['tjdevries/cyclist.vim'] = {
-    config = config.cyclist
-}
-
 ui['tjdevries/gruvbuddy.nvim'] = {
     config = config.gruvbuddy,
     requires = 'tjdevries/colorbuddy.nvim'
 }
+
+ui['hoob3rt/lualine.nvim'] = {
+    config = config.lualine
+}
+
+ui['tjdevries/cyclist.vim'] = {}
 
 -- ui['ntk148v/vim-horizon'] = { }
 

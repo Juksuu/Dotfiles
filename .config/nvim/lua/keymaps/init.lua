@@ -15,7 +15,7 @@ local plug_map = {
 
     -- Git
     ["n|<leader>gs"]     = map_cr(":vert :botright :Git");
-    ["n|<leader>gn"]     = map_cmd("v:lua.create_worktree()");
+    ["n|<leader>gn"]     = map_cmd("v:lua.create_worktree()"):with_expr():with_silent();
     ["n|<leader>gw"]     = map_cmd("<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>");
 
     -- Harpoon

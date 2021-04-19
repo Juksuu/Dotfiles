@@ -13,7 +13,6 @@ utils['nvim-lua/telescope.nvim'] = {
 }
 
 utils['kyazdani42/nvim-tree.lua'] = {
-    cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
     requires = 'kyazdani42/nvim-web-devicons',
     config = config.nvimtree
 }
