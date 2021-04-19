@@ -1,29 +1,25 @@
--- Install packer if missing
-if require('juksu.install_packer')() then
-  return
-end
+require("core")
+-- -- Use space as leader key
+-- vim.g.mapleader = " "
 
--- Use space as leader key
-vim.g.mapleader = " "
+-- -- Load global functions
+-- require('juksu.globals')
 
--- Load global functions
-require('juksu.globals')
+-- -- Load neovim options
+-- require('juksu.options')
 
--- Load neovim options
-require('juksu.options')
+-- -- Load plugins
+-- require('juksu.plugins')
 
--- Load plugins
-require('juksu.plugins')
+-- -- Force loading of astronauta first.
+-- vim.cmd [[runtime plugin/astronauta.vim]]
 
--- Force loading of astronauta first.
-vim.cmd [[runtime plugin/astronauta.vim]]
+-- -- Load global autocommands
+-- require('juksu.autocommands')
 
--- Load global autocommands
-require('juksu.autocommands')
+-- -- Setup lsp
+-- require('juksu.lsp')
 
--- Setup lsp
-require('juksu.lsp')
-
--- Setup telescope
-require("juksu.telescope")
-require("juksu.telescope.mappings")
+-- -- Setup telescope
+-- require("juksu.telescope")
+-- require("juksu.telescope.mappings")

@@ -15,6 +15,8 @@ opt.wildmode = opt.wildmode + { 'longest', 'full' }
 
 opt.wildoptions = 'pum'
 
+opt.termguicolors  = true
+opt.syntax         = 'on'
 opt.guicursor      = ''
 opt.confirm        = true
 opt.showmode       = false
@@ -60,21 +62,10 @@ opt.shada          = { "!", "'1000", "<50", "s10", "h" }
 
 opt.mouse          = 'n'
 
--- Helpful related items:
---   1. :center, :left, :right
---   2. gw{motion} - Put cursor back after formatting motion.
---
--- TODO: w, {v, b, l}
 opt.formatoptions = opt.formatoptions
-                    - 'a'     -- Auto formatting is BAD.
                     - 't'     -- Don't auto format my code. I got linters for that.
-                    + 'c'     -- In general, I like it when comments respect textwidth
-                    + 'q'     -- Allow formatting comments w/ gq
-                    - 'o'     -- O and o, don't continue comments
                     + 'r'     -- But do continue when pressing enter.
                     + 'n'     -- Indent past the formatlistpat, not underneath it.
-                    + 'j'     -- Auto-remove comments if possible.
-                    - '2'     -- I'm not in gradeschool anymore
 
 -- set joinspaces
 opt.joinspaces = false         -- Two spaces and grade school, we're done
@@ -86,22 +77,7 @@ opt.fillchars = { eob = "~" }
 opt.undofile = true
 opt.undodir = "~/.cache/nvim/undodir"
 
--- Disable distribution packages
-vim.g.loaded_gzip              = 1
-vim.g.loaded_tar               = 1
-vim.g.loaded_tarPlugin         = 1
-vim.g.loaded_zip               = 1
-vim.g.loaded_zipPlugin         = 1
-vim.g.loaded_getscript         = 1
-vim.g.loaded_getscriptPlugin   = 1
-vim.g.loaded_vimball           = 1
-vim.g.loaded_vimballPlugin     = 1
-vim.g.loaded_matchit           = 1
-vim.g.loaded_matchparen        = 1
-vim.g.loaded_2html_plugin      = 1
-vim.g.loaded_logiPat           = 1
-vim.g.loaded_rrhelper          = 1
-vim.g.loaded_netrw             = 1
-vim.g.loaded_netrwPlugin       = 1
-vim.g.loaded_netrwSettings     = 1
-vim.g.loaded_netrwFileHandlers = 1
+vim.opt.completeopt = { "menuone" , "noinsert", "noselect" }
+
+-- Don't show the dumb matching stuff.
+vim.cmd [[set shortmess+=c]]
