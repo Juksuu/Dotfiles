@@ -19,12 +19,12 @@ function config.treesitter()
             'typescript'
         },
         highlight = {
-            enable = true, -- false will disable the whole extension
+            enable = true,
             use_languagetree = false,
             disable = {"json"},
         },
         indent = {
-            enable = true
+            enable = false
         }
     }
 end

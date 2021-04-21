@@ -12,4 +12,8 @@ function config.lspstatus()
     require('lsp-status').register_progress()
 end
 
+function config.lspkind()
+    require('lspkind').init({})
+end
+
 return config

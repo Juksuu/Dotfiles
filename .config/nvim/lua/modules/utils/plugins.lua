@@ -21,10 +21,6 @@ utils['editorconfig/editorconfig-vim'] = {
     config = config.editorconfig
 }
 
-utils['prettier/vim-prettier'] = {
-    event = 'BufWritePre'
-}
-
 utils['mbbill/undotree'] = {
     cmd = 'UndotreeToggle'
 }
@@ -33,11 +29,14 @@ utils['godlygeek/tabular'] = {
     cmd = "Tabular"
 }
 
+utils['blackCauldron7/surround.nvim'] = {
+    config = config.surround
+}
+
+utils['prettier/vim-prettier'] = { }
+utils['b3nj5m1n/kommentary'] = {}
 utils['ThePrimeagen/harpoon'] = {}
-utils['tpope/vim-repeat'] = {}
-utils['tpope/vim-surround'] = {}
-utils['tpope/vim-commentary'] = {}
-utils['maxbrunsfeld/vim-yankstack'] = {}
+utils['bfredl/nvim-miniyank'] = {}
 utils['Raimondi/delimitMate'] = {}
 
 return utils

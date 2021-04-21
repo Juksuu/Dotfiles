@@ -18,6 +18,4 @@ ui['hoob3rt/lualine.nvim'] = {
 
 ui['tjdevries/cyclist.vim'] = {}
 
--- ui['ntk148v/vim-horizon'] = { }
-
 return ui

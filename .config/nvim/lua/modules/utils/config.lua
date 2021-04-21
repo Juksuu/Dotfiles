@@ -25,4 +25,9 @@ function config.nvimtree()
     vim.g.nvim_tree_hijack_netrw = 0
 end
 
+function config.surround()
+    vim.g.surround_context_offset = 50
+    require('surround').setup {}
+end
+
 return config

@@ -8,6 +8,11 @@ local plug_map = {
     ["i|<S-TAB>"]    = map_cmd('v:lua.s_tab_complete()'):with_silent():with_expr(),
     ["i|<CR>"]       = map_cmd([[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]]):with_noremap():with_expr():with_nowait(),
 
+    -- yankstack
+    ["n|p"]      = map_cmd("<Plug>(miniyank-autoput)");
+    ["n|P"]      = map_cmd("<Plug>(miniyank-autoPut)");
+    ["n|M-p"]    = map_cmd("<Plug>(miniyank-cycle)");
+
     -- Packer
     ["n|<leader>pu"]     = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
     ["n|<leader>pi"]     = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait();

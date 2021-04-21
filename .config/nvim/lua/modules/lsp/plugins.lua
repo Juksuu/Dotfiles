@@ -15,4 +15,8 @@ lsp['glepnir/lspsaga.nvim'] = {
     config = config.lspsaga
 }
 
+lsp['onsails/lspkind-nvim'] = {
+    config = config.lspkind
+}
+
 return lsp
