@@ -4,6 +4,10 @@ function config.gruvbuddy()
     require('colorbuddy').colorscheme('gruvbuddy')
 end
 
+function config.gitsigns()
+    require('gitsigns').setup()
+end
+
 function config.tokyonight()
     vim.g.tokyonight_style = "storm"
     vim.g.tokyonight_transparent = true

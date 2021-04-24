@@ -10,6 +10,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         }
 })
 
+-- Disable gutter signs, color linenum instead
+vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
+vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
+vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
+
 local custom_init = function(client)
     client.config.flags = client.config.flags or {}
     client.config.flags.allow_incremental_sync = true
