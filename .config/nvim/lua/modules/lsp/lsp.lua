@@ -1,8 +1,6 @@
 local nvim_lsp = require("lspconfig")
 local lspconfig_util = require('lspconfig.util')
 
-local lsp_status = require('lsp-status')
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         underline = true,
@@ -22,9 +20,6 @@ local custom_attach = function(client, bufnr)
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Lsp status
-    lsp_status.on_attach(client)
 
     -- Mappings.
     local opts = { noremap=true, silent=true }
@@ -61,19 +56,16 @@ require('nlua.lsp.nvim').setup(nvim_lsp, {
 nvim_lsp.pyls.setup {
     on_init = custom_init,
     on_attach = custom_attach,
-    capabilities = lsp_status.capabilities
 }
 
 nvim_lsp.tsserver.setup {
     on_init = custom_init,
     on_attach = custom_attach,
-    capabilities = lsp_status.capabilities
 }
 
 nvim_lsp.svelte.setup {
     on_init = custom_init,
     on_attach = custom_attach,
-    capabilities = lsp_status.capabilities
 }
 
 local tslint = require('modules.lsp.efm.linters.tslint')

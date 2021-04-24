@@ -43,6 +43,8 @@ local plug_map = {
     ["n|<leader>dp"]     = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap():with_silent(),
     ["n|K"]              = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 
+    ["n|<leader>dt"]     = map_cr("LspTroubleOpen"),
+
     -- nvim-tree
     ["n|<leader>n"]      = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
 

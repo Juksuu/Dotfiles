@@ -11,7 +11,7 @@ function config.tokyonight()
     -- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 
     -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-    vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
+    vim.g.tokyonight_colors = { hint = "teal", error = "#ff0000" }
 
     vim.cmd[[ colorscheme tokyonight ]]
 end
@@ -21,24 +21,16 @@ function config.colorizer()
 end
 
 function config.lualine()
-    local function lsp_status()
-        if #vim.lsp.buf_get_clients() > 0 then
-            return require('lsp-status').status()
-        end
-    end
-
     require('lualine').setup {
         options = { 
-            theme = 'everforest',
-            section_separators = '',
-            component_separators = ''
+            theme = 'tokyonight',
         },
         sections = {
             lualine_a = {'mode'},
             lualine_b = {'branch'},
-            lualine_c = {'filename'},
+            lualine_c = {{'diagnostics', sources = { 'nvim_lsp' }}},
+            lualine_d = {'filename'},
             lualine_x = {'encoding', 'fileformat', 'filetype'},
-            lualine_y = {lsp_status},
             lualine_z = {'location'}
         },
         inactive_sections = {
