@@ -30,4 +30,16 @@ function config.surround()
     require('surround').setup {}
 end
 
+function config.lsp_trouble()
+    require('trouble').setup {
+        signs = {
+            -- icons / text used for a diagnostic
+            error = "",
+            warning = "",
+            hint = "",
+            information = ""
+        },
+    }
+end
+
 return config

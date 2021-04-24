@@ -3,6 +3,15 @@ local lspconfig_util = require('lspconfig.util')
 
 local lsp_status = require('lsp-status')
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = true,
+        virtual_text = {
+            spacing = 1,
+            prefix = '⚫'
+        }
+})
+
 local custom_init = function(client)
     client.config.flags = client.config.flags or {}
     client.config.flags.allow_incremental_sync = true
@@ -44,9 +53,6 @@ require('nlua.lsp.nvim').setup(nvim_lsp, {
     end,
 
     globals = {
-        -- Colorbuddy
-        "Color", "c", "Group", "g", "s",
-
         -- Custom
         "RELOAD",
     }

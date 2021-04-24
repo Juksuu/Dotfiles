@@ -7,9 +7,13 @@ ui['norcalli/nvim-colorizer.lua'] = {
     config = config.colorizer
 }
 
-ui['tjdevries/gruvbuddy.nvim'] = {
+--[[ ui['tjdevries/gruvbuddy.nvim'] = {
     config = config.gruvbuddy,
     requires = 'tjdevries/colorbuddy.nvim'
+} ]]
+
+ui['folke/tokyonight.nvim'] = {
+    config = config.tokyonight
 }
 
 ui['hoob3rt/lualine.nvim'] = {

@@ -74,8 +74,7 @@ end
 
 function M.git_files()
     local opts = require('telescope.themes').get_dropdown {
-        winblend = 10,
-        border = true,
+        -- border = true,
         previewer = false,
         shorten_path = false,
     }

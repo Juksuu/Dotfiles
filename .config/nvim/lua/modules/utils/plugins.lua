@@ -33,6 +33,11 @@ utils['blackCauldron7/surround.nvim'] = {
     config = config.surround
 }
 
+utils['folke/lsp-trouble.nvim'] = {
+    config = config.lsp_trouble,
+    requires = "kyazdani42/nvim-web-devicons",
+}
+
 utils['prettier/vim-prettier'] = { }
 utils['b3nj5m1n/kommentary'] = {}
 utils['ThePrimeagen/harpoon'] = {}
