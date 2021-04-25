@@ -38,10 +38,10 @@ utils['folke/lsp-trouble.nvim'] = {
     requires = "kyazdani42/nvim-web-devicons",
 }
 
-utils['prettier/vim-prettier'] = { }
+utils['maxbrunsfeld/vim-yankstack'] = {}
+utils['prettier/vim-prettier'] = {}
 utils['b3nj5m1n/kommentary'] = {}
 utils['ThePrimeagen/harpoon'] = {}
-utils['bfredl/nvim-miniyank'] = {}
 utils['Raimondi/delimitMate'] = {}
 
 return utils

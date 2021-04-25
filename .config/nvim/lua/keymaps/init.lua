@@ -8,18 +8,13 @@ local plug_map = {
     ["i|<S-TAB>"]    = map_cmd('v:lua.s_tab_complete()'):with_silent():with_expr(),
     ["i|<CR>"]       = map_cmd([[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]]):with_noremap():with_expr():with_nowait(),
 
-    -- yankstack
-    ["n|p"]      = map_cmd("<Plug>(miniyank-autoput)");
-    ["n|P"]      = map_cmd("<Plug>(miniyank-autoPut)");
-    ["n|M-p"]    = map_cmd("<Plug>(miniyank-cycle)");
-
     -- Packer
     ["n|<leader>pu"]     = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
     ["n|<leader>pi"]     = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait();
     ["n|<leader>pc"]     = map_cr("PackerCompile"):with_silent():with_noremap():with_nowait();
 
     -- Git
-    ["n|<leader>gs"]     = map_cr(":vert :botright :Git");
+    ["n|<leader>gs"]     = map_cr(":vert :botright :Git"):with_expr():with_silent();
     ["n|<leader>gn"]     = map_cmd("v:lua.create_worktree()"):with_expr():with_silent();
     ["n|<leader>gw"]     = map_cmd("<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>");
 
@@ -43,7 +38,7 @@ local plug_map = {
     ["n|<leader>dp"]     = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap():with_silent(),
     ["n|K"]              = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 
-    ["n|<leader>dt"]     = map_cr("LspTroubleOpen"),
+    ["n|<leader>dt"]     = map_cr("LspTroubleOpen"):with_noremap():with_silent(),
 
     -- nvim-tree
     ["n|<leader>n"]      = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
