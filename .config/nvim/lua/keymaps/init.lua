@@ -14,8 +14,8 @@ local plug_map = {
     ["n|<leader>pc"]     = map_cr("PackerCompile"):with_silent():with_noremap():with_nowait();
 
     -- Git
-    ["n|<leader>gs"]     = map_cr(":vert :botright :Git"):with_expr():with_silent();
-    ["n|<leader>gn"]     = map_cmd("v:lua.create_worktree()"):with_expr():with_silent();
+    ["n|<leader>gs"]     = map_cr(":vert :botright :Git"):with_silent();
+    ["n|<leader>gn"]     = map_cmd("v:lua.create_worktree()"):with_silent();
     ["n|<leader>gw"]     = map_cmd("<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>");
 
     -- Harpoon
