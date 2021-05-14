@@ -5,8 +5,6 @@ utils['nvim-lua/telescope.nvim'] = {
     requires = {
         'kyazdani42/nvim-web-devicons',
         'nvim-lua/popup.nvim',
-        'nvim-telescope/telescope-fzf-writer.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         { 'nvim-lua/plenary.nvim', config = config.plenary },
     },
     config = config.telescope

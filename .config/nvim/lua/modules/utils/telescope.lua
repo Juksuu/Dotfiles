@@ -42,10 +42,6 @@ require('telescope').setup {
         },
 
         file_sorter = require('telescope.sorters').get_fzy_sorter,
-
-        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
-        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
-        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
     },
 
     extensions = {
@@ -54,22 +50,15 @@ require('telescope').setup {
             override_file_sorter = true,
             case_mode = "smart_case",
         },
-
-        fzf_writer = {
-            use_highlighter = false,
-            minimum_grep_characters = 1,
-            minimum_files_characters = 1,
-        }
     },
 }
 
-require('telescope').load_extension('fzf')
 require('telescope').load_extension('git_worktree')
 
 local M = {}
 
 function M.find_files()
-    require('telescope').extensions.fzf_writer.files()
+    require('telescope.builtin').find_files()
 end
 
 function M.git_files()
@@ -83,7 +72,7 @@ function M.git_files()
 end
 
 function M.live_grep()
-    require('telescope').extensions.fzf_writer.staged_grep {
+    require('telescope.builtin').live_grep {
         shorten_path = true,
     }
 end
