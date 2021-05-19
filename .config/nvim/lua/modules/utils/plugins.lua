@@ -36,6 +36,14 @@ utils['folke/lsp-trouble.nvim'] = {
     requires = "kyazdani42/nvim-web-devicons",
 }
 
+utils['folke/zen-mode.nvim'] = {
+    config = config.zen_mode
+}
+
+utils['folke/todo-comments.nvim'] = {
+   config = config.todo_comments
+}
+
 utils['maxbrunsfeld/vim-yankstack'] = {}
 utils['prettier/vim-prettier'] = {}
 utils['b3nj5m1n/kommentary'] = {}
