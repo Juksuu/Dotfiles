@@ -7,28 +7,29 @@ SETUVAR --export QT_IM_MODULE:ibus
 SETUVAR --export VISUAL:nvim
 SETUVAR --export XMODIFIERS:\x40im\x3dibus
 SETUVAR __fish_initialized:3100
-SETUVAR --export fish_color_autosuggestion:585858
-SETUVAR --export fish_color_cancel:\x2dr
-SETUVAR --export fish_color_command:a1b56c
-SETUVAR --export fish_color_comment:f7ca88
-SETUVAR --export fish_color_cwd:green
+SETUVAR ayu_variant:mirage
+SETUVAR --export fish_color_autosuggestion:707A8C
+SETUVAR --export fish_color_cancel:1F2430
+SETUVAR --export fish_color_command:5CCFE6
+SETUVAR --export fish_color_comment:5C6773
+SETUVAR --export fish_color_cwd:73D0FF
 SETUVAR --export fish_color_cwd_root:red
-SETUVAR --export fish_color_end:ba8baf
-SETUVAR --export fish_color_error:ab4642
-SETUVAR --export fish_color_escape:86c1b9
+SETUVAR --export fish_color_end:F29E74
+SETUVAR --export fish_color_error:FF3333
+SETUVAR --export fish_color_escape:95E6CB
 SETUVAR --export fish_color_history_current:\x2d\x2dbold
-SETUVAR --export fish_color_host:normal
-SETUVAR fish_color_host_remote:yellow
-SETUVAR --export fish_color_match:7cafc2
-SETUVAR --export fish_color_normal:normal
-SETUVAR --export fish_color_operator:7cafc2
-SETUVAR --export fish_color_param:d8d8d8
-SETUVAR --export fish_color_quote:f7ca88
-SETUVAR --export fish_color_redirection:d8d8d8
-SETUVAR --export fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
-SETUVAR --export fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR --export fish_color_host:D4BFFF
+SETUVAR fish_color_host_remote:D4BFFF
+SETUVAR --export fish_color_match:F28779
+SETUVAR --export fish_color_normal:CBCCC6
+SETUVAR --export fish_color_operator:FFCC66
+SETUVAR --export fish_color_param:CBCCC6
+SETUVAR --export fish_color_quote:BAE67E
+SETUVAR --export fish_color_redirection:D4BFFF
+SETUVAR --export fish_color_search_match:\x2d\x2dbackground\x1eFFCC66
+SETUVAR --export fish_color_selection:FFCC66
 SETUVAR fish_color_status:red
-SETUVAR --export fish_color_user:brgreen
+SETUVAR --export fish_color_user:FFA759
 SETUVAR --export fish_color_valid_path:\x2d\x2dunderline
 SETUVAR fish_greeting:\x1d
 SETUVAR fish_key_bindings:fish_default_key_bindings

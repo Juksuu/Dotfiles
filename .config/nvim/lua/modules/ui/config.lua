@@ -1,18 +1,17 @@
 local config = {}
 
-function config.gruvbuddy()
-    require('colorbuddy').colorscheme('gruvbuddy')
-end
-
 function config.gitsigns()
     require('gitsigns').setup()
+end
+
+function config.colorizer()
+    require('colorizer').setup()
 end
 
 function config.tokyonight()
     vim.g.tokyonight_style = "storm"
     vim.g.tokyonight_transparent = true
     vim.g.tokyonight_italic_functions = true
-    -- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 
     -- Change the "hint" color to the "orange" color, and make the "error" color bright red
     vim.g.tokyonight_colors = { hint = "teal", error = "#ff0000" }
@@ -20,14 +19,18 @@ function config.tokyonight()
     vim.cmd[[ colorscheme tokyonight ]]
 end
 
-function config.colorizer()
-    require('colorizer').setup()
+function config.ayu()
+    vim.g.ayu_mirage = true
+    vim.g.ayu_transparent = true
+    vim.g.ayu_italic_comment = true
+
+    vim.cmd[[ colorscheme ayu ]]
 end
 
 function config.lualine()
     require('lualine').setup {
         options = { 
-            theme = 'tokyonight',
+            theme = 'ayu',
         },
         sections = {
             lualine_a = {'mode'},
