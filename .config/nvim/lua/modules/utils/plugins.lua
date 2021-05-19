@@ -44,6 +44,10 @@ utils['folke/todo-comments.nvim'] = {
    config = config.todo_comments
 }
 
+utils['npxbr/glow.nvim'] = {
+    branch = 'main'
+}
+
 utils['maxbrunsfeld/vim-yankstack'] = {}
 utils['prettier/vim-prettier'] = {}
 utils['b3nj5m1n/kommentary'] = {}
