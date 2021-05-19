@@ -26,7 +26,7 @@ function autocmd.load_autocmds()
             {"BufWritePre","MERGE_MSG","setlocal noundofile"};
             {"BufWritePre","*.tmp","setlocal noundofile"};
             {"BufWritePre","*.bak","setlocal noundofile"};
-            { "BufWritePre","*.css,*.svelte,*.pcss,*.html,*.ts,*.js,*.json,*.yml,*.yaml","PrettierAsync" };
+            { "BufWritePre","*.css,*.svelte,*.pcss,*.html,*.ts,*.tsx,*.js,*.jsx,*.json,*.yml,*.yaml","PrettierAsync" };
         };
 
         wins = {
