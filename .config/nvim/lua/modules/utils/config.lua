@@ -42,4 +42,12 @@ function config.lsp_trouble()
     }
 end
 
+function config.zen_mode()
+    require('zen-mode').setup { }
+end
+
+function config.todo_comments()
+    require('todo-comments').setup {}
+end
+
 return config

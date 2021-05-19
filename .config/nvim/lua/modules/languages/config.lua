@@ -1,6 +1,6 @@
 local config = {}
 
-function config.svelte()
+function config.polyglot()
     vim.g.vim_svelte_plugin_load_full_syntax = 1
     vim.g.vim_svelte_plugin_use_typescript = 1
     vim.g.vim_svelte_plugin_use_sass = 1
@@ -15,13 +15,12 @@ function config.treesitter()
             'javascript',
             'python',
             'rust',
-            'svelte',
             'typescript'
         },
         highlight = {
             enable = true,
             use_languagetree = false,
-            disable = {"json"},
+            disable = { "json", "svelte" },
         },
         indent = {
             enable = false

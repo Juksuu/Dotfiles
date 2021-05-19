@@ -1,9 +1,8 @@
 local languages = {}
 local config = require('modules.languages.config')
 
-languages['leafOfTree/vim-svelte-plugin'] = {
-    ft = "svelte",
-    config = config.svelte
+languages['sheerun/vim-polyglot'] = {
+    config = config.polyglot
 }
 
 languages['nvim-treesitter/nvim-treesitter'] = {
