@@ -19,24 +19,18 @@ function config.tokyonight()
     vim.cmd[[ colorscheme tokyonight ]]
 end
 
-function config.ayu()
-    vim.g.ayu_mirage = true
-    vim.g.ayu_transparent = true
-    vim.g.ayu_italic_comment = true
-
-    vim.cmd[[ colorscheme ayu ]]
+function config.vibrantgrey()
+    vim.g.vibrantgrey_transparent = true
+    vim.g.vibrantgrey_italic_comments= true
+	require("colorbuddy").colorscheme("vibrantgrey")
 end
 
 function config.lualine()
     require('lualine').setup {
-        options = { 
-            theme = 'ayu',
-        },
         sections = {
             lualine_a = {'mode'},
-            lualine_b = {'branch'},
+            lualine_b = {'branch', 'filename'},
             lualine_c = {{'diagnostics', sources = { 'nvim_lsp' }}},
-            lualine_d = {'filename'},
             lualine_x = {'encoding', 'fileformat', 'filetype'},
             lualine_z = {'location'}
         },
