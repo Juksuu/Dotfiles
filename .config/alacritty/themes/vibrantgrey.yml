@@ -1,0 +1,29 @@
+colors:
+  # Primary colors
+  primary:
+    background: "#3a383f"
+    foreground: "#d0d6d2"
+
+  # Normal colors
+  normal:
+    black: "#000000"
+    white: "#ffffff"
+    green: "#53ed75"
+    red: "#dd3033"
+    blue: "#128bae"
+    yellow: "#cbed53"
+    pink: "#ed537e"
+    orange: "#ed7553"
+    violet: "#7553ed"
+
+  # Bright colors
+  bright:
+    black: "#000000"
+    white: "#ffffff"
+    green: "#53ed75"
+    red: "#dd3033"
+    blue: "#128bae"
+    yellow: "#cbed53"
+    pink: "#ed537e"
+    orange: "#ed7553"
+    violet: "#7553ed"

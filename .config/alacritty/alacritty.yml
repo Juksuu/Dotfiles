@@ -16,69 +16,7 @@ font:
   size: 12
   use_thin_strokes: true
 draw_bold_text_with_bright_colors: true
-background_opacity: 0.97
-colors:
-  primary:
-    background: '#1f2430'
-    foreground: '#cbccc6'
-    dim_foreground: '#a5abb6'
-    bright_foreground: '#f28779'
-  normal:
-    black: '#212733'
-    red: '#f08778'
-    green: '#53bf97'
-    yellow: '#fdcc60'
-    blue: '#60b8d6'
-    magenta: '#ec7171'
-    cyan: '#98e6ca'
-    white: '#fafafa'
-  bright:
-    black: '#686868'
-    red: '#f58c7d'
-    green: '#58c49c'
-    yellow: '#ffd165'
-    blue: '#65bddb'
-    magenta: '#f17676'
-    cyan: '#9debcf'
-    white: '#ffffff'
-  indexed_colors:
-    - index: 16
-      color: '0xff9e64'
-    - index: 17
-      color: '0xdb4b4b'
-    - index: 16
-      color: '0xb15c00'
-    - index: 17
-      color: '0xc64343'
-    - index: 16
-      color: '0xff9e64'
-    - index: 17
-      color: '0xdb4b4b'
-  cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  vi_mode_cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  selection:
-    text: CellForeground
-    background: '#4c566a'
-  search:
-    matches:
-      foreground: CellBackground
-      background: '#88c0d0'
-    bar:
-      background: '#434c5e'
-      foreground: '#d8dee9'
-  dim:
-    black: '#373e4d'
-    red: '#94545d'
-    green: '#809575'
-    yellow: '#b29e75'
-    blue: '#68809a'
-    magenta: '#8c738c'
-    cyan: '#6d96a5'
-    white: '#aeb3bb'
+background_opacity: 0.9
 key_bindings:
   - key: Key0
     mods: Control
@@ -89,3 +27,27 @@ key_bindings:
   - key: Minus
     mods: Control
     action: DecreaseFontSize
+colors:
+  primary:
+    background: '#3a383f'
+    foreground: '#d0d6d2'
+  normal:
+    black: '#000000'
+    white: '#ffffff'
+    green: '#53ed75'
+    red: '#dd3033'
+    blue: '#128bae'
+    yellow: '#cbed53'
+    pink: '#ed537e'
+    orange: '#ed7553'
+    violet: '#7553ed'
+  bright:
+    black: '#000000'
+    white: '#ffffff'
+    green: '#53ed75'
+    red: '#dd3033'
+    blue: '#128bae'
+    yellow: '#cbed53'
+    pink: '#ed537e'
+    orange: '#ed7553'
+    violet: '#7553ed'
