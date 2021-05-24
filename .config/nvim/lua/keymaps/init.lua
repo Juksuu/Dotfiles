@@ -15,8 +15,6 @@ local plug_map = {
 
     -- Git
     ["n|<leader>gs"]     = map_cr(":vert :botright :Git"):with_silent();
-    ["n|<leader>gn"]     = map_cmd("v:lua.create_worktree()"):with_silent();
-    ["n|<leader>gw"]     = map_cmd("<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>");
 
     -- Harpoon
     ["n|<leader>th"]     = map_cmd("<cmd>lua require('harpoon.term').gotoTerminal(1)<CR>");
@@ -70,10 +68,14 @@ local map_tele = function(key, f, options, buffer)
   end
 end
 
--- Files
+-- Search
 map_tele('<leader>ff', 'find_files')
-map_tele('<leader>fg', 'git_files')
 map_tele('<leader>fs', 'live_grep')
+
+-- Git
+map_tele('<leader>fg', 'git_files')
+map_tele('<leader>gw', 'git_worktrees')
+map_tele('<leader>gn', 'create_git_worktree')
 
 -- Nvim
 map_tele('<leader>fb', 'buffers')

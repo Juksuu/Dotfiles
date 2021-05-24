@@ -71,6 +71,14 @@ function M.git_files()
     require('telescope.builtin').git_files(opts)
 end
 
+function M.git_worktrees()
+    require('telescope').extensions.git_worktree.git_worktrees()
+end
+
+function M.create_git_worktree()
+    require('telescope').extensions.git_worktree.create_git_worktree()
+end
+
 function M.live_grep()
     require('telescope.builtin').live_grep {
         shorten_path = true,
