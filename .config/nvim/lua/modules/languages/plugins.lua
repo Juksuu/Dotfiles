@@ -1,9 +1,7 @@
 local languages = {}
 local config = require('modules.languages.config')
 
-languages['sheerun/vim-polyglot'] = {
-    config = config.polyglot
-}
+languages['sheerun/vim-polyglot'] = {config = config.polyglot}
 
 languages['nvim-treesitter/nvim-treesitter'] = {
     event = 'BufRead',

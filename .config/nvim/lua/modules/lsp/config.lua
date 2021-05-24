@@ -1,5 +1,7 @@
 local config = {}
 
+-- LuaFormatter off
+
 function config.lspconfig()
     require('modules.lsp.lsp')
 end
@@ -15,5 +17,7 @@ end
 function config.lspkind()
     require('lspkind').init({})
 end
+
+-- LuaFormatter on
 
 return config

@@ -8,6 +8,7 @@ end
 
 function config.treesitter()
     require('nvim-treesitter.configs').setup {
+        -- LuaFormatter off
         ensure_installed = { 
             'lua',
             'graphql',
@@ -17,14 +18,13 @@ function config.treesitter()
             'rust',
             'typescript'
         },
+        -- LuaFormatter on
         highlight = {
-            enable = true,
+            enable = false,
             use_languagetree = false,
-            disable = { "json", "svelte" },
+            disable = {"json", "svelte"}
         },
-        indent = {
-            enable = false
-        }
+        indent = {enable = false}
     }
 end
 

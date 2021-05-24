@@ -1,5 +1,6 @@
 local config = {}
 
+-- LuaFormatter off
 function config.gitsigns()
     require('gitsigns').setup()
 end
@@ -7,6 +8,7 @@ end
 function config.colorizer()
     require('colorizer').setup()
 end
+-- LuaFormatter on
 
 function config.tokyonight()
     vim.g.tokyonight_style = "storm"
@@ -14,15 +16,15 @@ function config.tokyonight()
     vim.g.tokyonight_italic_functions = true
 
     -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-    vim.g.tokyonight_colors = { hint = "teal", error = "#ff0000" }
+    vim.g.tokyonight_colors = {hint = "teal", error = "#ff0000"}
 
-    vim.cmd[[ colorscheme tokyonight ]]
+    vim.cmd [[ colorscheme tokyonight ]]
 end
 
 function config.vibrantgrey()
     vim.g.vibrantgrey_transparent = true
-    vim.g.vibrantgrey_italic_comments= true
-	require("colorbuddy").colorscheme("vibrantgrey")
+    vim.g.vibrantgrey_italic_comments = true
+    require("colorbuddy").colorscheme("vibrantgrey")
 end
 
 function config.lualine()
@@ -30,7 +32,7 @@ function config.lualine()
         sections = {
             lualine_a = {'mode'},
             lualine_b = {'branch', 'filename'},
-            lualine_c = {{'diagnostics', sources = { 'nvim_lsp' }}},
+            lualine_c = {{'diagnostics', sources = {'nvim_lsp'}}},
             lualine_x = {'encoding', 'fileformat', 'filetype'},
             lualine_z = {'location'}
         },

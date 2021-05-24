@@ -1,8 +1,10 @@
 local config = {}
 
+-- LuaFormatter off
 function config.telescope()
     require('modules.utils.telescope')
 end
+-- LuaFormatter on
 
 function config.editorconfig()
     vim.g.EditorConfig_exclude_patterns = {'fugitive://.*', 'scp://.*'}
@@ -38,16 +40,18 @@ function config.lsp_trouble()
             warning = "",
             hint = "",
             information = ""
-        },
+        }
     }
 end
 
+-- LuaFormatter off
 function config.zen_mode()
-    require('zen-mode').setup { }
+    require('zen_mode').setup { }
 end
 
 function config.todo_comments()
     require('todo-comments').setup {}
 end
+-- LuaFormatter on
 
 return config

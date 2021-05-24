@@ -1,6 +1,8 @@
 -- These options are mostly taken from tjdevries
 local opt = vim.opt
 
+-- LuaFormatter off
+
 -- Ignore compiled files
 opt.wildignore = '__pycache__'
 opt.wildignore = opt.wildignore + { '*.o' , '*~', '*.pyc', '*pycache*' }
@@ -18,6 +20,7 @@ opt.wildoptions = 'pum'
 opt.termguicolors  = true
 opt.syntax         = 'on'
 opt.guicursor      = ''
+opt.compatible     = false
 opt.confirm        = true
 opt.showmode       = false
 opt.showcmd        = true
@@ -81,3 +84,5 @@ vim.opt.completeopt = { "menuone" , "noinsert", "noselect" }
 
 -- Don't show the dumb matching stuff.
 vim.cmd [[set shortmess+=c]]
+
+-- LuaFormatter on
