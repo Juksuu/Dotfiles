@@ -18,8 +18,9 @@ ui['hoob3rt/lualine.nvim'] = {
     config = config.tokyonight
 } ]]
 
-ui['Juksuu/neovim-ayu'] = {
-    config = config.ayu
+ui['Juksuu/VibrantGrey'] = {
+    config = config.vibrantgrey,
+    requires = "tjdevries/colorbuddy.nvim"
 }
 
 ui['tjdevries/cyclist.vim'] = {}
