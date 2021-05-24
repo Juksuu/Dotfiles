@@ -1,6 +1,8 @@
 local utils = {}
 local config = require('modules.utils.config')
 
+-- LuaFormatter off
+
 utils['nvim-lua/telescope.nvim'] = {
     requires = {
         'kyazdani42/nvim-web-devicons',
@@ -48,10 +50,10 @@ utils['npxbr/glow.nvim'] = {
     branch = 'main'
 }
 
-utils['maxbrunsfeld/vim-yankstack'] = {}
-utils['prettier/vim-prettier'] = {}
+utils['sbdchd/neoformat'] = {}
 utils['b3nj5m1n/kommentary'] = {}
 utils['ThePrimeagen/harpoon'] = {}
 utils['Raimondi/delimitMate'] = {}
 
+-- LuaFormatter on
 return utils
