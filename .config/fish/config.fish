@@ -5,7 +5,7 @@ set -x GOPATH $HOME/go
 set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $GOPATH/bin
 
 set fish_greeting
-source ~/.config/fish/themes/ayu_mirage.fish
+source ~/.config/fish/themes/vibrantgrey.fish
 
 function nvm
    bass source $HOME/.nvm/nvm.sh --no-use ';' nvm $argv
