@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
     }
 
     use {
-        '~/code/colorschemes/VibrantGrey',
+        'Juksuu/VibrantGrey',
         requires = {'tjdevries/colorbuddy.nvim'},
         config = require('plugin_configs.vibrantgrey')
     }
