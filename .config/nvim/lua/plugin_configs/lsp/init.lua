@@ -33,16 +33,7 @@ return function()
     -- Load lua configuration from nlua.
     require('nlua.lsp.nvim').setup(nvim_lsp, {
         on_init = custom_init,
-        on_attach = custom_attach,
-
-        root_dir = function(fname)
-            if string.find(vim.fn.fnamemodify(fname, ":p"), ".config/nvim/") then
-                return vim.fn.expand("~/.config/nvim/")
-            end
-
-            return lspconfig_util.find_git_ancestor(fname) or
-                       lspconfig_util.path.dirname(fname)
-        end
+        on_attach = custom_attach
     })
 
     nvim_lsp.pyls.setup {on_init = custom_init, on_attach = custom_attach}

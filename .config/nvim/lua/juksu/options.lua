@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 opt.syntax = 'on'
+opt.termguicolors = true
 opt.confirm = true
 
 opt.guicursor = ''

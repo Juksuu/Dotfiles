@@ -35,3 +35,23 @@ _G.enter_complete = function()
         return t "<CR>"
     end
 end
+
+local M = {}
+
+-- Telescope bindings
+function M.map_tele(key, f, options, buffer)
+    local mode = "n"
+    local rhs = string.format(
+                    "<cmd> lua require('plugin_configs.telescope.functions')['%s'](%s)<CR>",
+                    f, options and vim.inspect(options, {newline = ''}) or '')
+
+    local opts = {noremap = true, silent = true}
+
+    if not buffer then
+        vim.api.nvim_set_keymap(mode, key, rhs, opts)
+    else
+        vim.api.nvim_buf_set_keymap(0, mode, key, rhs, opts)
+    end
+end
+
+return M

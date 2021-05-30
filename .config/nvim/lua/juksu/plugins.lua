@@ -2,7 +2,6 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     --- UTILITIES ---
-    use 'npxbr/glow.nvim'
     use 'sbdchd/neoformat'
     use 'tpope/vim-surround'
     use 'tpope/vim-fugitive'
@@ -16,7 +15,8 @@ return require('packer').startup(function(use)
         requires = {
             'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
             'kyazdani42/nvim-web-devicons'
-        }
+        },
+        config = require('plugin_configs.telescope')
     }
 
     use {
@@ -51,10 +51,12 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'Juksuu/VibrantGrey',
+        '~/code/colorschemes/VibrantGrey',
         requires = {'tjdevries/colorbuddy.nvim'},
         config = require('plugin_configs.vibrantgrey')
     }
+
+    use {'hoob3rt/lualine.nvim', config = require('plugin_configs.lualine')}
 
     --- LANGUAGES ---
     use {'sheerun/vim-polyglot', config = require('plugin_configs.polyglot')}
