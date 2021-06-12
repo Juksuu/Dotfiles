@@ -16,19 +16,9 @@ return function()
     vim.fn.sign_define("LspDiagnosticsSignHint",
                        {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
-    local custom_init = function(client)
-        client.config.flags = client.config.flags or {}
-        client.config.flags.allow_incremental_sync = true
-    end
+    local custom_init = function(client) end
 
-    local custom_attach = function(client, bufnr)
-        local function buf_set_option(...)
-            vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    end
+    local custom_attach = function(client, bufnr) end
 
     -- Load lua configuration from nlua.
     require('nlua.lsp.nvim').setup(nvim_lsp, {
