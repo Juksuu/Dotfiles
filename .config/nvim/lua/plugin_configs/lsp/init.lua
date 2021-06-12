@@ -39,6 +39,11 @@ return function()
     nvim_lsp.pyls.setup {on_init = custom_init, on_attach = custom_attach}
     nvim_lsp.tsserver.setup {on_init = custom_init, on_attach = custom_attach}
     nvim_lsp.svelte.setup {on_init = custom_init, on_attach = custom_attach}
+    nvim_lsp.yamlls.setup {
+        on_init = custom_init,
+        on_attach = custom_attach
+        -- settings = {yaml = {schemas = {kubernetes = "/*"}}}
+    }
 
     local tslint = require('plugin_configs.lsp.efm.tslint')
     local eslint = require('plugin_configs.lsp.efm.eslint')

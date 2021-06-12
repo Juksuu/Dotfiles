@@ -20,6 +20,8 @@ bind("n", "K", "<cmd> lua vim.lsp.buf.hover() <CR>",
 {noremap = true, silent = true})
 bind("n", "<leader>cdl", "<cmd> lua vim.lsp.diagnostic.show_line_diagnostics() <CR>",
 {noremap = true, silent = true})
+bind("n", "<leader>cR", "<cmd> lua vim.lsp.buf.rename() <CR>",
+{noremap = true, silent = true})
 
 -- Harpoon
 bind("n", "<leader>th", "<cmd>lua require('harpoon.term').gotoTerminal(1)<CR>",

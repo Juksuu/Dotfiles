@@ -16,7 +16,7 @@ font:
   size: 12
   use_thin_strokes: true
 draw_bold_text_with_bright_colors: true
-background_opacity: 0.9
+background_opacity: 0.98
 key_bindings:
   - key: Key0
     mods: Control
