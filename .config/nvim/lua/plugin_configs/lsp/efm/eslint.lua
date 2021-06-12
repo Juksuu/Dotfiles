@@ -6,3 +6,4 @@ local eslint = {
 }
 
 return eslint
+
