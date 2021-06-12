@@ -64,7 +64,7 @@ use 'kyazdani42/nvim-web-devicons'
 use {
     'Juksuu/VibrantGrey',
     after = 'tjdevries/colorbuddy.nvim',
-    repo = '~/code/colorschemes/VibrantGrey',
+    -- repo = '~/code/colorschemes/VibrantGrey',
     config = require('plugin_configs.vibrantgrey')
 }
 use {
