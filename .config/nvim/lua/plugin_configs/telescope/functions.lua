@@ -1,26 +1,36 @@
 local M = {}
 
 -- LuaFormatter off
+--- THEMES ---
 local function ivy(opts)
     return require('telescope.themes').get_ivy(opts)
+end
+local function dropdown(opts)
+    return require('telescope.themes').get_dropdown(opts)
 end
 
 --- SEARCH ---
 function M.find_files()
-    local opts = {}
-    require('telescope.builtin').find_files(ivy(opts))
+    local opts = {
+        hidden = true,
+        prompt_position = "bottom",
+        file_ignore_patterns = {"**.min"},
+    }
+    require('telescope.builtin').find_files(opts)
 end
 
 function M.grep_string()
     local opts = {
-        shorten_path = true
+        shorten_path = true,
+        file_ignore_patterns = {"**.min"},
     }
     require('telescope.builtin').grep_string(ivy(opts))
 end
 
 function M.live_grep()
     local opts = {
-        shorten_path = true
+        shorten_path = true,
+        file_ignore_patterns = {"**.min"},
     }
     require('telescope.builtin').live_grep(ivy(opts))
 end
@@ -28,9 +38,12 @@ end
 --- GIT ---
 function M.git_files()
     local opts = {
-        shorten_path = false
+        hidden = true,
+        previewer = false,
+        shorten_path = false,
+        prompt_position = "bottom",
     }
-    require('telescope.builtin').git_files(ivy(opts))
+    require('telescope.builtin').git_files(dropdown(opts))
 end
 
 function M.git_worktrees()
@@ -43,7 +56,7 @@ end
 
 function M.git_stash()
     local opts = {}
-    require('telescope.builtin').git_stash(ivy(opts))
+    require('telescope.builtin').git_stash(dropdown(opts))
 end
 
 --- LSP ---

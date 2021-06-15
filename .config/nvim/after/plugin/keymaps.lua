@@ -37,10 +37,10 @@ _G.enter_complete = function()
 end
 
 -- Telescope bindings
-function map_tele(key, f, options, buffer)
+local function map_tele(key, f, options, buffer)
     local mode = "n"
     local rhs = string.format(
-                    "<cmd> lua require('plugin_configs.telescope.functions')['%s'](%s)<CR>",
+                    "<cmd> lua R('plugin_configs.telescope.functions')['%s'](%s)<CR>",
                     f, options and vim.inspect(options, {newline = ''}) or '')
 
     local opts = {noremap = true, silent = true}
@@ -67,8 +67,12 @@ bind("i", "<CR>", "v:lua.enter_complete()",
 --- NORMAL MODE BINDS ---
 bind("n", "<leader>n", "<cmd> NvimTreeToggle <CR>",
 {noremap = true, silent = true})
-bind("n", "<leader>gs", ":vert :Git <CR>",
+bind("n", "<leader>gs", "<cmd> vert Git <CR>",
 {noremap = true, silent = true})
+bind("n", "<leader>so", "<cmd> so $HOME/.config/nvim/init.lua <CR>",
+{noremap = true, silent = true})
+
+-- LSP
 bind("n", "K", "<cmd> lua vim.lsp.buf.hover() <CR>",
 {noremap = true, silent = true})
 bind("n", "<leader>cdl", "<cmd> lua vim.lsp.diagnostic.show_line_diagnostics() <CR>",
