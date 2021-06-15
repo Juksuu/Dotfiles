@@ -93,6 +93,9 @@ map_tele('<leader>ff', 'find_files')
 map_tele('<leader>fs', 'live_grep')
 map_tele('<leader>fS', 'grep_string')
 map_tele('<leader>fg', 'git_files')
+map_tele('<leader>fm', 'media_files')
+
+map_tele('<leader>zl', 'z_list_dirs')
 
 map_tele('<leader>gw', 'git_worktrees')
 map_tele('<leader>gn', 'create_git_worktree')

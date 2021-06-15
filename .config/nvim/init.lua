@@ -13,25 +13,36 @@ user.setup()
 
 local use = user.use
 
+-- LuaFormatter off
 use 'faerryn/user.nvim'
 
 --- Utilities ---
 use 'tpope/vim-surround'
 use 'tpope/vim-fugitive'
 use 'b3nj5m1n/kommentary'
-use 'nvim-lua/popup.nvim'
 use 'ThePrimeagen/harpoon'
-use 'nvim-lua/plenary.nvim'
 use 'maxbrunsfeld/vim-yankstack'
 use 'editorconfig/editorconfig-vim'
 
-use {'sbdchd/neoformat', config = require('plugin_configs.neoformat')}
+-- Dependencies
+use 'nvim-lua/popup.nvim'
+use 'nvim-lua/plenary.nvim'
+use 'nvim-telescope/telescope-z.nvim'
+use 'nvim-telescope/telescope-media-files.nvim'
+
+use {
+    'sbdchd/neoformat',
+    config = require('plugin_configs.neoformat')
+}
 
 use {
     'nvim-lua/telescope.nvim',
     after = {
-        'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
-        'kyazdani42/nvim-web-devicons'
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim',
+        'kyazdani42/nvim-web-devicons',
+        'nvim-telescope/telescope-z.nvim',
+        'nvim-telescope/telescope-media-files.nvim',
     },
     config = require('plugin_configs.telescope')
 }
@@ -39,10 +50,13 @@ use {
 use {
     'kyazdani42/nvim-tree.lua',
     after = 'kyazdani42/nvim-web-devicons',
-    config = require('plugin_configs.nvimtree')
+    init = require('plugin_configs.nvimtree')
 }
 
-use {'hrsh7th/nvim-compe', config = require('plugin_configs.compe')}
+use {
+    'hrsh7th/nvim-compe',
+    config = require('plugin_configs.compe')
+}
 
 use {
     'ThePrimeagen/git-worktree.nvim',
@@ -77,14 +91,21 @@ use {
     config = function() require('colorizer').setup() end
 }
 
-use {'hoob3rt/lualine.nvim', config = require('plugin_configs.lualine')}
+use {
+    'hoob3rt/lualine.nvim',
+    config = require('plugin_configs.lualine')
+}
 
 --- LANGUAGES ---
-use {'sheerun/vim-polyglot', config = require('plugin_configs.polyglot')}
+use {
+    'sheerun/vim-polyglot',
+    config = require('plugin_configs.polyglot')
+}
 
 use {
     'nvim-treesitter/nvim-treesitter',
     config = require('plugin_configs.treesitter')
 }
 
+-- LuaFormatter on
 user.flush()

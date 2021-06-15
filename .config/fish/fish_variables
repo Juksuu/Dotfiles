@@ -6,6 +6,11 @@ SETUVAR --path PATH:/usr/local/sbin\x1e/usr/local/bin\x1e/usr/bin\x1e/usr/lib/jv
 SETUVAR --export QT_IM_MODULE:ibus
 SETUVAR --export VISUAL:nvim
 SETUVAR --export XMODIFIERS:\x40im\x3dibus
+SETUVAR ZO_CMD:zo
+SETUVAR Z_CMD:z
+SETUVAR Z_DATA:/home/juksu/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/home/juksu/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e/home/juksu\x24
 SETUVAR __fish_initialized:3100
 SETUVAR ayu_variant:mirage
 SETUVAR --export fish_color_autosuggestion:707A8C

@@ -35,6 +35,14 @@ function M.live_grep()
     require('telescope.builtin').live_grep(ivy(opts))
 end
 
+function M.media_files()
+    require('telescope').extensions.media_files.media_files()
+end
+
+function M.z_list_dirs()
+    require('telescope').extensions.z.list()
+end
+
 --- GIT ---
 function M.git_files()
     local opts = {
