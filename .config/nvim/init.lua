@@ -24,11 +24,16 @@ use 'ThePrimeagen/harpoon'
 use 'maxbrunsfeld/vim-yankstack'
 use 'editorconfig/editorconfig-vim'
 
+-- snippets
+use 'hrsh7th/vim-vsnip'
+use 'hrsh7th/vim-vsnip-integ'
+
 -- Dependencies
 use 'nvim-lua/popup.nvim'
 use 'nvim-lua/plenary.nvim'
 use 'nvim-telescope/telescope-z.nvim'
 use 'nvim-telescope/telescope-media-files.nvim'
+
 
 use {
     'sbdchd/neoformat',

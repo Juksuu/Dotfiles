@@ -1,6 +1,5 @@
 return function()
     local nvim_lsp = require("lspconfig")
-    local lspconfig_util = require('lspconfig.util')
 
     vim.lsp.handlers["textDocument/publishDiagnostics"] =
         vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
@@ -20,20 +19,29 @@ return function()
 
     local custom_attach = function(client, bufnr) end
 
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {'documentation', 'detail', 'additionalTextEdits'}
+    }
+
     -- Load lua configuration from nlua.
     require('nlua.lsp.nvim').setup(nvim_lsp, {
         on_init = custom_init,
         on_attach = custom_attach
     })
 
-    nvim_lsp.pyls.setup {on_init = custom_init, on_attach = custom_attach}
-    nvim_lsp.tsserver.setup {on_init = custom_init, on_attach = custom_attach}
-    nvim_lsp.svelte.setup {on_init = custom_init, on_attach = custom_attach}
-    nvim_lsp.yamlls.setup {
-        on_init = custom_init,
-        on_attach = custom_attach
-        -- settings = {yaml = {schemas = {kubernetes = "/*"}}}
+    local servers = {
+        "gopls", "metals", "pyls", "rust_analyzer", "tsserver", "svelte",
+        "yamlls"
     }
+    for _, lsp in ipairs(servers) do
+        nvim_lsp[lsp].setup {
+            on_init = custom_init,
+            on_attach = custom_attach,
+            capabilities = capabilities
+        }
+    end
 
     local tslint = require('plugin_configs.lsp.efm.tslint')
     local eslint = require('plugin_configs.lsp.efm.eslint')
