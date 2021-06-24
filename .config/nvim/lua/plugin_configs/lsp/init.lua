@@ -15,9 +15,9 @@ return function()
     vim.fn.sign_define("LspDiagnosticsSignHint",
                        {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
-    local custom_init = function(client) end
-
-    local custom_attach = function(client, bufnr) end
+    local custom_attach = function(client, bufnr)
+        require"lsp_signature".on_attach()
+    end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -26,10 +26,7 @@ return function()
     }
 
     -- Load lua configuration from nlua.
-    require('nlua.lsp.nvim').setup(nvim_lsp, {
-        on_init = custom_init,
-        on_attach = custom_attach
-    })
+    require('nlua.lsp.nvim').setup(nvim_lsp, {on_attach = custom_attach})
 
     local servers = {
         "gopls", "metals", "pyls", "rust_analyzer", "tsserver", "svelte",
@@ -37,7 +34,6 @@ return function()
     }
     for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
-            on_init = custom_init,
             on_attach = custom_attach,
             capabilities = capabilities
         }

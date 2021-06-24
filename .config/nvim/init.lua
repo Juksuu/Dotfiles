@@ -19,7 +19,7 @@ use 'faerryn/user.nvim'
 --- Utilities ---
 use 'tpope/vim-surround'
 use 'tpope/vim-fugitive'
-use 'b3nj5m1n/kommentary'
+use 'tpope/vim-commentary'
 use 'ThePrimeagen/harpoon'
 use 'maxbrunsfeld/vim-yankstack'
 use 'editorconfig/editorconfig-vim'
@@ -27,13 +27,13 @@ use 'editorconfig/editorconfig-vim'
 -- snippets
 use 'hrsh7th/vim-vsnip'
 use 'hrsh7th/vim-vsnip-integ'
+use "rafamadriz/friendly-snippets"
 
 -- Dependencies
 use 'nvim-lua/popup.nvim'
 use 'nvim-lua/plenary.nvim'
 use 'nvim-telescope/telescope-z.nvim'
 use 'nvim-telescope/telescope-media-files.nvim'
-
 
 use {
     'sbdchd/neoformat',
@@ -68,11 +68,23 @@ use {
     config = function() require('git-worktree').setup() end
 }
 
+use {
+    'mizlan/iswap.nvim',
+    after = 'nvim-treesitter/nvim-treesitter',
+    config = function() require('iswap').setup{} end
+}
+
+
 --- LSP ---
 use 'tjdevries/nlua.nvim'
+use 'ray-x/lsp_signature.nvim'
+
 use {
     'neovim/nvim-lspconfig',
-    after = 'tjdevries/nlua.nvim',
+    after = {
+        'tjdevries/nlua.nvim',
+        'ray-x/lsp_signature.nvim'
+    },
     config = require('plugin_configs.lsp')
 }
 

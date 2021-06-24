@@ -76,6 +76,8 @@ bind("n", "<leader>gs", "<cmd> vert Git <CR>",
 {noremap = true, silent = true})
 bind("n", "<leader>so", "<cmd> so $HOME/.config/nvim/init.lua <CR>",
 {noremap = true, silent = true})
+bind("n", "<leader>s", "<cmd> ISwap <CR>",
+{noremap = true, silent = true})
 
 -- LSP
 bind("n", "K", "<cmd> lua vim.lsp.buf.hover() <CR>",
