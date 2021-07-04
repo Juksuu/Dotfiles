@@ -4,7 +4,6 @@ opt.syntax = 'on'
 opt.termguicolors = true
 opt.confirm = true
 
-opt.guicursor = ''
 opt.number = true
 opt.relativenumber = true
 
@@ -16,7 +15,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 opt.clipboard = 'unnamedplus'
-opt.completeopt = {"menuone", "noselect"}
+opt.completeopt = {"menuone", "noinsert", "preview"}
 
 opt.undofile = true
 
