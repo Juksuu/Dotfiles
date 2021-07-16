@@ -13,7 +13,6 @@ end
 function M.find_files()
     local opts = {
         hidden = true,
-        prompt_position = "bottom",
         file_ignore_patterns = {"**.min"},
     }
     require('telescope.builtin').find_files(opts)
@@ -49,7 +48,6 @@ function M.git_files()
         hidden = true,
         previewer = false,
         shorten_path = false,
-        prompt_position = "bottom",
     }
     require('telescope.builtin').git_files(dropdown(opts))
 end

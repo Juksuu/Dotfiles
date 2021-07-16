@@ -2,6 +2,7 @@ set -x VISUAL nvim
 set -x EDITOR $VISUAL
 
 set -x GOPATH $HOME/go
+set -x CARGO_HOME $HOME/.cargo
 set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $GOPATH/bin $HOME/.luarocks/bin
 
 set fish_greeting

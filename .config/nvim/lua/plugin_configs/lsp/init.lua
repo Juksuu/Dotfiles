@@ -1,9 +1,11 @@
 return function()
     local nvim_lsp = require("lspconfig")
 
-    vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                     {underline = true})
+    -- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    --     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    --         underline = true,
+    --         virtual_text = 
+    --     })
 
     -- Disable gutter signs, color linenum instead
     vim.fn.sign_define("LspDiagnosticsSignError",
@@ -29,8 +31,7 @@ return function()
     require('nlua.lsp.nvim').setup(nvim_lsp, {on_attach = custom_attach})
 
     local servers = {
-        "gopls", "metals", "pyls", "rust_analyzer", "tsserver", "svelte",
-        "yamlls"
+        "gopls", "metals", "pyls", "tsserver", "svelte", "yamlls", "gdscript"
     }
     for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
@@ -38,6 +39,21 @@ return function()
             capabilities = capabilities
         }
     end
+
+    -- nvim_lsp.rust_analyzer.setup({
+    --     on_attach = custom_attach,
+    --     capabilities = capabilities,
+    --     settings = {
+    --         ["rust-analyzer"] = {
+    --             assist = {
+    --                 importGranularity = "module",
+    --                 importPrefix = "by_self"
+    --             },
+    --             cargo = {loadOutDirsFromCheck = true},
+    --             procMacro = {enable = true}
+    --         }
+    --     }
+    -- })
 
     local tslint = require('plugin_configs.lsp.efm.tslint')
     local eslint = require('plugin_configs.lsp.efm.eslint')

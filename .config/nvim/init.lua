@@ -78,6 +78,15 @@ use {
 --- LSP ---
 use 'tjdevries/nlua.nvim'
 use 'ray-x/lsp_signature.nvim'
+-- use 'nvim-lua/lsp_extensions.nvim'
+
+use {
+    'simrat39/rust-tools.nvim',
+    after = {
+        'neovim/nvim-lspconfig'
+    },
+    config = require('plugin_configs.rust_tools')
+}
 
 use {
     'neovim/nvim-lspconfig',

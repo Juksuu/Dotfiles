@@ -15,7 +15,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 opt.clipboard = 'unnamedplus'
-opt.completeopt = {"menuone", "noinsert", "preview"}
+opt.completeopt = {"menuone", "noselect", "noinsert", "preview"}
 
 opt.undofile = true
 

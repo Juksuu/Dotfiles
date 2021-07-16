@@ -4,10 +4,10 @@ return function()
             prompt_prefix = ' >',
 
             sorting_strategy = "descending",
-            prompt_position = "top",
             color_devicons = true
 
         },
+        layout_config = {prompt_position = "top"},
 
         extensions = {
             fzf = {
