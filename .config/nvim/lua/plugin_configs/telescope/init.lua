@@ -18,8 +18,6 @@ return function()
         }
     }
 
-    require('telescope').load_extension('z')
-    require('telescope').load_extension('media_files')
     require('telescope').load_extension('git_worktree')
 end
 

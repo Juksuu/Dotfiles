@@ -18,7 +18,6 @@ use 'faerryn/user.nvim'
 
 --- Utilities ---
 use 'tpope/vim-surround'
-use 'tpope/vim-fugitive'
 use 'tpope/vim-commentary'
 use 'ThePrimeagen/harpoon'
 use 'maxbrunsfeld/vim-yankstack'
@@ -32,8 +31,6 @@ use "rafamadriz/friendly-snippets"
 -- Dependencies
 use 'nvim-lua/popup.nvim'
 use 'nvim-lua/plenary.nvim'
-use 'nvim-telescope/telescope-z.nvim'
-use 'nvim-telescope/telescope-media-files.nvim'
 
 use {
     'sbdchd/neoformat',
@@ -46,8 +43,6 @@ use {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
         'kyazdani42/nvim-web-devicons',
-        'nvim-telescope/telescope-z.nvim',
-        'nvim-telescope/telescope-media-files.nvim',
     },
     config = require('plugin_configs.telescope')
 }
@@ -64,16 +59,29 @@ use {
 }
 
 use {
-    'ThePrimeagen/git-worktree.nvim',
-    config = function() require('git-worktree').setup() end
-}
-
-use {
     'mizlan/iswap.nvim',
     after = 'nvim-treesitter/nvim-treesitter',
     config = function() require('iswap').setup{} end
 }
 
+-- Git
+use {
+    'ThePrimeagen/git-worktree.nvim',
+    config = function() require('git-worktree').setup() end
+}
+
+use {
+    'sindrets/diffview.nvim',
+    config = function() require('diffview').setup() end
+}
+
+use {
+    'TimUntersberger/neogit',
+    after = {
+        'sindrets/diffview.nvim',
+    },
+    config = require('plugin_configs.neogit')
+}
 
 --- LSP ---
 use 'tjdevries/nlua.nvim'
@@ -98,15 +106,26 @@ use {
 }
 
 --- UI ---
-use 'tjdevries/colorbuddy.nvim'
 use 'kyazdani42/nvim-web-devicons'
 
+-- use 'tjdevries/colorbuddy.nvim'
+-- use {
+--     'Juksuu/VibrantGrey',
+--     after = 'tjdevries/colorbuddy.nvim',
+--     -- repo = '~/code/colorschemes/VibrantGrey',
+--     config = require('plugin_configs.vibrantgrey')
+-- }
+
 use {
-    'Juksuu/VibrantGrey',
-    after = 'tjdevries/colorbuddy.nvim',
-    -- repo = '~/code/colorschemes/VibrantGrey',
-    config = require('plugin_configs.vibrantgrey')
+    'RRethy/nvim-base16',
+    config = require('plugin_configs.base16')
 }
+
+use {
+    'xiyaowong/nvim-transparent',
+    config = require('plugin_configs.transparent')
+}
+
 use {
     'lewis6991/gitsigns.nvim',
     config = function() require('gitsigns').setup() end

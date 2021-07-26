@@ -20,7 +20,9 @@ end
 
 function M.grep_string()
     local opts = {
-        shorten_path = true,
+        path_display = {
+            'shorten'
+        },
         file_ignore_patterns = {"**.min"},
     }
     require('telescope.builtin').grep_string(ivy(opts))
@@ -28,18 +30,12 @@ end
 
 function M.live_grep()
     local opts = {
-        shorten_path = true,
+        path_display = {
+            'shorten'
+        },
         file_ignore_patterns = {"**.min"},
     }
     require('telescope.builtin').live_grep(ivy(opts))
-end
-
-function M.media_files()
-    require('telescope').extensions.media_files.media_files()
-end
-
-function M.z_list_dirs()
-    require('telescope').extensions.z.list()
 end
 
 --- GIT ---
@@ -47,7 +43,6 @@ function M.git_files()
     local opts = {
         hidden = true,
         previewer = false,
-        shorten_path = false,
     }
     require('telescope.builtin').git_files(dropdown(opts))
 end
@@ -58,11 +53,6 @@ end
 
 function M.create_git_worktree()
     require('telescope').extensions.git_worktree.create_git_worktree()
-end
-
-function M.git_stash()
-    local opts = {}
-    require('telescope.builtin').git_stash(dropdown(opts))
 end
 
 --- LSP ---

@@ -72,7 +72,7 @@ bind("i", "<CR>", "v:lua.enter_complete()",
 --- NORMAL MODE BINDS ---
 bind("n", "<leader>n", "<cmd> NvimTreeToggle <CR>",
 {noremap = true, silent = true})
-bind("n", "<leader>gs", "<cmd> vert Git <CR>",
+bind("n", "<leader>gs", "<cmd> lua require('neogit').open({ kind = 'split' }) <CR>",
 {noremap = true, silent = true})
 bind("n", "<leader>so", "<cmd> so $HOME/.config/nvim/init.lua <CR>",
 {noremap = true, silent = true})
@@ -88,11 +88,11 @@ bind("n", "<leader>cR", "<cmd> lua vim.lsp.buf.rename() <CR>",
 {noremap = true, silent = true})
 
 -- Harpoon
-bind("n", "<leader>th", "<cmd>lua require('harpoon.term').gotoTerminal(1)<CR>",
+bind("n", "<leader>th", "<cmd> lua require('harpoon.term').gotoTerminal(1)<CR>",
 {noremap = true, silent = true})
-bind("n", "<leader>tj", "<cmd>lua require('harpoon.term').gotoTerminal(2)<CR>",
+bind("n", "<leader>tj", "<cmd> lua require('harpoon.term').gotoTerminal(2)<CR>",
 {noremap = true, silent = true})
-bind("n", "<leader>tk", "<cmd>lua require('harpoon.term').gotoTerminal(3)<CR>",
+bind("n", "<leader>tk", "<cmd> lua require('harpoon.term').gotoTerminal(3)<CR>",
 {noremap = true, silent = true})
 
 --- TELESCOPE MAPPINGS ---
@@ -100,13 +100,9 @@ map_tele('<leader>ff', 'find_files')
 map_tele('<leader>fs', 'live_grep')
 map_tele('<leader>fS', 'grep_string')
 map_tele('<leader>fg', 'git_files')
-map_tele('<leader>fm', 'media_files')
-
-map_tele('<leader>zl', 'z_list_dirs')
 
 map_tele('<leader>gw', 'git_worktrees')
 map_tele('<leader>gn', 'create_git_worktree')
-map_tele('<leader>gS', 'git_stash')
 
 map_tele('gd', 'lsp_definitions')
 map_tele('<leader>cr', 'lsp_references')

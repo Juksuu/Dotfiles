@@ -15,7 +15,7 @@ font:
     style: Bold Italic
   size: 12
   use_thin_strokes: true
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 background_opacity: 0.98
 key_bindings:
   - key: Key0
@@ -29,25 +29,32 @@ key_bindings:
     action: DecreaseFontSize
 colors:
   primary:
-    background: '#3a383f'
-    foreground: '#d0d6d2'
+    background: '0x1e1e1e'
+    foreground: '0xa7a7a7'
   normal:
-    black: '#000000'
-    white: '#ffffff'
-    green: '#53ed75'
-    red: '#dd3033'
-    blue: '#128bae'
-    yellow: '#cbed53'
+    black: '0x1e1e1e'
+    white: '0xa7a7a7'
+    green: '0x8f9d6a'
+    red: '0xcf6a4c'
+    blue: '0x7587a6'
+    yellow: '0xf9ee98'
     pink: '#ed537e'
     orange: '#ed7553'
     violet: '#7553ed'
+    magenta: '0x9b859d'
+    cyan: '0xafc4db'
   bright:
-    black: '#000000'
-    white: '#ffffff'
-    green: '#53ed75'
-    red: '#dd3033'
-    blue: '#128bae'
-    yellow: '#cbed53'
+    black: '0x5f5a60'
+    white: '0xffffff'
+    green: '0x323537'
+    red: '0xcda869'
+    blue: '0x838184'
+    yellow: '0x464b50'
     pink: '#ed537e'
     orange: '#ed7553'
     violet: '#7553ed'
+    magenta: '0xc3c3c3'
+    cyan: '0x9b703f'
+  cursor:
+    text: '0x1e1e1e'
+    cursor: '0xa7a7a7'
