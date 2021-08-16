@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+opt.guicursor = ''
 opt.syntax = 'on'
 opt.confirm = true
 opt.showmode = true

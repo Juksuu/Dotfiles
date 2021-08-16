@@ -115,8 +115,8 @@ return require('packer').startup(function()
   }
 
   use {
-     'hoob3rt/lualine.nvim',
-     config = require('plugin_configs.lualine')
+      'famiu/feline.nvim',
+      config = require('plugin_configs.feline')
   }
 
 end)
