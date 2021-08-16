@@ -2,18 +2,20 @@ env:
   TERM: xterm-256color
 font:
   normal:
-    family: Code New Roman Nerd Font
+    family: Jetbrains mono Nerd Font
     style: Regular
-  size: 12
+  size: 11
   offset:
     x: 0
-    y: 3
+    y: -2
 draw_bold_text_with_bright_colors: true
 background_opacity: 0.98
 cursor:
-  shape: Block
-  blinking: Never
+  style:
+    shape: Block
+    blinking: Never
   unfocused_hollow: false
+  thickness: 0.15
 live_config_reload: true
 key_bindings:
   - key: Key0
@@ -29,30 +31,24 @@ colors:
   primary:
     background: '0x1e1e1e'
     foreground: '0xa7a7a7'
-  normal:
-    black: '0x1e1e1e'
-    white: '0xa7a7a7'
-    green: '0x8f9d6a'
-    red: '0xcf6a4c'
-    blue: '0x7587a6'
-    yellow: '0xf9ee98'
-    pink: '#ed537e'
-    orange: '#ed7553'
-    violet: '#7553ed'
-    magenta: '0x9b859d'
-    cyan: '0xafc4db'
-  bright:
-    black: '0x5f5a60'
-    white: '0xffffff'
-    green: '0x323537'
-    red: '0xcda869'
-    blue: '0x838184'
-    yellow: '0x464b50'
-    pink: '#ed537e'
-    orange: '#ed7553'
-    violet: '#7553ed'
-    magenta: '0xc3c3c3'
-    cyan: '0x9b703f'
   cursor:
     text: '0x1e1e1e'
     cursor: '0xa7a7a7'
+  normal:
+    black: '0x1e1e1e'
+    red: '0xcf6a4c'
+    green: '0x8f9d6a'
+    yellow: '0xf9ee98'
+    blue: '0x7587a6'
+    magenta: '0x9b859d'
+    cyan: '0xafc4db'
+    white: '0xa7a7a7'
+  bright:
+    black: '0x5f5a60'
+    red: '0xcda869'
+    green: '0x323537'
+    yellow: '0x464b50'
+    blue: '0x838184'
+    magenta: '0xc3c3c3'
+    cyan: '0x9b703f'
+    white: '0xffffff'
