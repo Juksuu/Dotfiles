@@ -101,9 +101,6 @@ map_tele('<leader>fs', 'live_grep')
 map_tele('<leader>fS', 'grep_string')
 map_tele('<leader>fg', 'git_files')
 
-map_tele('<leader>gw', 'git_worktrees')
-map_tele('<leader>gn', 'create_git_worktree')
-
 map_tele('gd', 'lsp_definitions')
 map_tele('<leader>cr', 'lsp_references')
 map_tele('<leader>ca', 'lsp_code_actions')
