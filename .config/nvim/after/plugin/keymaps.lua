@@ -1,46 +1,3 @@
-local function check_back_space()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-_G.tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif vim.fn.call("vsnip#available", {1}) == 1 then
-        return t "<Plug>(vsnip-jump-next)"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return vim.fn['compe#complete']()
-    end
-end
-
-_G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        -- If <S-Tab> is not working in your terminal, change it to <C-h>
-        return t "<S-Tab>"
-    end
-end
-
-_G.enter_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return vim.fn['compe#confirm']()
-    else
-        return t "<CR>"
-    end
-end
-
 -- Telescope bindings
 local function map_tele(key, f, options, buffer)
     local mode = "n"
@@ -61,18 +18,11 @@ vim.g.mapleader = ' '
 local bind = vim.api.nvim_set_keymap
 
 -- LuaFormatter off
---- INSERT MODE BINDS ---
-bind("i", "<TAB>", "v:lua.tab_complete()",
-{silent = true, expr = true})
-bind("i", "<S-TAB>", "v:lua.s_tab_complete()",
-{silent = true, expr = true})
-bind("i", "<CR>", "v:lua.enter_complete()",
-{silent = true, expr = true})
 
 --- NORMAL MODE BINDS ---
 bind("n", "<leader>n", "<cmd> NvimTreeToggle <CR>",
 {noremap = true, silent = true})
-bind("n", "<leader>gs", "<cmd> lua require('neogit').open({ kind = 'split' }) <CR>",
+bind("n", "<leader>gs", "<cmd> lua require('neogit').open() <CR>",
 {noremap = true, silent = true})
 bind("n", "<leader>so", "<cmd> so $HOME/.config/nvim/init.lua <CR>",
 {noremap = true, silent = true})

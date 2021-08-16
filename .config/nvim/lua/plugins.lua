@@ -22,15 +22,6 @@ return require('packer').startup(function()
   use 'maxbrunsfeld/vim-yankstack'
   use 'editorconfig/editorconfig-vim'
 
-  -- snippets
-  use {
-     'hrsh7th/vim-vsnip',
-     requires = {
-        'hrsh7th/vim-vsnip-integ',
-        'rafamadriz/friendly-snippets'
-     }
-  }
-
   -- Dependencies
   use {
      'sbdchd/neoformat',
@@ -43,11 +34,8 @@ return require('packer').startup(function()
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
         'kyazdani42/nvim-web-devicons',
-        {
-           'ThePrimeagen/git-worktree.nvim',
-           config = function() require('git-worktree').setup() end
-        }
      },
+     after = 'git-worktree.nvim',
      config = require('plugin_configs.telescope')
   }
 
@@ -56,10 +44,14 @@ return require('packer').startup(function()
      requires = 'kyazdani42/nvim-web-devicons',
      init = require('plugin_configs.nvimtree')
   }
-
+  
   use {
-     'hrsh7th/nvim-compe',
-     config = require('plugin_configs.compe')
+      'ms-jpq/coq_nvim',
+      branch = 'coq',
+      requires = {
+         'ms-jpq/coq.artifacts',
+         branch = 'artifacts'
+      }
   }
 
   use {
@@ -68,6 +60,11 @@ return require('packer').startup(function()
   }
 
   -- Git
+  use {
+      'ThePrimeagen/git-worktree.nvim',
+      config = function() require('git-worktree').setup() end
+  }
+
   use {
      'TimUntersberger/neogit',
      requires = {
@@ -86,11 +83,13 @@ return require('packer').startup(function()
         'tjdevries/nlua.nvim',
         'ray-x/lsp_signature.nvim'
      },
+     after = 'coq_nvim',
      config = require('plugin_configs.lsp')
   }
 
   use {
      'simrat39/rust-tools.nvim',
+     after = 'nvim-lspconfig',
      config = require('plugin_configs.rust_tools')
   }
 
