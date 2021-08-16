@@ -2,21 +2,19 @@ env:
   TERM: xterm-256color
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: Code New Roman Nerd Font
     style: Regular
-  bold:
-    family: JetBrainsMono Nerd Font
-    style: Bold
-  italic:
-    family: JetBrainsMono Nerd Font
-    style: Italic
-  bold_italic:
-    family: JetBrainsMono Nerd Font
-    style: Bold Italic
   size: 12
-  use_thin_strokes: true
-draw_bold_text_with_bright_colors: false
+  offset:
+    x: 0
+    y: 3
+draw_bold_text_with_bright_colors: true
 background_opacity: 0.98
+cursor:
+  shape: Block
+  blinking: Never
+  unfocused_hollow: false
+live_config_reload: true
 key_bindings:
   - key: Key0
     mods: Control
