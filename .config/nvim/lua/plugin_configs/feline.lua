@@ -130,7 +130,7 @@ return function()
     -- filename
     components.left.active[3] = {
         provider = function()
-            return vim.fn.expand("%:F")
+            return vim.fn.expand("%:t")
         end,
         hl = {
             fg = 'white',
@@ -189,6 +189,7 @@ return function()
         },
         right_sep = ' '
     }
+
     -- diagnosticErrors
     components.mid.active[2] = {
         provider = 'diagnostic_errors',
@@ -198,6 +199,7 @@ return function()
             style = 'bold'
         }
     }
+
     -- diagnosticWarn
     components.mid.active[3] = {
         provider = 'diagnostic_warnings',
@@ -207,6 +209,7 @@ return function()
             style = 'bold'
         }
     }
+
     -- diagnosticHint
     components.mid.active[4] = {
         provider = 'diagnostic_hints',
@@ -216,6 +219,7 @@ return function()
             style = 'bold'
         }
     }
+
     -- diagnosticInfo
     components.mid.active[5] = {
         provider = 'diagnostic_info',
@@ -228,56 +232,8 @@ return function()
 
     -- RIGHT
 
-    -- fileIcon
-    components.right.active[1] = {
-        provider = function()
-            local filename = vim.fn.expand('%:t')
-            local extension = vim.fn.expand('%:e')
-            local icon  = require'nvim-web-devicons'.get_icon(filename, extension)
-            if icon == nil then
-                icon = ''
-            end
-            return icon
-        end,
-        hl = function()
-            local val = {}
-            local filename = vim.fn.expand('%:t')
-            local extension = vim.fn.expand('%:e')
-            local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
-            if icon ~= nil then
-                val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
-            else
-                val.fg = 'white'
-            end
-            val.bg = 'bg'
-            val.style = 'bold'
-            return val
-        end,
-        right_sep = ' '
-    }
-
-    -- fileType
-    components.right.active[2] = {
-        provider = 'file_type',
-        hl = function()
-            local val = {}
-            local filename = vim.fn.expand('%:t')
-            local extension = vim.fn.expand('%:e')
-            local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
-            if icon ~= nil then
-                val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
-            else
-                val.fg = 'white'
-            end
-            val.bg = 'bg'
-            val.style = 'bold'
-            return val
-        end,
-        right_sep = ' '
-    }
-
     -- fileSize
-    components.right.active[3] = {
+    components.right.active[1] = {
         provider = 'file_size',
         enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
         hl = {
@@ -289,7 +245,7 @@ return function()
     }
 
     -- fileFormat
-    components.right.active[4] = {
+    components.right.active[2] = {
         provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
         hl = {
             fg = 'white',
@@ -300,7 +256,7 @@ return function()
     }
 
     -- fileEncode
-    components.right.active[5] = {
+    components.right.active[3] = {
         provider = 'file_encoding',
         hl = {
             fg = 'white',
@@ -311,19 +267,8 @@ return function()
     }
 
     -- lineInfo
-    components.right.active[6] = {
+    components.right.active[4] = {
         provider = 'position',
-        hl = {
-            fg = 'white',
-            bg = 'bg',
-            style = 'bold'
-        },
-        right_sep = ' '
-    }
-
-    -- linePercent
-    components.right.active[7] = {
-        provider = 'line_percentage',
         hl = {
             fg = 'white',
             bg = 'bg',
