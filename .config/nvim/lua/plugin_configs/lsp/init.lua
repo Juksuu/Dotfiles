@@ -11,9 +11,7 @@ return function()
     vim.fn.sign_define("LspDiagnosticsSignHint",
                        {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
-    local custom_attach = function(client, bufnr)
-        require"lsp_signature".on_attach()
-    end
+    local custom_attach = function(client, bufnr) end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -27,9 +25,10 @@ return function()
     local servers = {"gopls", "tsserver", "svelte", "yamlls", "gdscript"}
     for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup {
-            on_attach = custom_attach,
-            capabilities = capabilities,
-            require('coq')().lsp_ensure_capabilities()
+            require('coq')().lsp_ensure_capabilities({
+                on_attach = custom_attach,
+                capabilities = capabilities
+            })
         }
     end
 

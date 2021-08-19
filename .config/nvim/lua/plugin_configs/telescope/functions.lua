@@ -8,6 +8,9 @@ end
 local function dropdown(opts)
     return require('telescope.themes').get_dropdown(opts)
 end
+local function cursor(opts)
+    return require('telescope.themes').get_cursor(opts)
+end
 
 --- SEARCH ---
 function M.find_files()
@@ -15,7 +18,7 @@ function M.find_files()
         hidden = true,
         file_ignore_patterns = {"**.min"},
     }
-    require('telescope.builtin').find_files(opts)
+    require('telescope.builtin').find_files(ivy(opts))
 end
 
 function M.grep_string()
@@ -44,7 +47,7 @@ function M.git_files()
         hidden = true,
         previewer = false,
     }
-    require('telescope.builtin').git_files(dropdown(opts))
+    require('telescope.builtin').git_files(ivy(opts))
 end
 
 --- LSP ---
@@ -55,7 +58,7 @@ end
 
 function M.lsp_code_actions()
     local opts = {}
-    require('telescope.builtin').lsp_code_actions(ivy(opts))
+    require('telescope.builtin').lsp_code_actions(cursor(opts))
 end
 
 function M.lsp_definitions()

@@ -51,7 +51,8 @@ return require('packer').startup(function()
       requires = {
          'ms-jpq/coq.artifacts',
          branch = 'artifacts'
-      }
+      },
+      config = require('plugin_configs.coq')
   }
 
   use {
@@ -80,8 +81,7 @@ return require('packer').startup(function()
   use {
      'neovim/nvim-lspconfig',
      requires = {
-        'tjdevries/nlua.nvim',
-        'ray-x/lsp_signature.nvim'
+        'tjdevries/nlua.nvim'
      },
      after = 'coq_nvim',
      config = require('plugin_configs.lsp')
@@ -110,8 +110,9 @@ return require('packer').startup(function()
   }
 
   use {
-     'norcalli/nvim-colorizer.lua',
-     config = function() require('colorizer').setup() end
+     'rrethy/vim-hexokinase',
+     init = function() vim.g.Hexokinase_higlighters = { 'virtual' } end,
+     run = 'make hexokinase'
   }
 
   use {
