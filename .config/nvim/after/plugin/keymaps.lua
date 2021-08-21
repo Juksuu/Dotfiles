@@ -2,7 +2,7 @@
 local function map_tele(key, f, options, buffer)
     local mode = "n"
     local rhs = string.format(
-                    "<cmd> lua R('plugin_configs.telescope.functions')['%s'](%s)<CR>",
+                    "<cmd> lua require('plugin_configs.telescope.functions')['%s'](%s)<CR>",
                     f, options and vim.inspect(options, {newline = ''}) or '')
 
     local opts = {noremap = true, silent = true}

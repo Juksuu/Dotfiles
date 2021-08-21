@@ -1,30 +1,64 @@
 -- LuaFormatter off
+
+vim.cmd [[packadd packer.nvim]]
+
 return require('packer').startup(function()
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use {
+      'wbthomason/packer.nvim',
+      event = 'VimEnter'
+  }
 
   --- LANGUAGES ---
   use {
      'sheerun/vim-polyglot',
+     event = 'BufRead',
      config = require('plugin_configs.polyglot')
   }
 
   use {
      'nvim-treesitter/nvim-treesitter',
      run = ':TSUpdate',
+     event = 'BufRead',
      config = require('plugin_configs.treesitter')
   }
 
   --- Utilities ---
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
-  use 'ThePrimeagen/harpoon'
-  use 'maxbrunsfeld/vim-yankstack'
-  use 'editorconfig/editorconfig-vim'
+  use {
+      'tpope/vim-surround',
+      event = 'BufRead'
+  }
+  use {
+      'tpope/vim-commentary',
+      event = 'BufRead'
+  }
+  use {
+      'ThePrimeagen/harpoon',
+      event = 'BufRead'
+  }
+  use {
+      'maxbrunsfeld/vim-yankstack',
+      event = 'BufRead'
+  }
+  use {
+      'editorconfig/editorconfig-vim',
+      event = 'BufRead'
+  }
 
   -- Dependencies
   use {
+    'nvim-lua/plenary.nvim',
+    after = 'packer.nvim',
+  }
+
+  use {
+     'kyazdani42/nvim-web-devicons',
+      event = 'BufRead'
+  }
+
+  use {
      'sbdchd/neoformat',
+     cmd = "Neoformat",
      config = require('plugin_configs.neoformat')
   }
 
@@ -32,19 +66,21 @@ return require('packer').startup(function()
      'nvim-lua/telescope.nvim',
      requires = {
         'nvim-lua/popup.nvim',
-        'nvim-lua/plenary.nvim',
-        'kyazdani42/nvim-web-devicons',
      },
-     after = 'git-worktree.nvim',
+     after = {
+        'git-worktree.nvim',
+        'plenary.nvim',
+        'nvim-web-devicons'
+     },
      config = require('plugin_configs.telescope')
   }
 
   use {
      'kyazdani42/nvim-tree.lua',
-     requires = 'kyazdani42/nvim-web-devicons',
+     cmd = "NvimTreeToggle",
      init = require('plugin_configs.nvimtree')
   }
-  
+
   use {
       'ms-jpq/coq_nvim',
       branch = 'coq',
@@ -55,14 +91,10 @@ return require('packer').startup(function()
       config = require('plugin_configs.coq')
   }
 
-  use {
-     'mizlan/iswap.nvim',
-     config = function() require('iswap').setup{} end
-  }
-
   -- Git
   use {
       'ThePrimeagen/git-worktree.nvim',
+      after = 'plenary.nvim',
       config = function() require('git-worktree').setup() end
   }
 
@@ -71,19 +103,23 @@ return require('packer').startup(function()
      requires = {
         {
            'sindrets/diffview.nvim',
+           event = 'BufRead',
            config = function() require('diffview').setup() end
         }
      },
+     after = 'plenary.nvim',
      config = require('plugin_configs.neogit')
   }
 
   --- LSP ---
   use {
+     'tjdevries/nlua.nvim',
+     event = 'BufRead'
+  }
+
+  use {
      'neovim/nvim-lspconfig',
-     requires = {
-        'tjdevries/nlua.nvim'
-     },
-     after = 'coq_nvim',
+     after = 'nlua.nvim',
      config = require('plugin_configs.lsp')
   }
 
@@ -96,29 +132,26 @@ return require('packer').startup(function()
   --- UI ---
   use {
      'RRethy/nvim-base16',
+     event = 'BufRead',
      config = require('plugin_configs.base16')
   }
 
   use {
      'xiyaowong/nvim-transparent',
+     after = 'nvim-base16',
      config = require('plugin_configs.transparent')
   }
 
   use {
      'lewis6991/gitsigns.nvim',
+     after = 'plenary.nvim',
      config = function() require('gitsigns').setup() end
   }
 
   use {
-     'rrethy/vim-hexokinase',
-     init = function() vim.g.Hexokinase_higlighters = { 'virtual' } end,
-     run = 'make hexokinase'
-  }
-
-  use {
       'famiu/feline.nvim',
+      event = 'BufRead',
       config = require('plugin_configs.feline')
   }
-
 end)
 -- LuaFormatter on
