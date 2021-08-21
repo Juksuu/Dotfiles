@@ -5,44 +5,44 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use {
-      'wbthomason/packer.nvim',
-      event = 'VimEnter'
+    'wbthomason/packer.nvim',
+    event = 'VimEnter'
   }
 
   --- LANGUAGES ---
   use {
-     'sheerun/vim-polyglot',
-     event = 'BufRead',
-     config = require('plugin_configs.polyglot')
+    'sheerun/vim-polyglot',
+    event = 'BufRead',
+    config = require('plugin_configs.polyglot')
   }
 
   use {
-     'nvim-treesitter/nvim-treesitter',
-     run = ':TSUpdate',
-     event = 'BufRead',
-     config = require('plugin_configs.treesitter')
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    event = 'BufRead',
+    config = require('plugin_configs.treesitter')
   }
 
   --- Utilities ---
   use {
-      'tpope/vim-surround',
-      event = 'BufRead'
+    'tpope/vim-surround',
+    event = 'BufRead'
   }
   use {
-      'tpope/vim-commentary',
-      event = 'BufRead'
+    'tpope/vim-commentary',
+    event = 'BufRead'
   }
   use {
-      'ThePrimeagen/harpoon',
-      event = 'BufRead'
+    'ThePrimeagen/harpoon',
+    event = 'BufRead'
   }
   use {
-      'maxbrunsfeld/vim-yankstack',
-      event = 'BufRead'
+    'maxbrunsfeld/vim-yankstack',
+    event = 'BufRead'
   }
   use {
-      'editorconfig/editorconfig-vim',
-      event = 'BufRead'
+    'editorconfig/editorconfig-vim',
+    event = 'BufRead'
   }
 
   -- Dependencies
@@ -52,106 +52,113 @@ return require('packer').startup(function()
   }
 
   use {
-     'kyazdani42/nvim-web-devicons',
-      event = 'BufRead'
+    'kyazdani42/nvim-web-devicons',
+    event = 'BufRead'
   }
 
   use {
-     'sbdchd/neoformat',
-     cmd = "Neoformat",
-     config = require('plugin_configs.neoformat')
+    'sbdchd/neoformat',
+    cmd = "Neoformat",
+    config = require('plugin_configs.neoformat')
   }
 
   use {
-     'nvim-lua/telescope.nvim',
-     requires = {
-        'nvim-lua/popup.nvim',
-     },
-     after = {
-        'git-worktree.nvim',
-        'plenary.nvim',
-        'nvim-web-devicons'
-     },
-     config = require('plugin_configs.telescope')
+    'nvim-lua/telescope.nvim',
+    requires = {
+      'nvim-lua/popup.nvim',
+    },
+    after = {
+      'git-worktree.nvim',
+      'plenary.nvim',
+      'nvim-web-devicons'
+    },
+    config = require('plugin_configs.telescope')
   }
 
   use {
-     'kyazdani42/nvim-tree.lua',
-     cmd = "NvimTreeToggle",
-     init = require('plugin_configs.nvimtree')
+    'kyazdani42/nvim-tree.lua',
+    cmd = "NvimTreeToggle",
+    init = require('plugin_configs.nvimtree')
   }
 
   use {
-      'ms-jpq/coq_nvim',
-      branch = 'coq',
-      requires = {
-         'ms-jpq/coq.artifacts',
-         branch = 'artifacts'
-      },
-      config = require('plugin_configs.coq')
+    'ms-jpq/coq_nvim',
+    branch = 'coq',
+    requires = {
+      'ms-jpq/coq.artifacts',
+      branch = 'artifacts'
+    },
+    config = require('plugin_configs.coq')
   }
 
   -- Git
   use {
-      'ThePrimeagen/git-worktree.nvim',
-      after = 'plenary.nvim',
-      config = function() require('git-worktree').setup() end
+    'ThePrimeagen/git-worktree.nvim',
+    after = 'plenary.nvim',
+    config = function() require('git-worktree').setup() end
   }
 
   use {
-     'TimUntersberger/neogit',
-     requires = {
-        {
-           'sindrets/diffview.nvim',
-           event = 'BufRead',
-           config = function() require('diffview').setup() end
-        }
-     },
-     after = 'plenary.nvim',
-     config = require('plugin_configs.neogit')
+    'TimUntersberger/neogit',
+    requires = {
+      {
+        'sindrets/diffview.nvim',
+        event = 'BufRead',
+        config = function() require('diffview').setup() end
+      }
+    },
+    after = 'plenary.nvim',
+    config = require('plugin_configs.neogit')
   }
 
   --- LSP ---
   use {
-     'tjdevries/nlua.nvim',
-     event = 'BufRead'
+    'tjdevries/nlua.nvim',
+    event = 'BufRead'
   }
 
   use {
-     'neovim/nvim-lspconfig',
-     after = 'nlua.nvim',
-     config = require('plugin_configs.lsp')
+    'neovim/nvim-lspconfig',
+    after = 'nlua.nvim',
+    config = require('plugin_configs.lsp')
   }
 
   use {
-     'simrat39/rust-tools.nvim',
-     after = 'nvim-lspconfig',
-     config = require('plugin_configs.rust_tools')
+    'simrat39/rust-tools.nvim',
+    after = 'nvim-lspconfig',
+    config = require('plugin_configs.rust_tools')
   }
 
   --- UI ---
   use {
-     'RRethy/nvim-base16',
-     event = 'BufRead',
-     config = require('plugin_configs.base16')
+    'RRethy/nvim-base16',
+    event = 'BufRead',
+    config = require('plugin_configs.base16')
   }
 
   use {
-     'xiyaowong/nvim-transparent',
-     after = 'nvim-base16',
-     config = require('plugin_configs.transparent')
+    'xiyaowong/nvim-transparent',
+    after = 'nvim-base16',
+    config = require('plugin_configs.transparent')
   }
 
   use {
-     'lewis6991/gitsigns.nvim',
-     after = 'plenary.nvim',
-     config = function() require('gitsigns').setup() end
+    'lewis6991/gitsigns.nvim',
+    after = 'plenary.nvim',
+    config = function() require('gitsigns').setup() end
   }
 
   use {
-      'famiu/feline.nvim',
-      event = 'BufRead',
-      config = require('plugin_configs.feline')
+    'famiu/feline.nvim',
+    event = 'BufRead',
+    config = require('plugin_configs.feline')
   }
+
+  use {
+    'akinsho/bufferline.nvim',
+    event = 'BufRead',
+    config = require('plugin_configs.bufferline')
+  }
+
 end)
 -- LuaFormatter on
