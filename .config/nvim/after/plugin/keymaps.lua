@@ -24,10 +24,6 @@ bind("n", "<leader>n", "<cmd> NvimTreeToggle <CR>",
 {noremap = true, silent = true})
 bind("n", "<leader>gs", "<cmd> lua require('neogit').open() <CR>",
 {noremap = true, silent = true})
-bind("n", "<leader>so", "<cmd> so $HOME/.config/nvim/init.lua <CR>",
-{noremap = true, silent = true})
-bind("n", "<leader>s", "<cmd> ISwap <CR>",
-{noremap = true, silent = true})
 
 -- LSP
 bind("n", "K", "<cmd> lua vim.lsp.buf.hover() <CR>",
@@ -45,6 +41,16 @@ bind("n", "<leader>tj", "<cmd> lua require('harpoon.term').gotoTerminal(2)<CR>",
 bind("n", "<leader>tk", "<cmd> lua require('harpoon.term').gotoTerminal(3)<CR>",
 {noremap = true, silent = true})
 
+bind("n", "<leader>ma", "<cmd> lua require('harpoon.mark').add_file()<CR>",
+{noremap = true, silent = true})
+bind("n", "<C-J>", "<cmd> lua require('harpoon.ui').nav_file(1)<CR>",
+{noremap = true, silent = true})
+bind("n", "<C-K>", "<cmd> lua require('harpoon.ui').nav_file(2)<CR>",
+{noremap = true, silent = true})
+bind("n", "<leader>mm", "<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>",
+{noremap = true, silent = true})
+
+
 --- TELESCOPE MAPPINGS ---
 map_tele('<leader>ff', 'find_files')
 map_tele('<leader>fs', 'live_grep')
@@ -56,5 +62,4 @@ map_tele('<leader>cr', 'lsp_references')
 map_tele('<leader>ca', 'lsp_code_actions')
 map_tele('<leader>cd', 'lsp_document_diagnostics')
 map_tele('<leader>cD', 'lsp_workspace_diagnostics')
-
 -- LuaFormatter on

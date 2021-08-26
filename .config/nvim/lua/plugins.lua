@@ -2,7 +2,7 @@
 
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   -- Packer can manage itself
   use {
     'wbthomason/packer.nvim',
@@ -28,18 +28,17 @@ return require('packer').startup(function()
     'tpope/vim-surround',
     event = 'BufRead'
   }
+
   use {
     'tpope/vim-commentary',
     event = 'BufRead'
   }
-  use {
-    'ThePrimeagen/harpoon',
-    event = 'BufRead'
-  }
+
   use {
     'maxbrunsfeld/vim-yankstack',
     event = 'BufRead'
   }
+
   use {
     'editorconfig/editorconfig-vim',
     event = 'BufRead'
@@ -49,6 +48,11 @@ return require('packer').startup(function()
   use {
     'nvim-lua/plenary.nvim',
     after = 'packer.nvim',
+  }
+
+  use {
+    'ThePrimeagen/harpoon',
+    after = 'plenary.nvim'
   }
 
   use {
