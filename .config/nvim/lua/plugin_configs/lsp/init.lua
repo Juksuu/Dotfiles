@@ -1,6 +1,10 @@
 return function()
     local nvim_lsp = require('lspconfig')
 
+    vim.lsp.handlers["textDocument/publishDiagnostics"] =
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                     {update_in_insert = false})
+
     -- Disable gutter signs, color linenum instead
     vim.fn.sign_define("LspDiagnosticsSignError",
                        {text = "", numhl = "LspDiagnosticsDefaultError"})
