@@ -12,9 +12,8 @@ return function()
     }
 
     local components = {
-        left = {active = {}, inactive = {}},
-        mid = {active = {}, inactive = {}},
-        right = {active = {}, inactive = {}}
+        active = {},
+        inactive = {}
     }
 
     local colors = {
@@ -96,9 +95,10 @@ return function()
     }
 
     -- LEFT
+    table.insert(components.active, {})
 
     -- vi-mode
-    components.left.active[1] = {
+    table.insert(components.active[1], {
         provider = ' NV-IDE ',
         hl = function()
             local val = {}
@@ -110,10 +110,10 @@ return function()
             return val
         end,
         right_sep = ' '
-    }
+    })
 
     -- vi-symbol
-    components.left.active[2] = {
+    table.insert(components.active[1], {
         provider = function()
             return vi_mode_text[vi_mode_utils.get_vim_mode()]
         end,
@@ -125,10 +125,10 @@ return function()
             return val
         end,
         right_sep = ' '
-    }
+    })
 
     -- filename
-    components.left.active[3] = {
+    table.insert(components.active[1], {
         provider = function()
             return vim.fn.expand("%:t")
         end,
@@ -137,50 +137,54 @@ return function()
             bg = 'bg',
             style = 'bold'
         },
-        right_sep = ''
-    }
+        right_sep = ' '
+    })
 
     -- gitBranch
-    components.left.active[4] = {
+    table.insert(components.active[1], {
         provider = 'git_branch',
         hl = {
             fg = 'yellow',
             bg = 'bg',
             style = 'bold'
         }
-    }
+    })
+
     -- diffAdd
-    components.left.active[5] = {
+    table.insert(components.active[1], {
         provider = 'git_diff_added',
         hl = {
             fg = 'green',
             bg = 'bg',
             style = 'bold'
         }
-    }
+    })
+
     -- diffModfified
-    components.left.active[6] = {
+    table.insert(components.active[1], {
         provider = 'git_diff_changed',
         hl = {
             fg = 'orange',
             bg = 'bg',
             style = 'bold'
         }
-    }
+    })
+
     -- diffRemove
-    components.left.active[7] = {
+    table.insert(components.active[1], {
         provider = 'git_diff_removed',
         hl = {
             fg = 'red',
             bg = 'bg',
             style = 'bold'
         }
-    }
+    })
 
     -- MID
+    table.insert(components.active, {})
 
     -- LspName
-    components.mid.active[1] = {
+    table.insert(components.active[2], {
         provider = 'lsp_client_names',
         hl = {
             fg = 'yellow',
@@ -188,52 +192,53 @@ return function()
             style = 'bold'
         },
         right_sep = ' '
-    }
+    })
 
     -- diagnosticErrors
-    components.mid.active[2] = {
+    table.insert(components.active[2], {
         provider = 'diagnostic_errors',
         enabled = function() return lsp.diagnostics_exist('Error') end,
         hl = {
             fg = 'red',
             style = 'bold'
         }
-    }
+    })
 
     -- diagnosticWarn
-    components.mid.active[3] = {
+    table.insert(components.active[2], {
         provider = 'diagnostic_warnings',
         enabled = function() return lsp.diagnostics_exist('Warning') end,
         hl = {
             fg = 'yellow',
             style = 'bold'
         }
-    }
+    })
 
     -- diagnosticHint
-    components.mid.active[4] = {
+    table.insert(components.active[2], {
         provider = 'diagnostic_hints',
         enabled = function() return lsp.diagnostics_exist('Hint') end,
         hl = {
             fg = 'cyan',
             style = 'bold'
         }
-    }
+    })
 
     -- diagnosticInfo
-    components.mid.active[5] = {
+    table.insert(components.active[2], {
         provider = 'diagnostic_info',
         enabled = function() return lsp.diagnostics_exist('Information') end,
         hl = {
             fg = 'skyblue',
             style = 'bold'
         }
-    }
+    })
 
     -- RIGHT
+    table.insert(components.active, {})
 
     -- fileSize
-    components.right.active[1] = {
+    table.insert(components.active[3], {
         provider = 'file_size',
         enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
         hl = {
@@ -242,10 +247,10 @@ return function()
             style = 'bold'
         },
         right_sep = ' '
-    }
+    })
 
     -- fileFormat
-    components.right.active[2] = {
+    table.insert(components.active[3], {
         provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
         hl = {
             fg = 'white',
@@ -253,10 +258,10 @@ return function()
             style = 'bold'
         },
         right_sep = ' '
-    }
+    })
 
     -- fileEncode
-    components.right.active[3] = {
+    table.insert(components.active[3], {
         provider = 'file_encoding',
         hl = {
             fg = 'white',
@@ -264,10 +269,10 @@ return function()
             style = 'bold'
         },
         right_sep = ' '
-    }
+    })
 
     -- lineInfo
-    components.right.active[4] = {
+    table.insert(components.active[3], {
         provider = 'position',
         hl = {
             fg = 'white',
@@ -275,12 +280,13 @@ return function()
             style = 'bold'
         },
         right_sep = ' '
-    }
+    })
 
     -- INACTIVE
+    table.insert(components.inactive, {})
 
     -- fileType
-    components.left.inactive[1] = {
+    table.insert(components.inactive[1], {
         provider = 'file_type',
         hl = {
             fg = 'black',
@@ -304,7 +310,7 @@ return function()
             },
             ' '
         }
-    }
+    })
 
     require('feline').setup({
             colors = colors,
