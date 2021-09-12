@@ -1,7 +1,8 @@
+-- LuaFormatter off
 return function()
     require('lualine').setup {
         options = {
-            theme = 'wombat',
+            theme = 'nightfox',
             component_separators = '',
             section_separators = ''
         },
@@ -22,3 +23,4 @@ return function()
         }
     }
 end
+-- LuaFormatter on

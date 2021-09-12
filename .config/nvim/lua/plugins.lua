@@ -131,18 +131,11 @@ return require('packer').startup(function(use)
     after = 'nvim-lspconfig',
     config = require('plugin_configs.rust_tools')
   }
-
-  --- UI ---
+  
   use {
-    'RRethy/nvim-base16',
+    'EdenEast/nightfox.nvim',
     event = 'BufRead',
-    config = require('plugin_configs.base16')
-  }
-
-  use {
-    'xiyaowong/nvim-transparent',
-    after = 'nvim-base16',
-    config = require('plugin_configs.transparent')
+    config = require('plugin_configs.nightfox')
   }
 
   use {
@@ -152,9 +145,9 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'famiu/feline.nvim',
+    'hoob3rt/lualine.nvim',
     event = 'BufRead',
-    config = require('plugin_configs.feline')
+    config = require('plugin_configs.lualine')
   }
 
   use {

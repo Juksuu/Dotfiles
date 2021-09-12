@@ -7,7 +7,7 @@ font:
   size: 11
   offset:
     x: 0
-    y: -2
+    'y': -2
 draw_bold_text_with_bright_colors: true
 background_opacity: 0.98
 cursor:
@@ -29,26 +29,32 @@ key_bindings:
     action: DecreaseFontSize
 colors:
   primary:
-    background: '0x1e1e1e'
-    foreground: '0xa7a7a7'
-  cursor:
-    text: '0x1e1e1e'
-    cursor: '0xa7a7a7'
+    background: '0x2e3440'
+    foreground: '0xb9bfca'
   normal:
-    black: '0x1e1e1e'
-    red: '0xcf6a4c'
-    green: '0x8f9d6a'
-    yellow: '0xf9ee98'
-    blue: '0x7587a6'
-    magenta: '0x9b859d'
-    cyan: '0xafc4db'
-    white: '0xa7a7a7'
+    black: '0x3b4252'
+    red: '0xbf616a'
+    green: '0xa3be8c'
+    yellow: '0xebcb8b'
+    blue: '0x81a1c1'
+    magenta: '0xb48ead'
+    cyan: '0x88c0d0'
+    white: '0xe5e9f0'
   bright:
-    black: '0x5f5a60'
-    red: '0xcda869'
-    green: '0x323537'
-    yellow: '0x464b50'
-    blue: '0x838184'
-    magenta: '0xc3c3c3'
-    cyan: '0x9b703f'
-    white: '0xffffff'
+    black: '0x465780'
+    red: '0xd06f79'
+    green: '0xb1d196'
+    yellow: '0xf0d399'
+    blue: '0x8cafd2'
+    magenta: '0xc895bf'
+    cyan: '0x93ccdc'
+    white: '0xe7ecf4'
+  indexed_colors:
+    - index: 16
+      color: '0xf4a261'
+    - index: 17
+      color: '0xd67ad2'
+    - index: 16
+      color: '0xc9826b'
+    - index: 17
+      color: '0xbf88bc'

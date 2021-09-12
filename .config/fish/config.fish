@@ -6,13 +6,7 @@ set -x CARGO_HOME $HOME/.cargo
 set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $GOPATH/bin $HOME/.luarocks/bin
 
 set fish_greeting
-# source ~/.config/fish/themes/vibrantgrey.fish
-
-# Base16 Shell
-if status --is-interactive
-    set BASE16_SHELL "$HOME/.config/base16-shell/"
-    source "$BASE16_SHELL/profile_helper.fish"
-end
+source ~/.config/fish/themes/nordfox.fish
 
 function nvm
     bass source $HOME/.nvm/nvm.sh --no-use ';' nvm $argv
