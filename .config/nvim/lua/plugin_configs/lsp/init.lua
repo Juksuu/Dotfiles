@@ -1,10 +1,9 @@
 return function()
-    local nvim_lsp = require("lspconfig")
-    local lspconfig_util = require('lspconfig.util')
+    local nvim_lsp = require('lspconfig')
 
     vim.lsp.handlers["textDocument/publishDiagnostics"] =
         vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                     {underline = true})
+                     {update_in_insert = false})
 
     -- Disable gutter signs, color linenum instead
     vim.fn.sign_define("LspDiagnosticsSignError",
@@ -16,34 +15,26 @@ return function()
     vim.fn.sign_define("LspDiagnosticsSignHint",
                        {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
-    local custom_init = function(client)
-        client.config.flags = client.config.flags or {}
-        client.config.flags.allow_incremental_sync = true
-    end
+    local custom_attach = function(client, bufnr) end
 
-    local custom_attach = function(client, bufnr)
-        local function buf_set_option(...)
-            vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    end
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {'documentation', 'detail', 'additionalTextEdits'}
+    }
 
     -- Load lua configuration from nlua.
-    require('nlua.lsp.nvim').setup(nvim_lsp, {
-        on_init = custom_init,
-        on_attach = custom_attach
-    })
+    require('nlua.lsp.nvim').setup(nvim_lsp, {on_attach = custom_attach})
 
-    nvim_lsp.pyls.setup {on_init = custom_init, on_attach = custom_attach}
-    nvim_lsp.tsserver.setup {on_init = custom_init, on_attach = custom_attach}
-    nvim_lsp.svelte.setup {on_init = custom_init, on_attach = custom_attach}
-    nvim_lsp.yamlls.setup {
-        on_init = custom_init,
-        on_attach = custom_attach
-        -- settings = {yaml = {schemas = {kubernetes = "/*"}}}
-    }
+    local servers = {"gopls", "tsserver", "svelte", "yamlls", "gdscript"}
+    for _, lsp in ipairs(servers) do
+        nvim_lsp[lsp].setup {
+            require('coq')().lsp_ensure_capabilities({
+                on_attach = custom_attach,
+                capabilities = capabilities
+            })
+        }
+    end
 
     local tslint = require('plugin_configs.lsp.efm.tslint')
     local eslint = require('plugin_configs.lsp.efm.eslint')
