@@ -1,6 +1,7 @@
 local M = {}
 
 -- LuaFormatter off
+
 --- THEMES ---
 local function ivy(opts)
     return require('telescope.themes').get_ivy(opts)
