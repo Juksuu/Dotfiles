@@ -61,8 +61,14 @@ return require('packer').startup(function(use)
   }
 
   use {
+    'Darazaki/indent-o-matic',
+    event = 'BufRead',
+    config = require('plugin_configs.indentmatic')
+  }
+
+  use {
     'sbdchd/neoformat',
-    config = require('plugin_configs.neoformat')
+    init = require('plugin_configs.neoformat')
   }
 
   use {
@@ -80,8 +86,8 @@ return require('packer').startup(function(use)
 
   use {
     'kyazdani42/nvim-tree.lua',
-    cmd = "NvimTreeToggle",
-    init = require('plugin_configs.nvimtree')
+    cmd = 'NvimTreeToggle',
+    config = require('plugin_configs.nvimtree')
   }
 
   use {

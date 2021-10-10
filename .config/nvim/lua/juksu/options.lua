@@ -21,8 +21,3 @@ opt.completeopt = {"menuone", "noselect"}
 opt.undofile = true
 
 opt.inccommand = 'split'
-
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.softtabstop = 4
-opt.expandtab = true

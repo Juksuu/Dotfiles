@@ -1,3 +1,4 @@
+-- LuaFormatter off
 return function()
     require('bufferline').setup{
         options = {
@@ -6,3 +7,4 @@ return function()
         }
     }
 end
+-- LuaFormatter on
