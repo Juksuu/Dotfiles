@@ -68,7 +68,7 @@ return require('packer').startup(function(use)
 
   use {
     'sbdchd/neoformat',
-    init = require('plugin_configs.neoformat')
+    setup = require('plugin_configs.neoformat')
   }
 
   use {
