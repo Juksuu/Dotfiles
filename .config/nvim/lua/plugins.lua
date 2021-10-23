@@ -1,29 +1,72 @@
 -- LuaFormatter off
 
-vim.cmd [[packadd packer.nvim]]
-
 return require('packer').startup(function(use)
+  --- Loaded in startup ---
+
   -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
+
+  use 'nvim-lua/plenary.nvim'
+  use 'kyazdani42/nvim-web-devicons'
+
+  use 'tpope/vim-sleuth'
+  use 'ThePrimeagen/harpoon'
   use {
-    'wbthomason/packer.nvim',
-    event = 'VimEnter'
+    'ThePrimeagen/git-worktree.nvim',
+    config = function() require('git-worktree').setup() end
   }
 
-  --- LANGUAGES ---
+  use {
+    'EdenEast/nightfox.nvim',
+    config = require('plugin_configs.nightfox')
+  }
+
+  use {
+    'hoob3rt/lualine.nvim',
+    config = require('plugin_configs.lualine')
+  }
+
+  use {
+    'akinsho/bufferline.nvim',
+    config = require('plugin_configs.bufferline')
+  }
+
+  use {
+    'b0o/mapx.nvim',
+    requires = 'folke/which-key.nvim'
+  }
+
+  use {
+    'sbdchd/neoformat',
+    setup = require('plugin_configs.neoformat')
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    requires = {
+      'nvim-treesitter/nvim-treesitter-refactor'
+    },
+    config = require('plugin_configs.treesitter')
+  }
+
+  use {
+    'ms-jpq/coq_nvim',
+    branch = 'coq',
+    requires = {
+      'ms-jpq/coq.artifacts',
+      branch = 'artifacts'
+    },
+    config = require('plugin_configs.coq')
+  }
+
+  --- Lazy loaded packages ---
   use {
     'sheerun/vim-polyglot',
     event = 'BufRead',
     config = require('plugin_configs.polyglot')
   }
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    event = 'BufRead',
-    config = require('plugin_configs.treesitter')
-  }
-
-  --- Utilities ---
   use {
     'tpope/vim-surround',
     event = 'BufRead'
@@ -42,33 +85,6 @@ return require('packer').startup(function(use)
   use {
     'editorconfig/editorconfig-vim',
     event = 'BufRead'
-  }
-
-  -- Dependencies
-  use {
-    'nvim-lua/plenary.nvim',
-    after = 'packer.nvim',
-  }
-
-  use {
-    'ThePrimeagen/harpoon',
-    after = 'plenary.nvim'
-  }
-
-  use {
-    'kyazdani42/nvim-web-devicons',
-    event = 'BufRead'
-  }
-
-  use {
-    'Darazaki/indent-o-matic',
-    event = 'BufRead',
-    config = require('plugin_configs.indentmatic')
-  }
-
-  use {
-    'sbdchd/neoformat',
-    setup = require('plugin_configs.neoformat')
   }
 
   use {
@@ -90,23 +106,7 @@ return require('packer').startup(function(use)
     config = require('plugin_configs.nvimtree')
   }
 
-  use {
-    'ms-jpq/coq_nvim',
-    branch = 'coq',
-    requires = {
-      'ms-jpq/coq.artifacts',
-      branch = 'artifacts'
-    },
-    config = require('plugin_configs.coq')
-  }
-
   -- Git
-  use {
-    'ThePrimeagen/git-worktree.nvim',
-    after = 'plenary.nvim',
-    config = function() require('git-worktree').setup() end
-  }
-
   use {
     'TimUntersberger/neogit',
     requires = {
@@ -116,7 +116,7 @@ return require('packer').startup(function(use)
         config = function() require('diffview').setup() end
       }
     },
-    after = 'plenary.nvim',
+    event = 'BufRead',
     config = require('plugin_configs.neogit')
   }
 
@@ -137,30 +137,18 @@ return require('packer').startup(function(use)
     after = 'nvim-lspconfig',
     config = require('plugin_configs.rust_tools')
   }
-  
-  use {
-    'EdenEast/nightfox.nvim',
-    event = 'BufRead',
-    config = require('plugin_configs.nightfox')
-  }
 
+  use {
+    'https://gitlab.com/yorickpeterse/nvim-dd',
+    event = 'BufRead',
+    config = function() require('dd').setup({ timeout = 500 }) end
+  }
+  
+  --- Theming
   use {
     'lewis6991/gitsigns.nvim',
-    after = 'plenary.nvim',
+    event = 'BufRead',
     config = function() require('gitsigns').setup() end
   }
-
-  use {
-    'hoob3rt/lualine.nvim',
-    event = 'BufRead',
-    config = require('plugin_configs.lualine')
-  }
-
-  use {
-    'akinsho/bufferline.nvim',
-    event = 'BufRead',
-    config = require('plugin_configs.bufferline')
-  }
-
 end)
 -- LuaFormatter on

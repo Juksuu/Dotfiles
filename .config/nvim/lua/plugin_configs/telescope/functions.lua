@@ -22,16 +22,6 @@ function M.find_files()
     require('telescope.builtin').find_files(ivy(opts))
 end
 
-function M.grep_string()
-    local opts = {
-        path_display = {
-            'shorten'
-        },
-        file_ignore_patterns = {"**.min"},
-    }
-    require('telescope.builtin').grep_string(ivy(opts))
-end
-
 function M.live_grep()
     local opts = {
         path_display = {

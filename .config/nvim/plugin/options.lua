@@ -11,7 +11,7 @@ opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
 opt.cursorline = true
-opt.updatetime = 1000
+opt.updatetime = 500
 opt.termguicolors = true
 opt.shortmess = opt.shortmess + 'c'
 
