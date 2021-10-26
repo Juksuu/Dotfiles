@@ -44,18 +44,20 @@ return require('packer').startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    requires = {
-      'nvim-treesitter/nvim-treesitter-refactor'
-    },
     config = require('plugin_configs.treesitter')
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter-refactor',
+    after = 'nvim-treesitter'
   }
 
   use {
     'ms-jpq/coq_nvim',
     branch = 'coq',
     requires = {
-      'ms-jpq/coq.artifacts',
-      branch = 'artifacts'
+      {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+      {'ms-jpq/coq.thirdparty', config = require('plugin_configs.coq_thirdparty')}
     },
     config = require('plugin_configs.coq')
   }
@@ -92,11 +94,7 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-lua/popup.nvim',
     },
-    after = {
-      'git-worktree.nvim',
-      'plenary.nvim',
-      'nvim-web-devicons'
-    },
+    event = "VimEnter",
     config = require('plugin_configs.telescope')
   }
 
