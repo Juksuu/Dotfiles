@@ -2,7 +2,7 @@
 return function()
     require('lualine').setup {
         options = {
-            theme = 'nightfox',
+            theme = 'enfocado',
             component_separators = '',
             section_separators = ''
         },

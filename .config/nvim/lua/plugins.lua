@@ -16,9 +16,14 @@ return require('packer').startup(function(use)
     config = function() require('git-worktree').setup() end
   }
 
+  -- use {
+  --   'EdenEast/nightfox.nvim',
+  --   config = require('plugin_configs.nightfox')
+  -- }
+
   use {
-    'EdenEast/nightfox.nvim',
-    config = require('plugin_configs.nightfox')
+    'wuelnerdotexe/vim-enfocado',
+    config = require('plugin_configs.enfocado')
   }
 
   use {
