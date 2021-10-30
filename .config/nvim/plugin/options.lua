@@ -6,7 +6,6 @@ opt.showcmd = true
 opt.cmdheight = 1
 
 opt.guicursor = ''
-opt.syntax = 'on'
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
@@ -34,7 +33,13 @@ opt.undofile = true
 
 opt.inccommand = 'split'
 
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.softtabstop = 4
-opt.expandtab = true
+-- LuaFormatter off
+-- Default: jtcroql
+opt.formatoptions = opt.formatoptions
+    - "t" -- Don't auto wrap code
+    - "o" -- Don't continue comments with o and O
+
+    + "n" -- Formatting numbered lists
+
+-- LuaFormatter on
+

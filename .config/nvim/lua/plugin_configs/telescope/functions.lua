@@ -41,6 +41,14 @@ function M.git_files()
     require('telescope.builtin').git_files(ivy(opts))
 end
 
+function M.worktrees()
+    require('telescope').extensions.git_worktree.git_worktrees()
+end
+
+function M.create_worktree()
+    require('telescope').extensions.git_worktree.create_git_worktree()
+end
+
 --- LSP ---
 function M.lsp_references()
     local opts = {}

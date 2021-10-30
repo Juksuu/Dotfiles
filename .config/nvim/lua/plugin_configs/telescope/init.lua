@@ -12,5 +12,7 @@ return function()
             prompt_position = "top"
         }
     }
+
+    require("telescope").load_extension("git_worktree")
 end
 -- LuaFormatter on

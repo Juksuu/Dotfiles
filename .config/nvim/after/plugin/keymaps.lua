@@ -10,13 +10,14 @@ end
 
 -- LuaFormatter off
 mapx.nname('<leader>l', 'Lsp')
+mapx.nname('<leader>g', 'Git')
 mapx.nname('<leader>s', 'Search')
 mapx.nname('<leader>t', 'Terminal')
 mapx.nname('<leader>m', 'Harpoon nav')
 
 --- NORMAL MODE BINDS ---
 mapx.nnoremap("<leader>n", "<cmd> NvimTreeToggle <CR>", 'NvimTree')
-mapx.nnoremap("<leader>g", "<cmd> lua require('neogit').open() <CR>", 'Neogit')
+mapx.nnoremap("<leader>gs", "<cmd> lua require('neogit').open() <CR>", 'Neogit')
 
 -- LSP
 mapx.nnoremap("K", "<cmd> lua vim.lsp.buf.hover() <CR>")
@@ -44,4 +45,7 @@ map_tele('<leader>lr', 'lsp_references', 'References')
 map_tele('<leader>la', 'lsp_code_actions', 'Code actions')
 map_tele('<leader>ld', 'lsp_document_diagnostics', 'Document diagnostics')
 map_tele('<leader>lD', 'lsp_workspace_diagnostics', 'Workspace diagnostics')
+
+map_tele('<leader>gw', 'worktrees', 'Git worktrees')
+map_tele('<leader>gn', 'create_worktree', 'Create new worktree')
 -- LuaFormatter on
