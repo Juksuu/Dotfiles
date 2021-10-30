@@ -10,6 +10,10 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
   use 'tpope/vim-sleuth'
+
+  use 'AndrewRadev/splitjoin.vim'
+  use 'mtth/scratch.vim'
+
   use 'ThePrimeagen/harpoon'
   use {
     'ThePrimeagen/git-worktree.nvim',
@@ -123,7 +127,7 @@ return require('packer').startup(function(use)
     config = require('plugin_configs.neogit')
   }
 
-  --- LSP ---
+  -- LSP
   use {
     'tjdevries/nlua.nvim',
     event = 'BufRead'
@@ -147,7 +151,7 @@ return require('packer').startup(function(use)
     config = function() require('dd').setup({ timeout = 500 }) end
   }
   
-  --- Theming
+  -- Theming
   use {
     'lewis6991/gitsigns.nvim',
     event = 'BufRead',
