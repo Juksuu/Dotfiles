@@ -29,8 +29,10 @@ mapx.nnoremap("<leader>th", "<cmd> lua require('harpoon.term').gotoTerminal(1)<C
 mapx.nnoremap("<leader>tj", "<cmd> lua require('harpoon.term').gotoTerminal(2)<CR>", 'Terminal 2')
 mapx.nnoremap("<leader>tk", "<cmd> lua require('harpoon.term').gotoTerminal(3)<CR>", 'Terminal 3')
 
-mapx.nnoremap("<C-J>", "<cmd> lua require('harpoon.ui').nav_file(1)<CR>")
-mapx.nnoremap("<C-K>", "<cmd> lua require('harpoon.ui').nav_file(2)<CR>")
+mapx.nnoremap("<C-j>", "<cmd> lua require('harpoon.ui').nav_file(1)<CR>")
+mapx.nnoremap("<C-k>", "<cmd> lua require('harpoon.ui').nav_file(2)<CR>")
+mapx.nnoremap("<C-u>", "<cmd> lua require('harpoon.ui').nav_file(3)<CR>")
+mapx.nnoremap("<C-i>", "<cmd> lua require('harpoon.ui').nav_file(4)<CR>")
 mapx.nnoremap("<leader>ma", "<cmd> lua require('harpoon.mark').add_file()<CR>", 'Add file')
 mapx.nnoremap("<leader>mm", "<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>", 'Menu')
 
