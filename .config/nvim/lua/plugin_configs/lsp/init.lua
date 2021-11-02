@@ -12,12 +12,22 @@ return function()
     vim.fn.sign_define("LspDiagnosticsSignHint",
                        {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {'documentation', 'detail', 'additionalTextEdits'}
+    }
+
     -- Load lua configuration from nlua.
-    require('nlua.lsp.nvim').setup(nvim_lsp, {coq.lsp_ensure_capabilities()})
+    require('nlua.lsp.nvim').setup(nvim_lsp, {
+        coq.lsp_ensure_capabilities({capabilities = capabilities})
+    })
 
     local servers = {"gopls", "tsserver", "svelte", "yamlls", "gdscript"}
     for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup {coq.lsp_ensure_capabilities()}
+        nvim_lsp[lsp].setup {
+            coq.lsp_ensure_capabilities({capabilities = capabilities})
+        }
     end
 
     local tslint = require('plugin_configs.lsp.efm.tslint')

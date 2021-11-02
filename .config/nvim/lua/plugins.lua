@@ -20,11 +20,6 @@ return require('packer').startup(function(use)
     config = function() require('git-worktree').setup() end
   }
 
-  -- use {
-  --   'EdenEast/nightfox.nvim',
-  --   config = require('plugin_configs.nightfox')
-  -- }
-
   use {
     'wuelnerdotexe/vim-enfocado',
     config = require('plugin_configs.enfocado')
@@ -47,7 +42,7 @@ return require('packer').startup(function(use)
 
   use {
     'sbdchd/neoformat',
-    setup = require('plugin_configs.neoformat')
+    setup = function() vim.g.neoformat_only_msg_on_error = 1 end
   }
 
   use {
