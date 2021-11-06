@@ -4,7 +4,6 @@ return function()
         ensure_installed = 'all',
         highlight = {
             enable = true,
-            disable = {"json", "svelte"},
             additional_vim_regex_highlighting = true
         },
         indent = {

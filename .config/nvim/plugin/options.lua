@@ -34,7 +34,7 @@ opt.undofile = true
 opt.inccommand = 'split'
 
 -- LuaFormatter off
--- Default: jtcroql
+
 opt.formatoptions = opt.formatoptions
     - "t" -- Don't auto wrap code
     - "o" -- Don't continue comments with o and O
@@ -42,4 +42,8 @@ opt.formatoptions = opt.formatoptions
     + "n" -- Formatting numbered lists
 
 -- LuaFormatter on
+
+vim.cmd [[
+    autocmd FileType * set formatoptions-=o
+]]
 

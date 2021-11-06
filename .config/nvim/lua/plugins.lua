@@ -17,7 +17,9 @@ return require('packer').startup(function(use)
   use 'ThePrimeagen/harpoon'
   use {
     'ThePrimeagen/git-worktree.nvim',
-    config = function() require('git-worktree').setup() end
+    config = function()
+      require('git-worktree').setup()
+    end,
   }
 
   use {
@@ -28,11 +30,6 @@ return require('packer').startup(function(use)
   use {
     'hoob3rt/lualine.nvim',
     config = require('plugin_configs.lualine')
-  }
-
-  use {
-    'akinsho/bufferline.nvim',
-    config = require('plugin_configs.bufferline')
   }
 
   use {
@@ -67,12 +64,6 @@ return require('packer').startup(function(use)
   }
 
   --- Lazy loaded packages ---
-  use {
-    'sheerun/vim-polyglot',
-    event = 'BufRead',
-    config = require('plugin_configs.polyglot')
-  }
-
   use {
     'tpope/vim-surround',
     event = 'BufRead'
