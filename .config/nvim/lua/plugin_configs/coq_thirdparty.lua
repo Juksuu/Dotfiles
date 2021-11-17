@@ -1,1 +1,8 @@
-return function() require("coq_3p") {{src = "nvimlua", short_name = "nLUA"}} end
+return function()
+    require("coq_3p")({
+        {
+            src = "nvimlua",
+            short_name = "nLUA",
+        },
+    })
+end
