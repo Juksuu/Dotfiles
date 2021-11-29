@@ -2,20 +2,11 @@ env:
   TERM: xterm-256color
 font:
   normal:
-    family: Jetbrains mono Nerd Font
+    family: Space Mono Nerd Font
     style: Regular
   size: 11
-  offset:
-    x: 0
-    'y': -2
 draw_bold_text_with_bright_colors: true
 background_opacity: 0.98
-cursor:
-  style:
-    shape: Block
-    blinking: Never
-  unfocused_hollow: false
-  thickness: 0.15
 live_config_reload: true
 key_bindings:
   - key: Key0
@@ -29,32 +20,32 @@ key_bindings:
     action: DecreaseFontSize
 colors:
   primary:
-    background: '0x181818'
-    foreground: '0xb9b9b9'
+    background: "0x181818"
+    foreground: "0xb9b9b9"
   normal:
-    black: '0x252525'
-    red: '0xed4a46'
-    green: '0x70b433'
-    yellow: '0xdbb32d'
-    blue: '0x368aeb'
-    magenta: '0xeb6eb7'
-    cyan: '0x3fc5b7'
-    white: '0x777777'
+    black: "0x252525"
+    red: "0xed4a46"
+    green: "0x70b433"
+    yellow: "0xdbb32d"
+    blue: "0x368aeb"
+    magenta: "0xeb6eb7"
+    cyan: "0x3fc5b7"
+    white: "0x777777"
   bright:
-    black: '0x3b3b3b'
-    red: '0xff5e56'
-    green: '0x83c746'
-    yellow: '0xefc541'
-    blue: '0x4f9cfe'
-    magenta: '0xff81ca'
-    cyan: '0x56d8c9'
-    white: '0xdedede'
+    black: "0x3b3b3b"
+    red: "0xff5e56"
+    green: "0x83c746"
+    yellow: "0xefc541"
+    blue: "0x4f9cfe"
+    magenta: "0xff81ca"
+    cyan: "0x56d8c9"
+    white: "0xdedede"
   indexed_colors:
     - index: 16
-      color: '0xf4a261'
+      color: "0xf4a261"
     - index: 17
-      color: '0xd67ad2'
+      color: "0xd67ad2"
     - index: 16
-      color: '0xc9826b'
+      color: "0xc9826b"
     - index: 17
-      color: '0xbf88bc'
+      color: "0xbf88bc"
