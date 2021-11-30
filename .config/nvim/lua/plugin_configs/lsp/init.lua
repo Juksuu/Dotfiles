@@ -25,16 +25,52 @@ return function()
     capabilities.textDocument.completion.completionItem.resolveSupport = {
         properties = { "documentation", "detail", "additionalTextEdits" },
     }
+    capabilities.textDocument.codeLens = { dynamicRegistration = false }
+
+    local custom_attach = function(client)
+        -- Set autocommands conditional on server_capabilities
+        if client.resolved_capabilities.document_highlight then
+            vim.cmd([[
+              augroup lsp_document_highlight
+                autocmd! * <buffer>
+                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+              augroup END
+            ]])
+        end
+
+        if client.resolved_capabilities.code_lens then
+            vim.cmd([[
+              augroup lsp_document_codelens
+                au! * <buffer>
+                autocmd BufEnter ++once <buffer> lua require"vim.lsp.codelens".refresh()
+                autocmd BufWritePost,CursorHold <buffer> lua require"vim.lsp.codelens".refresh()
+              augroup END
+            ]])
+        end
+    end
 
     -- Load lua configuration from nlua.
     require("nlua.lsp.nvim").setup(nvim_lsp, {
-        coq.lsp_ensure_capabilities({ capabilities = capabilities }),
+        coq.lsp_ensure_capabilities({
+            capabilities = capabilities,
+        }),
+        on_attach = custom_attach,
+        flags = {
+            allow_incremental_sync = true,
+        },
     })
 
     local servers = { "gopls", "tsserver", "svelte", "yamlls", "gdscript" }
     for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
-            coq.lsp_ensure_capabilities({ capabilities = capabilities }),
+            coq.lsp_ensure_capabilities({
+                capabilities = capabilities,
+            }),
+            on_attach = custom_attach,
+            flags = {
+                allow_incremental_sync = true,
+            },
         })
     end
 
@@ -60,6 +96,10 @@ return function()
             rootMarkers = { "package.json", ".git" },
             lintDebounce = 100,
             languages = languages,
+        },
+        on_attach = custom_attach,
+        flags = {
+            allow_incremental_sync = true,
         },
     })
 end
