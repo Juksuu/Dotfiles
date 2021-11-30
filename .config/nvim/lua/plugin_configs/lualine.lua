@@ -3,30 +3,27 @@ return function()
         options = {
             theme = "enfocado",
             component_separators = "",
-            section_separators = "",
+            section_separators = { left = "", right = "" },
         },
         sections = {
             lualine_a = { "mode" },
             lualine_b = {
                 "branch",
-                { "diagnostics", sources = { "nvim_lsp" } },
+                "diff",
             },
-            lualine_c = {
-                function()
-                    return "%="
-                end,
-                "filename",
-            },
-            lualine_x = { "encoding", "fileformat", "filetype" },
+            lualine_x = { "fileformat" },
+            lualine_y = { "filetype" },
             lualine_z = { "location" },
         },
         inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = { "filename" },
-            lualine_x = { "location" },
-            lualine_y = {},
-            lualine_z = {},
+            lualine_a = { "mode" },
+            lualine_b = {
+                "branch",
+                "diff",
+            },
+            lualine_x = { "fileformat" },
+            lualine_y = { "filetype" },
+            lualine_z = { "location" },
         },
     })
 end

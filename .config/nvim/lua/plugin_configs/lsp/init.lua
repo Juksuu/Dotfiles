@@ -4,20 +4,20 @@ return function()
 
     -- Disable gutter signs, color linenum instead
     vim.fn.sign_define(
-        "LspDiagnosticsSignError",
-        { text = "", numhl = "LspDiagnosticsDefaultError" }
+        "DiagnosticSignError",
+        { text = "", numhl = "DiagnosticSignError" }
     )
     vim.fn.sign_define(
-        "LspDiagnosticsSignWarning",
-        { text = "", numhl = "LspDiagnosticsDefaultWarning" }
+        "DiagnosticSignWarn",
+        { text = "", numhl = "DiagnosticSignWarn" }
     )
     vim.fn.sign_define(
-        "LspDiagnosticsSignInformation",
-        { text = "", numhl = "LspDiagnosticsDefaultInformation" }
+        "DiagnosticSignInfo",
+        { text = "", numhl = "DiagnosticSignInfo" }
     )
     vim.fn.sign_define(
-        "LspDiagnosticsSignHint",
-        { text = "", numhl = "LspDiagnosticsDefaultHint" }
+        "DiagnosticSignHint",
+        { text = "", numhl = "DiagnosticSignHint" }
     )
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
