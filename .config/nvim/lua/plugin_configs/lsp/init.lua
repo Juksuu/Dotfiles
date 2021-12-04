@@ -1,6 +1,5 @@
 return function()
     local nvim_lsp = require("lspconfig")
-    local coq = require("coq")
 
     -- Disable gutter signs, color linenum instead
     vim.fn.sign_define(
@@ -20,7 +19,9 @@ return function()
         { text = "", numhl = "DiagnosticSignHint" }
     )
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require("cmp_nvim_lsp").update_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+    )
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities.textDocument.completion.completionItem.resolveSupport = {
         properties = { "documentation", "detail", "additionalTextEdits" },
@@ -52,9 +53,7 @@ return function()
 
     -- Load lua configuration from nlua.
     require("nlua.lsp.nvim").setup(nvim_lsp, {
-        coq.lsp_ensure_capabilities({
-            capabilities = capabilities,
-        }),
+        capabilities = capabilities,
         on_attach = custom_attach,
         flags = {
             allow_incremental_sync = true,
@@ -64,9 +63,7 @@ return function()
     local servers = { "gopls", "tsserver", "svelte", "yamlls", "gdscript" }
     for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
-            coq.lsp_ensure_capabilities({
-                capabilities = capabilities,
-            }),
+            capabilities = capabilities,
             on_attach = custom_attach,
             flags = {
                 allow_incremental_sync = true,

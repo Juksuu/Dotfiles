@@ -52,16 +52,22 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "ms-jpq/coq_nvim",
-        branch = "coq",
+        "hrsh7th/nvim-cmp",
         requires = {
-            { "ms-jpq/coq.artifacts", branch = "artifacts" },
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+
             {
-                "ms-jpq/coq.thirdparty",
-                config = require("plugin_configs.coq_thirdparty"),
+                "L3MON4D3/LuaSnip",
+                config = require("plugin_configs.luasnip"),
             },
+            "saadparwaiz1/cmp_luasnip",
+
+            "onsails/lspkind-nvim",
         },
-        config = require("plugin_configs.coq"),
+        config = require("plugin_configs.cmp"),
     })
 
     --- Lazy loaded packages ---

@@ -65,6 +65,27 @@ mapx.nnoremap(
     "Menu"
 )
 
+mapx.imap(
+    "<C-l>",
+    "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'",
+    "Snippets jump or expand"
+)
+mapx.inoremap(
+    "<C-h>",
+    "<cmd> lua require('luasnip').jump(-1)<CR>",
+    "Snippets jump backwards"
+)
+mapx.snoremap(
+    "<C-h>",
+    "<cmd> lua require('luasnip').jump(-1)<CR>",
+    "Snippets jump backwards"
+)
+mapx.snoremap(
+    "<C-l>",
+    "<cmd> lua require('luasnip').jump(1)<CR>",
+    "Snippets jump forwards"
+)
+
 --- TELESCOPE MAPPINGS ---
 map_tele("<leader>sf", "find_files", "Find Files")
 map_tele("<leader>ss", "live_grep", "Telescope live grep")
