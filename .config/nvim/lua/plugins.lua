@@ -59,13 +59,13 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
 
+            "onsails/lspkind-nvim",
+
             {
                 "L3MON4D3/LuaSnip",
                 config = require("plugin_configs.luasnip"),
             },
             "saadparwaiz1/cmp_luasnip",
-
-            "onsails/lspkind-nvim",
         },
         config = require("plugin_configs.cmp"),
     })
@@ -77,8 +77,11 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "tpope/vim-commentary",
+        "numToStr/Comment.nvim",
         event = "BufRead",
+        config = function()
+            require("Comment").setup()
+        end,
     })
 
     use({
