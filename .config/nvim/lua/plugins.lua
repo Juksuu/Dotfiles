@@ -10,7 +10,6 @@ return require("packer").startup(function(use)
     use("tpope/vim-sleuth")
 
     use("AndrewRadev/splitjoin.vim")
-    use("mtth/scratch.vim")
 
     use("ThePrimeagen/harpoon")
     use({
@@ -117,6 +116,14 @@ return require("packer").startup(function(use)
         config = require("plugin_configs.neogit"),
     })
 
+    use({
+        "lewis6991/gitsigns.nvim",
+        event = "BufRead",
+        config = function()
+            require("gitsigns").setup()
+        end,
+    })
+
     -- LSP
     use({
         "tjdevries/nlua.nvim",
@@ -133,22 +140,5 @@ return require("packer").startup(function(use)
         "simrat39/rust-tools.nvim",
         after = "nvim-lspconfig",
         config = require("plugin_configs.rust_tools"),
-    })
-
-    use({
-        "https://gitlab.com/yorickpeterse/nvim-dd",
-        event = "BufRead",
-        config = function()
-            require("dd").setup({ timeout = 500 })
-        end,
-    })
-
-    -- Theming
-    use({
-        "lewis6991/gitsigns.nvim",
-        event = "BufRead",
-        config = function()
-            require("gitsigns").setup()
-        end,
     })
 end)
