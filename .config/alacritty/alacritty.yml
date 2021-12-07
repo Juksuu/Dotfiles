@@ -20,32 +20,39 @@ key_bindings:
     action: DecreaseFontSize
 colors:
   primary:
-    background: "0x181818"
-    foreground: "0xb9b9b9"
+    background: '0x1E1E28'
+    foreground: '0xD7DAE0'
   normal:
-    black: "0x252525"
-    red: "0xed4a46"
-    green: "0x70b433"
-    yellow: "0xdbb32d"
-    blue: "0x368aeb"
-    magenta: "0xeb6eb7"
-    cyan: "0x3fc5b7"
-    white: "0x777777"
+    black: '0x6E6C7C'
+    red: '0xE28C8C'
+    green: '0xB3E1A3'
+    yellow: '0xEADDA0'
+    blue: '0xA4B9EF'
+    magenta: '0xC6AAE8'
+    cyan: '0xF0AFE1'
+    white: '0xD7DAE0'
   bright:
-    black: "0x3b3b3b"
-    red: "0xff5e56"
-    green: "0x83c746"
-    yellow: "0xefc541"
-    blue: "0x4f9cfe"
-    magenta: "0xff81ca"
-    cyan: "0x56d8c9"
-    white: "0xdedede"
+    black: '0x6E6C7C'
+    red: '0xE28C8C'
+    green: '0xB3E1A3'
+    yellow: '0xEADDA0'
+    blue: '0xA4B9EF'
+    magenta: '0xC6AAE8'
+    cyan: '0xF0AFE1'
+    white: '0xD7DAE0'
   indexed_colors:
     - index: 16
-      color: "0xf4a261"
+      color: '0xf4a261'
     - index: 17
-      color: "0xd67ad2"
+      color: '0xd67ad2'
     - index: 16
-      color: "0xc9826b"
+      color: '0xc9826b'
     - index: 17
-      color: "0xbf88bc"
+      color: '0xbf88bc'
+    - index: 16
+      color: '0xECBFBD'
+    - index: 17
+      color: '0x3E4058'
+  cursor:
+    text: '0x1E1E28'
+    cursor: '0xB3E1A3'

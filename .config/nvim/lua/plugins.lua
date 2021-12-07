@@ -21,8 +21,8 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "wuelnerdotexe/vim-enfocado",
-        config = require("plugin_configs.enfocado"),
+        "catppuccin/nvim",
+        config = require("plugin_configs.catppuccin"),
     })
 
     use({
