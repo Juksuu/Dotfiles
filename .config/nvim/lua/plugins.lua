@@ -8,23 +8,12 @@ return require("packer").startup(function(use)
     use("kyazdani42/nvim-web-devicons")
 
     use("tpope/vim-sleuth")
-
-    use("AndrewRadev/splitjoin.vim")
-
     use("ThePrimeagen/harpoon")
-    use({
-        "Juksuu/git-worktree.nvim",
-        branch = "feature/select-base-branch",
-        config = function()
-            require("git-worktree").setup()
-        end,
-    })
 
     use({
         "catppuccin/nvim",
         config = require("plugin_configs.catppuccin"),
     })
-
     use({
         "nvim-lualine/lualine.nvim",
         config = require("plugin_configs.lualine"),
@@ -52,6 +41,23 @@ return require("packer").startup(function(use)
     })
 
     use({
+        "Juksuu/git-worktree.nvim",
+        branch = "feature/select-base-branch",
+        config = function()
+            require("git-worktree").setup()
+        end,
+    })
+
+    use({
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            "nvim-lua/popup.nvim",
+        },
+        after = "git-worktree.nvim",
+        config = require("plugin_configs.telescope"),
+    })
+
+    use({
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-path",
@@ -70,11 +76,23 @@ return require("packer").startup(function(use)
         config = require("plugin_configs.cmp"),
     })
 
-    --- Lazy loaded packages ---
+    use("tjdevries/nlua.nvim")
     use({
-        "tpope/vim-surround",
-        event = "BufRead",
+        "neovim/nvim-lspconfig",
+        after = "nlua.nvim",
+        config = require("plugin_configs.lsp"),
     })
+    use({
+        "simrat39/rust-tools.nvim",
+        after = "nvim-lspconfig",
+        config = require("plugin_configs.rust_tools"),
+    })
+
+    --- Lazy loaded packages ---
+    use({ "tpope/vim-surround", event = "BufRead" })
+    use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
+    use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
+    use({ "editorconfig/editorconfig-vim", event = "BufRead" })
 
     use({
         "numToStr/Comment.nvim",
@@ -85,31 +103,11 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "maxbrunsfeld/vim-yankstack",
-        event = "BufRead",
-    })
-
-    use({
-        "editorconfig/editorconfig-vim",
-        event = "BufRead",
-    })
-
-    use({
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            "nvim-lua/popup.nvim",
-        },
-        after = "git-worktree.nvim",
-        config = require("plugin_configs.telescope"),
-    })
-
-    use({
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",
         config = require("plugin_configs.nvimtree"),
     })
 
-    -- Git
     use({
         "TimUntersberger/neogit",
         requires = {
@@ -131,23 +129,5 @@ return require("packer").startup(function(use)
         config = function()
             require("gitsigns").setup()
         end,
-    })
-
-    -- LSP
-    use({
-        "tjdevries/nlua.nvim",
-        event = "BufRead",
-    })
-
-    use({
-        "neovim/nvim-lspconfig",
-        after = "nlua.nvim",
-        config = require("plugin_configs.lsp"),
-    })
-
-    use({
-        "simrat39/rust-tools.nvim",
-        after = "nvim-lspconfig",
-        config = require("plugin_configs.rust_tools"),
     })
 end)
