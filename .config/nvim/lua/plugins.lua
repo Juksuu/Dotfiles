@@ -14,6 +14,7 @@ return require("packer").startup(function(use)
         "catppuccin/nvim",
         config = require("plugin_configs.catppuccin"),
     })
+
     use({
         "nvim-lualine/lualine.nvim",
         config = require("plugin_configs.lualine"),

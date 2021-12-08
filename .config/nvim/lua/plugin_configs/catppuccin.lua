@@ -1,7 +1,7 @@
 return function()
     require("catppuccin").setup({
         transparent_background = true,
-        term_colors = true,
+        term_colors = false,
         styles = {
             comments = "NONE",
             functions = "NONE",
@@ -18,6 +18,12 @@ return function()
                     hints = "NONE",
                     warnings = "NONE",
                     information = "NONE",
+                },
+                underlines = {
+                    errors = "underline",
+                    hints = "underline",
+                    warnings = "underline",
+                    information = "underline",
                 },
             },
             lsp_trouble = false,
@@ -44,6 +50,7 @@ return function()
             lightspeed = false,
             ts_rainbow = false,
             hop = false,
+            cmp = true,
         },
     })
 
