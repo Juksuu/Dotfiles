@@ -19,9 +19,9 @@ opt.relativenumber = true
 
 opt.smartcase = true
 opt.incsearch = true
-opt.showmatch = true
 opt.hlsearch = false
 opt.ignorecase = true
+opt.inccommand = "split"
 
 opt.splitright = true
 opt.splitbelow = true
@@ -31,7 +31,8 @@ opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 
 opt.undofile = true
 
-opt.inccommand = "split"
+opt.list = true
+opt.listchars = "tab:→ ,trail:·"
 
 opt.formatoptions = opt.formatoptions
     - "t" -- Don't auto wrap code

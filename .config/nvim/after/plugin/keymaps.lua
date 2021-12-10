@@ -1,18 +1,17 @@
 vim.g.mapleader = " "
 local mapx = require("mapx").setup({ whichkey = true })
 
--- Telescope bindings
-local function map_tele(key, f, whichkey)
-    mapx.nnoremap(
-        key,
-        string.format(
-            "<cmd> lua require('plugin_configs.telescope.functions')['%s'](%s)<CR>",
-            f,
-            ""
-        ),
-        whichkey
-    )
-end
+-- Reselect visual selection after indenting
+mapx.vnoremap("<", "<gv")
+mapx.vnoremap(">", ">gv")
+
+-- Maintain cursor position when yanking a visual selection
+mapx.vnoremap("y", "myy`y")
+mapx.vnoremap("Y", "myY`y")
+
+-- Move visual selection with J and K
+mapx.vnoremap("J", ":m '>+1<CR>gv=gv")
+mapx.vnoremap("K", ":m '<-2<CR>gv=gv")
 
 mapx.nname("<leader>l", "Lsp")
 mapx.nname("<leader>g", "Git")
@@ -87,6 +86,17 @@ mapx.snoremap(
 )
 
 --- TELESCOPE MAPPINGS ---
+local function map_tele(key, f, whichkey)
+    mapx.nnoremap(
+        key,
+        string.format(
+            "<cmd> lua require('plugin_configs.telescope.functions')['%s'](%s)<CR>",
+            f,
+            ""
+        ),
+        whichkey
+    )
+end
 map_tele("<leader>sf", "find_files", "Find Files")
 map_tele("<leader>ss", "live_grep", "Telescope live grep")
 map_tele("<leader>sg", "git_files", "Git files")
