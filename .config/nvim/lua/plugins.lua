@@ -53,6 +53,7 @@ return require("packer").startup(function(use)
         "nvim-telescope/telescope.nvim",
         requires = {
             "nvim-lua/popup.nvim",
+            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         },
         after = "git-worktree.nvim",
         config = require("plugin_configs.telescope"),
