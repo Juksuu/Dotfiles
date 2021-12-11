@@ -11,8 +11,8 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
 
     use({
-        "catppuccin/nvim",
-        config = require("plugin_configs.catppuccin"),
+        "EdenEast/nightfox.nvim",
+        config = require("plugin_configs.nightfox"),
     })
 
     use({

@@ -16,16 +16,6 @@ end
 function LOAD_AUTOCOMMANDS()
     local definitions = {
         bufs = { { "BufWritePre", "*", "Neoformat" } },
-
-        wins = {
-            -- Force write shada on leaving nvim
-            {
-                "VimLeave",
-                "*",
-                [[if has('nvim') | wshada! | else | wviminfo! | endif]],
-            },
-        },
-
         yank = {
             {
                 "TextYankPost",
