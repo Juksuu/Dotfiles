@@ -45,6 +45,19 @@ return require("packer").startup(function(use)
     })
 
     use({
+        "TimUntersberger/neogit",
+        requires = {
+            {
+                "sindrets/diffview.nvim",
+                config = function()
+                    require("diffview").setup()
+                end,
+            },
+        },
+        config = require("plugin_configs.neogit"),
+    })
+
+    use({
         "nvim-telescope/telescope.nvim",
         requires = {
             "nvim-lua/popup.nvim",
@@ -106,21 +119,6 @@ return require("packer").startup(function(use)
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",
         config = require("plugin_configs.nvimtree"),
-    })
-
-    use({
-        "TimUntersberger/neogit",
-        requires = {
-            {
-                "sindrets/diffview.nvim",
-                event = "BufRead",
-                config = function()
-                    require("diffview").setup()
-                end,
-            },
-        },
-        event = "BufRead",
-        config = require("plugin_configs.neogit"),
     })
 
     use({
