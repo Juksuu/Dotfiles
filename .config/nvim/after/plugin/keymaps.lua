@@ -20,7 +20,7 @@ mapx.nname("<leader>t", "Terminal")
 mapx.nname("<leader>m", "Harpoon nav")
 
 --- NORMAL MODE BINDS ---
-mapx.nnoremap("<leader>n", "<cmd> NvimTreeToggle <CR>", "NvimTree")
+mapx.nnoremap("<leader>nt", "<cmd> NvimTreeToggle <CR>", "NvimTree")
 mapx.nnoremap("<leader>gs", "<cmd> lua require('neogit').open() <CR>", "Neogit")
 
 -- LSP
@@ -63,7 +63,7 @@ mapx.nnoremap(
     "<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>",
     "Menu"
 )
-
+-- LuaSnip
 mapx.imap(
     "<C-l>",
     "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'",
@@ -84,6 +84,9 @@ mapx.snoremap(
     "<cmd> lua require('luasnip').jump(1)<CR>",
     "Snippets jump forwards"
 )
+
+-- Neogen
+mapx.nnoremap("<leader>ng", "<cmd> lua require('neogen').generate()<CR>")
 
 --- TELESCOPE MAPPINGS ---
 local function map_tele(key, f, whichkey)

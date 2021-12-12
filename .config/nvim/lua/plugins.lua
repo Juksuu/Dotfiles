@@ -37,11 +37,6 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "nvim-treesitter/nvim-treesitter-refactor",
-        after = "nvim-treesitter",
-    })
-
-    use({
         "Juksuu/git-worktree.nvim",
         branch = "feature/select-base-branch",
         config = function()
@@ -71,6 +66,7 @@ return require("packer").startup(function(use)
 
             {
                 "L3MON4D3/LuaSnip",
+                requires = "rafamadriz/friendly-snippets",
                 config = require("plugin_configs.luasnip"),
             },
             "saadparwaiz1/cmp_luasnip",
@@ -79,11 +75,13 @@ return require("packer").startup(function(use)
     })
 
     use("tjdevries/nlua.nvim")
+
     use({
         "neovim/nvim-lspconfig",
         after = "nlua.nvim",
         config = require("plugin_configs.lsp"),
     })
+
     use({
         "simrat39/rust-tools.nvim",
         after = "nvim-lspconfig",
@@ -130,6 +128,16 @@ return require("packer").startup(function(use)
         event = "BufRead",
         config = function()
             require("gitsigns").setup()
+        end,
+    })
+
+    use({
+        "danymat/neogen",
+        event = "BufRead",
+        config = function()
+            require("neogen").setup({
+                enabled = true,
+            })
         end,
     })
 end)
