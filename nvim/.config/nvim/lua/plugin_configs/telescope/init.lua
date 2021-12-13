@@ -2,12 +2,22 @@ return function()
     require("telescope").setup({
         defaults = {
             prompt_prefix = " >",
-
-            sorting_strategy = "descending",
+            sorting_strategy = "ascending",
             color_devicons = true,
-        },
-        layout_config = {
-            prompt_position = "top",
+            layout_config = {
+                bottom_pane = {
+                    prompt_position = "top",
+                },
+                center = {
+                    prompt_position = "top",
+                },
+                horizontal = {
+                    prompt_position = "top",
+                },
+                vertical = {
+                    prompt_position = "top",
+                },
+            },
         },
         extensions = {
             fzf = {

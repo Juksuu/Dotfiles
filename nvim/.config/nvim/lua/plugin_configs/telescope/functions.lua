@@ -4,9 +4,6 @@ local M = {}
 local function ivy(opts)
     return require("telescope.themes").get_ivy(opts)
 end
-local function dropdown(opts)
-    return require("telescope.themes").get_dropdown(opts)
-end
 local function cursor(opts)
     return require("telescope.themes").get_cursor(opts)
 end
@@ -17,7 +14,7 @@ function M.find_files()
         hidden = true,
         file_ignore_patterns = { "**.min" },
     }
-    require("telescope.builtin").find_files(ivy(opts))
+    require("telescope.builtin").find_files(opts)
 end
 
 function M.live_grep()
@@ -27,7 +24,7 @@ function M.live_grep()
         },
         file_ignore_patterns = { "**.min" },
     }
-    require("telescope.builtin").live_grep(ivy(opts))
+    require("telescope.builtin").live_grep(opts)
 end
 
 --- GIT ---
@@ -36,7 +33,7 @@ function M.git_files()
         hidden = true,
         previewer = false,
     }
-    require("telescope.builtin").git_files(ivy(opts))
+    require("telescope.builtin").git_files(opts)
 end
 
 function M.worktrees()
@@ -63,14 +60,16 @@ function M.lsp_definitions()
     require("telescope.builtin").lsp_definitions(ivy(opts))
 end
 
-function M.lsp_document_diagnostics()
-    local opts = {}
-    require("telescope.builtin").lsp_document_diagnostics(ivy(opts))
+function M.diagnostics()
+    local opts = {
+        bufnr = 0,
+    }
+    require("telescope.builtin").diagnostics(ivy(opts))
 end
 
-function M.lsp_workspace_diagnostics()
+function M.workspace_diagnostics()
     local opts = {}
-    require("telescope.builtin").lsp_workspace_diagnostics(ivy(opts))
+    require("telescope.builtin").diagnostics(ivy(opts))
 end
 
 return setmetatable({}, {

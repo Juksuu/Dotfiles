@@ -27,7 +27,7 @@ mapx.nnoremap("<leader>gs", "<cmd> lua require('neogit').open() <CR>", "Neogit")
 mapx.nnoremap("K", "<cmd> lua vim.lsp.buf.hover() <CR>")
 mapx.nnoremap(
     "<leader>lld",
-    "<cmd> lua vim.lsp.diagnostic.show_line_diagnostics() <CR>",
+    "<cmd> lua vim.diagnostic.open_float({ border = 'single' }) <CR>",
     "Line diagnostics"
 )
 mapx.nnoremap("<leader>lR", "<cmd> lua vim.lsp.buf.rename() <CR>", "Rename")
@@ -108,8 +108,8 @@ map_tele("gd", "lsp_definitions")
 
 map_tele("<leader>lr", "lsp_references", "References")
 map_tele("<leader>la", "lsp_code_actions", "Code actions")
-map_tele("<leader>ld", "lsp_document_diagnostics", "Document diagnostics")
-map_tele("<leader>lD", "lsp_workspace_diagnostics", "Workspace diagnostics")
+map_tele("<leader>ld", "diagnostics", "Document diagnostics")
+map_tele("<leader>lD", "workspace_diagnostics", "Workspace diagnostics")
 
 map_tele("<leader>gw", "worktrees", "Git worktrees")
 map_tele("<leader>gn", "create_worktree", "Create new worktree")

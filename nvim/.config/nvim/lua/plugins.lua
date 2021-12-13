@@ -46,14 +46,6 @@ return require("packer").startup(function(use)
 
     use({
         "TimUntersberger/neogit",
-        requires = {
-            {
-                "sindrets/diffview.nvim",
-                config = function()
-                    require("diffview").setup()
-                end,
-            },
-        },
         config = require("plugin_configs.neogit"),
     })
 
