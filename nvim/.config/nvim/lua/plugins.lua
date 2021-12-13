@@ -11,8 +11,8 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
 
     use({
-        "EdenEast/nightfox.nvim",
-        config = require("plugin_configs.nightfox"),
+        "olimorris/onedarkpro.nvim",
+        config = require("plugin_configs.onedark"),
     })
 
     use({

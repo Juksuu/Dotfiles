@@ -1,7 +1,7 @@
 return function()
     require("lualine").setup({
         options = {
-            theme = "nightfox",
+            theme = "onedarkpro",
             component_separators = "",
             section_separators = { left = "", right = "" },
         },
