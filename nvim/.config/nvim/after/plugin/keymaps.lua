@@ -63,16 +63,16 @@ mapx.nnoremap(
     "<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>",
     "Menu"
 )
--- LuaSnip
-mapx.imap(
+-- LuaSnip (TODO: Make this prettier somehow)
+mapx.nnoremap(
+    "<C-h>",
+    "<cmd> lua require('luasnip').jump(-1)<CR>",
+    "Snippets jump backwards"
+)
+mapx.nnoremap(
     "<C-l>",
-    "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-l>'",
-    "Snippets jump or expand"
-)
-mapx.inoremap(
-    "<C-h>",
-    "<cmd> lua require('luasnip').jump(-1)<CR>",
-    "Snippets jump backwards"
+    "<cmd> lua require('luasnip').jump(1)<CR>",
+    "Snippets jump forwards"
 )
 mapx.snoremap(
     "<C-h>",
@@ -80,6 +80,16 @@ mapx.snoremap(
     "Snippets jump backwards"
 )
 mapx.snoremap(
+    "<C-l>",
+    "<cmd> lua require('luasnip').jump(1)<CR>",
+    "Snippets jump forwards"
+)
+mapx.imap(
+    "<C-h>",
+    "<cmd> lua require('luasnip').jump(-1)<CR>",
+    "Snippets jump backwards"
+)
+mapx.imap(
     "<C-l>",
     "<cmd> lua require('luasnip').jump(1)<CR>",
     "Snippets jump forwards"
