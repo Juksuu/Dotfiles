@@ -1,6 +1,4 @@
 return require("packer").startup(function(use)
-    --- Loaded in startup ---
-
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
@@ -10,10 +8,8 @@ return require("packer").startup(function(use)
     use("tpope/vim-sleuth")
     use("ThePrimeagen/harpoon")
 
-    use({
-        "b0o/mapx.nvim",
-        requires = "folke/which-key.nvim",
-    })
+    use("rust-lang/rust.vim")
+    use("togglebyte/togglerust")
 
     use({
         "sbdchd/neoformat",
