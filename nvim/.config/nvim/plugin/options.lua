@@ -1,21 +1,27 @@
 vim.g.loaded_matchparen = 1
 
+vim.cmd([[
+    filetype plugin indent on
+    syntax on
+]])
+
 local opt = vim.opt
 
 opt.showcmd = true
 opt.cmdheight = 1
 
+opt.ruler = true
+opt.laststatus = 0
+
+opt.number = true
+opt.relativenumber = true
+
 opt.guicursor = ""
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
-opt.cursorline = true
 opt.updatetime = 500
-opt.termguicolors = true
 opt.shortmess = opt.shortmess + "c"
-
-opt.number = true
-opt.relativenumber = true
 
 opt.smartcase = true
 opt.incsearch = true
