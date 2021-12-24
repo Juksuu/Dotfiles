@@ -11,16 +11,6 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
 
     use({
-        "olimorris/onedarkpro.nvim",
-        config = require("plugin_configs.onedark"),
-    })
-
-    use({
-        "nvim-lualine/lualine.nvim",
-        config = require("plugin_configs.lualine"),
-    })
-
-    use({
         "b0o/mapx.nvim",
         requires = "folke/which-key.nvim",
     })
