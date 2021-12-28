@@ -52,8 +52,6 @@ KEYMAP(
 
 KEYMAP("n", "<C-j>", "<cmd> lua require('harpoon.ui').nav_file(1)<CR>")
 KEYMAP("n", "<C-k>", "<cmd> lua require('harpoon.ui').nav_file(2)<CR>")
-KEYMAP("n", "<C-u>", "<cmd> lua require('harpoon.ui').nav_file(3)<CR>")
-KEYMAP("n", "<C-i>", "<cmd> lua require('harpoon.ui').nav_file(4)<CR>")
 KEYMAP("n", "<leader>ma", "<cmd> lua require('harpoon.mark').add_file()<CR>")
 KEYMAP(
     "n",

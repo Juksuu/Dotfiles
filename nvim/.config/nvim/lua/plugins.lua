@@ -2,6 +2,8 @@ return require("packer").startup(function(use)
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
+    use("nathom/filetype.nvim")
+
     use("nvim-lua/plenary.nvim")
     use("kyazdani42/nvim-web-devicons")
 
@@ -83,7 +85,8 @@ return require("packer").startup(function(use)
     use({ "tpope/vim-surround", event = "BufRead" })
     use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
     use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
-    use({ "editorconfig/editorconfig-vim", event = "BufRead" })
+    use({ "gpanders/editorconfig.nvim", event = "BufRead" })
+    use({ "takac/vim-hardtime", event = "BufRead" })
 
     use({
         "numToStr/Comment.nvim",
