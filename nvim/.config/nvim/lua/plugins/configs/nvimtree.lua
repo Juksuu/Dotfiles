@@ -5,4 +5,7 @@ return function()
             ignore = false,
         },
     })
+
+    local utils = require("juksu.utils")
+    utils.map("n", "<leader>nt", "<cmd> NvimTreeToggle <CR>")
 end

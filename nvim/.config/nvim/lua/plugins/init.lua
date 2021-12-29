@@ -1,27 +1,26 @@
-return require("packer").startup(function(use)
+local present, packer = pcall(require, "plugins.initpacker")
+
+if not present then
+    return false
+end
+
+return packer.startup(function(use)
     -- Packer can manage itself
-    use("wbthomason/packer.nvim")
+    use({ "wbthomason/packer.nvim", event = "VimEnter" })
 
-    use("nathom/filetype.nvim")
-
+    --- Loaded on startup ---
     use("nvim-lua/plenary.nvim")
     use("kyazdani42/nvim-web-devicons")
 
-    use("tpope/vim-sleuth")
-    use("ThePrimeagen/harpoon")
-
-    use("rust-lang/rust.vim")
-    use("togglebyte/togglerust")
-
     use({
         "sbdchd/neoformat",
-        setup = require("plugin_configs.neoformat"),
+        setup = require("plugins.configs.neoformat"),
     })
 
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        config = require("plugin_configs.treesitter"),
+        config = require("plugins.configs.treesitter"),
     })
 
     use({
@@ -34,7 +33,7 @@ return require("packer").startup(function(use)
 
     use({
         "TimUntersberger/neogit",
-        config = require("plugin_configs.neogit"),
+        config = require("plugins.configs.neogit"),
     })
 
     use({
@@ -44,7 +43,7 @@ return require("packer").startup(function(use)
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         },
         after = "git-worktree.nvim",
-        config = require("plugin_configs.telescope"),
+        config = require("juksu.telescope"),
     })
 
     use({
@@ -60,11 +59,11 @@ return require("packer").startup(function(use)
             {
                 "L3MON4D3/LuaSnip",
                 requires = "rafamadriz/friendly-snippets",
-                config = require("plugin_configs.luasnip"),
+                config = require("plugins.configs.luasnip"),
             },
             "saadparwaiz1/cmp_luasnip",
         },
-        config = require("plugin_configs.cmp"),
+        config = require("plugins.configs.cmp"),
     })
 
     use("tjdevries/nlua.nvim")
@@ -72,21 +71,31 @@ return require("packer").startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         after = "nlua.nvim",
-        config = require("plugin_configs.lsp"),
+        config = require("lsp"),
     })
 
     use({
         "simrat39/rust-tools.nvim",
         after = "nvim-lspconfig",
-        config = require("plugin_configs.rust_tools"),
+        config = require("plugins.configs.rust_tools"),
     })
 
     --- Lazy loaded packages ---
+    use({ "tpope/vim-sleuth", event = "BufRead" })
     use({ "tpope/vim-surround", event = "BufRead" })
+    use({ "takac/vim-hardtime", event = "BufRead" })
     use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
     use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
     use({ "gpanders/editorconfig.nvim", event = "BufRead" })
-    use({ "takac/vim-hardtime", event = "BufRead" })
+
+    use({ "rust-lang/rust.vim", ft = "rust" })
+    use({ "togglebyte/togglerust", ft = "rust" })
+
+    use({
+        "ThePrimeagen/harpoon",
+        event = "BufRead",
+        config = require("plugins.configs.harpoon"),
+    })
 
     use({
         "numToStr/Comment.nvim",
@@ -98,8 +107,8 @@ return require("packer").startup(function(use)
 
     use({
         "kyazdani42/nvim-tree.lua",
-        cmd = "NvimTreeToggle",
-        config = require("plugin_configs.nvimtree"),
+        event = "BufRead",
+        config = require("plugins.configs.nvimtree"),
     })
 
     use({
@@ -113,10 +122,6 @@ return require("packer").startup(function(use)
     use({
         "danymat/neogen",
         event = "BufRead",
-        config = function()
-            require("neogen").setup({
-                enabled = true,
-            })
-        end,
+        config = require("plugins.configs.neogen"),
     })
 end)

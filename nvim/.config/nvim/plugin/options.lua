@@ -1,5 +1,3 @@
-vim.g.loaded_matchparen = 1
-
 vim.cmd([[
     filetype plugin indent on
     syntax on
