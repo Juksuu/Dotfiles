@@ -6,11 +6,20 @@ end
 
 return packer.startup(function(use)
     -- Packer can manage itself
-    use({ "wbthomason/packer.nvim", event = "VimEnter" })
+    use("wbthomason/packer.nvim")
 
     --- Loaded on startup ---
+    use("tpope/vim-sleuth")
     use("nvim-lua/plenary.nvim")
     use("kyazdani42/nvim-web-devicons")
+
+    -- Languages
+    use("DingDean/wgsl.vim")
+
+    use({
+        "luisiacc/gruvbox-baby",
+        config = require("plugins.configs.gruvbox"),
+    })
 
     use({
         "sbdchd/neoformat",
@@ -81,15 +90,11 @@ return packer.startup(function(use)
     })
 
     --- Lazy loaded packages ---
-    use({ "tpope/vim-sleuth", event = "BufRead" })
     use({ "tpope/vim-surround", event = "BufRead" })
     use({ "takac/vim-hardtime", event = "BufRead" })
     use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
     use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
     use({ "gpanders/editorconfig.nvim", event = "BufRead" })
-
-    use({ "rust-lang/rust.vim", ft = "rust" })
-    use({ "togglebyte/togglerust", ft = "rust" })
 
     use({
         "ThePrimeagen/harpoon",
@@ -124,4 +129,8 @@ return packer.startup(function(use)
         event = "BufRead",
         config = require("plugins.configs.neogen"),
     })
+
+    -- Languages
+    use({ "rust-lang/rust.vim", ft = "rust" })
+    use({ "togglebyte/togglerust", ft = "rust" })
 end)
