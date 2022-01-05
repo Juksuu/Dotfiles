@@ -8,8 +8,8 @@ local opt = vim.opt
 opt.showcmd = true
 opt.cmdheight = 1
 
-opt.ruler = true
-opt.laststatus = 0
+-- opt.ruler = true
+-- opt.laststatus = 0
 
 opt.number = true
 opt.relativenumber = true

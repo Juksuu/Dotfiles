@@ -16,9 +16,20 @@ return packer.startup(function(use)
     -- Languages
     use("DingDean/wgsl.vim")
 
+    -- use({
+    --     "luisiacc/gruvbox-baby",
+    --     config = require("plugins.configs.gruvbox"),
+    -- })
+
     use({
-        "luisiacc/gruvbox-baby",
-        config = require("plugins.configs.gruvbox"),
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = require("plugins.configs.catppuccin"),
+    })
+
+    use({
+        "feline-nvim/feline.nvim",
+        config = require("plugins.configs.feline"),
     })
 
     use({
@@ -76,17 +87,12 @@ return packer.startup(function(use)
     })
 
     use("tjdevries/nlua.nvim")
+    use("simrat39/rust-tools.nvim")
 
     use({
         "neovim/nvim-lspconfig",
         after = "nlua.nvim",
         config = require("lsp"),
-    })
-
-    use({
-        "simrat39/rust-tools.nvim",
-        after = "nvim-lspconfig",
-        config = require("plugins.configs.rust_tools"),
     })
 
     --- Lazy loaded packages ---
