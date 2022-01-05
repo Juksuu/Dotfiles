@@ -60,12 +60,23 @@ return function()
         end
     end
 
-    -- Load lua configuration from nlua.
+    -- Load lua configuration with nlua.
     require("nlua.lsp.nvim").setup(nvim_lsp, {
         capabilities = capabilities,
         on_attach = custom_attach,
         flags = {
             allow_incremental_sync = true,
+        },
+    })
+
+    -- Load rust configuration with rust-tools
+    require("rust-tools").setup({
+        server = {
+            capabilities = capabilities,
+            on_attach = custom_attach,
+            flags = {
+                allow_incremental_sync = true,
+            },
         },
     })
 
