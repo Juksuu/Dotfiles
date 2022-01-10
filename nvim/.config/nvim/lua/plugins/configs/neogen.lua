@@ -3,6 +3,5 @@ return function()
         enabled = true,
     })
 
-    local utils = require("juksu.utils")
-    utils.map("n", "<leader>ng", "<cmd> lua require('neogen').generate()<CR>")
+    vim.keymap.set("n", "<leader>ng", require("neogen").generate)
 end

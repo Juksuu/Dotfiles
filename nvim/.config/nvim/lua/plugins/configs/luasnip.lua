@@ -8,22 +8,10 @@ return function()
         },
     })
 
-    local utils = require("juksu.utils")
-
-    utils.map("n", "<C-h>", "<cmd> lua require('luasnip').jump(-1)<CR>")
-    utils.map("n", "<C-l>", "<cmd> lua require('luasnip').jump(1)<CR>")
-    utils.map("s", "<C-h>", "<cmd> lua require('luasnip').jump(-1)<CR>")
-    utils.map("s", "<C-l>", "<cmd> lua require('luasnip').jump(1)<CR>")
-    utils.map(
-        "i",
-        "<C-h>",
-        "<cmd> lua require('luasnip').jump(-1)<CR>",
-        { noremap = false }
-    )
-    utils.map(
-        "i",
-        "<C-l>",
-        "<cmd> lua require('luasnip').jump(1)<CR>",
-        { noremap = false }
-    )
+    vim.keymap.set({ "n", "s", "i" }, "<C-h>", function()
+        require("luasnip").jump(-1)
+    end)
+    vim.keymap.set({ "n", "s", "i" }, "<C-l>", function()
+        require("luasnip").jump(1)
+    end)
 end

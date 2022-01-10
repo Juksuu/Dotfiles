@@ -39,15 +39,9 @@ return function()
     )
 
     local custom_attach = function(client)
-        local utils = require("juksu.utils")
-
-        utils.map("n", "K", "<cmd> lua vim.lsp.buf.hover() <CR>")
-        utils.map(
-            "n",
-            "<leader>lld",
-            "<cmd> lua vim.diagnostic.open_float({ border = 'single' }) <CR>"
-        )
-        utils.map("n", "<leader>lR", "<cmd> lua vim.lsp.buf.rename() <CR>")
+        vim.keymap.set("n", "K", vim.lsp.buf.hover)
+        vim.keymap.set("n", "<leader>lld", vim.diagnostic.open_float)
+        vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename)
 
         if client.resolved_capabilities.code_lens then
             vim.cmd([[

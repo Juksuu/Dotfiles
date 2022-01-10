@@ -16,11 +16,6 @@ return packer.startup(function(use)
     -- Languages
     use("DingDean/wgsl.vim")
 
-    -- use({
-    --     "luisiacc/gruvbox-baby",
-    --     config = require("plugins.configs.gruvbox"),
-    -- })
-
     use({
         "catppuccin/nvim",
         as = "catppuccin",

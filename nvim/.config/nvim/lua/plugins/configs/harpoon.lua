@@ -1,31 +1,22 @@
 return function()
-    local utils = require("juksu.utils")
-    utils.map(
-        "n",
-        "<leader>th",
-        "<cmd> lua require('harpoon.term').gotoTerminal(1)<CR>"
-    )
-    utils.map(
-        "n",
-        "<leader>tj",
-        "<cmd> lua require('harpoon.term').gotoTerminal(2)<CR>"
-    )
-    utils.map(
-        "n",
-        "<leader>tk",
-        "<cmd> lua require('harpoon.term').gotoTerminal(3)<CR>"
-    )
+    vim.keymap.set("n", "<leader>th", function()
+        require("harpoon.term").gotoTerminal(1)
+    end)
+    vim.keymap.set("n", "<leader>tj", function()
+        require("harpoon.term").gotoTerminal(2)
+    end)
+    vim.keymap.set("n", "<leader>tk", function()
+        require("harpoon.term").gotoTerminal(3)
+    end)
 
-    utils.map("n", "<C-j>", "<cmd> lua require('harpoon.ui').nav_file(1)<CR>")
-    utils.map("n", "<C-k>", "<cmd> lua require('harpoon.ui').nav_file(2)<CR>")
-    utils.map(
-        "n",
-        "<leader>ma",
-        "<cmd> lua require('harpoon.mark').add_file()<CR>"
-    )
-    utils.map(
-        "n",
-        "<leader>mm",
-        "<cmd> lua require('harpoon.ui').toggle_quick_menu()<CR>"
-    )
+    vim.keymap.set("n", "<C-j>", function()
+        require("harpoon.ui").nav_file(1)
+    end)
+    vim.keymap.set("n", "<C-k>", function()
+        require("harpoon.ui").nav_file(2)
+    end)
+    vim.keymap.set("n", "<leader>ma", function()
+        require("harpoon.mark").add_file()
+    end)
+    vim.keymap.set("n", "<leader>mm", require("harpoon.ui").toggle_quick_menu)
 end

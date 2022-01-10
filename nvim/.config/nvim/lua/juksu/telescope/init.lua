@@ -33,19 +33,10 @@ return function()
     require("telescope").load_extension("git_worktree")
 
     --- TELESCOPE MAPPINGS ---
-    local utils = require("juksu.utils")
-
     local function map_tele(key, f)
-        utils.map(
-            "n",
-            key,
-            string.format(
-                "<cmd> lua require('juksu.telescope.functions')['%s'](%s)<CR>",
-                f,
-                ""
-            )
-        )
+        vim.keymap.set("n", key, require("juksu.telescope.functions")[f])
     end
+
     map_tele("<leader>sf", "find_files")
     map_tele("<leader>ss", "live_grep")
     map_tele("<leader>sg", "git_files")

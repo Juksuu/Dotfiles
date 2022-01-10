@@ -1,15 +1,9 @@
-vim.cmd([[
-    filetype plugin indent on
-    syntax on
-]])
-
 local opt = vim.opt
 
 opt.showcmd = true
 opt.cmdheight = 1
 
--- opt.ruler = true
--- opt.laststatus = 0
+opt.termguicolors = true
 
 opt.number = true
 opt.relativenumber = true

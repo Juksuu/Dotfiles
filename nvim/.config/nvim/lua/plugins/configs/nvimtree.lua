@@ -6,6 +6,5 @@ return function()
         },
     })
 
-    local utils = require("juksu.utils")
-    utils.map("n", "<leader>nt", "<cmd> NvimTreeToggle <CR>")
+    vim.keymap.set("n", "<leader>nt", "<cmd> NvimTreeToggle <CR>")
 end

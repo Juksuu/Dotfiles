@@ -1,2 +1,1 @@
-local utils = require("juksu.utils")
-utils.map("n", "<leader>x", "<cmd> Compile <CR>")
+vim.keymap.set("n", "<leader>x", "<cmd> Compile <CR>")
