@@ -68,6 +68,7 @@ return packer.startup(function(use)
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
+            "lukas-reineke/cmp-under-comparator",
 
             "onsails/lspkind-nvim",
 
@@ -90,12 +91,23 @@ return packer.startup(function(use)
         config = require("lsp"),
     })
 
+    use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        after = "nvim-lspconfig",
+        config = require("plugins.configs.lsplines"),
+    })
+
     --- Lazy loaded packages ---
     use({ "tpope/vim-surround", event = "BufRead" })
     use({ "takac/vim-hardtime", event = "BufRead" })
     use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
-    use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
     use({ "gpanders/editorconfig.nvim", event = "BufRead" })
+
+    use({
+        "bfredl/nvim-miniyank",
+        event = "BufRead",
+        config = require("plugins.configs.miniyank"),
+    })
 
     use({
         "ThePrimeagen/harpoon",
