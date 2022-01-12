@@ -40,6 +40,12 @@ return function()
 
     local custom_attach = function(client)
         vim.keymap.set("n", "K", vim.lsp.buf.hover)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+        -- vim.keymap.set("n", "sh", vim.lsp.buf.signature_help)
+
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
         vim.keymap.set("n", "<leader>lld", vim.diagnostic.open_float)
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename)
 
@@ -74,7 +80,14 @@ return function()
         },
     })
 
-    local servers = { "gopls", "tsserver", "svelte", "yamlls", "gdscript" }
+    local servers = {
+        "gopls",
+        "tsserver",
+        "svelte",
+        "yamlls",
+        "pylsp",
+        "eslint",
+    }
     for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
             capabilities = capabilities,
@@ -85,32 +98,30 @@ return function()
         })
     end
 
-    local tslint = require("lsp.efm.tslint")
-    local eslint = require("lsp.efm.eslint")
-
-    local languages = {
-        typescript = { tslint, eslint },
-        javascript = { tslint, eslint },
-        typescriptreact = { tslint, eslint },
-        ["typescript.tsx"] = { tslint, eslint },
-        javascriptreact = { tslint, eslint },
-        ["javascript.jsx"] = { tslint, eslint },
-    }
-
-    -- https://github.com/mattn/efm-langserver
-    nvim_lsp.efm.setup({
-        root_dir = function()
-            return vim.fn.getcwd()
-        end,
-        filetypes = vim.tbl_keys(languages),
-        settings = {
-            rootMarkers = { "package.json", ".git" },
-            lintDebounce = 100,
-            languages = languages,
-        },
-        on_attach = custom_attach,
-        flags = {
-            allow_incremental_sync = true,
-        },
-    })
+    -- local eslint = require("lsp.efm.eslint")
+    --
+    -- local languages = {
+    --     typescript = { eslint },
+    --     javascript = { eslint },
+    --     typescriptreact = { eslint },
+    --     ["typescript.tsx"] = { eslint },
+    --     javascriptreact = { eslint },
+    --     ["javascript.jsx"] = { eslint },
+    -- }
+    --
+    -- -- https://github.com/mattn/efm-langserver
+    -- nvim_lsp.efm.setup({
+    --     root_dir = function()
+    --         return vim.fn.getcwd()
+    --     end,
+    --     filetypes = vim.tbl_keys(languages),
+    --     settings = {
+    --         rootMarkers = { "package.json", ".git" },
+    --         languages = languages,
+    --     },
+    --     on_attach = custom_attach,
+    --     flags = {
+    --         allow_incremental_sync = true,
+    --     },
+    -- })
 end

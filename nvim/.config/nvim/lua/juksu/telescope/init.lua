@@ -41,8 +41,6 @@ return function()
     map_tele("<leader>ss", "live_grep")
     map_tele("<leader>sg", "git_files")
 
-    map_tele("gd", "lsp_definitions")
-
     map_tele("<leader>lr", "lsp_references")
     map_tele("<leader>la", "lsp_code_actions")
     map_tele("<leader>ld", "diagnostics")

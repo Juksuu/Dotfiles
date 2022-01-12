@@ -55,11 +55,6 @@ function M.lsp_code_actions()
     require("telescope.builtin").lsp_code_actions(cursor(opts))
 end
 
-function M.lsp_definitions()
-    local opts = {}
-    require("telescope.builtin").lsp_definitions(ivy(opts))
-end
-
 function M.diagnostics()
     local opts = {
         bufnr = 0,
