@@ -110,6 +110,12 @@ return packer.startup(function(use)
     })
 
     use({
+        "windwp/nvim-autopairs",
+        event = "BufRead",
+        config = require("plugins.configs.autopairs"),
+    })
+
+    use({
         "ThePrimeagen/harpoon",
         event = "BufRead",
         config = require("plugins.configs.harpoon"),
