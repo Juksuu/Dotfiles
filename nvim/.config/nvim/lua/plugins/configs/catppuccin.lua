@@ -24,7 +24,7 @@ return function()
             gitsigns = true,
             telescope = true,
             nvimtree = {
-                enabled = true,
+                enabled = false,
                 show_root = false,
             },
             indent_blankline = {
@@ -32,7 +32,7 @@ return function()
                 colored_indent_levels = false,
             },
             dashboard = false,
-            neogit = false,
+            neogit = true,
             bufferline = false,
             notify = false,
             telekasten = false,
