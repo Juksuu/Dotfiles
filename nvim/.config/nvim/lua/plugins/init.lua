@@ -73,7 +73,6 @@ return packer.startup({
 
         use({
             "windwp/nvim-autopairs",
-            event = "BufRead",
             config = require("plugins.configs.autopairs"),
         })
 

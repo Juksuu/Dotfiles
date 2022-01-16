@@ -1,6 +1,5 @@
-local present, autopairs = pcall(require, "nvim-autopairs")
-if present then
-    autopairs.setup({
+return function()
+    require("nvim-autopairs").setup({
         map_cr = true,
     })
 end
