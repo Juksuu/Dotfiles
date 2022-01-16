@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 -- Reselect visual selection after indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")

@@ -12,7 +12,7 @@ opt.guicursor = ""
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
-opt.updatetime = 500
+opt.updatetime = 1500
 opt.shortmess = opt.shortmess + "c"
 
 opt.smartcase = true

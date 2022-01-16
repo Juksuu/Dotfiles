@@ -8,6 +8,11 @@ local function cursor(opts)
     return require("telescope.themes").get_cursor(opts)
 end
 
+--- FILE BROWSER ---
+function M.file_browser()
+    require("telescope").extensions.file_browser.file_browser()
+end
+
 --- SEARCH ---
 function M.find_files()
     local opts = {

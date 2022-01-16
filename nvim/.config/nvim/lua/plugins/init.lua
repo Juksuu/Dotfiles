@@ -1,155 +1,179 @@
-local present, packer = pcall(require, "plugins.initpacker")
+local packer_bootstrap = false
 
-if not present then
-    return false
+local install_path = vim.fn.stdpath("data")
+    .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    packer_bootstrap = true
+    vim.fn.system({
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    })
 end
 
-return packer.startup(function(use)
-    -- Packer can manage itself
-    use("wbthomason/packer.nvim")
+vim.cmd([[ packadd packer.nvim ]])
 
-    --- Loaded on startup ---
-    use("tpope/vim-sleuth")
-    use("nvim-lua/plenary.nvim")
-    use("kyazdani42/nvim-web-devicons")
+local packer = require("packer")
+return packer.startup({
+    function(use)
+        -- Packer can manage itself
+        use("wbthomason/packer.nvim")
 
-    -- Languages
-    use("DingDean/wgsl.vim")
+        -- Impatient for lua module optimizations
+        use("lewis6991/impatient.nvim")
 
-    use({
-        "catppuccin/nvim",
-        as = "catppuccin",
-        config = require("plugins.configs.catppuccin"),
-    })
+        -- Languages
+        use("DingDean/wgsl.vim")
+        use({ "rust-lang/rust.vim", ft = "rust" })
+        use({ "togglebyte/togglerust", ft = "rust" })
 
-    use({
-        "feline-nvim/feline.nvim",
-        config = require("plugins.configs.feline"),
-    })
+        -- Utils
+        use("tpope/vim-sleuth")
+        use("nvim-lua/plenary.nvim")
+        use("kyazdani42/nvim-web-devicons")
+        use({ "tpope/vim-surround", event = "BufRead" })
+        use({ "takac/vim-hardtime", event = "BufRead" })
+        use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
+        use({ "gpanders/editorconfig.nvim", event = "BufRead" })
 
-    use({
-        "sbdchd/neoformat",
-        setup = require("plugins.configs.neoformat"),
-    })
+        use({
+            "catppuccin/nvim",
+            as = "catppuccin",
+            config = require("plugins.configs.catppuccin"),
+        })
 
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        config = require("plugins.configs.treesitter"),
-    })
+        use({
+            "feline-nvim/feline.nvim",
+            config = require("plugins.configs.feline"),
+        })
 
-    use({
-        "Juksuu/git-worktree.nvim",
-        branch = "feature/select-base-branch",
-        config = function()
-            require("git-worktree").setup()
-        end,
-    })
+        use({
+            "sbdchd/neoformat",
+            setup = require("plugins.configs.neoformat"),
+        })
 
-    use({
-        "TimUntersberger/neogit",
-        config = require("plugins.configs.neogit"),
-    })
+        use({
+            "nvim-treesitter/nvim-treesitter",
+            run = ":TSUpdate",
+            config = require("plugins.configs.treesitter"),
+        })
 
-    use({
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            "nvim-lua/popup.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        },
-        after = "git-worktree.nvim",
-        config = require("juksu.telescope"),
-    })
+        use({
+            "ThePrimeagen/harpoon",
+            config = require("plugins.configs.harpoon"),
+        })
 
-    use({
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lua",
-            "lukas-reineke/cmp-under-comparator",
+        use({
+            "bfredl/nvim-miniyank",
+            config = require("plugins.configs.miniyank"),
+        })
 
-            "onsails/lspkind-nvim",
+        use({
+            "windwp/nvim-autopairs",
+            event = "BufRead",
+            config = require("plugins.configs.autopairs"),
+        })
 
-            {
-                "L3MON4D3/LuaSnip",
-                requires = "rafamadriz/friendly-snippets",
-                config = require("plugins.configs.luasnip"),
+        use({
+            "numToStr/Comment.nvim",
+            event = "BufRead",
+            config = function()
+                require("Comment").setup()
+            end,
+        })
+
+        use({
+            "danymat/neogen",
+            event = "BufRead",
+            config = require("plugins.configs.neogen"),
+        })
+
+        -- Git
+        use({
+            "Juksuu/git-worktree.nvim",
+            branch = "feature/select-base-branch",
+            config = function()
+                require("git-worktree").setup()
+            end,
+        })
+
+        use({
+            "TimUntersberger/neogit",
+            config = require("plugins.configs.neogit"),
+        })
+
+        use({
+            "lewis6991/gitsigns.nvim",
+            event = "BufRead",
+            config = function()
+                require("gitsigns").setup()
+            end,
+        })
+
+        -- Fuzzy find
+        use({
+            "nvim-telescope/telescope.nvim",
+            requires = {
+                "nvim-lua/popup.nvim",
+                "nvim-telescope/telescope-file-browser.nvim",
+                { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
             },
-            "saadparwaiz1/cmp_luasnip",
+            after = "git-worktree.nvim",
+            config = require("juksu.telescope"),
+        })
+
+        -- Completion
+        use({
+            "hrsh7th/nvim-cmp",
+            requires = {
+                "hrsh7th/cmp-path",
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-nvim-lsp",
+                "hrsh7th/cmp-nvim-lua",
+                "lukas-reineke/cmp-under-comparator",
+
+                "onsails/lspkind-nvim",
+
+                {
+                    "L3MON4D3/LuaSnip",
+                    requires = "rafamadriz/friendly-snippets",
+                    config = require("plugins.configs.luasnip"),
+                },
+                "saadparwaiz1/cmp_luasnip",
+            },
+            config = require("plugins.configs.cmp"),
+        })
+
+        -- Lsp
+        use("tjdevries/nlua.nvim")
+        use("simrat39/rust-tools.nvim")
+
+        use({
+            "neovim/nvim-lspconfig",
+            after = "nlua.nvim",
+            config = require("lsp"),
+        })
+
+        use({
+            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            after = "nvim-lspconfig",
+            config = require("plugins.configs.lsplines"),
+        })
+
+        if packer_bootstrap then
+            packer.sync()
+        end
+    end,
+    config = {
+        display = {
+            open_fn = function()
+                return require("packer.util").float({ border = "single" })
+            end,
+            prompt_border = "single",
         },
-        config = require("plugins.configs.cmp"),
-    })
-
-    use("tjdevries/nlua.nvim")
-    use("simrat39/rust-tools.nvim")
-
-    use({
-        "neovim/nvim-lspconfig",
-        after = "nlua.nvim",
-        config = require("lsp"),
-    })
-
-    use({
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        after = "nvim-lspconfig",
-        config = require("plugins.configs.lsplines"),
-    })
-
-    --- Lazy loaded packages ---
-    use({ "tpope/vim-surround", event = "BufRead" })
-    use({ "takac/vim-hardtime", event = "BufRead" })
-    use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
-    use({ "gpanders/editorconfig.nvim", event = "BufRead" })
-
-    use({
-        "bfredl/nvim-miniyank",
-        event = "BufRead",
-        config = require("plugins.configs.miniyank"),
-    })
-
-    use({
-        "windwp/nvim-autopairs",
-        event = "BufRead",
-        config = require("plugins.configs.autopairs"),
-    })
-
-    use({
-        "ThePrimeagen/harpoon",
-        event = "BufRead",
-        config = require("plugins.configs.harpoon"),
-    })
-
-    use({
-        "numToStr/Comment.nvim",
-        event = "BufRead",
-        config = function()
-            require("Comment").setup()
-        end,
-    })
-
-    use({
-        "kyazdani42/nvim-tree.lua",
-        event = "BufRead",
-        config = require("plugins.configs.nvimtree"),
-    })
-
-    use({
-        "lewis6991/gitsigns.nvim",
-        event = "BufRead",
-        config = function()
-            require("gitsigns").setup()
-        end,
-    })
-
-    use({
-        "danymat/neogen",
-        event = "BufRead",
-        config = require("plugins.configs.neogen"),
-    })
-
-    -- Languages
-    use({ "rust-lang/rust.vim", ft = "rust" })
-    use({ "togglebyte/togglerust", ft = "rust" })
-end)
+        compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
+    },
+})

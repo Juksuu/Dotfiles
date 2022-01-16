@@ -31,6 +31,7 @@ return function()
 
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("git_worktree")
+    require("telescope").load_extension("file_browser")
 
     --- TELESCOPE MAPPINGS ---
     local function map_tele(key, f)
@@ -40,6 +41,8 @@ return function()
     map_tele("<leader>sf", "find_files")
     map_tele("<leader>ss", "live_grep")
     map_tele("<leader>sg", "git_files")
+
+    map_tele("<leader>fb", "file_browser")
 
     map_tele("<leader>lr", "lsp_references")
     map_tele("<leader>la", "lsp_code_actions")
