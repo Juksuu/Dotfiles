@@ -1,5 +1,6 @@
 return function()
     local nvim_lsp = require("lspconfig")
+    local server_config = require("lsp.server_configuration")
 
     -- Disable gutter signs, color linenum instead
     vim.fn.sign_define(
@@ -60,68 +61,24 @@ return function()
         end
     end
 
-    -- Load lua configuration with nlua.
-    require("nlua.lsp.nvim").setup(nvim_lsp, {
-        capabilities = capabilities,
-        on_attach = custom_attach,
-        flags = {
-            allow_incremental_sync = true,
-        },
-    })
-
-    -- Load rust configuration with rust-tools
-    require("rust-tools").setup({
-        server = {
+    for _, lsp in ipairs(server_config.servers) do
+        local opts = {
             capabilities = capabilities,
             on_attach = custom_attach,
-            flags = {
-                allow_incremental_sync = true,
-            },
-        },
-    })
+        }
+        local server_opts = server_config.custom_server_settings[lsp.server]
+            or {}
+        opts = vim.tbl_deep_extend("force", opts, server_opts)
 
-    local servers = {
-        "gopls",
-        "tsserver",
-        "svelte",
-        "yamlls",
-        "pylsp",
-        "eslint",
-    }
-    for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup({
-            capabilities = capabilities,
-            on_attach = custom_attach,
-            flags = {
-                allow_incremental_sync = true,
-            },
-        })
+        if lsp.docker then
+            local docker_settings = server_config.custom_docker_settings[lsp.server]
+                or {}
+
+            opts["cmd"] = require("lspcontainers").command(
+                lsp.server,
+                docker_settings
+            )
+        end
+        nvim_lsp[lsp.server].setup(opts)
     end
-
-    -- local eslint = require("lsp.efm.eslint")
-    --
-    -- local languages = {
-    --     typescript = { eslint },
-    --     javascript = { eslint },
-    --     typescriptreact = { eslint },
-    --     ["typescript.tsx"] = { eslint },
-    --     javascriptreact = { eslint },
-    --     ["javascript.jsx"] = { eslint },
-    -- }
-    --
-    -- -- https://github.com/mattn/efm-langserver
-    -- nvim_lsp.efm.setup({
-    --     root_dir = function()
-    --         return vim.fn.getcwd()
-    --     end,
-    --     filetypes = vim.tbl_keys(languages),
-    --     settings = {
-    --         rootMarkers = { "package.json", ".git" },
-    --         languages = languages,
-    --     },
-    --     on_attach = custom_attach,
-    --     flags = {
-    --         allow_incremental_sync = true,
-    --     },
-    -- })
 end

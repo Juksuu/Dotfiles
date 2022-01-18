@@ -147,12 +147,10 @@ return packer.startup({
         })
 
         -- Lsp
-        use("tjdevries/nlua.nvim")
-        use("simrat39/rust-tools.nvim")
-
+        use("lspcontainers/lspcontainers.nvim")
         use({
             "neovim/nvim-lspconfig",
-            after = "nlua.nvim",
+            after = "lspcontainers.nvim",
             config = require("lsp"),
         })
 
