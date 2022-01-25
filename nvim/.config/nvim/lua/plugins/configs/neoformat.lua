@@ -16,7 +16,6 @@ return function()
 
     vim.api.nvim_add_user_command("NeoformatRun", function()
         if vim.g.neoformat_run_on_save then
-            print(vim.g.neoformat_run_on_save)
             vim.api.nvim_command("Neoformat")
         end
     end, {})
