@@ -43,19 +43,18 @@ return function()
         vim.keymap.set("n", "K", vim.lsp.buf.hover)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-        -- vim.keymap.set("n", "sh", vim.lsp.buf.signature_help)
 
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-        vim.keymap.set("n", "<leader>lld", vim.diagnostic.open_float)
-        vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename)
+        vim.keymap.set("n", "dl", vim.diagnostic.open_float)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 
         if client.resolved_capabilities.code_lens then
             vim.cmd([[
               augroup lsp_document_codelens
                 au! * <buffer>
-                autocmd BufEnter ++once <buffer> lua require"vim.lsp.codelens".refresh()
-                autocmd BufWritePost,CursorHold <buffer> lua require"vim.lsp.codelens".refresh()
+                autocmd BufEnter ++once <buffer> lua require("vim.lsp.codelens").refresh()
+                autocmd BufWritePost,CursorHold <buffer> lua require("vim.lsp.codelens").refresh()
               augroup END
             ]])
         end

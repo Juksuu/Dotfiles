@@ -46,8 +46,8 @@ return function()
 
     map_tele("<leader>lr", "lsp_references")
     map_tele("<leader>la", "lsp_code_actions")
-    map_tele("<leader>ld", "diagnostics")
-    map_tele("<leader>lD", "workspace_diagnostics")
+    map_tele("<leader>df", "diagnostics")
+    map_tele("<leader>dw", "workspace_diagnostics")
 
     map_tele("<leader>gw", "worktrees")
     map_tele("<leader>gn", "create_worktree")
