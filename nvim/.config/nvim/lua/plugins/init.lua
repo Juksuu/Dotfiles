@@ -113,9 +113,7 @@ return packer.startup({
         use({
             "lewis6991/gitsigns.nvim",
             event = "BufRead",
-            config = function()
-                require("gitsigns").setup()
-            end,
+            config = require("plugins.configs.gitsigns"),
         })
 
         -- Fuzzy find
