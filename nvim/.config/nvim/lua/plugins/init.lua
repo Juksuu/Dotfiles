@@ -164,6 +164,15 @@ return packer.startup({
             config = require("plugins.configs.lsplines"),
         })
 
+        -- Does not work yet with transparent background :(
+        -- use({
+        --     "j-hui/fidget.nvim",
+        --     after = "nvim-lspconfig",
+        --     config = function()
+        --         require("fidget").setup()
+        --     end,
+        -- })
+
         if packer_bootstrap then
             packer.sync()
         end
