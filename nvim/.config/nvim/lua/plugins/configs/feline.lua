@@ -257,60 +257,8 @@ return function()
     -- ######## Center
 
     -- Diagnostics ------>
-    -- workspace loader
-    components.active[2][1] = {
-        provider = function()
-            local Lsp = vim.lsp.util.get_progress_messages()[1]
-
-            if Lsp then
-                local msg = Lsp.message or ""
-                local percentage = Lsp.percentage or 0
-                local title = Lsp.title or ""
-                local spinners = {
-                    "",
-                    "",
-                    "",
-                }
-                local success_icon = {
-                    "",
-                    "",
-                    "",
-                }
-                local ms = vim.loop.hrtime() / 1000000
-                local frame = math.floor(ms / 120) % #spinners
-
-                if percentage >= 70 then
-                    return string.format(
-                        " %%<%s %s %s (%s%%%%) ",
-                        success_icon[frame + 1],
-                        title,
-                        msg,
-                        percentage
-                    )
-                end
-
-                return string.format(
-                    " %%<%s %s %s (%s%%%%) ",
-                    spinners[frame + 1],
-                    title,
-                    msg,
-                    percentage
-                )
-            end
-
-            return ""
-        end,
-        enabled = shortline or function()
-            return vim.api.nvim_win_get_width(0) > 80
-        end,
-        hl = {
-            fg = clrs.rosewater,
-            bg = sett.bkg,
-        },
-    }
-
     -- genral diagnostics (errors, warnings. info and hints)
-    components.active[2][2] = {
+    components.active[2][1] = {
         provider = "diagnostic_errors",
         enabled = function()
             return lsp.diagnostics_exist(lsp_severity.ERROR)
@@ -323,7 +271,7 @@ return function()
         icon = "  ",
     }
 
-    components.active[2][3] = {
+    components.active[2][2] = {
         provider = "diagnostic_warnings",
         enabled = function()
             return lsp.diagnostics_exist(lsp_severity.WARN)
@@ -335,7 +283,7 @@ return function()
         icon = "  ",
     }
 
-    components.active[2][4] = {
+    components.active[2][3] = {
         provider = "diagnostic_info",
         enabled = function()
             return lsp.diagnostics_exist(lsp_severity.INFO)
@@ -347,7 +295,7 @@ return function()
         icon = "  ",
     }
 
-    components.active[2][5] = {
+    components.active[2][4] = {
         provider = "diagnostic_hints",
         enabled = function()
             return lsp.diagnostics_exist(lsp_severity.HINT)
@@ -380,21 +328,6 @@ return function()
 
     components.active[3][2] = {
         provider = function()
-            if next(vim.lsp.buf_get_clients()) ~= nil then
-                return " "
-            else
-                return ""
-            end
-        end,
-        hl = {
-            fg = sett.extras,
-            bg = sett.bkg,
-        },
-        right_sep = invi_sep,
-    }
-
-    components.active[3][3] = {
-        provider = function()
             local filename = vim.fn.expand("%:t")
             local extension = vim.fn.expand("%:e")
             local icon = require("nvim-web-devicons").get_icon(
@@ -423,7 +356,7 @@ return function()
         },
     }
 
-    components.active[3][4] = {
+    components.active[3][3] = {
         provider = function()
             local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             return "  " .. dir_name .. " "

@@ -76,6 +76,17 @@ return packer.startup({
         })
 
         use({
+            "danymat/neogen",
+            event = "BufRead",
+            config = require("plugins.configs.neogen"),
+        })
+
+        use({
+            "rcarriga/nvim-notify",
+            config = require("plugins.configs.notify"),
+        })
+
+        use({
             "numToStr/Comment.nvim",
             event = "BufRead",
             config = function()
@@ -83,11 +94,6 @@ return packer.startup({
             end,
         })
 
-        use({
-            "danymat/neogen",
-            event = "BufRead",
-            config = require("plugins.configs.neogen"),
-        })
         use({
             "anuvyklack/pretty-fold.nvim",
             config = function()
@@ -159,19 +165,17 @@ return packer.startup({
         })
 
         use({
-            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            "j-hui/fidget.nvim",
             after = "nvim-lspconfig",
-            config = require("plugins.configs.lsplines"),
+            config = function()
+                require("fidget").setup({
+                    window = {
+                        relative = "editor",
+                        blend = 0,
+                    },
+                })
+            end,
         })
-
-        -- Does not work yet with transparent background :(
-        -- use({
-        --     "j-hui/fidget.nvim",
-        --     after = "nvim-lspconfig",
-        --     config = function()
-        --         require("fidget").setup()
-        --     end,
-        -- })
 
         if packer_bootstrap then
             packer.sync()

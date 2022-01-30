@@ -1,7 +1,7 @@
 return function()
     require("catppuccin").setup({
         transparent_background = true,
-        term_colors = false,
+        term_colors = true,
         styles = {
             comments = "None",
             functions = "None",
@@ -34,7 +34,7 @@ return function()
             dashboard = false,
             neogit = true,
             bufferline = false,
-            notify = false,
+            notify = true,
             telekasten = false,
         },
     })
