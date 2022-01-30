@@ -34,7 +34,6 @@ return packer.startup({
         use("nvim-lua/plenary.nvim")
         use("kyazdani42/nvim-web-devicons")
         use({ "tpope/vim-surround", event = "BufRead" })
-        use({ "takac/vim-hardtime", event = "BufRead" })
         use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
         use({ "gpanders/editorconfig.nvim", event = "BufRead" })
 
@@ -58,11 +57,6 @@ return packer.startup({
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
             config = require("plugins.configs.treesitter"),
-        })
-
-        use({
-            "ThePrimeagen/harpoon",
-            config = require("plugins.configs.harpoon"),
         })
 
         use({
@@ -91,14 +85,6 @@ return packer.startup({
             event = "BufRead",
             config = function()
                 require("Comment").setup()
-            end,
-        })
-
-        use({
-            "anuvyklack/pretty-fold.nvim",
-            config = function()
-                require("pretty-fold").setup({})
-                require("pretty-fold.preview").setup()
             end,
         })
 
