@@ -15,3 +15,6 @@ source /opt/asdf-vm/asdf.fish
 
 set -x NVM_DIR ~/.nvm
 nvm use default --silent
+
+alias wtc="~/Scripts/wtc.sh"
+alias wts="bass source ~/Scripts/wts.sh"
