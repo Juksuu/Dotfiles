@@ -2,6 +2,16 @@ local M = {}
 
 --- THEMES ---
 local function ivy(opts)
+    local defaults = {
+        border = false,
+        previewer = false,
+        sorting_strategy = "descending",
+        layout_config = {
+            height = 0.25,
+            prompt_position = "bottom",
+        },
+    }
+    opts = vim.tbl_deep_extend("force", opts, defaults)
     return require("telescope.themes").get_ivy(opts)
 end
 local function cursor(opts)
@@ -19,7 +29,7 @@ function M.find_files()
         hidden = true,
         file_ignore_patterns = { "**.min" },
     }
-    require("telescope.builtin").find_files(opts)
+    require("telescope.builtin").find_files(ivy(opts))
 end
 
 function M.live_grep()
@@ -38,7 +48,7 @@ function M.git_files()
         hidden = true,
         previewer = false,
     }
-    require("telescope.builtin").git_files(opts)
+    require("telescope.builtin").git_files(ivy(opts))
 end
 
 function M.worktrees()

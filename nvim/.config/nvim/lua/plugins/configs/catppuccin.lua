@@ -1,5 +1,6 @@
 return function()
-    require("catppuccin").setup({
+    local catppuccin = require("catppuccin")
+    catppuccin.setup({
         transparent_background = true,
         term_colors = true,
         styles = {
@@ -37,6 +38,26 @@ return function()
             notify = true,
             telekasten = false,
         },
+    })
+
+    local colors = require("catppuccin.api.colors").get_colors() -- fetch colors with API
+    catppuccin.remap({
+        TelescopeNormal = { fg = colors.lavender, bg = colors.black1 },
+        TelescopeBorder = { bg = colors.black1 },
+
+        TelescopeMatching = { fg = colors.red, bg = colors.None },
+        TelescopeSelection = { fg = colors.None, bg = colors.black2 },
+
+        TelescopeResultsTitle = { fg = colors.lavender, bg = colors.black1 },
+
+        TelescopePromptTitle = { fg = colors.rosewater, bg = colors.black3 },
+        TelescopePromptPrefix = { fg = colors.rosewater, bg = colors.black3 },
+        TelescopePromptNormal = { fg = colors.rosewater, bg = colors.black3 },
+        TelescopePromptBorder = { bg = colors.black3 },
+
+        TelescopePreviewTitle = { fg = colors.teal, bg = colors.black2 },
+        TelescopePreviewNormal = { bg = colors.black2 },
+        TelescopePreviewBorder = { bg = colors.black2 },
     })
 
     vim.cmd([[ colorscheme catppuccin ]])

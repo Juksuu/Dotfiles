@@ -1,23 +1,23 @@
 return function()
     require("telescope").setup({
         defaults = {
-            prompt_prefix = " >",
-            sorting_strategy = "ascending",
-            color_devicons = true,
+            prompt_prefix = "❯ ",
+            selection_caret = "❯ ",
+
+            winblend = 4,
+
+            borderchars = { " ", " ", " ", " ", "", "", "", "" },
+
+            layout_strategy = "horizontal",
             layout_config = {
-                bottom_pane = {
-                    prompt_position = "top",
-                },
-                center = {
-                    prompt_position = "top",
-                },
-                horizontal = {
-                    prompt_position = "top",
-                },
-                vertical = {
-                    prompt_position = "top",
-                },
+                prompt_position = "top",
+                width = 0.8,
             },
+
+            selection_strategy = "reset",
+            sorting_strategy = "ascending",
+            scroll_strategy = "cycle",
+            color_devicons = true,
         },
     })
 
