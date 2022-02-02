@@ -114,7 +114,7 @@ return packer.startup({
             requires = {
                 "nvim-lua/popup.nvim",
                 "nvim-telescope/telescope-file-browser.nvim",
-                { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+                "nvim-telescope/telescope-fzy-native.nvim",
             },
             after = "git-worktree.nvim",
             config = require("juksu.telescope"),
