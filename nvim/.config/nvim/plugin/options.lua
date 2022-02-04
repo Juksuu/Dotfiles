@@ -12,8 +12,7 @@ opt.guicursor = ""
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
-opt.updatetime = 1500
-opt.shortmess = opt.shortmess + "c"
+opt.updatetime = 500
 
 opt.smartcase = true
 opt.incsearch = true
@@ -25,7 +24,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 opt.clipboard = "unnamedplus"
-opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
+opt.completeopt = { "menuone", "noselect", "noinsert" }
 
 opt.undofile = true
 

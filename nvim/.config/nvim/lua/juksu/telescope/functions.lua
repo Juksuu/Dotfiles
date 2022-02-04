@@ -1,19 +1,6 @@
 local M = {}
 
 --- THEMES ---
-local function ivy(opts)
-    local defaults = {
-        border = false,
-        previewer = false,
-        sorting_strategy = "descending",
-        layout_config = {
-            height = 0.25,
-            prompt_position = "bottom",
-        },
-    }
-    opts = vim.tbl_deep_extend("force", opts, defaults)
-    return require("telescope.themes").get_ivy(opts)
-end
 local function cursor(opts)
     return require("telescope.themes").get_cursor(opts)
 end
@@ -29,7 +16,7 @@ function M.find_files()
         hidden = true,
         file_ignore_patterns = { "**.min" },
     }
-    require("telescope.builtin").find_files(ivy(opts))
+    require("telescope.builtin").find_files(opts)
 end
 
 function M.live_grep()
@@ -48,7 +35,7 @@ function M.git_files()
         hidden = true,
         previewer = false,
     }
-    require("telescope.builtin").git_files(ivy(opts))
+    require("telescope.builtin").git_files(opts)
 end
 
 function M.worktrees()
@@ -62,7 +49,7 @@ end
 --- LSP ---
 function M.lsp_references()
     local opts = {}
-    require("telescope.builtin").lsp_references(ivy(opts))
+    require("telescope.builtin").lsp_references(opts)
 end
 
 function M.lsp_code_actions()
@@ -74,12 +61,12 @@ function M.diagnostics()
     local opts = {
         bufnr = 0,
     }
-    require("telescope.builtin").diagnostics(ivy(opts))
+    require("telescope.builtin").diagnostics(opts)
 end
 
 function M.workspace_diagnostics()
     local opts = {}
-    require("telescope.builtin").diagnostics(ivy(opts))
+    require("telescope.builtin").diagnostics(opts)
 end
 
 return setmetatable({}, {

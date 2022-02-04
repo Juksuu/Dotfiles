@@ -36,6 +36,7 @@ return packer.startup({
         use({ "tpope/vim-surround", event = "BufRead" })
         use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
         use({ "gpanders/editorconfig.nvim", event = "BufRead" })
+        use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
 
         use({
             "catppuccin/nvim",
@@ -60,24 +61,8 @@ return packer.startup({
         })
 
         use({
-            "bfredl/nvim-miniyank",
-            config = require("plugins.configs.miniyank"),
-        })
-
-        use({
             "windwp/nvim-autopairs",
             config = require("plugins.configs.autopairs"),
-        })
-
-        use({
-            "danymat/neogen",
-            event = "BufRead",
-            config = require("plugins.configs.neogen"),
-        })
-
-        use({
-            "rcarriga/nvim-notify",
-            config = require("plugins.configs.notify"),
         })
 
         use({
