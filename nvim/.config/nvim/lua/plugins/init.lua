@@ -39,6 +39,13 @@ return packer.startup({
         use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
 
         use({
+            "Juksuu/worktrees.nvim",
+            config = function()
+                require("worktrees").setup()
+            end,
+        })
+
+        use({
             "catppuccin/nvim",
             as = "catppuccin",
             config = require("plugins.configs.catppuccin"),
@@ -75,14 +82,6 @@ return packer.startup({
 
         -- Git
         use({
-            "Juksuu/git-worktree.nvim",
-            branch = "feature/select-base-branch",
-            config = function()
-                require("git-worktree").setup()
-            end,
-        })
-
-        use({
             "TimUntersberger/neogit",
             config = require("plugins.configs.neogit"),
         })
@@ -101,7 +100,7 @@ return packer.startup({
                 "nvim-telescope/telescope-file-browser.nvim",
                 "nvim-telescope/telescope-fzy-native.nvim",
             },
-            after = "git-worktree.nvim",
+            after = "worktrees.nvim",
             config = require("juksu.telescope"),
         })
 

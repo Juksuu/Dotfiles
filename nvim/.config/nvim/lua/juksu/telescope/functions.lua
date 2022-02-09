@@ -39,11 +39,12 @@ function M.git_files()
 end
 
 function M.worktrees()
-    require("telescope").extensions.git_worktree.git_worktrees()
-end
-
-function M.create_worktree()
-    require("telescope").extensions.git_worktree.create_git_worktree()
+    local opts = {
+        path_display = {
+            "smart",
+        },
+    }
+    require("telescope").extensions.worktrees.list_worktrees(opts)
 end
 
 --- LSP ---

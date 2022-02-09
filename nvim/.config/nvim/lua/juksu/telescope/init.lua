@@ -22,7 +22,7 @@ return function()
     })
 
     require("telescope").load_extension("fzy_native")
-    require("telescope").load_extension("git_worktree")
+    require("telescope").load_extension("worktrees")
     require("telescope").load_extension("file_browser")
 
     --- TELESCOPE MAPPINGS ---
@@ -46,5 +46,4 @@ return function()
     map_tele("<leader>dw", "workspace_diagnostics")
 
     map_tele("<leader>gw", "worktrees")
-    map_tele("<leader>gn", "create_worktree")
 end
