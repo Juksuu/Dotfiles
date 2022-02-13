@@ -13,20 +13,13 @@ M.servers = {
     { server = "sumneko_lua", docker = true },
 }
 
-M.custom_docker_settings = {
-    -- rust_analyzer = {
-    --     network = "bridge",
-    -- },
-}
+M.custom_docker_settings = {}
 
 M.custom_server_settings = {
     tsserver = {
         before_init = function(params)
             params.processId = vim.NIL
         end,
-    },
-    rust_analyzer = {
-        cmd = { "rustup", "run", "nightly", "rust-analyzer" },
     },
     sumneko_lua = {
         settings = {
