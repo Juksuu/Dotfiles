@@ -14,9 +14,9 @@ M.servers = {
 }
 
 M.custom_docker_settings = {
-    rust_analyzer = {
-        network = "bridge",
-    },
+    -- rust_analyzer = {
+    --     network = "bridge",
+    -- },
 }
 
 M.custom_server_settings = {

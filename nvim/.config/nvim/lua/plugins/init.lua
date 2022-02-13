@@ -1,6 +1,5 @@
 local packer_bootstrap = false
-local install_path = vim.fn.stdpath("data")
-    .. "/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     packer_bootstrap = true
     vim.fn.system({
@@ -39,7 +38,7 @@ return packer.startup({
         use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
 
         use({
-            "Juksuu/worktrees.nvim",
+            "~/code/personal/worktrees.nvim/main",
             config = function()
                 require("worktrees").setup()
             end,
@@ -100,7 +99,7 @@ return packer.startup({
                 "nvim-telescope/telescope-file-browser.nvim",
                 "nvim-telescope/telescope-fzy-native.nvim",
             },
-            after = "worktrees.nvim",
+            after = "main",
             config = require("juksu.telescope"),
         })
 
@@ -112,6 +111,7 @@ return packer.startup({
                 "hrsh7th/cmp-buffer",
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-nvim-lua",
+                "lukas-reineke/cmp-rg",
                 "lukas-reineke/cmp-under-comparator",
 
                 "onsails/lspkind-nvim",

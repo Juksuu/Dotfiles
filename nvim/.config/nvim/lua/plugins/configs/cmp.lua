@@ -41,6 +41,7 @@ return function()
             { name = "path" },
             { name = "luasnip" },
             { name = "buffer", keyword_length = 5 },
+            { name = "rg", keyword_length = 5 },
         },
         sorting = {
             comparators = {
@@ -63,12 +64,9 @@ return function()
                     nvim_lua = "[vim_api]",
                     path = "[path]",
                     luasnip = "[snip]",
+                    rg = "[rg]",
                 },
             }),
-        },
-        experimental = {
-            native_menu = false,
-            ghost_text = true,
         },
     })
 end

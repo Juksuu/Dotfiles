@@ -330,10 +330,7 @@ return function()
         provider = function()
             local filename = vim.fn.expand("%:t")
             local extension = vim.fn.expand("%:e")
-            local icon = require("nvim-web-devicons").get_icon(
-                filename,
-                extension
-            )
+            local icon = require("nvim-web-devicons").get_icon(filename, extension)
             if icon == nil then
                 icon = "   "
                 return icon

@@ -4,8 +4,6 @@ return function()
             prompt_prefix = "❯ ",
             selection_caret = "❯ ",
 
-            winblend = 4,
-
             borderchars = { " ", " ", " ", " ", "", "", "", "" },
 
             layout_strategy = "horizontal",
