@@ -19,4 +19,4 @@ template:
     #   plugin:
     #     location: "zellij:status-bar"
 tabs:
-  - name: "tab 1" # tab 1
+  - name: "Tab #1" # tab 1
