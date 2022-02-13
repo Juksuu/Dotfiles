@@ -38,7 +38,7 @@ return packer.startup({
         use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
 
         use({
-            "~/code/personal/worktrees.nvim/main",
+            "Juksuu/worktrees.nvim",
             config = function()
                 require("worktrees").setup()
             end,
@@ -99,7 +99,7 @@ return packer.startup({
                 "nvim-telescope/telescope-file-browser.nvim",
                 "nvim-telescope/telescope-fzy-native.nvim",
             },
-            after = "main",
+            after = "worktrees.nvim",
             config = require("juksu.telescope"),
         })
 
