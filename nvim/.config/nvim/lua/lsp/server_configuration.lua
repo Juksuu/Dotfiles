@@ -16,6 +16,9 @@ M.servers = {
 M.custom_docker_settings = {}
 
 M.custom_server_settings = {
+    rust_analyzer = {
+        cmd = { "rustup", "run", "nightly-2021-11-01", "rust-analyzer" },
+    },
     tsserver = {
         before_init = function(params)
             params.processId = vim.NIL
