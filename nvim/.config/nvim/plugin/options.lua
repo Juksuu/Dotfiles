@@ -8,7 +8,6 @@ opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
 
-opt.guicursor = ""
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
@@ -23,7 +22,6 @@ opt.inccommand = "split"
 opt.splitright = true
 opt.splitbelow = true
 
-opt.clipboard = "unnamedplus"
 opt.completeopt = { "menuone", "noselect", "noinsert" }
 
 opt.undofile = true
