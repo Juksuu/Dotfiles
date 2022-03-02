@@ -17,7 +17,7 @@ M.custom_docker_settings = {}
 
 M.custom_server_settings = {
     rust_analyzer = {
-        cmd = { "rustup", "run", "nightly-2021-11-01", "rust-analyzer" },
+        cmd = { "rustup", "run", "nightly", "rust-analyzer" },
     },
     tsserver = {
         before_init = function(params)

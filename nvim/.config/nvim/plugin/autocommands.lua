@@ -1,10 +1,5 @@
-local utils = require("juksu.utils")
-
-utils.create_autocommands({
-    yank = {
-        {
-            "TextYankPost",
-            [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]],
-        },
-    },
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank({ higroup = "IncSearch", timeout = 400 })
+    end,
 })

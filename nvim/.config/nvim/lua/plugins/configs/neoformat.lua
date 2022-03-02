@@ -28,8 +28,5 @@ return function()
         end
     end, {})
 
-    local utils = require("juksu.utils")
-    utils.create_autocommands({
-        format = { { "BufWritePre", "*", "NeoformatRun" } },
-    })
+    vim.api.nvim_create_autocmd("BufWritePre", { command = "NeoformatRun" })
 end
