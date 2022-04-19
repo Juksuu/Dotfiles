@@ -14,15 +14,15 @@ return function()
     -- Configure commands for enabling and disabling run on save
     vim.g.neoformat_run_on_save = true
 
-    vim.api.nvim_add_user_command("NeoformatDisableOnSave", function()
+    vim.api.nvim_create_user_command("NeoformatDisableOnSave", function()
         vim.g.neoformat_run_on_save = false
     end, {})
 
-    vim.api.nvim_add_user_command("NeoformatEnableOnSave", function()
+    vim.api.nvim_create_user_command("NeoformatEnableOnSave", function()
         vim.g.neoformat_run_on_save = true
     end, {})
 
-    vim.api.nvim_add_user_command("NeoformatRun", function()
+    vim.api.nvim_create_user_command("NeoformatRun", function()
         if vim.g.neoformat_run_on_save then
             vim.api.nvim_command("Neoformat")
         end
