@@ -39,7 +39,6 @@ return function()
     map_tele("<leader>fb", "file_browser")
 
     map_tele("<leader>lr", "lsp_references")
-    map_tele("<leader>la", "lsp_code_actions")
     map_tele("<leader>df", "diagnostics")
     map_tele("<leader>dw", "workspace_diagnostics")
 

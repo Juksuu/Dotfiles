@@ -1,10 +1,5 @@
 local M = {}
 
---- THEMES ---
-local function cursor(opts)
-    return require("telescope.themes").get_cursor(opts)
-end
-
 --- FILE BROWSER ---
 function M.file_browser()
     require("telescope").extensions.file_browser.file_browser()
@@ -51,11 +46,6 @@ end
 function M.lsp_references()
     local opts = {}
     require("telescope.builtin").lsp_references(opts)
-end
-
-function M.lsp_code_actions()
-    local opts = {}
-    require("telescope.builtin").lsp_code_actions(cursor(opts))
 end
 
 function M.diagnostics()
