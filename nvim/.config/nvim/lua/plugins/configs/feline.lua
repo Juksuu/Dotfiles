@@ -27,13 +27,13 @@ return function()
         slim_dot = "•",
     }
 
-    local clrs = require("catppuccin.core.color_palette")
+    local clrs = require("catppuccin.api.colors").get_colors() -- fetch colors with API
 
     -- settings
     local sett = {
-        bkg = clrs.black3,
+        bkg = clrs.surface0,
         diffs = clrs.mauve,
-        extras = clrs.gray1,
+        extras = clrs.overlay1,
         curr_file = clrs.maroon,
         curr_dir = clrs.flamingo,
     }
@@ -60,8 +60,6 @@ return function()
         ["r?"] = { "CONFIRM", clrs.mauve },
         ["!"] = { "SHELL", clrs.green },
     }
-
-    local shortline = false
 
     -- Initialize the components table
     local components = {
@@ -256,7 +254,6 @@ return function()
 
     -- ######## Center
 
-    -- Diagnostics ------>
     -- genral diagnostics (errors, warnings. info and hints)
     components.active[2][1] = {
         provider = "diagnostic_errors",
@@ -314,9 +311,6 @@ return function()
 
     components.active[3][1] = {
         provider = "git_branch",
-        enabled = shortline or function()
-            return vim.api.nvim_win_get_width(0) > 70
-        end,
         hl = {
             fg = sett.extras,
             bg = sett.bkg,
@@ -328,6 +322,21 @@ return function()
 
     components.active[3][2] = {
         provider = function()
+            if next(vim.lsp.buf_get_clients()) ~= nil then
+                return " "
+            else
+                return ""
+            end
+        end,
+        hl = {
+            fg = sett.extras,
+            bg = sett.bkg,
+        },
+        right_sep = invi_sep,
+    }
+
+    components.active[3][3] = {
+        provider = function()
             local filename = vim.fn.expand("%:t")
             local extension = vim.fn.expand("%:e")
             local icon = require("nvim-web-devicons").get_icon(filename, extension)
@@ -336,9 +345,6 @@ return function()
                 return icon
             end
             return " " .. icon .. " " .. filename .. " "
-        end,
-        enabled = shortline or function()
-            return vim.api.nvim_win_get_width(0) > 70
         end,
         hl = {
             fg = sett.bkg,
@@ -353,14 +359,10 @@ return function()
         },
     }
 
-    components.active[3][3] = {
+    components.active[3][4] = {
         provider = function()
             local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             return "  " .. dir_name .. " "
-        end,
-
-        enabled = shortline or function()
-            return vim.api.nvim_win_get_width(0) > 80
         end,
 
         hl = {
