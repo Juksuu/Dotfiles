@@ -5,6 +5,8 @@ opt.cmdheight = 1
 
 opt.termguicolors = true
 
+opt.laststatus = 3
+
 opt.number = true
 opt.relativenumber = true
 

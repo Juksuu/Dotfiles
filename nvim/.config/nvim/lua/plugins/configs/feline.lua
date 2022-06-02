@@ -322,45 +322,6 @@ return function()
 
     components.active[3][2] = {
         provider = function()
-            if next(vim.lsp.buf_get_clients()) ~= nil then
-                return " "
-            else
-                return ""
-            end
-        end,
-        hl = {
-            fg = sett.extras,
-            bg = sett.bkg,
-        },
-        right_sep = invi_sep,
-    }
-
-    components.active[3][3] = {
-        provider = function()
-            local filename = vim.fn.expand("%:t")
-            local extension = vim.fn.expand("%:e")
-            local icon = require("nvim-web-devicons").get_icon(filename, extension)
-            if icon == nil then
-                icon = "   "
-                return icon
-            end
-            return " " .. icon .. " " .. filename .. " "
-        end,
-        hl = {
-            fg = sett.bkg,
-            bg = sett.curr_file,
-        },
-        left_sep = {
-            str = assets.left_semicircle,
-            hl = {
-                fg = sett.curr_file,
-                bg = sett.bkg,
-            },
-        },
-    }
-
-    components.active[3][4] = {
-        provider = function()
             local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             return "  " .. dir_name .. " "
         end,
@@ -373,7 +334,7 @@ return function()
             str = assets.left_semicircle,
             hl = {
                 fg = sett.curr_dir,
-                bg = sett.curr_file,
+                bg = sett.bkg,
             },
         },
     }
@@ -382,4 +343,6 @@ return function()
     require("feline").setup({
         components = components,
     })
+
+    require("feline").winbar.setup()
 end
