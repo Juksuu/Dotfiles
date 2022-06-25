@@ -29,13 +29,19 @@ return packer.startup({
         use({ "togglebyte/togglerust", ft = "rust" })
 
         -- Utils
-        use("tpope/vim-sleuth")
         use("nvim-lua/plenary.nvim")
         use("kyazdani42/nvim-web-devicons")
         use({ "tpope/vim-surround", event = "BufRead" })
         use({ "AndrewRadev/splitjoin.vim", event = "BufRead" })
         use({ "gpanders/editorconfig.nvim", event = "BufRead" })
         use({ "maxbrunsfeld/vim-yankstack", event = "BufRead" })
+
+        use({
+            "nmac427/guess-indent.nvim",
+            config = function()
+                require("guess-indent").setup()
+            end,
+        })
 
         use({
             "Juksuu/worktrees.nvim",
