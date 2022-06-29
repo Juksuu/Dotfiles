@@ -152,6 +152,12 @@ return packer.startup({
             end,
         })
 
+        use({
+            "weilbith/nvim-code-action-menu",
+            after = "nvim-lspconfig",
+            config = require("plugins.configs.codeaction"),
+        })
+
         if packer_bootstrap then
             packer.sync()
         end

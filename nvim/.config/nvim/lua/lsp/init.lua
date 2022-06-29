@@ -34,7 +34,6 @@ return function()
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr })
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, { buffer = bufnr })
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
 
         if client.server_capabilities.code_lens then
             vim.cmd([[
