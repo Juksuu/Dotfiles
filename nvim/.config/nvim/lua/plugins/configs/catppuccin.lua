@@ -1,31 +1,33 @@
 return function()
+    local colors = require("catppuccin.core.palettes.init").get_palette() -- fetch colors with API
+
     local catppuccin = require("catppuccin")
     catppuccin.setup({
         transparent_background = true,
         term_colors = true,
         styles = {
-            comments = "None",
-            conditionals = "None",
-            loops = "None",
-            functions = "None",
-            keywords = "None",
-            strings = "None",
-            variables = "None",
-            numbers = "None",
-            booleans = "None",
-            properties = "None",
-            types = "None",
-            operators = "None",
+            comments = "NONE",
+            conditionals = "NONE",
+            loops = "NONE",
+            functions = "NONE",
+            keywords = "NONE",
+            strings = "NONE",
+            variables = "NONE",
+            numbers = "NONE",
+            booleans = "NONE",
+            properties = "NONE",
+            types = "NONE",
+            operators = "NONE",
         },
         integrations = {
             treesitter = true,
             native_lsp = {
                 enabled = true,
                 virtual_text = {
-                    errors = "None",
-                    hints = "None",
-                    warnings = "None",
-                    information = "None",
+                    errors = "NONE",
+                    hints = "NONE",
+                    warnings = "NONE",
+                    information = "NONE",
                 },
             },
             coc_nvim = false,
@@ -64,26 +66,24 @@ return function()
             telekasten = false,
             symbols_outline = false,
         },
-    })
+        custom_highlights = {
+            TelescopeNormal = { fg = colors.lavender, bg = colors.surface0 },
+            TelescopeBorder = { bg = colors.surface1 },
 
-    local colors = require("catppuccin.api.colors").get_colors() -- fetch colors with API
-    catppuccin.remap({
-        TelescopeNormal = { fg = colors.lavender, bg = colors.surface0 },
-        TelescopeBorder = { bg = colors.surface1 },
+            TelescopeMatching = { fg = colors.red, bg = colors.none },
+            TelescopeSelection = { fg = colors.None, bg = colors.base },
 
-        TelescopeMatching = { fg = colors.red, bg = colors.None },
-        TelescopeSelection = { fg = colors.None, bg = colors.base },
+            TelescopeResultsTitle = { fg = colors.lavender, bg = colors.surface1 },
 
-        TelescopeResultsTitle = { fg = colors.lavender, bg = colors.surface1 },
+            TelescopePromptTitle = { fg = colors.rosewater, bg = colors.surface2 },
+            TelescopePromptPrefix = { fg = colors.rosewater, bg = colors.surface2 },
+            TelescopePromptNormal = { fg = colors.rosewater, bg = colors.surface2 },
+            TelescopePromptBorder = { bg = colors.surface2 },
 
-        TelescopePromptTitle = { fg = colors.rosewater, bg = colors.surface2 },
-        TelescopePromptPrefix = { fg = colors.rosewater, bg = colors.surface2 },
-        TelescopePromptNormal = { fg = colors.rosewater, bg = colors.surface2 },
-        TelescopePromptBorder = { bg = colors.surface2 },
-
-        TelescopePreviewTitle = { fg = colors.teal, bg = colors.surface1 },
-        TelescopePreviewNormal = { bg = colors.surface1 },
-        TelescopePreviewBorder = { bg = colors.surface1 },
+            TelescopePreviewTitle = { fg = colors.teal, bg = colors.surface1 },
+            TelescopePreviewNormal = { bg = colors.surface1 },
+            TelescopePreviewBorder = { bg = colors.surface1 },
+        },
     })
 
     vim.cmd([[ colorscheme catppuccin ]])
