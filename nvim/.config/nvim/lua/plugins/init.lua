@@ -52,6 +52,7 @@ return packer.startup({
         use({
             "catppuccin/nvim",
             as = "catppuccin",
+            run = ":CatppuccinCompile",
             config = require("plugins.configs.catppuccin"),
         })
 

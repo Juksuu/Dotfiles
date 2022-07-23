@@ -1,33 +1,48 @@
 return function()
-    local colors = require("catppuccin.core.palettes.init").get_palette() -- fetch colors with API
+    local colors = require("catppuccin.palettes").get_palette() -- fetch colors with API
 
     local catppuccin = require("catppuccin")
     catppuccin.setup({
+        dim_inactive = {
+            enabled = false,
+            shade = "dark",
+            percentage = 0.15,
+        },
         transparent_background = true,
         term_colors = true,
+        compile = {
+            enabled = true,
+            path = vim.fn.stdpath("cache") .. "/catppuccin",
+        },
         styles = {
-            comments = "NONE",
-            conditionals = "NONE",
-            loops = "NONE",
-            functions = "NONE",
-            keywords = "NONE",
-            strings = "NONE",
-            variables = "NONE",
-            numbers = "NONE",
-            booleans = "NONE",
-            properties = "NONE",
-            types = "NONE",
-            operators = "NONE",
+            comments = {},
+            conditionals = {},
+            loops = {},
+            functions = {},
+            keywords = {},
+            strings = {},
+            variables = {},
+            numbers = {},
+            booleans = {},
+            properties = {},
+            types = {},
+            operators = {},
         },
         integrations = {
             treesitter = true,
             native_lsp = {
                 enabled = true,
                 virtual_text = {
-                    errors = "NONE",
-                    hints = "NONE",
-                    warnings = "NONE",
-                    information = "NONE",
+                    errors = {},
+                    hints = {},
+                    warnings = {},
+                    information = {},
+                },
+                underlines = {
+                    errors = { "underline" },
+                    hints = { "underline" },
+                    warnings = { "underline" },
+                    information = { "underline" },
                 },
             },
             coc_nvim = false,
@@ -36,16 +51,21 @@ return function()
             lsp_saga = false,
             gitgutter = false,
             gitsigns = true,
+            leap = false,
             telescope = true,
             nvimtree = {
                 enabled = false,
-                show_root = false,
+                show_root = true,
                 transparent_panel = false,
             },
             neotree = {
                 enabled = false,
-                show_root = false,
+                show_root = true,
                 transparent_panel = false,
+            },
+            dap = {
+                enabled = false,
+                enable_ui = false,
             },
             which_key = false,
             indent_blankline = {
@@ -65,7 +85,12 @@ return function()
             notify = false,
             telekasten = false,
             symbols_outline = false,
+            mini = false,
+            aerial = false,
+            vimwiki = false,
+            beacon = false,
         },
+        color_overrides = {},
         custom_highlights = {
             TelescopeNormal = { fg = colors.lavender, bg = colors.surface0 },
             TelescopeBorder = { bg = colors.surface1 },

@@ -27,7 +27,7 @@ return function()
         slim_dot = "•",
     }
 
-    local clrs = require("catppuccin.api.colors").get_colors() -- fetch colors with API
+    local clrs = require("catppuccin.palettes").get_palette() -- fetch colors with API
 
     -- settings
     local sett = {
