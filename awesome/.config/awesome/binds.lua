@@ -71,7 +71,7 @@ local keybinds = {
             modifiers = { variables.modkey },
             key = "r",
             run = function()
-                awful.spawn("rofi -show run")
+                awful.spawn("rofi -show drun")
             end,
             desc = { description = "Open rofi", group = "Awesome: Launcher" },
         },
