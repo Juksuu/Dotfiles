@@ -61,7 +61,7 @@ screen.connect_signal("request::wallpaper", function(s)
         screen = s,
         widget = {
             {
-                image = beautiful.wallpaper,
+                image = os.getenv("HOME") .. "/Wallpapers/Clearday.png",
                 upscale = true,
                 downscale = true,
                 widget = wibox.widget.imagebox,
