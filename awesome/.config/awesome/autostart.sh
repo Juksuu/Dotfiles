@@ -8,3 +8,4 @@ run() {
 }
 
 run "picom"
+run "nm-applet"

@@ -5,16 +5,10 @@ pcall(require, "luarocks.loader")
 
 -- Standard awesome library
 local awful = require("awful")
-require("awful.autofocus")
-
--- Widget and layout library
-local wibox = require("wibox")
-
--- Theme handling library
 local beautiful = require("beautiful")
-
--- Notification library
 local naughty = require("naughty")
+
+require("awful.autofocus")
 
 -- {{{
 -- Error handling
@@ -34,12 +28,6 @@ end)
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/themes/default.lua")
 
--- Load bindings
-require("binds")
-
--- Load rules
-require("rules")
-
 -- {{{
 -- Tag layout
 
@@ -49,115 +37,6 @@ tag.connect_signal("request::default_layouts", function()
         awful.layout.suit.tile.left,
         awful.layout.suit.tile,
         awful.layout.suit.floating,
-    })
-end)
-
--- }}}
-
--- {{{
--- Wallpaper
-screen.connect_signal("request::wallpaper", function(s)
-    awful.wallpaper({
-        screen = s,
-        widget = {
-            {
-                image = os.getenv("HOME") .. "/Wallpapers/Clearday.png",
-                upscale = true,
-                downscale = true,
-                widget = wibox.widget.imagebox,
-            },
-            valign = "center",
-            halign = "center",
-            tiled = false,
-            widget = wibox.container.tile,
-        },
-    })
-end)
-
--- }}}
-
--- {{{
--- Wibar
-
--- Keyboard map indicator and switcher
-local mykeyboardlayout = awful.widget.keyboardlayout()
-
--- Create a textclock widget
-local mytextclock = wibox.widget.textclock()
-
-screen.connect_signal("request::desktop_decoration", function(s)
-    -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox({
-        screen = s,
-        buttons = {
-            awful.button({}, 1, function()
-                awful.layout.inc(1)
-            end),
-            awful.button({}, 3, function()
-                awful.layout.inc(-1)
-            end),
-            awful.button({}, 4, function()
-                awful.layout.inc(-1)
-            end),
-            awful.button({}, 5, function()
-                awful.layout.inc(1)
-            end),
-        },
-    })
-
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist({
-        screen = s,
-        filter = awful.widget.taglist.filter.all,
-    })
-
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist({
-        screen = s,
-        filter = awful.widget.tasklist.filter.currenttags,
-        buttons = {
-            awful.button({}, 1, function(c)
-                c:activate({ context = "tasklist", action = "toggle_minimization" })
-            end),
-            awful.button({}, 3, function()
-                awful.menu.client_list({ theme = { width = 250 } })
-            end),
-            awful.button({}, 4, function()
-                awful.client.focus.byidx(-1)
-            end),
-            awful.button({}, 5, function()
-                awful.client.focus.byidx(1)
-            end),
-        },
-    })
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({
-        position = "top",
-        screen = s,
-        widget = {
-            layout = wibox.layout.align.horizontal,
-            { -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
-                s.mytaglist,
-                s.mypromptbox,
-            },
-            s.mytasklist, -- Middle widget
-            { -- Right widgets
-                layout = wibox.layout.fixed.horizontal,
-                mykeyboardlayout,
-                wibox.widget.systray(),
-                mytextclock,
-                s.mylayoutbox,
-            },
-        },
     })
 end)
 
@@ -177,6 +56,15 @@ client.connect_signal("mouse::enter", function(c)
         raise = false,
     })
 end)
+
+-- Load bindings
+require("binds")
+
+-- Load rules
+require("rules")
+
+-- Load screen stuff
+require("screens")
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
