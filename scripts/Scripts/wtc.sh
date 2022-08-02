@@ -24,4 +24,8 @@ else
 
     # Add default branch as worktree
     git worktree add $branch
+
+    # Set upstream correctly for the branch
+    cd $branch
+    git branch --set-upstream-to=origin/$branch
 fi
