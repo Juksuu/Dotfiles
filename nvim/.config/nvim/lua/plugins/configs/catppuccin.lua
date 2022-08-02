@@ -1,4 +1,5 @@
 return function()
+    vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
     local colors = require("catppuccin.palettes").get_palette() -- fetch colors with API
 
     local catppuccin = require("catppuccin")
