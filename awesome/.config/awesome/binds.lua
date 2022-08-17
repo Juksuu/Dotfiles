@@ -79,13 +79,13 @@ local keybinds = {
         -- Tag
         {
             modifiers = { variables.modkey },
-            key = "Left",
+            key = "h",
             run = awful.tag.viewprev,
             desc = { description = "Switch to previous tag", group = "Awesome: Tag" },
         },
         {
             modifiers = { variables.modkey },
-            key = "Right",
+            key = "l",
             run = awful.tag.viewnext,
             desc = { description = "Switch to next tag", group = "Awesome: Tag" },
         },
@@ -152,21 +152,6 @@ local keybinds = {
             end,
             desc = { description = "Focus previous screen", group = "Awesome: Screen" },
         },
-        {
-            modifiers = { variables.modkey, "Control" },
-            key = "n",
-            run = function()
-                local c = awful.client.restore()
-                -- Focus restored client
-                if c then
-                    c:activate({ raise = true, context = "key.unminimize" })
-                end
-            end,
-            desc = {
-                description = "Restore minimized client",
-                group = "Awesome: Client",
-            },
-        },
 
         -- Layout
         {
@@ -199,7 +184,7 @@ local keybinds = {
         },
         {
             modifiers = { variables.modkey },
-            key = "l",
+            key = "Right",
             run = function()
                 awful.tag.incmwfact(0.05)
             end,
@@ -210,7 +195,7 @@ local keybinds = {
         },
         {
             modifiers = { variables.modkey },
-            key = "h",
+            key = "Left",
             run = function()
                 awful.tag.incmwfact(-0.05)
             end,
@@ -283,25 +268,6 @@ local keybinds = {
                 c.ontop = not c.ontop
             end,
             desc = { description = "Toggle keep on top", group = "Awesome: Client" },
-        },
-        {
-            modifiers = { variables.modkey },
-            key = "n",
-            run = function(c)
-                -- The client currently has the input focus, so it cannot be
-                -- minimized, since minimized clients can't have the focus.
-                c.minimized = true
-            end,
-            desc = { description = "Minimize", group = "Awesome: Client" },
-        },
-        {
-            modifiers = { variables.modkey },
-            key = "m",
-            run = function(c)
-                c.maximized = not c.maximized
-                c:raise()
-            end,
-            desc = { description = "(Un)Maximize", group = "Awesome: Client" },
         },
     },
 }
