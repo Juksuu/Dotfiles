@@ -11,16 +11,10 @@ screen.connect_signal("request::wallpaper", function(s)
     awful.wallpaper({
         screen = s,
         widget = {
-            {
-                image = os.getenv("HOME") .. "/Wallpapers/Clearday.png",
-                upscale = true,
-                downscale = true,
-                widget = wibox.widget.imagebox,
-            },
-            valign = "center",
-            halign = "center",
-            tiled = false,
-            widget = wibox.container.tile,
+            vertical_fit_policy = "fit",
+            horizontal_fit_policy = "fit",
+            image = os.getenv("HOME") .. "/Wallpapers/Clearday.png",
+            widget = wibox.widget.imagebox,
         },
     })
 end)
@@ -75,7 +69,11 @@ local mytextclock = wibox.widget.textclock()
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
-    awful.tag({ "Web", "Dev", "Misc" }, s, awful.layout.layouts[1])
+    local layout = {
+        awful.layout.layouts[1],
+        awful.layout.layouts[3],
+    }
+    awful.tag({ "Web", "Dev", "Misc" }, s, layout[s.index])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
