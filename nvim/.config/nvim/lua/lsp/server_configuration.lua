@@ -32,8 +32,16 @@ M.custom_server_settings = {
                     version = "LuaJIT",
                 },
                 diagnostics = {
-                    -- Get the language server to recognize the `vim` global
-                    globals = { "vim" },
+                    globals = {
+                        -- Recognize global `vim` variables
+                        "vim",
+                        -- Recognize global `awesome` variables
+                        "tag",
+                        "client",
+                        "screen",
+                        "naughty",
+                        "awesome"
+                    },
                 },
                 workspace = {
                     library = vim.api.nvim_get_runtime_file("", true),
