@@ -35,12 +35,6 @@ M.custom_server_settings = {
                     globals = {
                         -- Recognize global `vim` variables
                         "vim",
-                        -- Recognize global `awesome` variables
-                        "tag",
-                        "client",
-                        "screen",
-                        "naughty",
-                        "awesome"
                     },
                 },
                 workspace = {
