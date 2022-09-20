@@ -71,6 +71,12 @@ return packer.startup({
         })
 
         use({
+            "nvim-treesitter/nvim-treesitter-context",
+            after = "nvim-treesitter",
+            config = require("plugins.configs.treesitter-context"),
+        })
+
+        use({
             "windwp/nvim-autopairs",
             config = require("plugins.configs.autopairs"),
         })
