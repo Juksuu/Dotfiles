@@ -25,11 +25,11 @@ return function()
 
     --- TELESCOPE MAPPINGS ---
     local function map_tele(key, f)
-        vim.keymap.set(
-            "n",
-            key,
-            require("juksu.utils").reload_module("juksu.telescope.functions")[f]
+        local rhs = string.format(
+            "<cmd>lua RELOAD_RETURN('plugins.configs.telescope.functions')['%s']()<CR>",
+            f
         )
+        vim.keymap.set("n", key, rhs)
     end
 
     map_tele("<leader>sf", "find_files")

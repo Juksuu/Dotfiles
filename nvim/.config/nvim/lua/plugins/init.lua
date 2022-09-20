@@ -104,7 +104,7 @@ return packer.startup({
                 "nvim-telescope/telescope-fzy-native.nvim",
             },
             after = "worktrees.nvim",
-            config = require("juksu.telescope"),
+            config = require("plugins.configs.telescope"),
         })
 
         -- Completion
