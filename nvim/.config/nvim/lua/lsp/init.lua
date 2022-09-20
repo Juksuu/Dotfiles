@@ -11,29 +11,21 @@ return function()
     vim.fn.sign_define("DiagnosticSignInfo", { text = "", numhl = "DiagnosticSignInfo" })
     vim.fn.sign_define("DiagnosticSignHint", { text = "", numhl = "DiagnosticSignHint" })
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "single",
-    })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signatureHelp,
-        {
-            border = "single",
-        }
-    )
-
     local capabilities = require("cmp_nvim_lsp").update_capabilities(
         vim.lsp.protocol.make_client_capabilities()
     )
 
     local custom_attach = function(client, bufnr)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr })
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr })
-        vim.keymap.set("n", "dl", vim.diagnostic.open_float, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
+        vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, bufopts)
 
         if client.server_capabilities.code_lens then
             vim.cmd([[
