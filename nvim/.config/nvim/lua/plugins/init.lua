@@ -68,11 +68,6 @@ return packer.startup({
             config = require("plugins.configs.feline"),
         })
 
-        -- use({
-        --     "sbdchd/neoformat",
-        --     setup = require("plugins.configs.neoformat"),
-        -- })
-
         use({
             "nvim-treesitter/nvim-treesitter",
             config = require("plugins.configs.treesitter"),
