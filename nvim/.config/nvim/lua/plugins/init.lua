@@ -50,6 +50,14 @@ return packer.startup({
         })
 
         use({
+            "numToStr/Comment.nvim",
+            event = "BufRead",
+            config = function()
+                require("Comment").setup()
+            end,
+        })
+
+        use({
             "catppuccin/nvim",
             as = "catppuccin",
             config = require("plugins.configs.catppuccin"),
@@ -60,10 +68,10 @@ return packer.startup({
             config = require("plugins.configs.feline"),
         })
 
-        use({
-            "sbdchd/neoformat",
-            setup = require("plugins.configs.neoformat"),
-        })
+        -- use({
+        --     "sbdchd/neoformat",
+        --     setup = require("plugins.configs.neoformat"),
+        -- })
 
         use({
             "nvim-treesitter/nvim-treesitter",
@@ -79,14 +87,6 @@ return packer.startup({
         use({
             "windwp/nvim-autopairs",
             config = require("plugins.configs.autopairs"),
-        })
-
-        use({
-            "numToStr/Comment.nvim",
-            event = "BufRead",
-            config = function()
-                require("Comment").setup()
-            end,
         })
 
         -- Git
@@ -168,6 +168,13 @@ return packer.startup({
             "weilbith/nvim-code-action-menu",
             after = "mason-lspconfig.nvim",
             config = require("plugins.configs.codeaction"),
+        })
+
+        use({
+            "jayp0521/mason-null-ls.nvim",
+            requires = "jose-elias-alvarez/null-ls.nvim",
+            after = "mason.nvim",
+            config = require("plugins.configs.null-ls"),
         })
 
         if packer_bootstrap then

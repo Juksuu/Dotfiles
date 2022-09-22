@@ -27,8 +27,8 @@ return function()
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, bufopts)
+        vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, bufopts)
 
         if client.server_capabilities.code_lens then
             vim.cmd([[
