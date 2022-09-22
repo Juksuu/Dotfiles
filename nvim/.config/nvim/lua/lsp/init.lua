@@ -1,4 +1,8 @@
 return function()
+    require("mason-lspconfig").setup({
+        automatic_installation = true,
+    })
+
     local nvim_lsp = require("lspconfig")
     local server_config = require("lsp.server_configuration")
 
@@ -19,7 +23,6 @@ return function()
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
@@ -38,19 +41,13 @@ return function()
         end
     end
 
-    for _, lsp in ipairs(server_config.servers) do
+    for _, server in ipairs(server_config.servers) do
         local opts = {
             capabilities = capabilities,
             on_attach = custom_attach,
         }
-        local server_opts = server_config.custom_server_settings[lsp.server] or {}
+        local server_opts = server_config.server_settings[server] or {}
         opts = vim.tbl_deep_extend("force", opts, server_opts)
-
-        if lsp.docker then
-            local docker_settings = server_config.custom_docker_settings[lsp.server] or {}
-
-            opts["cmd"] = require("lspcontainers").command(lsp.server, docker_settings)
-        end
-        nvim_lsp[lsp.server].setup(opts)
+        nvim_lsp[server].setup(opts)
     end
 end

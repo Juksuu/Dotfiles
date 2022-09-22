@@ -137,16 +137,23 @@ return packer.startup({
         })
 
         -- Lsp
-        use("lspcontainers/lspcontainers.nvim")
         use({
-            "neovim/nvim-lspconfig",
-            after = "lspcontainers.nvim",
+            "williamboman/mason.nvim",
+            config = function()
+                require("mason").setup()
+            end,
+        })
+
+        use({
+            "williamboman/mason-lspconfig.nvim",
+            requires = "neovim/nvim-lspconfig",
+            after = "mason.nvim",
             config = require("lsp"),
         })
 
         use({
             "j-hui/fidget.nvim",
-            after = "nvim-lspconfig",
+            after = "mason-lspconfig.nvim",
             config = function()
                 require("fidget").setup({
                     window = {
@@ -159,7 +166,7 @@ return packer.startup({
 
         use({
             "weilbith/nvim-code-action-menu",
-            after = "nvim-lspconfig",
+            after = "mason-lspconfig.nvim",
             config = require("plugins.configs.codeaction"),
         })
 
