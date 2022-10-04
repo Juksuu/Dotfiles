@@ -1,19 +1,21 @@
 return function()
-    require("mason-lspconfig").setup({
-        automatic_installation = true,
+    local server_config = require("lsp.server_configuration")
+    local mason = require("mason-lspconfig")
+
+    mason.setup({
+        ensure_installed = server_config.servers,
     })
 
     local nvim_lsp = require("lspconfig")
-    local server_config = require("lsp.server_configuration")
 
     -- Disable gutter signs, color linenum instead
-    vim.fn.sign_define(
-        "DiagnosticSignError",
-        { text = "", numhl = "DiagnosticSignError" }
-    )
-    vim.fn.sign_define("DiagnosticSignWarn", { text = "", numhl = "DiagnosticSignWarn" })
-    vim.fn.sign_define("DiagnosticSignInfo", { text = "", numhl = "DiagnosticSignInfo" })
-    vim.fn.sign_define("DiagnosticSignHint", { text = "", numhl = "DiagnosticSignHint" })
+    local sign = function(name)
+        vim.fn.sign_define(name, { text = "", numhl = name })
+    end
+    sign("DiagnosticSignWarn")
+    sign("DiagnosticSignInfo")
+    sign("DiagnosticSignHint")
+    sign("DiagnosticSignError")
 
     local capabilities = require("cmp_nvim_lsp").update_capabilities(
         vim.lsp.protocol.make_client_capabilities()
@@ -41,13 +43,17 @@ return function()
         end
     end
 
-    for _, server in ipairs(server_config.servers) do
-        local opts = {
-            capabilities = capabilities,
-            on_attach = custom_attach,
-        }
-        local server_opts = server_config.server_settings[server] or {}
-        opts = vim.tbl_deep_extend("force", opts, server_opts)
+    local setup_server = function(server, opts)
+        opts.capabilities = capabilities
+        opts.on_attach = custom_attach
+
         nvim_lsp[server].setup(opts)
     end
+
+    mason.setup_handlers({
+        function(server)
+            local server_opts = server_config.server_settings[server] or {}
+            setup_server(server, server_opts)
+        end,
+    })
 end
