@@ -50,6 +50,14 @@ return packer.startup({
         })
 
         use({
+            "numToStr/Comment.nvim",
+            event = "BufRead",
+            config = function()
+                require("Comment").setup()
+            end,
+        })
+
+        use({
             "catppuccin/nvim",
             as = "catppuccin",
             config = require("plugins.configs.catppuccin"),
@@ -58,11 +66,6 @@ return packer.startup({
         use({
             "feline-nvim/feline.nvim",
             config = require("plugins.configs.feline"),
-        })
-
-        use({
-            "sbdchd/neoformat",
-            setup = require("plugins.configs.neoformat"),
         })
 
         use({
@@ -79,14 +82,6 @@ return packer.startup({
         use({
             "windwp/nvim-autopairs",
             config = require("plugins.configs.autopairs"),
-        })
-
-        use({
-            "numToStr/Comment.nvim",
-            event = "BufRead",
-            config = function()
-                require("Comment").setup()
-            end,
         })
 
         -- Git
@@ -137,16 +132,23 @@ return packer.startup({
         })
 
         -- Lsp
-        use("lspcontainers/lspcontainers.nvim")
         use({
-            "neovim/nvim-lspconfig",
-            after = "lspcontainers.nvim",
+            "williamboman/mason.nvim",
+            config = function()
+                require("mason").setup()
+            end,
+        })
+
+        use({
+            "williamboman/mason-lspconfig.nvim",
+            requires = "neovim/nvim-lspconfig",
+            after = "mason.nvim",
             config = require("lsp"),
         })
 
         use({
             "j-hui/fidget.nvim",
-            after = "nvim-lspconfig",
+            after = "mason-lspconfig.nvim",
             config = function()
                 require("fidget").setup({
                     window = {
@@ -159,8 +161,15 @@ return packer.startup({
 
         use({
             "weilbith/nvim-code-action-menu",
-            after = "nvim-lspconfig",
+            after = "mason-lspconfig.nvim",
             config = require("plugins.configs.codeaction"),
+        })
+
+        use({
+            "jayp0521/mason-null-ls.nvim",
+            requires = "jose-elias-alvarez/null-ls.nvim",
+            after = "mason.nvim",
+            config = require("plugins.configs.null-ls"),
         })
 
         if packer_bootstrap then
