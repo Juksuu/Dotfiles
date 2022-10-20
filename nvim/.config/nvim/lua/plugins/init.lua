@@ -100,7 +100,6 @@ return packer.startup({
         use({
             "nvim-telescope/telescope.nvim",
             requires = {
-                "nvim-lua/popup.nvim",
                 "nvim-telescope/telescope-file-browser.nvim",
                 "nvim-telescope/telescope-fzy-native.nvim",
             },
