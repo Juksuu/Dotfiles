@@ -17,9 +17,7 @@ return function()
     sign("DiagnosticSignHint")
     sign("DiagnosticSignError")
 
-    local capabilities = require("cmp_nvim_lsp").update_capabilities(
-        vim.lsp.protocol.make_client_capabilities()
-    )
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local custom_attach = function(client, bufnr)
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
