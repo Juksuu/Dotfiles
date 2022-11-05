@@ -92,25 +92,25 @@ local luasnip_conf = function()
 end
 
 return {
-       {
-           "hrsh7th/nvim-cmp",
-           requires = {
-               "hrsh7th/cmp-path",
-               "hrsh7th/cmp-buffer",
-               "hrsh7th/cmp-nvim-lsp",
-               "hrsh7th/cmp-nvim-lua",
-               "lukas-reineke/cmp-rg",
-               "lukas-reineke/cmp-under-comparator",
+    {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "lukas-reineke/cmp-rg",
+            "lukas-reineke/cmp-under-comparator",
 
-               "onsails/lspkind-nvim",
+            "onsails/lspkind-nvim",
 
-               {
-                   "L3MON4D3/LuaSnip",
-                   requires = "rafamadriz/friendly-snippets",
-                   config = luasnip_conf,
-               },
-               "saadparwaiz1/cmp_luasnip",
-           },
-           config = cmp_conf,
-       }
+            {
+                "L3MON4D3/LuaSnip",
+                requires = "rafamadriz/friendly-snippets",
+                config = luasnip_conf,
+            },
+            "saadparwaiz1/cmp_luasnip",
+        },
+        config = cmp_conf,
+    },
 }

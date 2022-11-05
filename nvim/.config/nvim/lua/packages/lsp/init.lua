@@ -1,16 +1,3 @@
-local fidget_conf = function()
-    require("fidget").setup({
-        window = {
-            relative = "editor",
-            blend = 0,
-        },
-    })
-end
-
-local codeaction_conf = function()
-    vim.keymap.set("n", "<leader>la", "<cmd> CodeActionMenu <CR>")
-end
-
 local mason_conf = function()
     require("mason").setup()
 end
@@ -85,6 +72,7 @@ local lsp_conf = function()
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, bufopts)
         vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, bufopts)
 
@@ -115,34 +103,17 @@ local lsp_conf = function()
 end
 
 return {
-    {
-        "williamboman/mason.nvim",
-        config = mason_conf,
-    },
-
+    { "williamboman/mason.nvim", config = mason_conf },
     {
         "williamboman/mason-lspconfig.nvim",
         requires = "neovim/nvim-lspconfig",
         after = "mason.nvim",
         config = lsp_conf,
     },
-
     {
         "jayp0521/mason-null-ls.nvim",
         requires = "jose-elias-alvarez/null-ls.nvim",
         after = "mason.nvim",
         config = null_ls_conf,
-    },
-
-    {
-        "j-hui/fidget.nvim",
-        after = "mason-lspconfig.nvim",
-        config = fidget_conf,
-    },
-
-    {
-        "weilbith/nvim-code-action-menu",
-        after = "mason-lspconfig.nvim",
-        config = codeaction_conf,
     },
 }
