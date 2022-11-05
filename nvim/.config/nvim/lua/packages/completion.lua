@@ -1,4 +1,4 @@
-return function()
+local cmp_conf = function()
     local cmp = require("cmp")
     local lspkind = require("lspkind")
 
@@ -72,3 +72,45 @@ return function()
         },
     })
 end
+
+local luasnip_conf = function()
+    require("luasnip").config.set_config({
+        history = true,
+    })
+    require("luasnip/loaders/from_vscode").lazy_load({
+        paths = {
+            "~/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+        },
+    })
+
+    vim.keymap.set({ "n", "s", "i" }, "<C-h>", function()
+        require("luasnip").jump(-1)
+    end)
+    vim.keymap.set({ "n", "s", "i" }, "<C-l>", function()
+        require("luasnip").jump(1)
+    end)
+end
+
+return {
+       {
+           "hrsh7th/nvim-cmp",
+           requires = {
+               "hrsh7th/cmp-path",
+               "hrsh7th/cmp-buffer",
+               "hrsh7th/cmp-nvim-lsp",
+               "hrsh7th/cmp-nvim-lua",
+               "lukas-reineke/cmp-rg",
+               "lukas-reineke/cmp-under-comparator",
+
+               "onsails/lspkind-nvim",
+
+               {
+                   "L3MON4D3/LuaSnip",
+                   requires = "rafamadriz/friendly-snippets",
+                   config = luasnip_conf,
+               },
+               "saadparwaiz1/cmp_luasnip",
+           },
+           config = cmp_conf,
+       }
+}

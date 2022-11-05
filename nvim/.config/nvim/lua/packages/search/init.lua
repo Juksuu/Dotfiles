@@ -1,4 +1,4 @@
-return function()
+local telescope = function()
     require("telescope").setup({
         defaults = {
             prompt_prefix = "❯ ",
@@ -20,13 +20,12 @@ return function()
     })
 
     require("telescope").load_extension("fzy_native")
-    require("telescope").load_extension("worktrees")
     require("telescope").load_extension("file_browser")
 
     --- TELESCOPE MAPPINGS ---
     local function map_tele(key, f)
         local rhs = string.format(
-            "<cmd>lua RELOAD_RETURN('plugins.configs.telescope.functions')['%s']()<CR>",
+            "<cmd>lua RELOAD_RETURN('packages.search.telescope_functions')['%s']()<CR>",
             f
         )
         vim.keymap.set("n", key, rhs)
@@ -42,5 +41,20 @@ return function()
     map_tele("<leader>df", "diagnostics")
     map_tele("<leader>dw", "workspace_diagnostics")
 
-    map_tele("<leader>gw", "worktrees")
+    local has_worktrees, _ = pcall(require, "worktrees")
+    if has_worktrees then
+        require("telescope").load_extension("worktrees")
+        map_tele("<leader>gw", "worktrees")
+    end
 end
+
+return {
+    {
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-fzy-native.nvim",
+        },
+        config = telescope,
+    },
+}
