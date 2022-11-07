@@ -1,7 +1,5 @@
 local M = {}
 
-M.servers = { "rust_analyzer", "sumneko_lua", "tsserver" }
-
 M.server_settings = {
     sumneko_lua = {
         settings = {

@@ -3,23 +3,17 @@ local mason_conf = function()
 end
 
 local null_ls_conf = function()
+    local mason_null = require("mason-null-ls")
+    mason_null.setup()
+
+    mason_null.setup_handlers({
+        function(source_name, methods)
+            require("mason-null-ls.automatic_setup")(source_name, methods)
+        end,
+    })
+
     local null = require("null-ls")
-    null.setup({
-        sources = {
-            null.builtins.formatting.stylua,
-            null.builtins.formatting.prettier,
-            null.builtins.formatting.rustfmt,
-            null.builtins.formatting.black,
-
-            null.builtins.code_actions.eslint_d,
-
-            null.builtins.diagnostics.eslint_d,
-        },
-    })
-
-    require("mason-null-ls").setup({
-        automatic_installation = true,
-    })
+    null.setup()
 
     -- Configure commands for enabling and disabling run on save
     vim.g.format_on_save = true
@@ -44,15 +38,6 @@ local null_ls_conf = function()
 end
 
 local lsp_conf = function()
-    local server_config = require("packages.lsp.server_configuration")
-    local mason = require("mason-lspconfig")
-
-    mason.setup({
-        ensure_installed = server_config.servers,
-    })
-
-    local nvim_lsp = require("lspconfig")
-
     -- Disable gutter signs, color linenum instead
     local sign = function(name)
         vim.fn.sign_define(name, { text = "", numhl = name })
@@ -86,6 +71,12 @@ local lsp_conf = function()
             ]])
         end
     end
+
+    local mason = require("mason-lspconfig")
+    mason.setup()
+
+    local nvim_lsp = require("lspconfig")
+    local server_config = require("packages.lsp.server_configuration")
 
     local setup_server = function(server, opts)
         opts.capabilities = capabilities
