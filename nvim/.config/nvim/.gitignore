@@ -1,2 +1,2 @@
 vim.log
-lua/packer_compiled.**
+.luarc.json

@@ -1,7 +1,34 @@
 vim.g.mapleader = " "
 
-local has_impatient, impatient = pcall(require, "impatient")
-if has_impatient then
-    impatient.enable_profile()
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--single-branch",
+        "git@github.com:folke/lazy.nvim.git",
+        lazypath,
+    })
 end
-require("packages")
+vim.opt.runtimepath:prepend(lazypath)
+
+require("lazy").setup("config.plugins", {
+    defaults = { lazy = true },
+    dev = { path = "~/code/personal" },
+    custom_keys = false,
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "matchit",
+                "matchparen",
+                "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
+})
