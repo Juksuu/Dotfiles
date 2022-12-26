@@ -5,7 +5,7 @@ local M = {
         "nvim-telescope/telescope-fzy-native.nvim",
         { "Juksuu/worktrees.nvim", config = true },
     },
-    lazy = false
+    lazy = false,
 }
 
 function M.config()

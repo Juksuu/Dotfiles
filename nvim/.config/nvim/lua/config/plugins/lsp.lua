@@ -1,43 +1,13 @@
-local mason_conf = function()
-    require("mason").setup()
-end
+local M = {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+        "neovim/nvim-lspconfig",
+        { "williamboman/mason.nvim", config = true },
+    },
+    event = "BufReadPre",
+}
 
-local null_ls_conf = function()
-    local mason_null = require("mason-null-ls")
-    mason_null.setup()
-
-    mason_null.setup_handlers({
-        function(source_name, methods)
-            require("mason-null-ls.automatic_setup")(source_name, methods)
-        end,
-    })
-
-    local null = require("null-ls")
-    null.setup()
-
-    -- Configure commands for enabling and disabling run on save
-    vim.g.format_on_save = true
-
-    vim.api.nvim_create_user_command("FormatOnSaveDisable", function()
-        vim.g.format_on_save = false
-    end, {})
-
-    vim.api.nvim_create_user_command("FormatOnSaveEnable", function()
-        vim.g.format_on_save = true
-    end, {})
-
-    local group = vim.api.nvim_create_augroup("AutoFormat", { clear = true })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        callback = function()
-            if vim.g.format_on_save then
-                vim.lsp.buf.format()
-            end
-        end,
-        group = group,
-    })
-end
-
-local lsp_conf = function()
+function M.config()
     -- Disable gutter signs, color linenum instead
     local sign = function(name)
         vim.fn.sign_define(name, { text = "", numhl = name })
@@ -47,7 +17,11 @@ local lsp_conf = function()
     sign("DiagnosticSignHint")
     sign("DiagnosticSignError")
 
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    local capabilities = {}
+    if status then
+        capabilities = cmp_nvim_lsp.default_capabilities()
+    end
 
     local custom_attach = function(client, bufnr)
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -81,7 +55,7 @@ local lsp_conf = function()
     mason.setup()
 
     local nvim_lsp = require("lspconfig")
-    local server_config = require("packages.lsp.server_configuration")
+    local server_config = require("config.lsp_servers")
 
     local setup_server = function(server, opts)
         opts.capabilities = capabilities
@@ -98,18 +72,4 @@ local lsp_conf = function()
     })
 end
 
-return {
-    { "williamboman/mason.nvim", config = mason_conf },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        requires = "neovim/nvim-lspconfig",
-        after = "mason.nvim",
-        config = lsp_conf,
-    },
-    {
-        "jayp0521/mason-null-ls.nvim",
-        requires = "jose-elias-alvarez/null-ls.nvim",
-        after = "mason.nvim",
-        config = null_ls_conf,
-    },
-}
+return M

@@ -51,7 +51,10 @@ return function()
             telescope = true,
             nvimtree = false,
             which_key = false,
-            indent_blankline = { enabled = false, colored_indent_levels = false },
+            indent_blankline = {
+                enabled = false,
+                colored_indent_levels = false,
+            },
             dashboard = false,
             neogit = true,
             vim_sneak = false,
@@ -71,7 +74,11 @@ return function()
             symbols_outline = false,
             coc_nvim = false,
             leap = false,
-            neotree = { enabled = false, show_root = true, transparent_panel = false },
+            neotree = {
+                enabled = false,
+                show_root = true,
+                transparent_panel = false,
+            },
             telekasten = false,
             mini = false,
             aerial = false,
@@ -79,7 +86,7 @@ return function()
             beacon = false,
             navic = { enabled = false },
             overseer = false,
-            fidget = true,
+            fidget = false,
         },
         color_overrides = {
             mocha = {
@@ -117,14 +124,21 @@ return function()
                 return {
                     -- For base configs.
                     CursorLineNr = { fg = cp.green },
-                    Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
+                    Search = {
+                        bg = cp.surface1,
+                        fg = cp.pink,
+                        style = { "bold" },
+                    },
                     IncSearch = { bg = cp.pink, fg = cp.surface1 },
 
                     -- For native lsp configs.
                     DiagnosticVirtualTextError = { bg = cp.none },
                     DiagnosticVirtualTextWarn = { bg = cp.none },
                     DiagnosticVirtualTextInfo = { bg = cp.none },
-                    DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
+                    DiagnosticVirtualTextHint = {
+                        fg = cp.rosewater,
+                        bg = cp.none,
+                    },
 
                     DiagnosticHint = { fg = cp.rosewater },
                     LspDiagnosticsDefaultHint = { fg = cp.rosewater },
@@ -142,9 +156,15 @@ return function()
                     TelescopeMatching = { fg = cp.red, bg = cp.none },
                     TelescopeSelection = { fg = cp.none, bg = cp.base },
 
-                    TelescopeResultsTitle = { fg = cp.lavender, bg = cp.surface1 },
+                    TelescopeResultsTitle = {
+                        fg = cp.lavender,
+                        bg = cp.surface1,
+                    },
 
-                    TelescopePromptTitle = { fg = cp.rosewater, bg = cp.surface2 },
+                    TelescopePromptTitle = {
+                        fg = cp.rosewater,
+                        bg = cp.surface2,
+                    },
                     TelescopePromptPrefix = {
                         fg = cp.rosewater,
                         bg = cp.surface2,
@@ -181,7 +201,10 @@ return function()
                     ["@constant.builtin"] = { fg = cp.lavender },
                     -- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
                     -- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
-                    ["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
+                    ["@variable.builtin"] = {
+                        fg = cp.red,
+                        style = { "italic" },
+                    },
 
                     -- ["@function"] = { fg = cp.blue },
                     ["@function.macro"] = { fg = cp.red, style = {} },
@@ -223,15 +246,24 @@ return function()
 
                     -- ["@label.json"] = { fg = cp.blue },
 
-                    ["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
-                    ["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
+                    ["@function.builtin.bash"] = {
+                        fg = cp.red,
+                        style = { "italic" },
+                    },
+                    ["@parameter.bash"] = {
+                        fg = cp.yellow,
+                        style = { "italic" },
+                    },
 
                     ["@field.lua"] = { fg = cp.lavender },
                     ["@constructor.lua"] = { fg = cp.flamingo },
 
                     ["@constant.java"] = { fg = cp.teal },
 
-                    ["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
+                    ["@property.typescript"] = {
+                        fg = cp.lavender,
+                        style = { "italic" },
+                    },
                     -- ["@constructor.typescript"] = { fg = cp.lavender },
 
                     -- ["@constructor.tsx"] = { fg = cp.lavender },

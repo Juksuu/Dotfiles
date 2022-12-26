@@ -1,7 +1,7 @@
 local M = {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false
+    lazy = false,
 }
 
 function M.config()
@@ -54,7 +54,7 @@ function M.config()
             beacon = false,
             dashboard = false,
             fern = false,
-            fidget = true,
+            fidget = false,
             gitsigns = true,
             harpoon = false,
             hop = false,
@@ -85,7 +85,7 @@ function M.config()
             illuminate = false,
             vim_sneak = false,
             vimwiki = false,
-            which_key = false
+            which_key = false,
         },
     })
 

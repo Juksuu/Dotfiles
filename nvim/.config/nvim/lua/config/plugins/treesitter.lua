@@ -8,9 +8,9 @@ function M.config()
     require("nvim-treesitter.configs").setup({
         ensure_installed = "all",
         auto_install = false,
-        indent = { enable = false } ,
+        indent = { enable = false },
         highlight = { enable = true },
-        incremental_selection = { enable = false } 
+        incremental_selection = { enable = false },
     })
 end
 
