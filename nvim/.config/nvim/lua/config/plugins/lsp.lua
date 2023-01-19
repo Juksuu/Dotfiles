@@ -40,6 +40,8 @@ function M.config()
             bufopts
         )
 
+        client.server_capabilities.semanticTokensProvider = nil
+
         if client.server_capabilities.code_lens then
             vim.cmd([[
               augroup lsp_document_codelens
