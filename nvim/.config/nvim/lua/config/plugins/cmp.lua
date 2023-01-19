@@ -97,18 +97,30 @@ function M.config()
                 cmp.config.compare.order,
             },
         },
-        formatting = {
-            format = lspkind.cmp_format({
-                with_text = true,
-                menu = {
-                    buffer = "[buf]",
-                    nvim_lsp = "[Lsp]",
-                    nvim_lua = "[vim_api]",
-                    path = "[path]",
-                    luasnip = "[snip]",
-                    rg = "[rg]",
-                },
+        window = {
+            completion = cmp.config.window.bordered({
+                col_offset = -3,
+                side_padding = 0,
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
             }),
+            documentation = cmp.config.window.bordered({
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+            }),
+        },
+        formatting = {
+            fields = { "kind", "abbr", "menu" },
+            format = function(entry, vim_item)
+                local kind = lspkind.cmp_format({
+                    mode = "symbol_text",
+                    maxwidth = 50,
+                })(entry, vim_item)
+
+                local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                kind.kind = " " .. (strings[1] or "") .. " "
+                kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+                return kind
+            end,
         },
     })
 end

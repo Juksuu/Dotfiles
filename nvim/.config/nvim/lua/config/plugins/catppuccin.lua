@@ -7,24 +7,37 @@ local M = {
 function M.config()
     local catppuccin = require("catppuccin")
     catppuccin.setup({
+        flavour = "mocha",
+        background = { light = "latte", dark = "mocha" },
+        dim_inactive = {
+            enabled = false,
+            -- Dim inactive splits/windows/buffers.
+            -- NOT recommended if you use old palette (a.k.a., mocha).
+            shade = "dark",
+            percentage = 0.15,
+        },
+        transparent_background = false,
+        show_end_of_buffer = false, -- show the '~' characters after the end of buffers
+        term_colors = true,
+        compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
         styles = {
             comments = { "italic" },
-            conditionals = {},
-            loops = {},
-            functions = {},
-            keywords = {},
+            properties = { "italic" },
+            functions = { "italic", "bold" },
+            keywords = { "italic" },
+            operators = { "bold" },
+            conditionals = { "bold" },
+            loops = { "bold" },
+            booleans = { "bold", "italic" },
+            numbers = {},
+            types = {},
             strings = {},
             variables = {},
-            numbers = {},
-            booleans = {},
-            properties = {},
-            types = {},
-            operators = {},
         },
         integrations = {
             dap = {
                 enabled = false,
-                enable_ui = false, -- enable nvim-dap-ui
+                enable_ui = false,
             },
             native_lsp = {
                 enabled = true,
@@ -72,8 +85,8 @@ function M.config()
             notify = true,
             semantic_tokens = false,
             nvimtree = false,
-            treesitter_context = true,
             treesitter = true,
+            treesitter_context = true,
             ts_rainbow = false,
             overseer = false,
             pounce = false,
@@ -87,6 +100,36 @@ function M.config()
             vimwiki = false,
             which_key = false,
         },
+        custom_highlights = function(color)
+            return {
+                CmpItemKindSnippet = { fg = color.base, bg = color.mauve },
+                CmpItemKindKeyword = { fg = color.base, bg = color.red },
+                CmpItemKindText = { fg = color.base, bg = color.teal },
+                CmpItemKindMethod = { fg = color.base, bg = color.blue },
+                CmpItemKindConstructor = { fg = color.base, bg = color.blue },
+                CmpItemKindFunction = { fg = color.base, bg = color.blue },
+                CmpItemKindFolder = { fg = color.base, bg = color.blue },
+                CmpItemKindModule = { fg = color.base, bg = color.blue },
+                CmpItemKindConstant = { fg = color.base, bg = color.peach },
+                CmpItemKindField = { fg = color.base, bg = color.green },
+                CmpItemKindProperty = { fg = color.base, bg = color.green },
+                CmpItemKindEnum = { fg = color.base, bg = color.green },
+                CmpItemKindUnit = { fg = color.base, bg = color.green },
+                CmpItemKindClass = { fg = color.base, bg = color.yellow },
+                CmpItemKindVariable = { fg = color.base, bg = color.flamingo },
+                CmpItemKindFile = { fg = color.base, bg = color.blue },
+                CmpItemKindInterface = { fg = color.base, bg = color.yellow },
+                CmpItemKindColor = { fg = color.base, bg = color.red },
+                CmpItemKindReference = { fg = color.base, bg = color.red },
+                CmpItemKindEnumMember = { fg = color.base, bg = color.red },
+                CmpItemKindStruct = { fg = color.base, bg = color.blue },
+                CmpItemKindValue = { fg = color.base, bg = color.peach },
+                CmpItemKindEvent = { fg = color.base, bg = color.blue },
+                CmpItemKindOperator = { fg = color.base, bg = color.blue },
+                CmpItemKindTypeParameter = { fg = color.base, bg = color.blue },
+                CmpItemKindCopilot = { fg = color.base, bg = color.teal },
+            }
+        end,
     })
 
     vim.cmd([[ colorscheme catppuccin ]])
