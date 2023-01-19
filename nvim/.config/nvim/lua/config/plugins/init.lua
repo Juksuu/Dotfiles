@@ -27,7 +27,7 @@ return {
 
     {
         "TimUntersberger/neogit",
-        config = true,
+        config = { disable_commit_confirmation = true },
         keys = {
             {
                 "<leader>gs",
