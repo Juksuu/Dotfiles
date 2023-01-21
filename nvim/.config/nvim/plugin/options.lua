@@ -1,15 +1,13 @@
 local opt = vim.opt
 
+opt.cindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 
 opt.showcmd = true
-opt.cmdheight = 1
-
 opt.termguicolors = true
-
 opt.laststatus = 3
 
 opt.number = true
@@ -18,7 +16,7 @@ opt.relativenumber = true
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
-opt.updatetime = 500
+opt.updatetime = 1000
 
 opt.smartcase = true
 opt.incsearch = true
@@ -32,6 +30,8 @@ opt.splitbelow = true
 opt.completeopt = { "menuone", "noselect", "noinsert" }
 
 opt.undofile = true
+opt.swapfile = false
+opt.shada = { "!", "'1000", "<50", "s10", "h" }
 
 opt.list = true
 opt.listchars = "tab:→ ,trail:·"
@@ -40,7 +40,3 @@ opt.formatoptions = opt.formatoptions
     - "t" -- Don't auto wrap code
     - "o" -- Don't continue comments with o and O
     + "n" -- Formatting numbered lists
-
-vim.cmd([[
-    autocmd FileType * set formatoptions-=o
-]])

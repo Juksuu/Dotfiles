@@ -18,7 +18,7 @@ function M.config()
             map("n", "<leader>hS", gs.stage_buffer)
             map("n", "<leader>hu", gs.undo_stage_hunk)
             map("n", "<leader>hR", gs.reset_buffer)
-            map("n", "<leader>hb", gs.toggle_current_line_blame)
+            map("n", "<leader>lb", gs.toggle_current_line_blame)
             map("n", "<leader>hst", gs.toggle_signs)
         end,
     })

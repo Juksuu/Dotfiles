@@ -1,8 +1,5 @@
 return {
-    "nvim-lua/plenary.nvim",
-
-    { "DingDean/wgsl.vim", lazy = false },
-    { "maxbrunsfeld/vim-yankstack", lazy = false },
+    { "nvim-lua/plenary.nvim", lazy = false },
     { "kyazdani42/nvim-web-devicons", lazy = false },
 
     { "rust-lang/rust.vim", ft = "rust" },
@@ -13,6 +10,7 @@ return {
 
     { "numToStr/Comment.nvim", config = true, event = "BufReadPost" },
     { "nmac427/guess-indent.nvim", config = true, event = "BufReadPre" },
+
     {
         "nvim-treesitter/nvim-treesitter-context",
         config = true,
