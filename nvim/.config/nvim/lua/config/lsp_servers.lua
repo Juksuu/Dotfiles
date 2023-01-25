@@ -23,6 +23,23 @@ M.server_settings = {
             },
         },
     },
+    ["rust-analyzer"] = {
+        semanticHighlighting = {
+            doc = {
+                comment = {
+                    inject = {
+                        enable = false,
+                    },
+                },
+            },
+            operator = {
+                enable = false,
+            },
+            strings = {
+                enable = false,
+            },
+        },
+    },
 }
 
 return M
