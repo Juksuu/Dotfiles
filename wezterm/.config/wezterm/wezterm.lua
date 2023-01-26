@@ -5,6 +5,14 @@ return {
 
     font = wezterm.font("Liga SFMono Nerd Font"),
     font_size = 11,
+
+    window_padding = {
+        left = 0,
+        right = 0,
+        top = 0,
+        bottom = 0,
+    },
+
     color_scheme = "catppucin",
     colors = {
         indexed = { [16] = "#F8BD96", [17] = "#F5E0DC" },
