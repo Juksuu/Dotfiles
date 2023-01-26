@@ -14,7 +14,13 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-context",
         config = true,
-        event = "BufReadPre",
+        event = "BufReadPost",
+    },
+
+    {
+        "Wansmer/treesj",
+        config = true,
+        event = "BufReadPost",
     },
 
     {
