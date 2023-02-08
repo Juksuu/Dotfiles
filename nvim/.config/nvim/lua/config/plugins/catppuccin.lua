@@ -39,7 +39,7 @@ function M.config()
                 },
             },
             navic = {
-                enabled = false,
+                enabled = true,
                 custom_bg = "NONE",
             },
             indent_blankline = {

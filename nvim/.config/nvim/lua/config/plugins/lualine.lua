@@ -1,9 +1,36 @@
 local M = {
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+        {
+            "SmiteshP/nvim-navic",
+            opts = { separator = "  ", highlight = true },
+        },
+    },
     event = { "VeryLazy", "BufReadPre" },
 }
 
 function M.config()
+    local winbar = {
+        lualine_x = {
+            {
+                "filename",
+                path = 1,
+                icon = "",
+                padding = { left = 4 },
+            },
+        },
+    }
+
+    local has_navic, navic = pcall(require, "nvim-navic")
+    if has_navic then
+        winbar.lualine_c = {
+            {
+                navic.get_location,
+                icon = "",
+                cond = navic.is_available,
+            },
+        }
+    end
     local opts = {
         options = {
             icons_enabled = true,
@@ -27,17 +54,11 @@ function M.config()
                 },
                 "diagnostics",
             },
-            lualine_c = {},
             lualine_x = { "location", "fileformat" },
-            lualine_y = {},
             lualine_z = { "filename" },
         },
-        winbar = {
-            lualine_c = { "filename" },
-        },
-        inactive_winbar = {
-            lualine_c = { "filename" },
-        },
+        winbar = winbar,
+        inactive_winbar = winbar,
     }
 
     local has_noice, noice = pcall(require, "noice")

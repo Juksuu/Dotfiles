@@ -40,6 +40,11 @@ function M.config()
             bufopts
         )
 
+        local has_navic, navic = pcall(require, "nvim-navic")
+        if has_navic and client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, bufnr)
+        end
+
         client.server_capabilities.semanticTokensProvider = nil
 
         if client.server_capabilities.code_lens then
