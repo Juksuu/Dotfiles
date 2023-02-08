@@ -18,7 +18,7 @@ opt.signcolumn = "yes"
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
-opt.updatetime = 1000
+opt.updatetime = 50
 
 opt.smartcase = true
 opt.incsearch = true

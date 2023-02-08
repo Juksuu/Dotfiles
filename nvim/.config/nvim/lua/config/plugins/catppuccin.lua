@@ -1,7 +1,7 @@
 local M = {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false
+    lazy = false,
 }
 
 function M.config()
@@ -11,29 +11,13 @@ function M.config()
         background = { light = "latte", dark = "mocha" },
         dim_inactive = {
             enabled = false,
-            -- Dim inactive splits/windows/buffers.
-            -- NOT recommended if you use old palette (a.k.a., mocha).
-            shade = "dark",
-            percentage = 0.15,
         },
         transparent_background = false,
         show_end_of_buffer = false, -- show the '~' characters after the end of buffers
         term_colors = true,
         compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-        styles = {
-            comments = { "italic" },
-            properties = { "italic" },
-            functions = { "italic", "bold" },
-            keywords = { "italic" },
-            operators = { "bold" },
-            conditionals = { "bold" },
-            loops = { "bold" },
-            booleans = { "bold", "italic" },
-            numbers = {},
-            types = {},
-            strings = {},
-            variables = {},
-        },
+        no_italic = true,
+        no_bold = true,
         integrations = {
             dap = {
                 enabled = false,
@@ -82,8 +66,8 @@ function M.config()
             neotest = false,
             noice = true,
             cmp = true,
-            notify = true,
-            semantic_tokens = false,
+            notify = false,
+            semantic_tokens = true,
             nvimtree = false,
             treesitter = true,
             treesitter_context = true,
