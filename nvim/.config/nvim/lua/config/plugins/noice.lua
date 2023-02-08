@@ -12,6 +12,20 @@ function M.config()
         presets = {
             lsp_doc_border = true,
         },
+        messages = {
+            enabled = true,
+            view = "mini",
+            view_error = "mini",
+            view_warn = "mini",
+        },
+        lsp = {
+            message = {
+                view = "mini",
+            },
+        },
+        notify = {
+            enabled = false,
+        },
     })
 end
 

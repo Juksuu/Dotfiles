@@ -40,12 +40,12 @@ function M.config()
         },
     }
 
-    local has_noice, _ = pcall(require, "noice")
+    local has_noice, noice = pcall(require, "noice")
     if has_noice then
-        opts.lualine_c = {
+        opts.sections.lualine_c = {
             {
-                require("noice").api.status.mode.get,
-                cond = require("noice").api.status.mode.has,
+                noice.api.status.mode.get,
+                cond = noice.api.status.mode.has,
                 color = { fg = "#ff9e64" },
             },
         }
