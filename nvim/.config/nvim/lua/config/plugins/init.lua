@@ -22,12 +22,12 @@ return {
     },
     {
         "windwp/nvim-autopairs",
-        config = { map_cr = true },
+        opts = { map_cr = true },
         event = "BufReadPost",
     },
     {
         "TimUntersberger/neogit",
-        config = { disable_commit_confirmation = true },
+        opts = { disable_commit_confirmation = true },
         keys = {
             {
                 "<leader>gs",
