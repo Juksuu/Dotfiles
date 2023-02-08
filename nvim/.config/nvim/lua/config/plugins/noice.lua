@@ -2,7 +2,6 @@ local M = {
     "folke/noice.nvim",
     dependencies = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
     },
     event = { "VeryLazy", "BufReadPre" },
 }
@@ -17,6 +16,9 @@ function M.config()
             view = "mini",
             view_error = "mini",
             view_warn = "mini",
+        },
+        message = {
+            view = nil
         },
         notify = {
             enabled = false,
