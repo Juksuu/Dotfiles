@@ -18,11 +18,6 @@ function M.config()
             view_error = "mini",
             view_warn = "mini",
         },
-        lsp = {
-            message = {
-                view = "mini",
-            },
-        },
         notify = {
             enabled = false,
         },

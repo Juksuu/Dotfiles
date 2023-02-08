@@ -31,7 +31,7 @@ function M.config()
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set("n", "<leader>la", "<cmd>CodeActionMenu<CR>", bufopts)
         vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, bufopts)
         vim.keymap.set(
             { "n", "i" },

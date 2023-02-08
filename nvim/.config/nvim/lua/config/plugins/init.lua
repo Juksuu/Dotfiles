@@ -1,10 +1,9 @@
 return {
     { "nvim-lua/plenary.nvim", event = { "VeryLazy", "BufReadPre" } },
     { "nvim-tree/nvim-web-devicons", event = { "VeryLazy", "BufReadPre" } },
-
     { "tpope/vim-sleuth", event = "BufReadPre" },
     { "tpope/vim-surround", event = "BufReadPost" },
-
+    { "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
     {
         "numToStr/Comment.nvim",
         config = true,
