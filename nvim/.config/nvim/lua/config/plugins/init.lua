@@ -1,12 +1,10 @@
 return {
-    { "nvim-lua/plenary.nvim", lazy = false },
-    { "kyazdani42/nvim-web-devicons", lazy = false },
-
-    { "rust-lang/rust.vim", ft = "rust" },
-    { "togglebyte/togglerust", ft = "rust" },
+    { "nvim-lua/plenary.nvim", event = { "VeryLazy", "BufReadPre" } },
+    { "nvim-tree/nvim-web-devicons", event = { "VeryLazy", "BufReadPre" } },
 
     { "tpope/vim-sleuth", event = "BufReadPre" },
     { "tpope/vim-surround", event = "BufReadPost" },
+
     {
         "numToStr/Comment.nvim",
         config = true,
@@ -22,13 +20,11 @@ return {
         config = true,
         event = "BufReadPost",
     },
-
     {
         "windwp/nvim-autopairs",
         config = { map_cr = true },
         event = "BufReadPost",
     },
-
     {
         "TimUntersberger/neogit",
         config = { disable_commit_confirmation = true },

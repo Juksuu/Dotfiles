@@ -4,7 +4,7 @@ local M = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
     },
-    event = "VeryLazy",
+    event = { "VeryLazy", "BufReadPre" },
 }
 
 function M.config()

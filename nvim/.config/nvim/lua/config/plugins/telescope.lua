@@ -5,7 +5,7 @@ local M = {
         "nvim-telescope/telescope-fzy-native.nvim",
         { "Juksuu/worktrees.nvim", config = true },
     },
-    lazy = false,
+    event = {"VeryLazy", "BufReadPre"},
 }
 
 function M.config()
