@@ -5,18 +5,18 @@ return {
     { "rust-lang/rust.vim", ft = "rust" },
     { "togglebyte/togglerust", ft = "rust" },
 
+    { "tpope/vim-sleuth", event = "BufReadPre" },
     { "tpope/vim-surround", event = "BufReadPost" },
-    { "gpanders/editorconfig.nvim", event = "BufReadPre" },
-
-    { "numToStr/Comment.nvim", config = true, event = "BufReadPost" },
-    { "nmac427/guess-indent.nvim", config = true, event = "BufReadPre" },
-
+    {
+        "numToStr/Comment.nvim",
+        config = true,
+        event = "BufReadPost",
+    },
     {
         "nvim-treesitter/nvim-treesitter-context",
         config = true,
         event = "BufReadPost",
     },
-
     {
         "Wansmer/treesj",
         config = true,

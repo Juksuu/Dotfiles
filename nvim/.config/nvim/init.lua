@@ -11,11 +11,11 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
-vim.opt.runtimepath:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
     defaults = { lazy = true },
-    dev = { path = "~/code/personal" },
+    dev = { path = "~/code/personal/nvim_plugins" },
     custom_keys = false,
     performance = {
         rtp = {

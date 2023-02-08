@@ -1,15 +1,14 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = "BufReadPost",
+    event = "BufReadPre",
 }
 
 function M.config()
     require("nvim-treesitter.configs").setup({
-        ensure_installed = "all",
-        auto_install = false,
+        auto_install = true,
         indent = { enable = false },
-        highlight = { enable = true },
+        highlight = { enable = true, additional_vim_regex_highlighting = false },
         incremental_selection = { enable = false },
     })
 end

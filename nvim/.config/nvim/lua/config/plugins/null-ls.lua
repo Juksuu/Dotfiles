@@ -4,7 +4,7 @@ local M = {
         "jose-elias-alvarez/null-ls.nvim",
         { "williamboman/mason.nvim", config = true },
     },
-    event = "BufReadPre",
+    event = "BufReadPost",
 }
 
 function M.config()
@@ -32,7 +32,7 @@ function M.config()
     end, {})
 
     local group = vim.api.nvim_create_augroup("AutoFormat", { clear = true })
-    vim.api.nvim_create_autocmd("BufWritePre", {
+    vim.api.nvim_create_autocmd("BufWritePost", {
         callback = function()
             if vim.g.format_on_save then
                 vim.lsp.buf.format()

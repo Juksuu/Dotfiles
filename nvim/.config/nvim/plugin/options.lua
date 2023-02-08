@@ -13,6 +13,8 @@ opt.laststatus = 3
 opt.number = true
 opt.relativenumber = true
 
+opt.signcolumn = "yes"
+
 opt.confirm = true
 opt.scrolloff = 10
 opt.showmode = false
@@ -35,8 +37,3 @@ opt.shada = { "!", "'1000", "<50", "s10", "h" }
 
 opt.list = true
 opt.listchars = "tab:→ ,trail:·"
-
-opt.formatoptions = opt.formatoptions
-    - "t" -- Don't auto wrap code
-    - "o" -- Don't continue comments with o and O
-    + "n" -- Formatting numbered lists
