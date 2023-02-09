@@ -23,6 +23,8 @@ function M.config()
         capabilities = cmp_nvim_lsp.default_capabilities()
     end
 
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
     local custom_attach = function(client, bufnr)
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
@@ -32,7 +34,6 @@ function M.config()
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
         vim.keymap.set("n", "<leader>la", "<cmd>CodeActionMenu<CR>", bufopts)
-        vim.keymap.set({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, bufopts)
         vim.keymap.set(
             { "n", "i" },
             "<c-k>",
@@ -55,6 +56,24 @@ function M.config()
                 autocmd BufWritePost,CursorHold <buffer> lua require("vim.lsp.codelens").refresh()
               augroup END
             ]])
+        end
+
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    if vim.g.format_on_save then
+                        vim.lsp.buf.format({
+                            bufnr = bufnr,
+                            filter = function(lsp_client)
+                                return lsp_client.name == "null-ls"
+                            end,
+                        })
+                    end
+                end,
+            })
         end
     end
 
