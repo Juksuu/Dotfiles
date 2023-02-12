@@ -41,9 +41,14 @@ function M.config()
         sections = {
             lualine_a = {
                 { "mode", icon = "" },
+            },
+            lualine_b = {},
+            lualine_c = {
                 { "branch", icon = "" },
             },
-            lualine_b = {
+
+            lualine_x = {
+                "diagnostics",
                 {
                     "diff",
                     symbols = {
@@ -52,10 +57,9 @@ function M.config()
                         removed = "  ",
                     },
                 },
-                "diagnostics",
             },
-            lualine_x = { "location", "fileformat" },
-            lualine_z = { "filename" },
+            lualine_y = {},
+            lualine_z = { "filename", "fileformat" },
         },
         winbar = winbar,
         inactive_winbar = winbar,
@@ -63,13 +67,11 @@ function M.config()
 
     local has_noice, noice = pcall(require, "noice")
     if has_noice then
-        opts.sections.lualine_c = {
-            {
-                noice.api.status.mode.get,
-                cond = noice.api.status.mode.has,
-                color = { fg = "#ff9e64" },
-            },
-        }
+        table.insert(opts.sections.lualine_c, {
+            noice.api.status.mode.get,
+            cond = noice.api.status.mode.has,
+            color = { fg = "#ff9e64" },
+        })
     end
     require("lualine").setup(opts)
 end

@@ -20,6 +20,11 @@ return {
         event = "BufReadPost",
     },
     {
+        "mvllow/modes.nvim",
+        config = true,
+        event = "BufReadPost",
+    },
+    {
         "windwp/nvim-autopairs",
         opts = { map_cr = true },
         event = "BufReadPost",
