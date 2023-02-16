@@ -29,7 +29,8 @@ opt.inccommand = "split"
 opt.splitright = true
 opt.splitbelow = true
 
-opt.completeopt = { "menuone", "noselect", "noinsert" }
+opt.complete = ""
+opt.completeopt = ""
 
 opt.undofile = true
 opt.swapfile = false
