@@ -4,6 +4,7 @@ return {
     -- General
     max_fps = 240,
     enable_tab_bar = false,
+    enable_kitty_graphics = true,
 
     -- Font
     font = wezterm.font("Liga SFMono Nerd Font"),
