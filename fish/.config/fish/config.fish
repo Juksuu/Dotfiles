@@ -6,7 +6,6 @@ set -x CARGO_HOME $HOME/.cargo
 set -x PATH $PATH $HOME/.local/bin $HOME/.yarn/bin $HOME/.cargo/bin $HOME/.ghcup/bin $GOPATH/bin $HOME/.luarocks/bin
 
 set fish_greeting
-starship init fish | source
 
 function nvm
     bass source $HOME/.nvm/nvm.sh --no-use ';' nvm $argv
