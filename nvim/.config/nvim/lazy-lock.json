@@ -37,5 +37,6 @@
   "treesj": { "branch": "main", "commit": "4d50281d534d06766caa6626809b8036766385a0" },
   "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
-  "worktrees.nvim": { "branch": "main", "commit": "eca23ff38b7b5b439d6a909f05db841222919270" }
+  "worktrees.nvim": { "branch": "main", "commit": "eca23ff38b7b5b439d6a909f05db841222919270" },
+  "yanky.nvim": { "branch": "main", "commit": "c41e4c31990ae1f5f3517de8dc006e4da235a043" }
 }

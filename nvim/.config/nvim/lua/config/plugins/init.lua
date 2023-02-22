@@ -41,4 +41,17 @@ return {
             },
         },
     },
+    {
+        "gbprod/yanky.nvim",
+        config = true,
+        keys = {
+            { "p", "<Plug>(YankyPutAfter)" },
+            { "P", "<Plug>(YankyPutBefore)" },
+            { "gp", "<Plug>(YankyGPutAfter)" },
+            { "gP", "<Plug>(YankyGPutBefore)" },
+            { "<m-n>", "<Plug>(YankyCycleForward)" },
+            { "<m-p>", "<Plug>(YankyCycleBackward)" },
+            { "<m-p>", "<Plug>(YankyCycleBackward)" },
+        },
+    },
 }

@@ -14,6 +14,7 @@ opt.number = true
 opt.relativenumber = true
 
 opt.signcolumn = "yes"
+opt.clipboard = "unnamedplus"
 
 opt.confirm = true
 opt.scrolloff = 10
