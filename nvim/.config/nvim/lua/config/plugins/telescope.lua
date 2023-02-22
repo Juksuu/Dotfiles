@@ -2,10 +2,13 @@ local M = {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-telescope/telescope-file-browser.nvim",
-        "nvim-telescope/telescope-fzy-native.nvim",
+        {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        },
         { "Juksuu/worktrees.nvim", config = true },
     },
-    event = {"VeryLazy", "BufReadPre"},
+    event = { "VeryLazy", "BufReadPre" },
 }
 
 function M.config()
@@ -29,7 +32,7 @@ function M.config()
         },
     })
 
-    require("telescope").load_extension("fzy_native")
+    require("telescope").load_extension("fzf")
     require("telescope").load_extension("file_browser")
     require("telescope").load_extension("worktrees")
 
