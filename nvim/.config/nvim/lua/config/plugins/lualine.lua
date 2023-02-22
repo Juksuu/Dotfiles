@@ -65,6 +65,15 @@ function M.config()
         inactive_winbar = winbar,
     }
 
+    local has_spotify, spotify = pcall(require, "nvim-spotify")
+    if has_spotify then
+        local status = spotify.status
+        status:start()
+        table.insert(opts.sections.lualine_c, {
+            status.listen,
+        })
+    end
+
     local has_noice, noice = pcall(require, "noice")
     if has_noice then
         table.insert(opts.sections.lualine_c, {
