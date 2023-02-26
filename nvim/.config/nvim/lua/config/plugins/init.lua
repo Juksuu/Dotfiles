@@ -16,8 +16,8 @@ return {
     },
     {
         "Wansmer/treesj",
-        config = true,
-        event = "BufReadPost",
+        opts = { use_default_keymaps = false },
+        keys = { { "<leader>j", "<cmd>TSJToggle<CR>" } },
     },
     {
         "mvllow/modes.nvim",
@@ -32,14 +32,7 @@ return {
     {
         "TimUntersberger/neogit",
         opts = { disable_commit_confirmation = true },
-        keys = {
-            {
-                "<leader>gs",
-                function()
-                    require("neogit").open()
-                end,
-            },
-        },
+        keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },
     },
     {
         "gbprod/yanky.nvim",
