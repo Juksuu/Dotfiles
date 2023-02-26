@@ -39,3 +39,6 @@ opt.shada = { "!", "'1000", "<50", "s10", "h" }
 
 opt.list = true
 opt.listchars = "tab:→ ,trail:·"
+
+opt.spelllang = "en_us"
+opt.spell = true
