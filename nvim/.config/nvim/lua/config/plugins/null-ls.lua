@@ -20,12 +20,8 @@ function M.config()
     end, {})
 
     local mason_null = require("mason-null-ls")
-    mason_null.setup()
-
-    mason_null.setup_handlers({
-        function(source_name, methods)
-            require("mason-null-ls.automatic_setup")(source_name, methods)
-        end,
+    mason_null.setup({
+        handlers = {},
     })
 
     local null = require("null-ls")
