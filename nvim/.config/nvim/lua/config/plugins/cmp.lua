@@ -29,6 +29,14 @@ local M = {
         "onsails/lspkind-nvim",
 
         {
+            "tzachar/cmp-tabnine",
+            build = "./install.sh",
+            config = function()
+                require("cmp_tabnine.config"):setup()
+            end,
+        },
+
+        {
             "L3MON4D3/LuaSnip",
             dependencies = "rafamadriz/friendly-snippets",
             config = luasnip_conf,
@@ -80,6 +88,7 @@ function M.config()
         sources = {
             { name = "nvim_lua" },
             { name = "nvim_lsp" },
+            { name = "cmp_tabnine" },
             { name = "path" },
             { name = "luasnip" },
             { name = "buffer", keyword_length = 5 },
