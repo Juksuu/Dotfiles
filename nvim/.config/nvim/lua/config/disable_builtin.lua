@@ -1,4 +1,3 @@
-vim.g.loaded_man = true
 vim.g.loaded_gzip = true
 vim.g.loaded_matchit = true
 vim.g.loaded_tarPlugin = true

@@ -19,6 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("config.plugins", {
     dev = { path = "~/code/personal/nvim_plugins" },
     install = {
-	    missing = false
+        missing = false,
     },
 })
