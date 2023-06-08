@@ -11,13 +11,9 @@ vim.opt.number = true
 vim.opt.signcolumn = "yes"
 
 vim.opt.scrolloff = 10
-vim.opt.updatetime = 50
 
 vim.opt.list = true
 vim.opt.listchars = "tab:→ ,trail:·"
-
-vim.opt.spell = true
-vim.opt.spelllang = "en_us"
 
 vim.opt.undofile = true
 vim.opt.swapfile = false

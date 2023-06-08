@@ -18,23 +18,19 @@ function M.config()
     sign("DiagnosticSignHint")
     sign("DiagnosticSignError")
 
-    -- local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    -- local capabilities = {}
-    -- if status then
-    --     capabilities = cmp_nvim_lsp.default_capabilities()
-    -- end
-
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     local custom_attach = function(client, bufnr)
-        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        local bufopts = { buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<leader>la", "<cmd>CodeActionMenu<CR>", bufopts)
+        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set(
             { "n", "i" },
             "<c-k>",
@@ -42,12 +38,7 @@ function M.config()
             bufopts
         )
 
-        -- local has_navic, navic = pcall(require, "nvim-navic")
-        -- if has_navic and client.server_capabilities.documentSymbolProvider then
-        --     navic.attach(client, bufnr)
-        -- end
-
-        -- client.server_capabilities.semanticTokensProvider = nil
+        client.server_capabilities.semanticTokensProvider = nil
 
         if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -75,8 +66,12 @@ function M.config()
     local server_config = require("config.lsp_servers")
 
     local setup_server = function(server, opts)
-        -- opts.capabilities = capabilities
         opts.on_attach = custom_attach
+
+        local status, coq = pcall(require, "coq")
+        if status then
+            opts = coq.lsp_ensure_capabilities(opts)
+        end
 
         nvim_lsp[server].setup(opts)
     end

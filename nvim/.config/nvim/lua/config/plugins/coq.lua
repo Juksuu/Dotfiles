@@ -1,18 +1,9 @@
 local M = {
     "ms-jpq/coq_nvim",
     branch = "coq",
-    event = { "BufReadPost" },
+    event = { "BufReadPre" },
     dependencies = {
         { "ms-jpq/coq.artifacts", branch = "artifacts" },
-        {
-            "ms-jpq/coq.thirdparty",
-            branch = "3p",
-            config = function()
-                require("coq_3p")({
-                    { src = "nvimlua", short_name = "nLUA" },
-                })
-            end,
-        },
     },
 }
 
