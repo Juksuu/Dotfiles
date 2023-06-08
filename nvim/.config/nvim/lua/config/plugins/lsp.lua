@@ -2,6 +2,7 @@ local M = {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
         "neovim/nvim-lspconfig",
+        { "folke/neodev.nvim", config = true },
         { "williamboman/mason.nvim", config = true },
     },
     event = "BufReadPre",
@@ -17,11 +18,11 @@ function M.config()
     sign("DiagnosticSignHint")
     sign("DiagnosticSignError")
 
-    local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    local capabilities = {}
-    if status then
-        capabilities = cmp_nvim_lsp.default_capabilities()
-    end
+    -- local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    -- local capabilities = {}
+    -- if status then
+    --     capabilities = cmp_nvim_lsp.default_capabilities()
+    -- end
 
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -41,22 +42,12 @@ function M.config()
             bufopts
         )
 
-        local has_navic, navic = pcall(require, "nvim-navic")
-        if has_navic and client.server_capabilities.documentSymbolProvider then
-            navic.attach(client, bufnr)
-        end
+        -- local has_navic, navic = pcall(require, "nvim-navic")
+        -- if has_navic and client.server_capabilities.documentSymbolProvider then
+        --     navic.attach(client, bufnr)
+        -- end
 
-        client.server_capabilities.semanticTokensProvider = nil
-
-        if client.server_capabilities.code_lens then
-            vim.cmd([[
-              augroup lsp_document_codelens
-                au! * <buffer>
-                autocmd BufEnter ++once <buffer> lua require("vim.lsp.codelens").refresh()
-                autocmd BufWritePost,CursorHold <buffer> lua require("vim.lsp.codelens").refresh()
-              augroup END
-            ]])
-        end
+        -- client.server_capabilities.semanticTokensProvider = nil
 
         if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -84,7 +75,7 @@ function M.config()
     local server_config = require("config.lsp_servers")
 
     local setup_server = function(server, opts)
-        opts.capabilities = capabilities
+        -- opts.capabilities = capabilities
         opts.on_attach = custom_attach
 
         nvim_lsp[server].setup(opts)

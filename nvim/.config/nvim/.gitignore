@@ -1,2 +1,2 @@
 vim.log
-.luarc.json
+*.luarc.json

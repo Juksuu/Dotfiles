@@ -1,6 +1,7 @@
-vim.loader.enable()
-
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("config.disable_builtin")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -16,20 +17,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
-    defaults = { lazy = true },
     dev = { path = "~/code/personal/nvim_plugins" },
-    custom_keys = false,
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                "matchit",
-                "matchparen",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
-            },
-        },
+    install = {
+	    missing = false
     },
 })

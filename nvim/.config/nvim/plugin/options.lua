@@ -1,44 +1,25 @@
-local opt = vim.opt
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 
-opt.cindent = true
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
+vim.opt.termguicolors = true
+vim.opt.laststatus = 3
 
-opt.showcmd = true
-opt.termguicolors = true
-opt.laststatus = 3
+vim.opt.number = true
+vim.opt.signcolumn = "yes"
 
-opt.number = true
-opt.relativenumber = true
+vim.opt.scrolloff = 10
+vim.opt.updatetime = 50
 
-opt.signcolumn = "yes"
-opt.clipboard = "unnamedplus"
+vim.opt.list = true
+vim.opt.listchars = "tab:→ ,trail:·"
 
-opt.confirm = true
-opt.scrolloff = 10
-opt.showmode = false
-opt.updatetime = 50
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"
 
-opt.smartcase = true
-opt.incsearch = true
-opt.hlsearch = false
-opt.ignorecase = true
-opt.inccommand = "split"
+vim.opt.undofile = true
+vim.opt.swapfile = false
 
-opt.splitright = true
-opt.splitbelow = true
-
-opt.complete = ""
-opt.completeopt = ""
-
-opt.undofile = true
-opt.swapfile = false
-opt.shada = { "!", "'1000", "<50", "s10", "h" }
-
-opt.list = true
-opt.listchars = "tab:→ ,trail:·"
-
-opt.spelllang = "en_us"
-opt.spell = true
+vim.opt.smoothscroll = true

@@ -1,9 +1,6 @@
 local M = {
     "jayp0521/mason-null-ls.nvim",
-    dependencies = {
-        "jose-elias-alvarez/null-ls.nvim",
-        { "williamboman/mason.nvim", config = true },
-    },
+    dependencies = "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPost",
 }
 
