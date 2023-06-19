@@ -2,7 +2,8 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
 
-    { "lewis6991/gitsigns.nvim", config = true, event = "BufReadPre" },
+    { "tpope/vim-sleuth", event = "BufReadPost" },
+    { "lewis6991/gitsigns.nvim", config = true, event = "BufReadPost" },
 
     {
         "numToStr/Comment.nvim",
