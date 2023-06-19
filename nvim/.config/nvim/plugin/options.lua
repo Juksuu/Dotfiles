@@ -18,4 +18,7 @@ vim.opt.listchars = "tab:→ ,trail:·"
 vim.opt.undofile = true
 vim.opt.swapfile = false
 
+vim.opt.confirm = true
 vim.opt.smoothscroll = true
+
+vim.opt.hlsearch = false
