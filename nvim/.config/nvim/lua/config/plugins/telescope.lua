@@ -5,7 +5,6 @@ local M = {
     dependencies = {
         "nvim-telescope/telescope-file-browser.nvim",
         { "Juksuu/worktrees.nvim", config = true },
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
 }
 
@@ -34,7 +33,6 @@ function M.config()
         },
     })
 
-    require("telescope").load_extension("fzf")
     require("telescope").load_extension("file_browser")
 
     -- require("telescope").load_extension("worktrees")
