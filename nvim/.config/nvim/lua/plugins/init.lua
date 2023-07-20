@@ -12,12 +12,6 @@ return {
     },
 
     {
-        "windwp/nvim-autopairs",
-        opts = { map_bs = false, map_cr = false },
-        event = "BufReadPost",
-    },
-
-    {
         "TimUntersberger/neogit",
         opts = { disable_commit_confirmation = true },
         keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },

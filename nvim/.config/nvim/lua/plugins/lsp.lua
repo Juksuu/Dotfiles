@@ -63,7 +63,7 @@ function M.config()
     mason.setup()
 
     local nvim_lsp = require("lspconfig")
-    local server_config = require("config.lsp_servers")
+    local server_config = require("lsp_servers")
 
     local setup_server = function(server, opts)
         opts.on_attach = custom_attach

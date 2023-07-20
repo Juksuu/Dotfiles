@@ -11,31 +11,40 @@ local M = {
 function M.config()
     require("telescope").setup({
         defaults = {
+            sort_mru = true,
+            sorting_strategy = "ascending",
+            hl_result_eol = true,
             layout_config = {
                 prompt_position = "top",
             },
-            sorting_strategy = "ascending",
-            scroll_strategy = "cycle",
+            border = true,
+            borderchars = {
+                -- stylua: ignore start
+                prompt = { '▔', '▕', ' ', '▏', '🭽', '🭾', '▕', '▏' },
+                results = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+                preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+                -- stylua: ignore end
+            },
         },
         pickers = {
             find_files = {
-                theme = "ivy",
-                layout_config = {
-                    height = 0.2,
-                },
+                hidden = true,
             },
             git_files = {
-                theme = "ivy",
-                layout_config = {
-                    height = 0.2,
+                hidden = true,
+            },
+        },
+        extensions = {
+            file_browser = {
+                hidden = {
+                    file_browser = true,
+                    folder_browser = true,
                 },
             },
         },
     })
 
     require("telescope").load_extension("file_browser")
-
-    -- require("telescope").load_extension("worktrees")
 
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ss", builtin.live_grep, {})
