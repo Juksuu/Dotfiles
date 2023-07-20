@@ -7,10 +7,18 @@ function M.config()
     local palette = require("nordic.colors")
     require("nordic").setup({
         override = {
-            LazyNormal = {
-                fg = palette.fg,
-                bg = palette.bg_dark,
-            },
+            LineNr = { fg = palette.gray5, bg = palette.gray1 },
+            SignColumn = { bg = palette.gray1 },
+            GitSignsAdd = { bg = palette.gray1 },
+            GitSignsDelete = { bg = palette.gray1 },
+            GitSignsChange = { bg = palette.gray1 },
+            DiagnosticInfo = { bg = palette.gray1 },
+            DiagnosticHint = { bg = palette.gray1 },
+            DiagnosticError = { bg = palette.gray1 },
+            DiagnosticWarning = { bg = palette.gray1 },
+            NeogitNotificationInfo = { fg = palette.blue2, bg = palette.gray0 },
+            NeogitNotificationError = { bg = palette.red.bright },
+            NeogitNotificationWarning = { bg = palette.yellow.base },
         },
     })
     require("nordic").load()

@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.loader.enable()
+
 require("disable_builtin")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

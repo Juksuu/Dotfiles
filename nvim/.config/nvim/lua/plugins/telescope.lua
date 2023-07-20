@@ -1,6 +1,5 @@
 local M = {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.1",
     event = { "VeryLazy", "BufReadPre" },
     dependencies = {
         "nvim-telescope/telescope-file-browser.nvim",
