@@ -12,4 +12,17 @@ return {
         opts = { disable_commit_confirmation = true },
         keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },
     },
+
+    {
+        "windwp/windline.nvim",
+        config = function()
+            require("wlsample.vscode")
+        end,
+    },
+    {
+        "j-hui/fidget.nvim",
+        config = true,
+        tag = "legacy",
+        event = "LspAttach",
+    },
 }
