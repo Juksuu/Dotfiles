@@ -18,6 +18,12 @@ function M.config()
     sign("DiagnosticSignHint")
     sign("DiagnosticSignError")
 
+    local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    local capabilities = {}
+    if status then
+        capabilities = cmp_nvim_lsp.default_capabilities()
+    end
+
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
     local custom_attach = function(client, bufnr)
@@ -37,7 +43,7 @@ function M.config()
             bufopts
         )
 
-        client.server_capabilities.semanticTokensProvider = nil
+        client.server_capabilities.semanticTokensProvider = false
 
         if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -65,12 +71,8 @@ function M.config()
     local server_config = require("lsp_servers")
 
     local setup_server = function(server, opts)
+        opts.capabilities = capabilities
         opts.on_attach = custom_attach
-
-        local status, coq = pcall(require, "coq")
-        if status then
-            opts = coq.lsp_ensure_capabilities(opts)
-        end
 
         nvim_lsp[server].setup(opts)
     end

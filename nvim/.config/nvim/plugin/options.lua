@@ -10,14 +10,12 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
-vim.opt.laststatus = 3
-vim.opt.showtabline = 0
 
 vim.opt.number = true
+vim.opt.laststatus = 3
+vim.opt.showtabline = 0
 vim.opt.signcolumn = "yes:1"
 vim.opt.statuscolumn = " %=%l %s%C%#StatusColumnBorder#▕%#None# "
-
-vim.opt.scrolloff = 10
 
 vim.opt.list = true
 vim.opt.listchars = "tab:→ ,trail:·"
@@ -37,4 +35,7 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 
 vim.opt.confirm = true
+vim.opt.updatetime = 100
+
+vim.opt.scrolloff = 10
 vim.opt.smoothscroll = true

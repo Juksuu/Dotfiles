@@ -1,6 +1,9 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    dependencies = {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+    },
 }
 
 function M.config()
@@ -11,6 +14,8 @@ function M.config()
         },
         auto_install = true,
         indent = { enable = false },
+        incremental_selection = { enable = false },
+        context_commentstring = { enable = true },
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
@@ -23,7 +28,6 @@ function M.config()
                 end
             end,
         },
-        incremental_selection = { enable = false },
     })
 end
 
