@@ -11,10 +11,11 @@ vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
+vim.opt.showtabline = 0
 
-vim.opt.statuscolumn = "%=%l %s%C%#StatusColumnBorder#▕%#None# "
 vim.opt.number = true
 vim.opt.signcolumn = "yes:1"
+vim.opt.statuscolumn = " %=%l %s%C%#StatusColumnBorder#▕%#None# "
 
 vim.opt.scrolloff = 10
 

@@ -1,6 +1,5 @@
 local M = {}
 
-M.server_settings = {
-}
+M.server_settings = {}
 
 return M
