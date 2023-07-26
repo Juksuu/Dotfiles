@@ -32,9 +32,40 @@ function M.config()
         capabilities = cmp_nvim_lsp.default_capabilities()
     end
 
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    vim.g.format_on_save = true
+    local toggle_formatting = function()
+        vim.g.format_on_save = not vim.g.format_on_save
+    end
 
+    vim.g.inlay_hints_visible = false
+    local toggle_inlay_hints = function(client, bufnr)
+        if vim.g.inlay_hints_visible then
+            vim.g.inlay_hints_visible = false
+            vim.lsp.inlay_hint(bufnr, false)
+        else
+            if client.server_capabilities.inlayHintProvider then
+                vim.g.inlay_hints_visible = true
+                vim.lsp.inlay_hint(bufnr, true)
+            else
+                print("No inlay hints available")
+            end
+        end
+    end
+
+    vim.g.diagnostics_visible = true
+    local toggle_diagnostics = function()
+        vim.g.diagnostics_visible = not vim.g.diagnostics_visible
+        if vim.g.diagnostics_visible then
+            vim.diagnostic.enable()
+        else
+            vim.diagnostic.disable()
+        end
+    end
+
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     local custom_attach = function(client, bufnr)
+        client.server_capabilities.semanticTokensProvider = false
+
         local bufopts = { buffer = bufnr }
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
@@ -51,7 +82,11 @@ function M.config()
             bufopts
         )
 
-        client.server_capabilities.semanticTokensProvider = false
+        vim.keymap.set("n", "<leader>tf", toggle_formatting, bufopts)
+        vim.keymap.set("n", "<leader>td", toggle_diagnostics, bufopts)
+        vim.keymap.set("n", "<leader>ti", function()
+            toggle_inlay_hints(client, bufnr)
+        end, bufopts)
 
         if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -62,8 +97,8 @@ function M.config()
                     if vim.g.format_on_save then
                         vim.lsp.buf.format({
                             bufnr = bufnr,
-                            filter = function(lsp_client)
-                                return lsp_client.name == "null-ls"
+                            filter = function(server)
+                                return server.name ~= "tssserver"
                             end,
                         })
                     end
@@ -78,19 +113,19 @@ function M.config()
     local nvim_lsp = require("lspconfig")
     local server_config = require("lsp_servers")
 
-    local setup_server = function(server, opts)
+    local setup_server = function(server)
+        local opts = server_config.server_settings[server] or {}
         opts.capabilities = capabilities
         opts.on_attach = custom_attach
 
         nvim_lsp[server].setup(opts)
     end
 
-    mason.setup_handlers({
-        function(server)
-            local server_opts = server_config.server_settings[server] or {}
-            setup_server(server, server_opts)
-        end,
-    })
+    mason.setup_handlers({ setup_server })
+
+    for _, v in pairs(server_config.manual_servers) do
+        setup_server(v)
+    end
 end
 
 return M
