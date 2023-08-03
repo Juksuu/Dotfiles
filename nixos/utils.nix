@@ -1,10 +1,15 @@
-{ inputs }:
+{ inputs, overlays }:
 {
   makeSystem = { hostname, system, users }:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs system hostname; };
       modules = [
         ./hosts/${hostname}
+        {
+          nixpkgs = {
+            inherit overlays;
+          };
+        }
       ] ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
     };
   
@@ -23,6 +28,9 @@
             inherit username;
             homeDirectory = "/home/${username}";
             stateVersion = "23.05";
+          };
+          nixpkgs = {
+            inherit overlays;
           };
         }
       ];

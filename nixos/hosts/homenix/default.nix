@@ -49,7 +49,9 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    gcc
     wget
+    fish
     kitty
     hyprland
     home-manager

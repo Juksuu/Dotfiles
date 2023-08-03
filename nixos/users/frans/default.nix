@@ -5,5 +5,8 @@
     home = "/home/frans";
     description = "Frans";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
   };
+
+  programs.fish.enable = true;
 }

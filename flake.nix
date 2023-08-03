@@ -9,15 +9,18 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs: 
     let
-      utils = import ./nixos/utils.nix { inherit inputs; };
+      overlays = [ inputs.neovim-nightly-overlay.overlay ];
+      utils = import ./nixos/utils.nix { inherit inputs overlays; };
     in
     {
       nixosConfigurations = {
-        frans = utils.makeSystem {
+        homenix = utils.makeSystem {
           system = "x86_64-linux";
           hostname = "homenix";
           users = [ "frans" ];
