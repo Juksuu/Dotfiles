@@ -1,11 +1,12 @@
 { inputs, lib, config, pkgs, ... }:
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.05";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -40,22 +41,19 @@
     LC_TIME = "fi_FI.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
   environment.systemPackages = with pkgs; [
+    fd
     vim
     git
     gcc
     wget
     fish
     kitty
-    hyprland
+    ripgrep
     home-manager
     polkit-kde-agent
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
   ];
 
   environment.sessionVariables = {
@@ -68,15 +66,6 @@
     SDL_VIDEODRIVER = "wayland";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
-
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
   };
 
   hardware = {
@@ -97,11 +86,43 @@
     };
   };
 
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    xkbVariant = "";
+    videoDrivers = [ "nvidia" ];
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+  };
+
+  # Audio
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  environment.etc = {
+    "pipewire/pipewire.conf.d/92-low-latency.conf".text = ''
+      context.properties = {
+        default.clock.rate = 48000
+          default.clock.quantum = 32
+          default.clock.min-quantum = 32
+          default.clock.max-quantum = 32
+      }
+    '';
+  };
+
+  xdg.portal.enable = true;
   security.polkit.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    nvidiaPatches = true;
-  };
+  fonts.packages = with pkgs;
+    [
+      (nerdfonts.override {
+        fonts = [ "Iosevka" ];
+      })
+    ];
 }

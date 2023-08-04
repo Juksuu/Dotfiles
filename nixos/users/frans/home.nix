@@ -1,4 +1,4 @@
-{ config, pkgs, unstable-pkgs, makeMutableSymlink, ...}:
+{ config, pkgs, unstable-pkgs, makeMutableSymlink, ... }:
 {
   home.packages = with pkgs; [
     wofi
@@ -9,6 +9,12 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting
+
+      if test -z (pgrep ssh-agent | string collect)
+        eval (ssh-agent -c) > /dev/null
+        set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+        set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+      end
     '';
     shellAliases = {
       hms = "home-manager switch --flake ~/.dotfiles#frans@homenix";
@@ -25,6 +31,11 @@
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
+    extraPackages = with pkgs; [
+      stylua
+      rnix-lsp
+      sumneko-lua-language-server
+    ];
   };
 
   # Create symlinks for all config files

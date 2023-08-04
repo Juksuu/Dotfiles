@@ -1,6 +1,6 @@
 local M = {}
 
-M.manual_servers = { "zls" }
-M.server_settings = {}
+M.servers = { "rnix", "lua_ls" }
+M.settings = {}
 
 return M

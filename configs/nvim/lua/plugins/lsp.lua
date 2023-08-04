@@ -1,9 +1,7 @@
 local M = {
-    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
     dependencies = {
-        "neovim/nvim-lspconfig",
         { "folke/neodev.nvim", config = true },
-        { "williamboman/mason.nvim", config = true },
     },
     event = "BufReadPre",
 }
@@ -13,7 +11,8 @@ function M.config()
     local ok, wf = pcall(require, "vim.lsp._watchfiles")
     if ok then
         wf._watchfunc = function()
-            return function() end
+            return function()
+            end
         end
     end
 
@@ -30,11 +29,6 @@ function M.config()
     local capabilities = {}
     if status then
         capabilities = cmp_nvim_lsp.default_capabilities()
-    end
-
-    vim.g.format_on_save = true
-    local toggle_formatting = function()
-        vim.g.format_on_save = not vim.g.format_on_save
     end
 
     vim.g.inlay_hints_visible = false
@@ -82,48 +76,24 @@ function M.config()
             bufopts
         )
 
-        vim.keymap.set("n", "<leader>tf", toggle_formatting, bufopts)
         vim.keymap.set("n", "<leader>td", toggle_diagnostics, bufopts)
         vim.keymap.set("n", "<leader>ti", function()
             toggle_inlay_hints(client, bufnr)
         end, bufopts)
-
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    if vim.g.format_on_save then
-                        vim.lsp.buf.format({
-                            bufnr = bufnr,
-                            filter = function(server)
-                                return server.name ~= "tssserver"
-                            end,
-                        })
-                    end
-                end,
-            })
-        end
     end
-
-    local mason = require("mason-lspconfig")
-    mason.setup()
 
     local nvim_lsp = require("lspconfig")
     local server_config = require("lsp_servers")
 
     local setup_server = function(server)
-        local opts = server_config.server_settings[server] or {}
+        local opts = server_config.settings[server] or {}
         opts.capabilities = capabilities
         opts.on_attach = custom_attach
 
         nvim_lsp[server].setup(opts)
     end
 
-    mason.setup_handlers({ setup_server })
-
-    for _, v in pairs(server_config.manual_servers) do
+    for _, v in pairs(server_config.servers) do
         setup_server(v)
     end
 end

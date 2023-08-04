@@ -12,7 +12,7 @@
         }
       ] ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
     };
-  
+
   makeHome = { system, username, hostname }:
     inputs.home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = {
