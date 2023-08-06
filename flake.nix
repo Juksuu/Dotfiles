@@ -2,22 +2,22 @@
   description = "NixOS system";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    hyprland.url = "github:hyprwm/Hyprland";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs:
     let
       overlays = [
-        inputs.nixpkgs-wayland.overlay
-        inputs.neovim-nightly-overlay.overlay
+        inputs.neovim-nightly.overlay
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
     in

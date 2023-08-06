@@ -8,17 +8,21 @@
 
   system.stateVersion = "23.05";
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   nix.settings = {
-    experimental-features = "nix-command flakes";
     auto-optimise-store = true;
+    experimental-features = "nix-command flakes";
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIMBioiJM7ypFP8PwtkuGc=" ];
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   # Enable networking
   networking.hostName = "homenix";
@@ -26,6 +30,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Helsinki";
+  time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -42,30 +47,21 @@
   };
 
   environment.systemPackages = with pkgs; [
-    fd
-    vim
-    git
     gcc
-    wget
+    vim
     fish
-    kitty
-    ripgrep
+    pipewire
     home-manager
-    polkit-kde-agent
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
+
+    egl-wayland
+    nvidia-vaapi-driver
   ];
 
   environment.sessionVariables = {
-    WLR_BACKEND = "vulkan";
-    WLR_RENDERER = "vulkan";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    XDG_SESSION_TYPE = "wayland";
-    LIBVA_DRIVER_NAME = "nvidia";
-    SDL_VIDEODRIVER = "wayland";
     GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
   };
 
   hardware = {
@@ -73,11 +69,6 @@
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        vaapiVdpau
-        libvdpau-va-gl
-        nvidia-vaapi-driver
-      ];
     };
     nvidia = {
       modesetting.enable = true;
@@ -116,13 +107,18 @@
     '';
   };
 
-  xdg.portal.enable = true;
-  security.polkit.enable = true;
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override {
+      fonts = [ "Iosevka" ];
+    })
+  ];
 
-  fonts.packages = with pkgs;
-    [
-      (nerdfonts.override {
-        fonts = [ "Iosevka" ];
-      })
-    ];
+  programs.hyprland = {
+    enable = true;
+    xwayland = {
+      enable = true;
+      hidpi = true;
+    };
+    nvidiaPatches = true;
+  };
 }

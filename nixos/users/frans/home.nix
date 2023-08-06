@@ -1,8 +1,18 @@
-{ config, pkgs, unstable-pkgs, makeMutableSymlink, ... }:
+{ self, config, pkgs, makeMutableSymlink, ... }:
 {
   home.packages = with pkgs; [
+    # Tools
+    fd
+    git
+    wget
+    ripgrep
+
+    # General programs
     wofi
+    kitty
+    dunst
     brave
+    discord
   ];
 
   programs.fish = {
@@ -49,6 +59,11 @@
       enable = true;
       recursive = true;
       source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
+    };
+    hypr = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
     };
   };
 }
