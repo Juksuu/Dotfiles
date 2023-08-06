@@ -50,25 +50,43 @@
     gcc
     vim
     fish
+    dbus
     pipewire
     home-manager
+    xdg-desktop-portal-gtk
 
-    egl-wayland
-    nvidia-vaapi-driver
+    grim
+    slurp
+
+    qt5.qtwayland
+    qt6.qtwayland
   ];
 
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
+    XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
-    GBM_BACKEND = "nvidia-drm";
+    WLR_NO_HARDWARE_CURSORS = "1";
+
+    # Nvidia specific
     LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+    # QT Variables
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+
+    GDK_SCALE = "2";
+    GDK_BACKEND = "wayland,x11";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
   };
 
   hardware = {
     opengl = {
       enable = true;
       driSupport = true;
-      driSupport32Bit = true;
     };
     nvidia = {
       modesetting.enable = true;
@@ -87,6 +105,8 @@
       wayland = true;
     };
   };
+
+  services.dbus.enable = true;
 
   # Audio
   security.rtkit.enable = true;
@@ -107,7 +127,7 @@
     '';
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override {
       fonts = [ "Iosevka" ];
     })

@@ -12,8 +12,27 @@
     kitty
     dunst
     brave
-    discord
+    discord-canary
   ];
+
+  # Create symlinks for all config files
+  xdg.configFile = {
+    nvim = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
+    };
+    kitty = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
+    };
+    hypr = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
+    };
+  };
 
   programs.fish = {
     enable = true;
@@ -48,22 +67,10 @@
     ];
   };
 
-  # Create symlinks for all config files
-  xdg.configFile = {
-    nvim = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
-    };
-    kitty = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
-    };
-    hypr = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
-    };
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+    ];
   };
 }
