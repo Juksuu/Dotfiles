@@ -51,15 +51,17 @@
     vim
     fish
     dbus
+    htop
     pipewire
+    pavucontrol
     home-manager
-    xdg-desktop-portal-gtk
 
+    # Hyprland wayland stuff
     grim
     slurp
-
     qt5.qtwayland
     qt6.qtwayland
+    xdg-desktop-portal-gtk
   ];
 
   environment.sessionVariables = {
@@ -137,7 +139,6 @@
     enable = true;
     xwayland = {
       enable = true;
-      hidpi = true;
     };
     nvidiaPatches = true;
   };

@@ -12,7 +12,7 @@
     kitty
     dunst
     brave
-    discord-canary
+    discord
   ];
 
   # Create symlinks for all config files
