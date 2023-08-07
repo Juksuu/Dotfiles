@@ -59,6 +59,8 @@
     # Hyprland wayland stuff
     grim
     slurp
+    hyprpaper
+    wl-clipboard
     qt5.qtwayland
     qt6.qtwayland
     xdg-desktop-portal-gtk

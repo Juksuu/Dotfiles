@@ -1,22 +1,30 @@
 { self, config, pkgs, makeMutableSymlink, ... }:
 {
   home.packages = with pkgs; [
-    # Tools
     fd
-    git
     wget
     ripgrep
 
-    # General programs
-    wofi
+    rofi-wayland
+
+    mako
     kitty
-    dunst
     brave
     discord
   ];
 
   # Create symlinks for all config files
   xdg.configFile = {
+    hypr = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
+    };
+    rofi = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/rofi";
+    };
     nvim = {
       enable = true;
       recursive = true;
@@ -26,11 +34,6 @@
       enable = true;
       recursive = true;
       source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
-    };
-    hypr = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
     };
   };
 
