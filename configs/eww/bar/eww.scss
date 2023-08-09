@@ -1,0 +1,40 @@
+* {
+    all: unset;
+    font-family: Iosevka;
+}
+
+.bar_class {
+    background-color: #0f0f17;
+    border-radius: 16px;
+}
+
+.separ {
+    color: #3e424f;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0px 8px 5px 8px;
+}
+
+// Workspaces
+.workspace {
+    margin: 0px 0px 0px 10px;
+}
+
+.workspace-current {
+    margin: 0px 0px 0px 10px;
+}
+
+// Clock
+.clock_time_class {
+    color: #bfc9db;
+    font-size: 14;
+    font-weight: bold;
+    margin: 0px 10px 0px 0px;
+}
+
+.clock_date_class {
+    color: #d7beda;
+    font-size: 14;
+    font-weight: bold;
+    margin: 0px 10px 0px 0px;
+}

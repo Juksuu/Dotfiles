@@ -20,6 +20,11 @@
       recursive = true;
       source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
     };
+    eww = {
+      enable = true;
+      recursive = true;
+      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/eww";
+    };
     rofi = {
       enable = true;
       recursive = true;

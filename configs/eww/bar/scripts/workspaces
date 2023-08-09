@@ -1,0 +1,11 @@
+#!/bin/sh
+
+workspaces () {
+    ACTIVE_WORKSPACE=$(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id')
+    hyprctl workspaces -j | jq -c -r --arg ACTIVE_WORKSPACE $ACTIVE_WORKSPACE '[{ "id": .[].id | tostring, "active": $ACTIVE_WORKSPACE }]'
+}
+
+workspaces
+socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+workspaces
+done

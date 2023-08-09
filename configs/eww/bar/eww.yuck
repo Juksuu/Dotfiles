@@ -1,0 +1,83 @@
+;; ********** Variables **********
+
+(defpoll clock_time :interval "30s" "date +\%H:%M")
+(defpoll clock_date :interval "30s" "date '+%d/%m'")
+
+(defvar time_reveal false)
+(defvar eww "eww -c $HOME/.config/eww/bar")
+
+(deflisten workspaces :initial "[]" "scripts/workspaces")
+
+
+;; ********** Widgets **********
+
+(defwidget sep []
+ (box :vexpand "false" :hexpand "false"
+  (label :class "separ" :text "|")))
+
+
+;; Workspaces
+(defwidget workspaces []
+  (eventbox :class "workspaces-widget"
+    (box :space-evenly true
+     (for workspace in workspaces
+      (box :class "${workspace.id == workspace.active ? "workspace-current" : "workspace"}"
+       (label :text "${workspace.id == workspace.active ? "  " : "  "}"))))))
+
+
+;; Clock
+(defwidget clock_module []
+ (eventbox
+  :onhover "${eww} update time_reveal=true"
+  :onhoverlost "${eww} update time_reveal=false"
+  (box :class "module" :space-evenly "false" :orientation "h" :spacing "4"
+   (label :text clock_time :class "clock_time_class" )
+   (revealer :transition "slideleft" :reveal time_reveal :duration "350ms"
+    (label :text clock_date :class "clock_date_class")))))
+
+
+(defwidget left []
+ (box :orientation "h"
+  :space-evenly false
+  :halign "start"
+  :class "left_modules"
+  (workspaces)))
+
+
+(defwidget right []
+ (box :orientation "h"
+  :space-evenly false
+  :halign "end"
+  :class "right_modules"
+  (sep)
+  (clock_module)))
+
+
+(defwidget center []
+ (box :orientation "h"
+  :space-evenly false
+  :halign "center"
+  :class "center_modules"))
+
+
+(defwidget bar_1 []
+ (box :class "bar_class"
+  :orientation "h"
+  (left)
+  (center)
+  (right)
+ ))
+
+
+;; ********** Windows **********
+
+(defwindow bar
+ :monitor 1
+ :stacking "fg"
+ :windowtype "dock"
+ :geometry (geometry
+     :x "0%"
+     :y "4px"
+     :width "99%"
+     :anchor "top center")
+ (bar_1))

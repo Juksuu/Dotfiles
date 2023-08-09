@@ -47,24 +47,30 @@
   };
 
   environment.systemPackages = with pkgs; [
+    jq
     gcc
     vim
     fish
     dbus
     htop
     pipewire
+    alsa-utils
     pavucontrol
     home-manager
 
-    # Hyprland wayland stuff
+    # Wayland stuff
     grim
     slurp
-    hyprpaper
+    eww-wayland
     egl-wayland
     wl-clipboard
     qt5.qtwayland
     qt6.qtwayland
     xdg-desktop-portal-gtk
+
+    # Hyrpland stuff
+    socat
+    hyprpaper
   ];
 
   environment.sessionVariables = {
