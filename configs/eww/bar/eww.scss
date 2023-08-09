@@ -1,11 +1,19 @@
+@function shade($color, $percentage) {
+  @return mix(rgb(0, 7, 18), $color, $percentage);
+}
+
+$primary: #adc6ff;
+$colorbarbg: #1f252d;
+$onSecondary: #293041;
+
 * {
     all: unset;
     font-family: Iosevka;
 }
 
 .bar_class {
-    background-color: #0f0f17;
-    border-radius: 16px;
+    border-radius: 10px;
+    background-color: mix(shade($colorbarbg, 35%), $primary, 95%);
 }
 
 .separ {
@@ -21,6 +29,11 @@
 }
 
 .workspace-current {
+    margin: 0px 0px 0px 10px;
+}
+
+// Window title
+.window-title {
     margin: 0px 0px 0px 10px;
 }
 

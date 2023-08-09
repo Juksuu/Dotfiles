@@ -1,0 +1,12 @@
+#!/bin/sh
+
+MONITOR=$1
+
+run () {
+    hyprctl activewindow -j | jq --arg test $MONITOR 'select(.monitor == ($test | tonumber)).title // ""' --raw-output
+}
+
+run
+socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+run
+done
