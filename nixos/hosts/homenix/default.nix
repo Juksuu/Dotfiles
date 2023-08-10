@@ -112,8 +112,9 @@
 
   services.xserver = {
     enable = true;
-    layout = "us";
+    layout = "us,fi";
     xkbVariant = "";
+    xkbOptions = "grp:win_space_toggle";
     videoDrivers = [ "nvidia" ];
     displayManager.gdm = {
       enable = true;

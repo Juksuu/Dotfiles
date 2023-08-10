@@ -1,53 +1,47 @@
-@function shade($color, $percentage) {
-  @return mix(rgb(0, 7, 18), $color, $percentage);
+.left-modules {
+    margin: 7px 10px 3px 12px;
 }
 
-$primary: #adc6ff;
-$colorbarbg: #1f252d;
-$onSecondary: #293041;
-
-* {
-    all: unset;
-    font-family: Iosevka;
+.right-modules {
+    background-color: $bg-alt;
+    margin: 7px 20px 7px 10px;
+    border-radius: 100px;
+    padding: 0px 20px 0px 20px;
 }
 
-.bar_class {
-    border-radius: 10px;
-    background-color: mix(shade($colorbarbg, 35%), $primary, 95%);
+.separator-bar {
+    font-size: 20px;
+    color: $gray;
 }
 
-.separ {
-    color: #3e424f;
-    font-weight: bold;
-    font-size: 24px;
-    margin: 0px 8px 5px 8px;
+.bar {
+    background-color: $bg;
+    border-radius: 0px 0px 15px 15px;
 }
 
-// Workspaces
-.workspace {
-    margin: 0px 0px 0px 10px;
+.time-module-box {
+    padding-left: 15px;
 }
 
-.workspace-current {
-    margin: 0px 0px 0px 10px;
+.time-module:hover {
+    color: $yellow;
 }
 
-// Window title
-.window-title {
-    margin: 0px 0px 0px 10px;
+.system-buttons-box {
+    font-size: 22px;
+    padding-right: 15px;
 }
 
-// Clock
-.clock_time_class {
-    color: #bfc9db;
-    font-size: 14;
-    font-weight: bold;
-    margin: 0px 10px 0px 0px;
+.volume-system-button:hover {
+    color: $blue;
 }
 
-.clock_date_class {
-    color: #d7beda;
-    font-size: 14;
-    font-weight: bold;
-    margin: 0px 10px 0px 0px;
+.volume-slider {
+    margin: 0px 5px 0px 10px;
+}
+
+.volume-slider highlight {
+    padding: 0.3em;
+    background: linear-gradient(to top, $blue, $cyan);
+    border-radius: 15px;
 }
