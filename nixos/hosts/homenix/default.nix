@@ -6,7 +6,7 @@
       ./hardware-configuration.nix
     ];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   nix.settings = {
     auto-optimise-store = true;
@@ -66,11 +66,15 @@
     wl-clipboard
     qt5.qtwayland
     qt6.qtwayland
-    xdg-desktop-portal-gtk
 
     # Hyrpland stuff
     socat
     hyprpaper
+
+    # SDDM themes
+    qt5.qtgraphicaleffects
+    # (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-dark
+    (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-candy
   ];
 
   environment.sessionVariables = {
@@ -116,9 +120,16 @@
     xkbVariant = "";
     xkbOptions = "grp:win_space_toggle";
     videoDrivers = [ "nvidia" ];
-    displayManager.gdm = {
+    displayManager.sddm = {
       enable = true;
-      wayland = true;
+      theme = "sugar-candy";
+      settings = {
+        General = {
+          DisplayServer = "wayland";
+          InputMethod = "";
+        };
+        Wayland.CompositorCommand = "${pkgs.weston}/bin/weston --shell=fullscreen-shell.so";
+      };
     };
   };
 
@@ -155,5 +166,12 @@
       enable = true;
     };
     nvidiaPatches = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 }
