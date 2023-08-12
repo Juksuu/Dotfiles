@@ -51,7 +51,6 @@
     gcc
     vim
     fish
-    dbus
     htop
     pipewire
     alsa-utils

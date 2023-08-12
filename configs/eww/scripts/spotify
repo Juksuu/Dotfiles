@@ -1,0 +1,19 @@
+#!/bin/sh
+
+IMAGE_OUTPUT="$HOME/.cache/eww/images/cover.jpeg"
+
+STATUS=$(playerctl -p spotify status)
+STATUS_ICON="  "
+
+if [[ $STATUS == "Playing" ]] then
+    STATUS_ICON="  "
+fi
+
+TITLE=$(playerctl -p spotify metadata --format "{{ title }}")
+ALBUM=$(playerctl -p spotify metadata --format "{{ album }}")
+ARTIST=$(playerctl -p spotify metadata --format "{{ artist }}")
+COVER_LINK=$(playerctl -p spotify metadata mpris:artUrl)
+
+curl -s $COVER_LINK --output $IMAGE_OUTPUT
+
+printf '{ "icon": "%s", "title": "%s", "artist": "%s", "album": "%s", "cover": "%s" }\n' "$STATUS_ICON" "$TITLE" "$ARTIST" "$ALBUM" "$IMAGE_OUTPUT"

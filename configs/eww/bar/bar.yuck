@@ -1,15 +1,13 @@
 ;; ********** Variables **********
-
 (defvar volume_slider false)
 
 (defpoll time-text :interval "1s" "date +'%b %d, %H:%M'")
-(defpoll volume_bar :interval "1s" "bar/scripts/volume status")
-(defpoll volume_value :interval "1s" "bar/scripts/volume")
+(defpoll volume_bar :interval "1s" "scripts/volume status")
+(defpoll volume_value :interval "1s" "scripts/volume")
 
-(deflisten workspaces :initial "[]" "bar/scripts/workspaces")
+(deflisten workspaces :initial "[]" "scripts/workspaces")
 
 ;; ********** Widgets **********
-
 (defwidget separator_bar []
  (label :class "separator-bar" :text "|"))
 
@@ -34,7 +32,7 @@
     (button
     :class "volume-system-button"
     :onclick "eww open --toggle system-menu"
-    :onrightclick "bar/scripts/volume toggle"
+    :onrightclick "scripts/volume toggle"
     "${volume_bar}")
     (revealer :transition "slideleft" :duration "350ms" :reveal volume_slider
      (scale :class "volume-slider"
@@ -95,7 +93,6 @@
 
 
 ;; ********** Windows **********
-
 (defwindow bar
  :monitor 1
  :exclusive true

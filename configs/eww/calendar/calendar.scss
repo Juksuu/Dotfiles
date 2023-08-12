@@ -1,8 +1,8 @@
 .cal-box {
     padding: 0.5em;
-    margin: 1em 0.75em 0.25em;
-    background-color: $bg;
     border-radius: 15px;
+    background-color: $bg;
+    margin: 1em 0.75em 0.25em;
 }
 
 .cal {
@@ -25,7 +25,7 @@ calendar.button {
 
 calendar.highlight {
     color: $green;
-    font-weight: bold;
-    padding: 20px;
     margin: 20px;
+    padding: 20px;
+    font-weight: bold;
 }

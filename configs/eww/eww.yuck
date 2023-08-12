@@ -1,2 +1,3 @@
-(include "./bar/eww.yuck")
-(include "./misc/eww.yuck")
+(include "./bar/bar.yuck")
+(include "./calendar/calendar.yuck")
+(include "./spotify/spotify.yuck")

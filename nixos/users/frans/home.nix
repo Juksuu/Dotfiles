@@ -4,13 +4,15 @@
     fd
     wget
     ripgrep
-
-    rofi-wayland
+    (python3.withPackages (ps: with ps; [ dbus-python ]))
 
     dunst
     kitty
     brave
     discord
+    spotify
+    playerctl
+    rofi-wayland
   ];
 
   # Create symlinks for all config files
