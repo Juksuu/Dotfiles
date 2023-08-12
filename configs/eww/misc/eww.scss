@@ -1,0 +1,31 @@
+.cal-box {
+    padding: 0.5em;
+    margin: 1em 0.75em 0.25em;
+    background-color: $bg;
+    border-radius: 15px;
+}
+
+.cal {
+    padding: 1em .75em 0em;
+}
+
+calendar {
+    font-weight: bold;
+    &:selected {
+        color: $blue;
+    }
+    &:indeterminate {
+        color: $gray;
+    }
+}
+
+calendar.button {
+    color: $red;
+}
+
+calendar.highlight {
+    color: $green;
+    font-weight: bold;
+    padding: 20px;
+    margin: 20px;
+}

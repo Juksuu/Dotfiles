@@ -1,0 +1,17 @@
+;; variables
+(defpoll calendar_day :interval "10h" "date '+%d'")
+(defpoll calendar_month :interval "10h" "date '+%m'")
+(defpoll calendar_year :interval "10h" "date '+%Y'")
+
+;; Widgets
+(defwidget calendar-widget []
+ (box :class "cal-box" :orientation "v" :space-evenly "false"
+  (calendar :class "cal" :show-details true :show-heading true :show-day-names true :day calendar_day :month calendar_month :year calendar_year)))
+
+;; Windows
+(defwindow calendar
+  :geometry (geometry :x "-20px" :y "-50px" :width "24%" :height "30%" :anchor "bottom right")
+  :stacking "fg"
+  :windowtype "dock"
+  :monitor 1
+  (calendar-widget))

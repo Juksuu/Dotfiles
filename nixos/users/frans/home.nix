@@ -7,7 +7,7 @@
 
     rofi-wayland
 
-    mako
+    dunst
     kitty
     brave
     discord

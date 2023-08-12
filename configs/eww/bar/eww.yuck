@@ -2,7 +2,7 @@
 
 (defvar volume_slider false)
 
-(defpoll time-text :interval "1s" "date +'%b %d, %I:%M'")
+(defpoll time-text :interval "1s" "date +'%b %d, %H:%M'")
 (defpoll volume_bar :interval "1s" "bar/scripts/volume status")
 (defpoll volume_value :interval "1s" "bar/scripts/volume")
 
