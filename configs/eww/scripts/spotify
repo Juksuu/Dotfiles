@@ -1,19 +1,48 @@
 #!/bin/sh
 
-IMAGE_OUTPUT="$HOME/.cache/eww/images/cover.jpeg"
+get_song_data () {
+    IMAGE_OUTPUT="$HOME/.cache/eww/images/cover.jpeg"
+    APP_ICON_PATH="$HOME/.config/eww/images/spotify.png"
 
-STATUS=$(playerctl -p spotify status)
-STATUS_ICON="  "
+    TITLE=$(playerctl -p spotify metadata --format "{{ title }}")
+    ALBUM=$(playerctl -p spotify metadata --format "{{ album }}")
+    ARTIST=$(playerctl -p spotify metadata --format "{{ artist }}")
+    COVER_LINK=$(playerctl -p spotify metadata mpris:artUrl)
 
-if [[ $STATUS == "Playing" ]] then
-    STATUS_ICON="  "
+    curl -s $COVER_LINK --output $IMAGE_OUTPUT
+
+    printf '{ "title": "%s", "artist": "%s", "album": "%s", "cover": "%s", "appIcon": "%s" }\n' "$TITLE" "$ARTIST" "$ALBUM" "$IMAGE_OUTPUT" "$APP_ICON_PATH"
+}
+
+get_spotify_playing () {
+    STATUS_ICON="  "
+    STATUS=$(playerctl -p spotify status)
+
+    if [[ $STATUS == "Playing" ]] then
+        STATUS_ICON="  "
+    fi
+
+    echo $STATUS_ICON
+}
+
+if [[ $1 == "running" ]] then
+    if playerctl -l | grep spotify > /dev/null; then
+        echo true
+    else
+        echo false
+    fi
+elif [[ $1 == "song-data" ]] then
+    playerctl -p spotify --follow metadata --format "{{ title }}" |
+        while read LINE ; do
+            if [[ -n "$LINE" ]] then
+                get_song_data
+            fi
+        done
+elif [[ $1 == "status" ]] then
+    playerctl -p spotify --follow status |
+        while read LINE ; do
+            if [[ -n "$LINE" ]] then
+                get_spotify_playing
+            fi
+        done
 fi
-
-TITLE=$(playerctl -p spotify metadata --format "{{ title }}")
-ALBUM=$(playerctl -p spotify metadata --format "{{ album }}")
-ARTIST=$(playerctl -p spotify metadata --format "{{ artist }}")
-COVER_LINK=$(playerctl -p spotify metadata mpris:artUrl)
-
-curl -s $COVER_LINK --output $IMAGE_OUTPUT
-
-printf '{ "icon": "%s", "title": "%s", "artist": "%s", "album": "%s", "cover": "%s" }\n' "$STATUS_ICON" "$TITLE" "$ARTIST" "$ALBUM" "$IMAGE_OUTPUT"

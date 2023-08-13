@@ -1,12 +1,12 @@
 ;; ********** Variables **********
 (defvar volume_slider false)
 
-(defpoll time-text :interval "1s" "date +'%b %d, %H:%M'")
+(defpoll time_text :interval "1s" "date +'%b %d, %H:%M'")
 (defpoll volume_bar :interval "1s" "scripts/volume status")
 (defpoll volume_value :interval "1s" "scripts/volume")
 
-(deflisten workspaces_0 :initial "[]" "scripts/workspaces 0")
-(deflisten workspaces_1 :initial "[]" "scripts/workspaces 1")
+(deflisten workspaces_0 "scripts/workspaces 0")
+(deflisten workspaces_1 "scripts/workspaces 1")
 
 ;; ********** Widgets **********
 (defwidget separator_bar []
@@ -25,7 +25,7 @@
 ;; Clock
 (defwidget clock_module []
  (box :class "time-module-box" :space-evenly "false"
-  (button :class "time-module" :onclick "eww open --toggle calendar" "${time-text}")))
+  (button :class "time-module" :onclick "eww open --toggle calendar" "${time_text}")))
 
 ;; System buttons
 (defwidget system_buttons []
@@ -47,6 +47,15 @@
       :max 100
       :min 0
       :onchange "amixer -q sset Master {}%"))))))
+
+;; Spotify
+(defwidget spotify []
+ (eventbox :onclick "eww open --toggle spotify"
+  (revealer :transition "slideleft" :duration "350ms" :reveal "${spotify_running}"
+   (box :class "spotify-bar-container" :space-evenly false
+    (image :class "spotify-bar-img" :path "${spotify_song_data.appIcon}" :image-width 20)
+    (label :class "spotify-bar-title" :text "${spotify_song_data.title}" :limit-width 30)))))
+
 
 ;; Bar sections
 (defwidget left []
@@ -84,7 +93,8 @@
   (clock_module)))
 
 (defwidget center []
- (box :orientation "h" :space-evenly false :halign "center" :class "center_modules"))
+ (box :orientation "h" :space-evenly false :halign "center" :class "center_modules"
+  (spotify)))
 
 (defwidget center_2 []
  (box :orientation "h" :space-evenly false :halign "center" :class "center_modules"))

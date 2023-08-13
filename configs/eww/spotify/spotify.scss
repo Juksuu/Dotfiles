@@ -1,49 +1,50 @@
 .spotify-container {
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: $bg;
 }
 
-.spotify-img-container {
-  padding: 1.2em;
-  min-width: 13em;
-  min-height: 13em;
-}
-
 .spotify-img {
+    margin: 1.2em;
+    min-width: 13em;
+    min-height: 13em;
     border-radius: 15px;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.spotify-inner-right-container {
-    min-width: 13em;
-    padding: 0.8em;
-    margin-right: 1.2em;
+.spotify-right-container {
+    margin: 1.2em;
+    min-width: 14em;
+}
+
+.spotify-song-data-container {
+    padding: 1em;
+    margin-top: 1em;
     border-radius: 0.8em;
     background-color: $bg-alt;
 }
 
 .spotify-title {
     color: $green;
-    font-size: 1.6em;
+    font-size: 1.1em;
     font-weight: bold;
 }
 
 .spotify-artist {
     color: $red;
-    font-size: 1.2em;
+    font-size: 0.7em;
     font-weight: bold;
 }
 
 .spotify-album {
     color: $fg;
-    font-size: 0.9em;
+    font-size: 0.7em;
     font-style: italic;
 }
 
 .spotify-controls {
     color: $cyan;
-    margin-top: 0.8em;
+    margin-top: 3em;
 }
 
 .spotify-controls button {

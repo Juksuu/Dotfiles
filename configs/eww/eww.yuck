@@ -1,3 +1,7 @@
+(defpoll spotify_running :interval "1s" "scripts/spotify running")
+(deflisten spotify_status "scripts/spotify status")
+(deflisten spotify_song_data "scripts/spotify song-data")
+
 (include "./bar/bar.yuck")
 (include "./calendar/calendar.yuck")
 (include "./spotify/spotify.yuck")

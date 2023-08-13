@@ -1,36 +1,25 @@
-;; ********** Variables **********
-(defpoll spotify :interval "1s" "scripts/spotify")
-
 ;; ********** Widgets **********
-(defwidget spotify[]
- (box
-  :class "spotify-container"
-  :orientation "h"
-  :spacing 20
-  (box :class "spotify-img-container" :valign "center" :halign "center"
-   (label :class "spotify-img" :style "background-image: url('${spotify.cover}');"))
-  (box
-   :class "spotify-inner-right-container"
-   :orientation "v"
+(defwidget spotify_menu []
+ (box :class "spotify-container" :space-evenly false
+  (label
+   :class "spotify-img"
    :valign "center"
-   :halign: "center"
-   :space-evenly false
-   (box :orientation "v" :spacing 10
-    (label :class "spotify-title" :text "${spotify.title}" :limit-width 24)
-    (label :class "spotify-artist" :text "~ ${spotify.artist} ~" :limit-width 20)
-    (label :class "spotify-album" :text "${spotify.album}" :limit-width 20))
-   (box
-    :class "spotify-controls"
-    :orientation "h"
-    :halign "fill"
-    :valign "center"
+   :halign "center"
+   :style "background-image: url('${spotify_song_data.cover}');")
+  (box
+   :class "spotify-right-container" :orientation "v" :space-evenly false
+   (box :class "spotify-song-data-container" :orientation "v" :space-evenly true :spacing 10
+    (label :class "spotify-title" :text "${spotify_song_data.title}" :limit-width 15)
+    (label :class "spotify-artist" :text "~ ${spotify_song_data.artist} ~" :limit-width 20)
+    (label :class "spotify-album" :text "${spotify_song_data.album}" :limit-width 20))
+   (box :class "spotify-controls" :orientation "h" :halign "fill"
     (button :onclick "playerctl -p spotify previous" "󰒮")
-    (button :onclick "playerctl -p spotify play-pause" "${spotify.icon}")
+    (button :onclick "playerctl -p spotify play-pause" "${spotify_status}")
     (button :onclick "playerctl -p spotify next" "󰒭")))))
 
 ;; ********** Windows **********
 (defwindow spotify
- :geometry (geometry :x "39%" :y "5px")
+ :geometry (geometry :y "5px" :anchor "top center" )
  :stacking "fg"
  :monitor 1
- (spotify))
+ (spotify_menu))
