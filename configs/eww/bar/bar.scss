@@ -1,26 +1,27 @@
 .left-modules {
-    margin: 7px 10px 3px 12px;
+    margin: 0.4em 1.3em 0.4em 0.1em;
+    padding: 0.1em 1.3em 0.1em 0.8em;
 }
 
 .right-modules {
+    border-radius: 40px;
     background-color: $bg-alt;
-    margin: 7px 20px 7px 10px;
-    border-radius: 100px;
-    padding: 0px 20px 0px 20px;
+    margin: 0.4em 1.3em 0.4em 0.1em;
+    padding: 0.1em 1.3em 0.1em 0.8em;
 }
 
 .separator-bar {
-    font-size: 20px;
     color: $gray;
+    font-size: 1.3em;
 }
 
 .bar {
+    border-radius: 1em;
     background-color: $bg;
-    border-radius: 0px 0px 15px 15px;
 }
 
 .time-module-box {
-    padding-left: 15px;
+    padding-left: 1em;
 }
 
 .time-module:hover {
@@ -28,8 +29,8 @@
 }
 
 .system-buttons-box {
-    font-size: 22px;
-    padding-right: 15px;
+    font-size: 1.4em;
+    padding-right: 0.1em;
 }
 
 .volume-system-button:hover {
@@ -37,11 +38,23 @@
 }
 
 .volume-slider {
-    margin: 0px 5px 0px 10px;
+    margin: 0.1em 0.3em 0.1em 0.3em;
 }
 
 .volume-slider highlight {
     padding: 0.3em;
-    background: linear-gradient(to top, $blue, $cyan);
     border-radius: 15px;
+    background: $cyan;
+}
+
+.workspace {
+    border-radius: 10px;
+    background-color: $bg-alt;
+    padding: 0.1em 0.7em 0.1em 0.7em;
+}
+
+.ws-active {
+    background-color: $blue;
+    border-radius: 50%;
+    padding: 0.1em 0.5em 0.1em 0.5em;
 }

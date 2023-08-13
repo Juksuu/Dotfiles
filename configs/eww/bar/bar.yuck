@@ -5,17 +5,22 @@
 (defpoll volume_bar :interval "1s" "scripts/volume status")
 (defpoll volume_value :interval "1s" "scripts/volume")
 
-(deflisten workspaces :initial "[]" "scripts/workspaces")
+(deflisten workspaces_0 :initial "[]" "scripts/workspaces 0")
+(deflisten workspaces_1 :initial "[]" "scripts/workspaces 1")
 
 ;; ********** Widgets **********
 (defwidget separator_bar []
  (label :class "separator-bar" :text "|"))
 
 ;; Workspaces
-(defwidget workspaces []
- (box :class "workspace" :space-evenly true :spacing 4
-  (for workspace in workspaces
-   (label :text "${workspace.id == workspace.active ? "  " : "  "}"))))
+(defwidget workspaces [workspace_list]
+ (box :class "workspace" :space-evenly true :spacing 8
+  (for workspace in workspace_list
+   (box
+    :class "${workspace.active ? "ws-active" : "ws-inactive"}"
+    :halign "center"
+    :valign "center"
+    (label :class "ws-text" :text "${workspace.id}")))))
 
 ;; Clock
 (defwidget clock_module []
@@ -50,7 +55,7 @@
   :space-evenly false
   :halign "start"
   :class "left-modules"
-  (workspaces)))
+  (workspaces :workspace_list workspaces_1)))
 
 (defwidget left_2 []
  (box
@@ -58,7 +63,7 @@
   :space-evenly false
   :halign "start"
   :class "left-modules"
-  (workspaces)))
+  (workspaces :workspace_list workspaces_0)))
 
 (defwidget right []
  (box
@@ -96,17 +101,15 @@
 (defwindow bar
  :monitor 1
  :exclusive true
- :focusable false
  :stacking "bg"
  :windowtype "dock"
- :geometry (geometry :x "0%" :y "0px" :width "99%" :anchor "top center")
+ :geometry (geometry :y "4px" :width "99%" :anchor "top center")
  (bar_1))
 
 (defwindow bar2
  :monitor 0
  :exclusive true
- :focusable false
  :stacking "bg"
  :windowtype "dock"
- :geometry (geometry :x "0%" :y "0px" :width "99%" :anchor "top center")
+ :geometry (geometry :y "4px" :width "99%" :anchor "top center")
  (bar_2))

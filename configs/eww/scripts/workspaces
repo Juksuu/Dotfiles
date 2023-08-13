@@ -1,11 +1,14 @@
 #!/bin/sh
 
 workspaces () {
-    ACTIVE_WORKSPACE=$(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id')
-    hyprctl workspaces -j | jq -c -r --arg ACTIVE_WORKSPACE $ACTIVE_WORKSPACE '[{ "id": .[].id | tostring, "active": $ACTIVE_WORKSPACE }]'
+    ACTIVE_WORKSPACE=$(hyprctl monitors -j | jq -c --arg MONITOR $1 '.[] | select((.id | tostring) == $MONITOR).activeWorkspace.id')
+hyprctl workspaces -j | jq -c --arg ACTIVE_WORKSPACE $ACTIVE_WORKSPACE '[.[] | if .id == ($ACTIVE_WORKSPACE | tonumber) then { "id": .id | tostring, "active": true } else { "id": .id | tostring, "active": false } end]'
 }
 
-workspaces
-socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
-workspaces
-done
+if [[ -n "$1" ]] then
+    workspaces $1
+    socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+        while read -r line; do
+            workspaces $1
+        done
+fi
