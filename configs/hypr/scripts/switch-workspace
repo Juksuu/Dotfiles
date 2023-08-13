@@ -1,0 +1,23 @@
+#!/bin/sh
+
+switch_workspace () {
+    MONITOR=$(hyprctl monitors -j | jq '.[] | select(.focused).name' | tr -d \")
+    HAS_WORKSPACE_ON_MONITOR=$(hyprctl workspaces -j | jq --arg ID $1 --arg MONITOR $MONITOR 'any(.[] ; (.monitor == $MONITOR) and (.id | tostring) == $ID)')
+
+    if [[ $HAS_WORKSPACE_ON_MONITOR = false ]] then
+        OTHER_MONITOR=$(hyprctl monitors -j | jq '.[] | select(.focused == false).name' | tr -d \")
+        WORKSPACE_ACTIVE_ON_OTHER_MONITOR=$(hyprctl monitors -j | jq --arg ID $1 --arg MONITOR $OTHER_MONITOR 'any(.[] ; (.name == $MONITOR) and (.activeWorkspace.id | tostring) == $ID)')
+        if [[ $WORKSPACE_ACTIVE_ON_OTHER_MONITOR = true ]] then
+            hyprctl dispatch swapactiveworkspaces $MONITOR $OTHER_MONITOR > /dev/null
+        else
+            hyprctl dispatch moveworkspacetomonitor $1 $MONITOR > /dev/null
+            hyprctl dispatch workspace $1 > /dev/null
+        fi
+    else
+        hyprctl dispatch workspace $1 > /dev/null
+    fi
+}
+
+if [[ -n "$1" ]] then
+    switch_workspace $1
+fi
