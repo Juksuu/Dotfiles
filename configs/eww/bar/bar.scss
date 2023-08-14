@@ -4,10 +4,7 @@
 }
 
 .right-modules {
-    border-radius: 40px;
-    background-color: $bg-alt;
     margin: 0.4em 1.3em 0.4em 0.1em;
-    padding: 0.1em 1.3em 0.1em 0.8em;
 }
 
 .separator-bar {
@@ -24,6 +21,10 @@
     padding-left: 1em;
 }
 
+.time-module {
+    font-weight: bold;
+}
+
 .time-module:hover {
     color: $yellow;
 }
@@ -33,24 +34,9 @@
     padding-right: 0.1em;
 }
 
-.volume-system-button:hover {
-    color: $blue;
-}
-
-.volume-slider {
-    margin: 0.1em 0.3em 0.1em 0.3em;
-}
-
-.volume-slider highlight {
-    padding: 0.3em;
-    border-radius: 15px;
-    background: $cyan;
-}
-
 .workspace {
     border-radius: 10px;
-    background-color: $bg-alt;
-    padding: 0.1em 0.7em 0.1em 0.7em;
+    padding: 0.1em 0.2em 0.1em 0.2em;
 }
 
 .ws-active {
@@ -59,8 +45,8 @@
     padding: 0.1em 0.5em 0.1em 0.5em;
 }
 
-.spotify-bar-container {
-    // background-color: $red;
+.ws-text {
+    font-weight: bold;
 }
 
 .spotify-bar-img {
@@ -68,5 +54,6 @@
 }
 
 .spotify-bar-title {
+    font-weight: bold;
     margin-left: 0.5em;
 }

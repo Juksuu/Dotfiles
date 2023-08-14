@@ -13,8 +13,8 @@ $gray: #4d5768;
 $gray-alt: #485263;
 
 @import "./bar/bar.scss";
+@import "./menu/menu.scss";
 @import "./calendar/calendar.scss";
-@import "./spotify/spotify.scss";
 
 * {
     all: unset;

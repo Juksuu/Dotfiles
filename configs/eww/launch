@@ -10,6 +10,12 @@ bar () {
     eww open-many --toggle bar bar2
 }
 
+system () {
+    eww open --toggle system_menu
+}
+
 if [[ $1 == "bar" ]] then
     bar
+elif [[ $1 == "system" ]] then
+    system
 fi

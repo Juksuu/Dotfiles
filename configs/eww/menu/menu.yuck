@@ -1,0 +1,127 @@
+;; ********** Variables **********
+(defpoll day :interval "1s" "date +'%A'")
+(defpoll time :interval "1s" "date +'%H:%M'")
+(defpoll date :interval "1s" "date +'%d %b %y'")
+
+(defpoll wifi_status :interval "1s" "scripts/wifi status")
+
+(defpoll bluetooth_icon :interval "1s" "scripts/bluetooth --icon")
+(defpoll bluetooth_status :interval "1s" "scripts/bluetooth --status")
+(defpoll bluetooth_tooltip :interval "1s" "scripts/bluetooth --battery")
+(defpoll bluetooth_class :interval "1s" "scripts/bluetooth --class")
+
+(defpoll volume :interval "1s" "scripts/volume")
+(defpoll volume_icon :interval "1s" "scripts/volume icon")
+
+;; ********** Widgets **********
+(defwidget time_and_date []
+ (box :class "top-row" :space-evenly false
+  (label :class "time" :text time)
+  (box :class "date-box" :orientation "v"
+   (label :class "date" :text date)
+   (label :class "day" :text day))))
+
+(defwidget system_wifi []
+ (box :class "wifi-box" :orientation "v"
+  (box :class "wifi-buttons-box" :space-evenly false
+   (button
+    :class "wifi-button ${wifi_status.enabled ? "wifi-button-on" : "wifi-button-off"}"
+    :onclick "scripts/wifi toggle"
+    "${wifi_status.icon}")
+   (label :class "separator" :text "-")
+   (button
+    :class "wifi-arrow-btn ${wifi_status.enabled ? "wifi-arrow-btn-on" : "wifi-arrow-btn-off"}"
+    :onclick "eww close system-menu && scripts/launchApps --network"
+    ""))
+  (label
+   :class "wifi-label"
+   :tooltip "Wi-Fi: ${wifi_status.ssid}"
+   :text "${wifi_status.ssid}"
+   :limit-width 9)))
+
+(defwidget system_bluetooth []
+ (box :class "bluetooth-box" :orientation "v"
+  (box :class "bluetooth-buttons-box" :space-evenly false
+   (button
+    :class "bluetooth-button ${bluetooth_class == "" ? "bluetooth-button-on" : "bluetooth-button-off"}"
+    :onclick "scripts/bluetooth --toggle"
+    "${bluetooth_icon}")
+   (label :class "separator" :text "-")
+   (button
+    :class "bluetooth-arrow-btn ${bluetooth_class == "" ? "bluetooth-arrow-btn-on" : "bluetooth-arrow-btn-off"}"
+    :onclick "eww close system-menu && scripts/launchApps --bluetooth" ""))
+  (label
+   :class "bluetooth-label"
+   :tooltip "${bluetooth_tooltip}"
+   :text "${bluetooth_status}"
+   :limit-width 9)))
+
+(defwidget system_buttons []
+ (box :class "first-row-system" :space-evenly false
+  (system_wifi)
+  (system_bluetooth)))
+
+(defwidget sliders []
+ (box :class "sliders" :orientation "v" :space-evenly false
+  (box :orientation "h" :class "volume-slider-box" :space-evenly false :halign "center"
+   (button :class "volume-slider-icon" :onclick "scripts/volume toggle" volume_icon)
+   (scale :class "volume-slider"
+    :value volume
+    :orientation "h"
+    :width 120
+    :marks true
+    :max 100
+    :min 0
+    :onchange "amixer sset Master {}%"))))
+
+(defwidget spotify_menu []
+ (revealer :transition "slidedown" :reveal spotify_running
+  (box :class "spotify-container" :space-evenly false :orientation "v"
+   (box :class "spotify-container-name" :space-evenly false :halign "center"
+    (image :class "spotify-container-img" :path "${spotify_song_data.appIcon}" :image-width 20)
+    (label :class "spotify-container-title" :text "SPOTIFY"))
+   (box :class "spotify-data-container"
+    (label
+     :class "spotify-img"
+     :valign "center"
+     :halign "center"
+     :style "background-image: url('${spotify_song_data.cover}');")
+    (box
+     :class "spotify-right-container" :orientation "v" :space-evenly false :valign "center"
+     (box :class "spotify-song-data-container" :orientation "v" :space-evenly true :spacing 10
+      (label
+       :class "spotify-title"
+       :text "${spotify_song_data.title}"
+       :width 30
+       :wrap true
+       :justify "center"
+       :limit-width 20)
+      (label
+       :class "spotify-artist"
+       :text "${spotify_song_data.artist}"
+       :width 30
+       :wrap true
+       :justify "center"))))
+   (box :class "spotify-controls" :orientation "h" :halign "fill"
+    (button :onclick "playerctl -p spotify previous" "󰒮")
+    (button :onclick "playerctl -p spotify play-pause" "${spotify_status}")
+    (button :onclick "playerctl -p spotify next" "󰒭")))))
+
+(defwidget system_menu []
+ (box :class "system-menu-box" :orientation "v" :space-evenly false
+  (time_and_date)
+  (system_buttons)
+  (sliders)
+  (spotify_menu)))
+  ;; (box :class "bottom-row" :space-evenly true
+  ;;  (box :class "side-options-box" :halign "end" :space-evenly false :spacing 30
+  ;;   (button :class "power-button" :onclick "poweroff" "")
+  ;;   (button :class "exit-button" :onclick "scripts/launchApps --powermenu" "")))))
+
+;; ********** Windows **********
+(defwindow system_menu
+ :monitor 1
+ :stacking "fg"
+ :wm-ignore true
+ :geometry (geometry :x 10 :y 10 :width "17%" :height "30%" :anchor "right top")
+ (system_menu))

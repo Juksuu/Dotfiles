@@ -5,13 +5,12 @@ get_song_data () {
     APP_ICON_PATH="$HOME/.config/eww/images/spotify.png"
 
     TITLE=$(playerctl -p spotify metadata --format "{{ title }}")
-    ALBUM=$(playerctl -p spotify metadata --format "{{ album }}")
     ARTIST=$(playerctl -p spotify metadata --format "{{ artist }}")
     COVER_LINK=$(playerctl -p spotify metadata mpris:artUrl)
 
     curl -s $COVER_LINK --output $IMAGE_OUTPUT
 
-    printf '{ "title": "%s", "artist": "%s", "album": "%s", "cover": "%s", "appIcon": "%s" }\n' "$TITLE" "$ARTIST" "$ALBUM" "$IMAGE_OUTPUT" "$APP_ICON_PATH"
+    printf '{ "title": "%s", "artist": "%s", "cover": "%s", "appIcon": "%s" }\n' "$TITLE" "$ARTIST" "$IMAGE_OUTPUT" "$APP_ICON_PATH"
 }
 
 get_spotify_playing () {

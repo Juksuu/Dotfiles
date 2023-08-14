@@ -1,6 +1,6 @@
 #!/bin/sh
 
-get_volume_status () {
+get_volume_icon () {
     LEVEL=$(amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%')
     STATUS=$(amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $4 }')
     if [[ $STATUS == "off" ]] then
@@ -17,17 +17,12 @@ get_volume_status () {
 
 toggle() {
     amixer -q set Master toggle
-    # if [ $STATUS == "false" ]; then
-    #     notify-send --icon=volume-level-muted --urgency=normal "Volume is muted." "Volume has been muted, your PC has been shut the fucked up."
-    # else
-    #     notify-send --icon=volume-level-high --urgency=normal "Volume has been turned on." "Sound is now on, you will hear farts!"
-    # fi
 }
 
 if [[ ! $1 ]] then
     amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'
-elif [[ $1 == "status" ]] then
-    get_volume_status
+elif [[ $1 == "icon" ]] then
+    get_volume_icon
 elif [[ $1 == "toggle" ]] then
     toggle
 fi

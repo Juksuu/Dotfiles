@@ -1,0 +1,193 @@
+* {
+    transition: 200ms ease-in-out;
+}
+
+.system-menu-box {
+    border: 0.5em solid $bg-alt;
+    border-radius: 1.2em;
+    background-color: $bg;
+}
+
+.time {
+    font-size: 3em;
+    margin: 0.3em 0.2em 0em 0.3em;
+}
+
+.date-box {
+    font-size: 1em;
+    margin: 1em 0em 0em 0.2em;
+}
+
+.first-row-system {
+    margin: 1em 0em 0em 1em;
+}
+
+.separator {
+    color: $bg;
+    font-size: 0.5em;
+}
+
+.wifi-buttons-box, .bluetooth-buttons-box {
+    margin: 1em 1.2em 0em 1.2em;
+    border-radius: 100px;
+}
+
+.wifi-button, .bluetooth-button {
+    font-size: 1.8em;
+    padding: 0.3em 0.7em 0.3em 0.5em;
+}
+
+.wifi-arrow-btn, .bluetooth-arrow-btn {
+    padding: 0.3em 1em 0.3em 0.8em;
+}
+
+.wifi-button-on, .bluetooth-button-on {
+    background-color: $blue;
+    border-radius: 100px 0px 0px 100px;
+}
+
+.wifi-button-off, .bluetooth-button-off {
+    background-color: $bg-alt;
+    border-radius: 100px 0px 0px 100px;
+}
+
+.wifi-arrow-btn-on, .bluetooth-arrow-btn-on {
+    background-color: $blue;
+    border-radius: 0px 100px 100px 0px;
+}
+
+.wifi-arrow-btn-off, .bluetooth-arrow-btn-off {
+    background-color: $bg-alt;
+    border-radius: 0px 100px 100px 0px;
+}
+
+.wifi-label, .bluetooth-label {
+    margin-left: 1em;
+}
+
+.wifi-button-off:hover,
+.wifi-arrow-btn-off:hover,
+.bluetooth-arrow-btn-off:hover,
+.bluetooth-button-off:hover {
+    background-color: $gray-alt;
+}
+
+.wifi-button-on:hover,
+.wifi-arrow-btn-on:hover,
+.bluetooth-arrow-btn-on:hover,
+.bluetooth-button-on:hover {
+    background-color: $cyan;
+}
+
+.sliders {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 15px;
+    background-color: $bg-alt;
+}
+
+.volume-slider-icon {
+    color: $green;
+    font-size: 2em;
+}
+
+.volume-slider {
+    margin-left: 0.5em;
+}
+
+.volume-slider trough {
+    border-radius: 15px;
+    background-color: $gray-alt;
+}
+
+.volume-slider highlight {
+    padding: 0.3em;
+    border-radius: 15px;
+    background-color: $green;
+}
+
+.spotify-container {
+    margin: 1em;
+    border-radius: 15px;
+    background-color: $bg-alt;
+}
+
+.spotify-container-name {
+    margin-top: 1em;
+}
+
+.spotify-container-img {
+    margin-right: 0.3em;
+}
+
+.spotify-container-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-left: 0.3em;
+}
+
+.spotify-img {
+    min-width: 8em;
+    min-height: 8em;
+    border-radius: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 1em 1.2em 0.5em 1.2em;
+}
+
+.spotify-right-container {
+    margin: 0.5em;
+    min-width: 8em;
+}
+
+.spotify-song-data-container {
+    padding: 0.5em;
+    margin-top: 0.5em;
+}
+
+.spotify-title {
+    color: $green;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.spotify-artist {
+    color: $red;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.spotify-controls {
+    color: $cyan;
+    margin: 1em;
+}
+
+.spotify-controls button {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.spotify-controls button:hover {
+    color: $green;
+    transition: ease 0.5s;
+}
+
+// .side-options-box {
+//     margin: 0px 25px 20px 20px;
+// }
+//
+// .power-button,
+// .exit-button,
+// .settings-button {
+//     background-color: $bg-alt;
+//     padding: 9px 10px 9px 10px;
+//     border-radius: 100%;
+// }
+//
+// .power-button:hover,
+// .exit-button:hover,
+// .settings-button:hover {
+//     background-color: $gray-alt;
+//     color: $blue;
+// }
+

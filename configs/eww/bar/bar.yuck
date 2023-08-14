@@ -1,9 +1,5 @@
 ;; ********** Variables **********
-(defvar volume_slider false)
-
-(defpoll time_text :interval "1s" "date +'%b %d, %H:%M'")
-(defpoll volume_bar :interval "1s" "scripts/volume status")
-(defpoll volume_value :interval "1s" "scripts/volume")
+(defpoll time_text :interval "1s" "date +'%H:%M'")
 
 (deflisten workspaces_0 "scripts/workspaces 0")
 (deflisten workspaces_1 "scripts/workspaces 1")
@@ -28,25 +24,8 @@
   (button :class "time-module" :onclick "eww open --toggle calendar" "${time_text}")))
 
 ;; System buttons
-(defwidget system_buttons []
- (box :class "system-buttons-box" :space-evenly false :spacing 10
-  (eventbox
-   :onhover "eww update volume_slider=true"
-   :onhoverlost "eww update volume_slider=false"
-   (box :class "volume-system-button" :space-evenly false
-    (button
-    :class "volume-system-button"
-    :onclick "eww open --toggle system-menu"
-    :onrightclick "scripts/volume toggle"
-    "${volume_bar}")
-    (revealer :transition "slideleft" :duration "350ms" :reveal volume_slider
-     (scale :class "volume-slider"
-      :value volume_value
-      :orientation "h"
-      :width 100
-      :max 100
-      :min 0
-      :onchange "amixer -q sset Master {}%"))))))
+;; (defwidget system_buttons []
+;;  (box :class "system-buttons-box" :space-evenly false :spacing 10))
 
 ;; Spotify
 (defwidget spotify []
@@ -80,8 +59,8 @@
   :space-evenly false
   :halign "end"
   :class "right-modules"
-  (system_buttons)
-  (separator_bar)
+  ;; (system_buttons)
+  ;; (separator_bar)
   (clock_module)))
 
 (defwidget right_2 []
