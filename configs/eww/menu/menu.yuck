@@ -3,7 +3,8 @@
 (defpoll time :interval "1s" "date +'%H:%M'")
 (defpoll date :interval "1s" "date +'%d %b %y'")
 
-(defpoll wifi_status :interval "1s" "scripts/wifi status")
+(defpoll wifi :interval "1s" "scripts/network wifi-status")
+(defpoll ethernet :interval "1s" "scripts/network ethernet-status")
 
 (defpoll bluetooth_icon :interval "1s" "scripts/bluetooth --icon")
 (defpoll bluetooth_status :interval "1s" "scripts/bluetooth --status")
@@ -18,48 +19,40 @@
  (box :class "top-row" :space-evenly false
   (label :class "time" :text time)
   (box :class "date-box" :orientation "v"
-   (label :class "date" :text date)
-   (label :class "day" :text day))))
+   (label :class "day" :text day)
+   (label :class "date" :text date))))
 
-(defwidget system_wifi []
- (box :class "wifi-box" :orientation "v"
-  (box :class "wifi-buttons-box" :space-evenly false
+(defwidget menu_button [enabled toggle_action icon open_action label]
+ (box :class "menu-button-container" :orientation "v"
+  (box :class "menu-button-box" :space-evenly false :halign "center"
    (button
-    :class "wifi-button ${wifi_status.enabled ? "wifi-button-on" : "wifi-button-off"}"
-    :onclick "scripts/wifi toggle"
-    "${wifi_status.icon}")
+    :class "menu-button ${enabled ? "menu-button-on" : "menu-button-off"}"
+    :onclick toggle_action
+    "${icon}")
    (label :class "separator" :text "-")
    (button
-    :class "wifi-arrow-btn ${wifi_status.enabled ? "wifi-arrow-btn-on" : "wifi-arrow-btn-off"}"
-    :onclick "eww close system-menu && scripts/launchApps --network"
+    :class "menu-button-arrow ${enabled ? "menu-button-arrow-on" : "menu-button-arrow-off"}"
+    :onclick open_action
     ""))
   (label
-   :class "wifi-label"
-   :tooltip "Wi-Fi: ${wifi_status.ssid}"
-   :text "${wifi_status.ssid}"
-   :limit-width 9)))
-
-(defwidget system_bluetooth []
- (box :class "bluetooth-box" :orientation "v"
-  (box :class "bluetooth-buttons-box" :space-evenly false
-   (button
-    :class "bluetooth-button ${bluetooth_class == "" ? "bluetooth-button-on" : "bluetooth-button-off"}"
-    :onclick "scripts/bluetooth --toggle"
-    "${bluetooth_icon}")
-   (label :class "separator" :text "-")
-   (button
-    :class "bluetooth-arrow-btn ${bluetooth_class == "" ? "bluetooth-arrow-btn-on" : "bluetooth-arrow-btn-off"}"
-    :onclick "eww close system-menu && scripts/launchApps --bluetooth" ""))
-  (label
-   :class "bluetooth-label"
-   :tooltip "${bluetooth_tooltip}"
-   :text "${bluetooth_status}"
+   :class "menu-button-label"
+   :text "${label}"
    :limit-width 9)))
 
 (defwidget system_buttons []
- (box :class "first-row-system" :space-evenly false
-  (system_wifi)
-  (system_bluetooth)))
+ (box :class "system_buttons" :orientation "h"
+  (menu_button
+   :enabled "${wifi.enabled}"
+   :toggle_action "scripts/network toggle-wifi"
+   :icon "${wifi.icon}"
+   :open_action ""
+   :label "${wifi.ssid}")
+  (menu_button
+   :enabled "${ethernet.enabled}"
+   :toggle_action "scripts/network toggle-ethernet"
+   :icon "${ethernet.icon}"
+   :open_action ""
+   :label "")))
 
 (defwidget sliders []
  (box :class "sliders" :orientation "v" :space-evenly false

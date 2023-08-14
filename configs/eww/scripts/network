@@ -1,0 +1,63 @@
+#!/bin/sh
+
+toggle_wifi() {
+    WIFI_ENABLED=$(nmcli radio wifi)
+    if [[ $WIFI_ENABLED == "enabled" ]] then
+        nmcli radio wifi off
+    else
+        nmcli radio wifi on
+    fi
+}
+
+wifi_status() {
+    WIFI_ENABLED=$(nmcli radio wifi)
+    SSID=$(nmcli | grep wlp6s0 | awk 'FNR==1' | awk '{print $4}')
+    STATUS=$(nmcli | grep wlp6s0 | awk 'FNR==1' | awk '{print $2}')
+
+    STATUS_ICON=" 󰖪 "
+    if [[ $STATUS == "connected" ]] then
+        STATUS_ICON=" 󰖩 "
+    fi
+
+    ENABLED=false
+    if [[ $WIFI_ENABLED == "enabled" ]] then
+        ENABLED=true
+    fi
+
+    printf '{ "enabled": "%s", "icon": "%s", "ssid": "%s" }\n'  $ENABLED $STATUS_ICON $SSID
+}
+
+toggle_ethernet() {
+    STATUS=$(nmcli | grep enp7s0 | awk 'FNR==1' | awk '{print $2}')
+    if [[ $STATUS == "connected" ]] then
+        nmcli c down "Wired connection 1"
+    else
+        nmcli c up "Wired connection 1"
+    fi
+}
+
+ethernet_status() {
+    STATUS=$(nmcli | grep enp7s0 | awk 'FNR==1' | awk '{print $2}')
+
+    STATUS_ICON=" 󰌙 "
+    if [[ $STATUS == "connected" ]] then
+        STATUS_ICON=" 󰌗 "
+    fi
+
+    ENABLED=false
+    if [[ $STATUS == "connected" ]] then
+        ENABLED=true
+    fi
+
+    printf '{ "enabled": "%s", "icon": "%s" }\n'  $ENABLED $STATUS_ICON
+}
+
+if [[ $1 == "toggle-wifi" ]] then
+    toggle_wifi
+elif [[ $1 == "wifi-status" ]] then
+    wifi_status
+elif [[ $1 == "toggle-ethernet" ]] then
+    toggle_ethernet
+elif [[ $1 == "ethernet-status" ]] then
+    ethernet_status
+fi

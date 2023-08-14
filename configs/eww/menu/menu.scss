@@ -1,5 +1,5 @@
 * {
-    transition: 200ms ease-in-out;
+    transition: 100ms ease-in-out;
 }
 
 .system-menu-box {
@@ -10,16 +10,18 @@
 
 .time {
     font-size: 3em;
-    margin: 0.3em 0.2em 0em 0.3em;
+    margin: 0.3em 0.2em 0em 0.4em;
 }
 
 .date-box {
     font-size: 1em;
-    margin: 1em 0em 0em 0.2em;
+    margin: 1.9em 0em 1em 0.5em;
 }
 
-.first-row-system {
-    margin: 1em 0em 0em 1em;
+.system_buttons {
+    margin: 1em;
+    border-radius: 15px;
+    background-color: $bg-alt;
 }
 
 .separator {
@@ -27,55 +29,51 @@
     font-size: 0.5em;
 }
 
-.wifi-buttons-box, .bluetooth-buttons-box {
+.menu-button-box {
     margin: 1em 1.2em 0em 1.2em;
     border-radius: 100px;
 }
 
-.wifi-button, .bluetooth-button {
+.menu-button {
     font-size: 1.8em;
     padding: 0.3em 0.7em 0.3em 0.5em;
 }
 
-.wifi-arrow-btn, .bluetooth-arrow-btn {
+.menu-button-arrow {
     padding: 0.3em 1em 0.3em 0.8em;
 }
 
-.wifi-button-on, .bluetooth-button-on {
+.menu-button-on {
     background-color: $blue;
     border-radius: 100px 0px 0px 100px;
 }
 
-.wifi-button-off, .bluetooth-button-off {
-    background-color: $bg-alt;
+.menu-button-off {
+    background-color: $gray;
     border-radius: 100px 0px 0px 100px;
 }
 
-.wifi-arrow-btn-on, .bluetooth-arrow-btn-on {
+.menu-button-arrow-on {
     background-color: $blue;
     border-radius: 0px 100px 100px 0px;
 }
 
-.wifi-arrow-btn-off, .bluetooth-arrow-btn-off {
-    background-color: $bg-alt;
+.menu-button-arrow-off {
+    background-color: $gray;
     border-radius: 0px 100px 100px 0px;
 }
 
-.wifi-label, .bluetooth-label {
+.menu-button-label {
     margin-left: 1em;
 }
 
-.wifi-button-off:hover,
-.wifi-arrow-btn-off:hover,
-.bluetooth-arrow-btn-off:hover,
-.bluetooth-button-off:hover {
+.menu-button-off:hover,
+.menu-button-arrow-off:hover {
     background-color: $gray-alt;
 }
 
-.wifi-button-on:hover,
-.wifi-arrow-btn-on:hover,
-.bluetooth-arrow-btn-on:hover,
-.bluetooth-button-on:hover {
+.menu-button-on:hover,
+.menu-button-arrow-on:hover {
     background-color: $cyan;
 }
 

@@ -23,10 +23,6 @@
  (box :class "time-module-box" :space-evenly "false"
   (button :class "time-module" :onclick "eww open --toggle calendar" "${time_text}")))
 
-;; System buttons
-;; (defwidget system_buttons []
-;;  (box :class "system-buttons-box" :space-evenly false :spacing 10))
-
 ;; Spotify
 (defwidget spotify []
  (eventbox :onclick "eww open --toggle spotify"
@@ -59,8 +55,6 @@
   :space-evenly false
   :halign "end"
   :class "right-modules"
-  ;; (system_buttons)
-  ;; (separator_bar)
   (clock_module)))
 
 (defwidget right_2 []
