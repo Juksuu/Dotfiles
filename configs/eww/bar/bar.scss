@@ -17,11 +17,18 @@
     background-color: $bg;
 }
 
+.bar2 {
+    border-radius: 1em;
+    background-color: $bg;
+}
+
 .time-module-box {
     padding-left: 1em;
 }
 
 .time-module {
+    all: unset;
+    color: white;
     font-weight: bold;
 }
 
@@ -41,6 +48,7 @@
 }
 
 .ws-text {
+    color: white;
     font-weight: bold;
 }
 

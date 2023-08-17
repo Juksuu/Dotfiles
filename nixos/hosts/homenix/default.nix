@@ -56,11 +56,11 @@
     alsa-utils
     pavucontrol
     home-manager
+    networkmanagerapplet
 
     # Wayland stuff
     grim
     slurp
-    eww-wayland
     egl-wayland
     wl-clipboard
     qt5.qtwayland
@@ -74,6 +74,9 @@
     qt5.qtgraphicaleffects
     # (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-dark
     (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-candy
+
+    # Custom packages
+    (callPackage ../../nixpkgs/eww.nix { })
   ];
 
   environment.sessionVariables = {
@@ -159,18 +162,18 @@
     })
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
+
   programs.hyprland = {
     enable = true;
     xwayland = {
       enable = true;
     };
     nvidiaPatches = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
   };
 }

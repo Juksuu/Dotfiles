@@ -55,6 +55,7 @@
   :space-evenly false
   :halign "end"
   :class "right-modules"
+  (systray :pack-direction "rtl")
   (clock_module)))
 
 (defwidget right_2 []
@@ -63,6 +64,7 @@
   :space-evenly false
   :halign "end"
   :class "right-modules"
+  (systray :pack-direction "rtl")
   (clock_module)))
 
 (defwidget center []
@@ -77,22 +79,20 @@
  (box :class "bar" :orientation "h" (left) (center) (right)))
 
 (defwidget bar_2 []
- (box :class "bar" :orientation "h" (left_2) (center_2) (right_2)))
+ (box :class "bar2" :orientation "h" (left_2) (center_2) (right_2)))
 
 
 ;; ********** Windows **********
 (defwindow bar
  :monitor 1
  :exclusive true
- :stacking "bg"
- :windowtype "dock"
+ :stacking "fg"
  :geometry (geometry :y "4px" :width "99%" :anchor "top center")
  (bar_1))
 
 (defwindow bar2
  :monitor 0
  :exclusive true
- :stacking "bg"
- :windowtype "dock"
+ :stacking "fg"
  :geometry (geometry :y "4px" :width "99%" :anchor "top center")
  (bar_2))
