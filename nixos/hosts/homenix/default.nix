@@ -61,6 +61,7 @@
     # Wayland stuff
     grim
     slurp
+    eww-wayland
     egl-wayland
     wl-clipboard
     qt5.qtwayland
@@ -76,7 +77,7 @@
     (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-candy
 
     # Custom packages
-    (callPackage ../../nixpkgs/eww.nix { })
+    # (callPackage ../../nixpkgs/eww.nix { })
   ];
 
   environment.sessionVariables = {

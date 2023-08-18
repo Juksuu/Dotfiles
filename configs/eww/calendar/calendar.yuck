@@ -17,7 +17,7 @@
 
 ;; ********** Windows **********
 (defwindow calendar
- :geometry (geometry :x "-20px" :y "-50px" :width "24%" :height "30%" :anchor "bottom right")
+ :geometry (geometry :x "-25px" :y "-20px" :width "24%" :height "30%" :anchor "bottom right")
  :stacking "fg"
  :windowtype "dock"
  :monitor 1

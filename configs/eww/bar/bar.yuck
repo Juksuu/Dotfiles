@@ -55,7 +55,6 @@
   :space-evenly false
   :halign "end"
   :class "right-modules"
-  (systray :pack-direction "rtl")
   (clock_module)))
 
 (defwidget right_2 []
@@ -64,7 +63,6 @@
   :space-evenly false
   :halign "end"
   :class "right-modules"
-  (systray :pack-direction "rtl")
   (clock_module)))
 
 (defwidget center []
