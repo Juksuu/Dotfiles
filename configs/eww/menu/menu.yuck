@@ -100,16 +100,20 @@
     (button :onclick "playerctl -p spotify play-pause" "${spotify_status}")
     (button :onclick "playerctl -p spotify next" "󰒭")))))
 
+(defwidget power_buttons []
+ (box :class "power_buttons" :space-evenly false :halign "end"
+   (button :class "button" :onclick "poweroff" "  ")
+   (button :class "button" :onclick "reboot" "  ")
+   (button :class "button" :onclick "" "  ")
+   (button :class "button" :onclick "hyprctl dispatch exit" " 󰍃 ")))
+
 (defwidget system_menu []
  (box :class "system-menu-box" :orientation "v" :space-evenly false
   (time_and_date)
   (system_buttons)
   (sliders)
-  (spotify_menu)))
-  ;; (box :class "bottom-row" :space-evenly true
-  ;;  (box :class "side-options-box" :halign "end" :space-evenly false :spacing 30
-  ;;   (button :class "power-button" :onclick "poweroff" "")
-  ;;   (button :class "exit-button" :onclick "scripts/launchApps --powermenu" "")))))
+  (spotify_menu)
+  (power_buttons)))
 
 ;; ********** Windows **********
 (defwindow system_menu

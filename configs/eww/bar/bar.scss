@@ -30,6 +30,7 @@
     all: unset;
     color: white;
     font-weight: bold;
+    text-shadow: 0em 0em 0.2em $blue;
 }
 
 .time-module:hover {
@@ -45,6 +46,7 @@
     background-color: $blue;
     border-radius: 50%;
     padding: 0.1em 0.4em 0.1em 0.4em;
+    box-shadow: 0em 0em 0.3em lightblue;
 }
 
 .ws-text {
