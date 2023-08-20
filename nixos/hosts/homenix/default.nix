@@ -56,7 +56,6 @@
     alsa-utils
     pavucontrol
     home-manager
-    networkmanagerapplet
 
     # Wayland stuff
     grim

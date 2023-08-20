@@ -71,30 +71,28 @@
  (revealer :transition "slidedown" :reveal spotify_running
   (box :class "spotify-container" :space-evenly false :orientation "v"
    (box :class "spotify-container-name" :space-evenly false :halign "center"
-    (image :class "spotify-container-img" :path "${spotify_song_data.appIcon}" :image-width 20)
+    (image :class "spotify-container-img" :path "${spotify_data.appIcon}" :image-width 20)
     (label :class "spotify-container-title" :text "SPOTIFY"))
-   (box :class "spotify-data-container"
-    (label
-     :class "spotify-img"
-     :valign "center"
-     :halign "center"
-     :style "background-image: url('${spotify_song_data.cover}');")
-    (box
-     :class "spotify-right-container" :orientation "v" :space-evenly false :valign "center"
-     (box :class "spotify-song-data-container" :orientation "v" :space-evenly true :spacing 10
-      (label
-       :class "spotify-title"
-       :text "${spotify_song_data.title}"
-       :width 30
-       :wrap true
-       :justify "center"
-       :limit-width 20)
-      (label
-       :class "spotify-artist"
-       :text "${spotify_song_data.artist}"
-       :width 30
-       :wrap true
-       :justify "center"))))
+   (box
+    :class "spotify-img"
+    :space-evenly false
+    :style "background-image: url('${spotify_data.cover}');"
+    (box :class "spotify-song-data" :orientation "v" :space-evenly false
+     (label
+      :class "spotify-title"
+      :halign "start"
+      :limit-width 22
+      :text "${spotify_data.title}")
+     (label
+      :class "spotify-artist"
+      :halign "start"
+      :limit-width 22
+      :text "${spotify_data.artist}")
+     (label
+      :class "spotify-progress"
+      :halign "start"
+      :valign "end"
+      :text "${spotify_progress}")))
    (box :class "spotify-controls" :orientation "h" :halign "fill"
     (button :onclick "playerctl -p spotify previous" "󰒮")
     (button :onclick "playerctl -p spotify play-pause" "${spotify_status}")

@@ -37,6 +37,8 @@ elif [[ $1 == "song-data" ]] then
                 get_song_data
             fi
         done
+elif [[ $1 == "song-progress" ]] then
+    playerctl -p spotify --follow metadata --format "{{ duration(position) }} / {{ duration(mpris:length) }}"
 elif [[ $1 == "status" ]] then
     playerctl -p spotify --follow status |
         while read LINE ; do

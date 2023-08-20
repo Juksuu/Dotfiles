@@ -28,8 +28,8 @@
  (eventbox :onclick "eww open --toggle spotify"
   (revealer :transition "slideleft" :duration "350ms" :reveal "${spotify_running}"
    (box :class "spotify-bar-container" :space-evenly false
-    (image :class "spotify-bar-img" :path "${spotify_song_data.appIcon}" :image-width 20)
-    (label :class "spotify-bar-title" :text "${spotify_song_data.title}" :limit-width 30)))))
+    (image :class "spotify-bar-img" :path "${spotify_data.appIcon}" :image-width 20)
+    (label :class "spotify-bar-title" :text "${spotify_data.title}" :limit-width 30)))))
 
 
 ;; Bar sections
