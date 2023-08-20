@@ -69,34 +69,31 @@
 
 (defwidget spotify_menu []
  (revealer :transition "slidedown" :reveal spotify_running
-  (box :class "spotify-container" :space-evenly false :orientation "v"
-   (box :class "spotify-container-name" :space-evenly false :halign "center"
-    (image :class "spotify-container-img" :path "${spotify_data.appIcon}" :image-width 20)
-    (label :class "spotify-container-title" :text "SPOTIFY"))
-   (box
-    :class "spotify-img"
-    :space-evenly false
-    :style "background-image: url('${spotify_data.cover}');"
+  (box
+   :class "spotify"
+   :space-evenly false
+   :style "background-image: url('${spotify_data.cover}');"
+   (box :class "spotify-container" :orientation "h" :space-evenly false
     (box :class "spotify-song-data" :orientation "v" :space-evenly false
      (label
-      :class "spotify-title"
+      :class "spotify-song-title"
       :halign "start"
-      :limit-width 22
+      :limit-width 25
       :text "${spotify_data.title}")
      (label
-      :class "spotify-artist"
+      :class "spotify-song-artist"
       :halign "start"
-      :limit-width 22
+      :limit-width 30
       :text "${spotify_data.artist}")
      (label
-      :class "spotify-progress"
+      :class "spotify-song-progress"
       :halign "start"
       :valign "end"
-      :text "${spotify_progress}")))
-   (box :class "spotify-controls" :orientation "h" :halign "fill"
-    (button :onclick "playerctl -p spotify previous" "󰒮")
-    (button :onclick "playerctl -p spotify play-pause" "${spotify_status}")
-    (button :onclick "playerctl -p spotify next" "󰒭")))))
+      :text "${spotify_progress}"))
+    (box :class "spotify-controls" :orientation "v" :valign "fill"
+     (button :onclick "playerctl -p spotify previous" "󰒮")
+     (button :onclick "playerctl -p spotify play-pause" "${spotify_status}")
+     (button :onclick "playerctl -p spotify next" "󰒭"))))))
 
 (defwidget power_buttons []
  (box :class "power_buttons" :space-evenly false :halign "end"

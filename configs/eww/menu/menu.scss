@@ -112,68 +112,55 @@
     background-color: $green;
 }
 
-.spotify-container {
+.spotify {
     margin: 1em;
-    border-radius: 15px;
-    background-color: $bg-alt;
-    box-shadow: -0.2em 0.2em 0.5em black;
-}
-
-.spotify-container-name {
-    margin-top: 1em;
-}
-
-.spotify-container-img {
-    margin-right: 0.3em;
-}
-
-.spotify-container-title {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-left: 0.3em;
-}
-
-.spotify-img {
-    min-width: 20em;
+    min-width: 21em;
     min-height: 10em;
     border-radius: 15px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 1em 0.7em 0.5em 0.7em;
+    box-shadow: -0.2em 0.2em 0.5em black;
+}
+
+.spotify-container {
+    min-width: 22em;
+    min-height: 10em;
+    border-radius: 12px;
+    background: linear-gradient(to right, $bg, transparent, $bg);
 }
 
 .spotify-song-data {
-    min-width: 20em;
-    min-height: 10em;
-    border-radius: 12px;
-    background: linear-gradient(to right, $bg, transparent);
+    margin: 1em;
+    min-width: 18em;
 }
 
-.spotify-title {
-    margin: 0.5em 0em 0em 0.7em;
+.spotify-song-title {
     font-size: 1em;
     font-weight: bold;
+    text-shadow: 0em 0em 0.3em black;
 }
 
-.spotify-artist {
-    margin: 0.5em 0em 0em 1em;
+.spotify-song-artist {
     font-size: 0.8em;
+    margin: 0.5em 0em 0em 0.2em;
+    text-shadow: 0em 0em 0.3em black;
 }
 
-.spotify-progress {
-    margin: 7em 0em 0em 1em;
+.spotify-song-progress {
     font-size: 0.8em;
+    margin: 6em 0em 0em 0.2em;
+    text-shadow: 0em 0em 0.3em black;
 }
 
 .spotify-controls {
-    color: $cyan;
-    margin: 0em 1em 1em 1em;
+    margin-right: 1.5em;
 }
 
 .spotify-controls button {
     font-size: 1.6em;
     font-weight: bold;
+    text-shadow: 0em 0em 0.3em black;
 }
 
 .spotify-controls button:hover {
