@@ -15,33 +15,22 @@
     rofi-wayland
   ];
 
-  # Create symlinks for all config files
-  xdg.configFile = {
-    hypr = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
-    };
-    eww = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/eww";
-    };
-    rofi = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/rofi";
-    };
-    nvim = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
-    };
-    kitty = {
-      enable = true;
-      recursive = true;
-      source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
-    };
+  home.file = {
+    # Scripts
+    "scripts".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";
+
+    # .config entries
+    ".config/hypr".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
+    ".config/eww".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/eww";
+    ".config/rofi".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/rofi";
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
+    ".config/kitty".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
   };
 
   programs.fish = {
