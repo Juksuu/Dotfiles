@@ -2,12 +2,8 @@
   description = "NixOS system";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
 
     hyprland.url = "github:hyprwm/Hyprland";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
@@ -26,6 +22,9 @@
           system = "x86_64-linux";
           hostname = "homenix";
           users = [ "frans" ];
+          extraModules = [
+            inputs.hyprland.nixosModules.default
+          ];
         };
       };
 

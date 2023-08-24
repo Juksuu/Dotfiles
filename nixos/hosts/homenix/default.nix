@@ -1,12 +1,11 @@
 { inputs, lib, config, pkgs, ... }:
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "23.05";
 
   nix.settings = {
     auto-optimise-store = true;
@@ -52,7 +51,6 @@
     vim
     fish
     htop
-    pipewire
     alsa-utils
     pavucontrol
     home-manager
@@ -69,18 +67,10 @@
     # Hyrpland stuff
     socat
     hyprpaper
-
-    # SDDM themes
-    qt5.qtgraphicaleffects
-    # (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-dark
-    (callPackage ../../nixpkgs/sddm-themes.nix { }).sddm-sugar-candy
-
-    # Custom packages
-    # (callPackage ../../nixpkgs/eww.nix { })
   ];
 
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "0";
+    NIXOS_OZONE_WL = "1";
     XDG_SESSION_TYPE = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";
 
@@ -122,17 +112,7 @@
     xkbVariant = "";
     xkbOptions = "grp:win_space_toggle";
     videoDrivers = [ "nvidia" ];
-    displayManager.sddm = {
-      enable = true;
-      theme = "sugar-candy";
-      settings = {
-        General = {
-          DisplayServer = "wayland";
-          InputMethod = "";
-        };
-        Wayland.CompositorCommand = "${pkgs.weston}/bin/weston --shell=fullscreen-shell.so";
-      };
-    };
+    displayManager.gdm.enable = true;
   };
 
   services.dbus.enable = true;
@@ -156,7 +136,7 @@
     '';
   };
 
-  fonts.packages = with pkgs; [
+  fonts.fonts = with pkgs; [
     (nerdfonts.override {
       fonts = [ "Iosevka" ];
     })
@@ -171,9 +151,7 @@
 
   programs.hyprland = {
     enable = true;
-    xwayland = {
-      enable = true;
-    };
-    nvidiaPatches = true;
+    xwayland.enable = true;
+    enableNvidiaPatches = true;
   };
 }

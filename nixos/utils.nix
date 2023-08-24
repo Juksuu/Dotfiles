@@ -1,10 +1,9 @@
 { inputs, overlays }:
 {
-  makeSystem = { hostname, system, users }:
+  makeSystem = { hostname, system, users, extraModules }:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs system hostname; };
       modules = [
-        inputs.hyprland.nixosModules.default
         {
           nixpkgs = {
             inherit overlays;
@@ -15,7 +14,7 @@
           };
         }
         ./hosts/${hostname}
-      ] ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
+      ] ++ extraModules ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
     };
 
   makeHome = { system, username, hostname }:
@@ -34,7 +33,7 @@
           home = {
             inherit username;
             homeDirectory = "/home/${username}";
-            stateVersion = "23.11";
+            stateVersion = "23.05";
           };
           systemd.user.startServices = "sd-switch";
         }
