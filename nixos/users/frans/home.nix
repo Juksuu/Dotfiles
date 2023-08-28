@@ -33,6 +33,11 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -47,7 +52,12 @@
     shellAliases = {
       hms = "home-manager switch --flake ~/.dotfiles#frans@homenix";
       nrs = "sudo nixos-rebuild switch --flake ~/.dotfiles#homenix";
+      wtc = "~/scripts/wtc.sh";
+      wts = "bass source ~/scripts/wts.sh";
     };
+    plugins = [
+      { name = "bass"; src = pkgs.fishPlugins.bass.src; }
+    ];
   };
 
   programs.git = {

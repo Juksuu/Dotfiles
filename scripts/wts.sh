@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 function get_correct_path() {
     local branch_name=""
