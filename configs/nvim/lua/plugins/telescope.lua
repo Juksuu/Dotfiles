@@ -1,6 +1,6 @@
 local M = {
     "nvim-telescope/telescope.nvim",
-    event = { "VeryLazy", "BufReadPre" },
+    tag = "0.1.2",
     dependencies = {
         "nvim-telescope/telescope-file-browser.nvim",
         { "Juksuu/worktrees.nvim", config = true },
@@ -17,12 +17,11 @@ function M.config()
                 prompt_position = "top",
             },
             border = true,
+            -- stylua: ignore
             borderchars = {
-                -- stylua: ignore start
-                prompt = { '▔', '▕', ' ', '▏', '🭽', '🭾', '▕', '▏' },
-                results = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-                preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-                -- stylua: ignore end
+                prompt = { "▔", "▕", " ", "▏", "🭽", "🭾", "▕", "▏", },
+                results = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼", },
+                preview = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼", },
             },
         },
         pickers = {
