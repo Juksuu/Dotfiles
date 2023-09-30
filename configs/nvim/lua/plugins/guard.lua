@@ -1,5 +1,8 @@
 local M = {
     "nvimdev/guard.nvim",
+    dependencies = {
+        "nvimdev/guard-collection",
+    },
     event = "BufReadPost"
 }
 
