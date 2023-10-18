@@ -4,29 +4,18 @@
     fd
     wget
     ripgrep
-    (python3.withPackages (ps: with ps; [ dbus-python ]))
-
-    dunst
     kitty
     brave
     discord
     spotify
-    playerctl
-    rofi-wayland
   ];
 
   home.file = {
     # Scripts
     "scripts".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";
-
-    # .config entries
-    ".config/hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
-    ".config/eww".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/eww";
-    ".config/rofi".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/rofi";
+    "wallpapers".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/wallpapers";
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
     ".config/kitty".source =
@@ -76,10 +65,5 @@
     ];
   };
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-    ];
-  };
+  programs.obs-studio.enable = true;
 }

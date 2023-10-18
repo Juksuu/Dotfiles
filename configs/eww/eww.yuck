@@ -1,9 +1,0 @@
-(defpoll spotify_running :interval "1s" "scripts/spotify running")
-
-(deflisten spotify_status "scripts/spotify status")
-(deflisten spotify_data "scripts/spotify song-data")
-(deflisten spotify_progress "scripts/spotify song-progress")
-
-(include "./bar/bar.yuck")
-(include "./menu/menu.yuck")
-(include "./calendar/calendar.yuck")
