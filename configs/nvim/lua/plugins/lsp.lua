@@ -11,8 +11,7 @@ function M.config()
     local ok, wf = pcall(require, "vim.lsp._watchfiles")
     if ok then
         wf._watchfunc = function()
-            return function()
-            end
+            return function() end
         end
     end
 
@@ -56,7 +55,6 @@ function M.config()
         end
     end
 
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     local custom_attach = function(client, bufnr)
         client.server_capabilities.semanticTokensProvider = false
 
