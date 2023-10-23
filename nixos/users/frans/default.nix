@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   users.users.frans = {
     isNormalUser = true;
     home = "/home/frans";

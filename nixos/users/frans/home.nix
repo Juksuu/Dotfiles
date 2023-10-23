@@ -1,14 +1,5 @@
-{ self, config, pkgs, makeMutableSymlink, ... }:
-{
-  home.packages = with pkgs; [
-    fd
-    wget
-    ripgrep
-    kitty
-    brave
-    discord
-    spotify
-  ];
+{ self, config, pkgs, makeMutableSymlink, ... }: {
+  home.packages = with pkgs; [ fd wget ripgrep kitty brave discord spotify ];
 
   home.file = {
     # Scripts
@@ -44,9 +35,10 @@
       wtc = "~/scripts/wtc.sh";
       wts = "bass source ~/scripts/wts.sh";
     };
-    plugins = [
-      { name = "bass"; src = pkgs.fishPlugins.bass.src; }
-    ];
+    plugins = [{
+      name = "bass";
+      src = pkgs.fishPlugins.bass.src;
+    }];
   };
 
   programs.git = {
@@ -60,6 +52,7 @@
     package = pkgs.neovim-nightly;
     extraPackages = with pkgs; [
       stylua
+      nixfmt
       rnix-lsp
       sumneko-lua-language-server
     ];

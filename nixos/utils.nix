@@ -1,5 +1,4 @@
-{ inputs, overlays }:
-{
+{ inputs, overlays }: {
   makeSystem = { hostname, system, users, extraModules }:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs system hostname; };

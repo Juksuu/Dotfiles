@@ -9,12 +9,9 @@
 
   outputs = inputs:
     let
-      overlays = [
-        inputs.neovim-nightly.overlay
-      ];
+      overlays = [ inputs.neovim-nightly.overlay ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
-    in
-    {
+    in {
       nixosConfigurations = {
         homenix = utils.makeSystem {
           system = "x86_64-linux";

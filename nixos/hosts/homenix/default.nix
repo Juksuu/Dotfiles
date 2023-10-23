@@ -1,5 +1,4 @@
-{ inputs, lib, config, pkgs, ... }:
-{
+{ inputs, lib, config, pkgs, ... }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -68,13 +67,16 @@
       alsa-utils
       pavucontrol
       home-manager
-      docker-compose
-      lazydocker
 
       # Wayland stuff
       wl-clipboard
       qt5.qtwayland
       qt6.qtwayland
+
+      # Programming stuff
+      codespell
+      lazydocker
+      docker-compose
     ];
 
     plasma5.excludePackages = with pkgs.libsForQt5; [
@@ -124,11 +126,7 @@
   security.rtkit.enable = true;
   virtualisation.docker.enable = true;
 
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override {
-      fonts = [ "Iosevka" ];
-    })
-  ];
+  fonts.fonts = with pkgs; [ (nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
 
   programs.steam.enable = true;
 }
