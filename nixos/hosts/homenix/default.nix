@@ -62,6 +62,7 @@
       jq
       gcc
       vim
+      fzf
       fish
       htop
       alsa-utils
@@ -74,6 +75,7 @@
       qt6.qtwayland
 
       # Programming stuff
+      python3
       codespell
       lazydocker
       docker-compose

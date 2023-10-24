@@ -28,12 +28,16 @@
         set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
         set -Ux SSH_AGENT_PID $SSH_AGENT_PID
       end
+
+      function fish_user_key_bindings
+        bind \cf '~/scripts/tmux-sessionizer.sh'
+        bind \cgw 'bass source ~/scripts/wts.sh'
+      end
     '';
     shellAliases = {
       hms = "home-manager switch --flake ~/.dotfiles#frans@homenix";
       nrs = "sudo nixos-rebuild switch --flake ~/.dotfiles#homenix";
       wtc = "~/scripts/wtc.sh";
-      wts = "bass source ~/scripts/wts.sh";
     };
     plugins = [{
       name = "bass";
@@ -56,6 +60,40 @@
       rnix-lsp
       sumneko-lua-language-server
     ];
+  };
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    mouse = true;
+    sensibleOnTop = true;
+    escapeTime = 0;
+    keyMode = "vi";
+    extraConfig = ''
+      bind r source-file ~/.config/tmux/tmux.conf
+
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'"
+
+      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
+      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
+      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
+      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
+
+      bind-key -T copy-mode-vi 'C-h' select-pane -L
+      bind-key -T copy-mode-vi 'C-j' select-pane -D
+      bind-key -T copy-mode-vi 'C-k' select-pane -U
+      bind-key -T copy-mode-vi 'C-l' select-pane -R
+
+      bind -n 'M-h' if-shell "$is_vim" 'send-keys M-h' 'resize-pane -L 1'
+      bind -n 'M-j' if-shell "$is_vim" 'send-keys M-j' 'resize-pane -D 1'
+      bind -n 'M-k' if-shell "$is_vim" 'send-keys M-k' 'resize-pane -U 1'
+      bind -n 'M-l' if-shell "$is_vim" 'send-keys M-l' 'resize-pane -R 1'
+
+      bind-key -T copy-mode-vi M-h resize-pane -L 1
+      bind-key -T copy-mode-vi M-j resize-pane -D 1
+      bind-key -T copy-mode-vi M-k resize-pane -U 1
+      bind-key -T copy-mode-vi M-l resize-pane -R 1
+    '';
   };
 
   programs.obs-studio.enable = true;
