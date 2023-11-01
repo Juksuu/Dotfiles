@@ -70,7 +70,11 @@
     escapeTime = 0;
     keyMode = "vi";
     extraConfig = ''
-      bind r source-file ~/.config/tmux/tmux.conf
+      set -s set-clipboard external
+      set-option -g default-terminal "screen-256color"
+      set-option -sa terminal-features ',xterm-kitty:RGB'
+
+
 
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|n?vim?x?)(-wrapped)?(diff)?$'"
 
