@@ -9,7 +9,7 @@ return {
     { "lewis6991/gitsigns.nvim", config = true, event = "VeryLazy" },
 
     {
-        "TimUntersberger/neogit",
+        "NeogitOrg/neogit",
         opts = { disable_commit_confirmation = true },
         keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },
     },
