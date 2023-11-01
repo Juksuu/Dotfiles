@@ -1,5 +1,6 @@
 local M = {
     "hrsh7th/nvim-pasta",
+    event = "BufReadPost",
 }
 
 M.config = function()

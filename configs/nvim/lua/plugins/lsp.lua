@@ -69,7 +69,7 @@ function M.config()
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set(
             { "n", "i" },
-            "<c-k>",
+            "<c-s>",
             vim.lsp.buf.signature_help,
             bufopts
         )
