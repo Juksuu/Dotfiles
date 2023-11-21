@@ -4,10 +4,8 @@ local M = {
 }
 
 M.config = function()
-    vim.keymap.set({ "n", "x" }, "p", require("pasta.mappings").p)
-    vim.keymap.set({ "n", "x" }, "P", require("pasta.mappings").P)
-
-    require("pasta").setup({})
+    vim.keymap.set({ "n", "x" }, "p", require("pasta.mapping").p)
+    vim.keymap.set({ "n", "x" }, "P", require("pasta.mapping").P)
 end
 
 return M
