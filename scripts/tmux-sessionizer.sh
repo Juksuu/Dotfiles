@@ -1,6 +1,6 @@
 #!/bin/sh
 
-base_folders=(~/code/personal/ ~/code/skynett/)
+base_folders=(~/code/)
 direct_folders=(~/.dotfiles/)
 
 folder_list=$(find ${base_folders[@]} -mindepth 1 -maxdepth 1 -type d)
