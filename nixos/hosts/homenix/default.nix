@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
   ];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   nix.settings = {
     auto-optimise-store = true;
@@ -128,7 +128,7 @@
   security.rtkit.enable = true;
   virtualisation.docker.enable = true;
 
-  fonts.fonts = with pkgs; [ (nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
+  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
 
   programs.steam.enable = true;
 }

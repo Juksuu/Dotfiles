@@ -2,9 +2,9 @@
   description = "NixOS system";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
