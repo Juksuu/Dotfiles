@@ -98,7 +98,6 @@
       driSupport32Bit = true;
     };
     nvidia = {
-      open = true;
       modesetting.enable = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
@@ -128,7 +127,8 @@
   security.rtkit.enable = true;
   virtualisation.docker.enable = true;
 
-  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
+  fonts.packages = with pkgs;
+    [ (nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
 
   programs.steam.enable = true;
 }

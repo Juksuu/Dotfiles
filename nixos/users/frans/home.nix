@@ -1,5 +1,13 @@
 { self, config, pkgs, makeMutableSymlink, ... }: {
-  home.packages = with pkgs; [ fd wget ripgrep kitty brave discord spotify ];
+  home.packages = with pkgs; [
+    fd
+    wget
+    ripgrep
+    kitty
+    master.brave
+    discord
+    spotify
+  ];
 
   home.file = {
     # Scripts
@@ -11,11 +19,6 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
     ".config/kitty".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
   };
 
   programs.fish = {
@@ -49,6 +52,16 @@
     enable = true;
     userName = "Frans Paasonen";
     userEmail = "franspaasonen@gmail.com";
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.neovim = {
