@@ -7,14 +7,6 @@ local M = {
 }
 
 function M.config()
-    -- disable lsp watcher. Too slow on linux
-    local ok, wf = pcall(require, "vim.lsp._watchfiles")
-    if ok then
-        wf._watchfunc = function()
-            return function() end
-        end
-    end
-
     -- Disable gutter signs, color linenum instead
     local sign = function(name)
         vim.fn.sign_define(name, { text = "", numhl = name })
@@ -23,6 +15,16 @@ function M.config()
     sign("DiagnosticSignInfo")
     sign("DiagnosticSignHint")
     sign("DiagnosticSignError")
+
+    vim.lsp.handlers["textDocument/hover"] =
+        vim.lsp.with(vim.lsp.handlers.hover, {
+            border = "rounded",
+        })
+
+    vim.lsp.handlers["textDocument/signatureHelp"] =
+        vim.lsp.with(vim.lsp.handlers.signature_help, {
+            border = "rounded",
+        })
 
     local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
     local capabilities = {}
