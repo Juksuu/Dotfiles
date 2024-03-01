@@ -2,21 +2,24 @@
   description = "NixOS system";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    neovim-flake = {
+      url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs:
     let
-      masterOverlay = final: prev: {
-        master = import inputs.nixpkgs-master {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
+      neovim-overlay = final: prev: {
+        neovim-custom-linux = inputs.neovim-flake.packages.x86_64-linux.neovim;
       };
-      overlays = [ inputs.neovim-nightly.overlay masterOverlay ];
+      overlays = [ neovim-overlay ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
     in {
       nixosConfigurations = {

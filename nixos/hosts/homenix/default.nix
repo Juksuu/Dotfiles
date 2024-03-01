@@ -13,7 +13,7 @@
 
   # Bootloader.
   boot = {
-    kernelPackages = pkgs.master.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -71,7 +71,6 @@
 
       # Wayland stuff
       wl-clipboard
-      qt5.qtwayland
       qt6.qtwayland
 
       # Programming stuff
@@ -79,15 +78,6 @@
       codespell
       lazydocker
       docker-compose
-    ];
-
-    plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-      okular
-      oxygen
-      khelpcenter
-      konsole
-      print-manager
     ];
   };
 
@@ -106,12 +96,14 @@
   services = {
     xserver = {
       enable = true;
-      layout = "us,fi";
-      xkbVariant = "";
-      xkbOptions = "grp:win_space_toggle";
+      xkb = {
+        variant = "";
+        layout = "us,fi";
+        options = "grp:win_space_toggle";
+      };
       videoDrivers = [ "nvidia" ];
       displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
+      desktopManager.plasma6.enable = true;
     };
 
     dbus.enable = true;

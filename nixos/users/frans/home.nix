@@ -1,13 +1,5 @@
 { self, config, pkgs, makeMutableSymlink, ... }: {
-  home.packages = with pkgs; [
-    fd
-    wget
-    ripgrep
-    kitty
-    master.brave
-    discord
-    spotify
-  ];
+  home.packages = with pkgs; [ fd wget ripgrep kitty brave discord spotify ];
 
   home.file = {
     # Scripts
@@ -66,7 +58,7 @@
 
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
+    package = pkgs.neovim-custom-linux;
     extraPackages = with pkgs; [
       stylua
       nixfmt
