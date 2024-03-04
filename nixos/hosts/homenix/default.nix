@@ -27,10 +27,7 @@
   };
 
   # Set your time zone.
-  time = {
-    timeZone = "Europe/Helsinki";
-    hardwareClockInLocalTime = true;
-  };
+  time.timeZone = "Europe/Helsinki";
 
   # Select internationalisation properties.
   i18n = {
@@ -79,6 +76,14 @@
       lazydocker
       docker-compose
     ];
+
+    plasma6.excludePackages = with pkgs.kdePackages; [
+      elisa
+      okular
+      oxygen
+      khelpcenter
+      print-manager
+    ];
   };
 
   hardware = {
@@ -89,6 +94,7 @@
     };
     nvidia = {
       modesetting.enable = true;
+      powerManagement.enable = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
   };
@@ -102,7 +108,10 @@
         options = "grp:win_space_toggle";
       };
       videoDrivers = [ "nvidia" ];
-      displayManager.sddm.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
       desktopManager.plasma6.enable = true;
     };
 
