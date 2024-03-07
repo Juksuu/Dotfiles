@@ -1,7 +1,10 @@
 return {
-    "direnv/direnv.vim",
+    -- Nvim packages to have by default
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
+
+    -- Language/tooling support
+    "direnv/direnv.vim",
 
     { "tpope/vim-sleuth", event = "VeryLazy" },
     { "aserowy/tmux.nvim", config = true, event = "VeryLazy" },
@@ -15,12 +18,6 @@ return {
         keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },
     },
 
-    {
-        "windwp/windline.nvim",
-        config = function()
-            require("wlsample.vscode")
-        end,
-    },
     {
         "j-hui/fidget.nvim",
         config = true,
