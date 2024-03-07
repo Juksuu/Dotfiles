@@ -14,9 +14,9 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 
 vim.opt.number = true
 vim.opt.laststatus = 3
+vim.opt.showmode = false
 vim.opt.showtabline = 0
 vim.opt.signcolumn = "yes:1"
-vim.opt.statuscolumn = " %=%l %s%C%#StatusColumnBorder#▕%#None# "
 
 vim.opt.list = true
 vim.opt.listchars = "tab:→ ,trail:·"
