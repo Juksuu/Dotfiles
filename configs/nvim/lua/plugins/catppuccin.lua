@@ -78,16 +78,23 @@ function M.config()
                 dim_context = false,
                 alt_background = false,
             },
-            cmp = true,
+            fidget = true,
             gitsigns = true,
+            indent_blankline = {
+                enabled = true,
+            },
+            mini = {
+                enabled = true,
+            },
+            neogit = true,
+            cmp = true,
             native_lsp = {
                 enabled = true,
                 inlay_hints = { background = true },
             },
-            neogit = true,
             semantic_tokens = true,
             treesitter = true,
-            treesitter_context = true,
+            telescope = true,
         },
         highlight_overrides = {
             all = function(colors)

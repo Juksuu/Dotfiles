@@ -14,9 +14,9 @@ M.config = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
     local cmp = require("cmp")
-    local lspkind = require("lspkind")
-
     local defaults = require("cmp.config.default")()
+
+    local lspkind = require("lspkind")
     local cmp_info_style = cmp.config.window.bordered({
         border = "rounded",
     })
@@ -27,7 +27,7 @@ M.config = function()
         },
         snippet = {
             expand = function(args)
-                require("luasnip").lsp_expand(args.body)
+                vim.snippet.expand(args.body)
             end,
         },
         mapping = cmp.mapping.preset.insert({
@@ -43,9 +43,9 @@ M.config = function()
             ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-            { name = "path" },
             { name = "nvim_lsp" },
-            { name = "luasnip" },
+            { name = "path" },
+        }, {
             { name = "buffer" },
         }),
         experimental = {
