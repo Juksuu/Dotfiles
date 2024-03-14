@@ -7,14 +7,25 @@ local M = {
 }
 
 function M.config()
-    -- Disable gutter signs, color linenum instead
-    local sign = function(name)
-        vim.fn.sign_define(name, { text = "", numhl = name })
-    end
-    sign("DiagnosticSignWarn")
-    sign("DiagnosticSignInfo")
-    sign("DiagnosticSignHint")
-    sign("DiagnosticSignError")
+    vim.diagnostic.config({
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+        signs = {
+            text = {
+                [vim.diagnostic.severity.HINT] = "",
+                [vim.diagnostic.severity.INFO] = "",
+                [vim.diagnostic.severity.WARN] = "",
+                [vim.diagnostic.severity.ERROR] = "",
+            },
+            numhl = {
+                [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+                [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+                [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+                [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+            },
+        },
+    })
 
     vim.lsp.handlers["textDocument/hover"] =
         vim.lsp.with(vim.lsp.handlers.hover, {
@@ -32,28 +43,19 @@ function M.config()
         capabilities = cmp_nvim_lsp.default_capabilities()
     end
 
-    vim.g.inlay_hints_visible = false
     local toggle_inlay_hints = function(client, bufnr)
-        if vim.g.inlay_hints_visible then
-            vim.g.inlay_hints_visible = false
-            vim.lsp.inlay_hint(bufnr, false)
-        else
-            if client.server_capabilities.inlayHintProvider then
-                vim.g.inlay_hints_visible = true
-                vim.lsp.inlay_hint(bufnr, true)
-            else
-                print("No inlay hints available")
-            end
+        if client.supports_method("textDocument/inlayHint") then
+            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+            local value = not ih.is_enabled(bufnr)
+            ih.enable(bufnr, value)
         end
     end
 
-    vim.g.diagnostics_visible = true
-    local toggle_diagnostics = function()
-        vim.g.diagnostics_visible = not vim.g.diagnostics_visible
-        if vim.g.diagnostics_visible then
-            vim.diagnostic.enable()
+    local toggle_diagnostics = function(_, bufnr)
+        if vim.diagnostic.is_disabled(bufnr) then
+            vim.diagnostic.enable(bufnr)
         else
-            vim.diagnostic.disable()
+            vim.diagnostic.disable(bufnr)
         end
     end
 
@@ -64,8 +66,6 @@ function M.config()
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
         vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
@@ -76,10 +76,15 @@ function M.config()
             bufopts
         )
 
-        vim.keymap.set("n", "<leader>td", toggle_diagnostics, bufopts)
+        vim.keymap.set("n", "<leader>td", function()
+            toggle_diagnostics(client, bufnr)
+        end, bufopts)
+
         vim.keymap.set("n", "<leader>ti", function()
             toggle_inlay_hints(client, bufnr)
         end, bufopts)
+
+        toggle_inlay_hints(client, bufnr)
     end
 
     local nvim_lsp = require("lspconfig")

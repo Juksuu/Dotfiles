@@ -4,7 +4,9 @@ local M = {
 }
 
 function M.config()
-    require("conform").setup({
+    local conform = require("conform")
+
+    conform.setup({
         formatters_by_ft = {
             lua = { "stylua" },
             zig = { "zigfmt" },
@@ -17,6 +19,19 @@ function M.config()
             NeogitCommitMessage = nil,
         },
         format_on_save = nil,
+    })
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function(args)
+            conform.format({
+                timeout_ms = 3000,
+                async = false,
+                quiet = false,
+                lsp_fallback = true,
+                bufnr = args.buf,
+            })
+        end,
     })
 end
 
