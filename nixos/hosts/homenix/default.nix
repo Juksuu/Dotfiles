@@ -95,6 +95,11 @@
   };
 
   services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      # wayland.enable = true;
+    };
     xserver = {
       enable = true;
       xkb = {
@@ -103,11 +108,6 @@
         options = "grp:win_space_toggle";
       };
       videoDrivers = [ "nvidia" ];
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
-      desktopManager.plasma6.enable = true;
     };
 
     dbus.enable = true;
@@ -125,6 +125,12 @@
 
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "Iosevka" ]; }) ];
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+  };
 
   programs.steam.enable = true;
 }

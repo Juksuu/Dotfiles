@@ -1,5 +1,15 @@
 { self, config, pkgs, makeMutableSymlink, ... }: {
-  home.packages = with pkgs; [ fd wget ripgrep kitty brave discord spotify ];
+  home.packages = with pkgs; [
+    fd
+    wget
+    ripgrep
+    kitty
+    brave
+    firefox
+    discord
+    spotify
+    mumble
+  ];
 
   home.file = {
     # Scripts
@@ -12,6 +22,8 @@
     ".config/kitty".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
   };
+
+  home.sessionVariables = { FLAKE = "/home/frans/.dotfiles"; };
 
   programs.fish = {
     enable = true;
@@ -29,11 +41,7 @@
         bind \cgw 'bass source ~/scripts/wts.sh'
       end
     '';
-    shellAliases = {
-      hms = "home-manager switch --flake ~/.dotfiles#frans@homenix";
-      nrs = "sudo nixos-rebuild switch --flake ~/.dotfiles#homenix";
-      wtc = "~/scripts/wtc.sh";
-    };
+    shellAliases = { wtc = "~/scripts/wtc.sh"; };
     plugins = [{
       name = "bass";
       src = pkgs.fishPlugins.bass.src;
@@ -60,9 +68,9 @@
     enable = true;
     package = pkgs.neovim-custom-linux;
     extraPackages = with pkgs; [
+      fswatch
       stylua
-      nixfmt
-      rnix-lsp
+      nixfmt-classic
       sumneko-lua-language-server
     ];
   };
