@@ -46,16 +46,16 @@ function M.config()
     local toggle_inlay_hints = function(client, bufnr)
         if client.supports_method("textDocument/inlayHint") then
             local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-            local value = not ih.is_enabled(bufnr)
-            ih.enable(bufnr, value)
+            local value = not ih.is_enabled({ bufnr })
+            ih.enable(value, { bufnr })
         end
     end
 
     local toggle_diagnostics = function(_, bufnr)
-        if vim.diagnostic.is_disabled(bufnr) then
-            vim.diagnostic.enable(bufnr)
+        if vim.diagnostic.is_enabled(bufnr) then
+            vim.diagnostic.enable(false, { bufnr })
         else
-            vim.diagnostic.disable(bufnr)
+            vim.diagnostic.enable(true, { bufnr })
         end
     end
 
@@ -84,7 +84,7 @@ function M.config()
             toggle_inlay_hints(client, bufnr)
         end, bufopts)
 
-        toggle_inlay_hints(client, bufnr)
+        -- toggle_inlay_hints(client, bufnr)
     end
 
     local nvim_lsp = require("lspconfig")

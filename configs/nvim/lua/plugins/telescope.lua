@@ -1,6 +1,5 @@
 local M = {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.5",
     dependencies = {
         "nvim-telescope/telescope-file-browser.nvim",
         { "Juksuu/worktrees.nvim", config = true },

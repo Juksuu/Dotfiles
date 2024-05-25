@@ -66,7 +66,7 @@
 
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-custom-linux;
+    package = pkgs.neovim;
     extraPackages = with pkgs; [
       fswatch
       stylua

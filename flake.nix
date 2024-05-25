@@ -7,18 +7,12 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-flake = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs:
     let
-      neovim-overlay = final: prev: {
-        neovim-custom-linux = inputs.neovim-flake.packages.x86_64-linux.neovim;
-      };
-      overlays = [ neovim-overlay ];
+      overlays = [ inputs.neovim-overlay.overlays.default ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
     in {
       nixosConfigurations = {
