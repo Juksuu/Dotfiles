@@ -13,6 +13,14 @@ return {
     { "lewis6991/gitsigns.nvim", config = true, event = "VeryLazy" },
 
     {
+        "Juksuu/worktrees.nvim",
+        event = "VeryLazy",
+        config = true,
+        -- name = "worktrees",
+        -- dir = "~/code/worktrees.nvim/main",
+    },
+
+    {
         "NeogitOrg/neogit",
         opts = { disable_commit_confirmation = true },
         keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },

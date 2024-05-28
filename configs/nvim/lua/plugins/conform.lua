@@ -9,7 +9,6 @@ function M.config()
     conform.setup({
         formatters_by_ft = {
             lua = { "stylua" },
-            zig = { "zigfmt" },
             nix = { "nixfmt" },
             ["*"] = { "codespell" },
             ["_"] = { "trim_whitespace" },
@@ -25,9 +24,6 @@ function M.config()
         pattern = "*",
         callback = function(args)
             conform.format({
-                timeout_ms = 3000,
-                async = false,
-                quiet = false,
                 lsp_fallback = true,
                 bufnr = args.buf,
             })

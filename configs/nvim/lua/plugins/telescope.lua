@@ -2,7 +2,13 @@ local M = {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-telescope/telescope-file-browser.nvim",
-        { "Juksuu/worktrees.nvim", config = true },
+    },
+    keys = {
+        "<leader>ss",
+        "<leader>sg",
+        "<leader>sf",
+        "<leader>fb",
+        "<leader>gw",
     },
 }
 
@@ -42,6 +48,7 @@ function M.config()
     })
 
     require("telescope").load_extension("file_browser")
+    require("telescope").load_extension("worktrees")
 
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ss", builtin.live_grep, {})
