@@ -14,7 +14,7 @@ function M.config()
     local trouble_jump = function(next)
         local trouble = require("trouble")
         if trouble.is_open() then
-            local func = next and trouble.next or trouble.previous
+            local func = next and trouble.next or trouble.prev
             func({ skip_groups = true, jump = true })
         end
     end
@@ -27,10 +27,7 @@ function M.config()
     end)
 
     vim.keymap.set("n", "<leader>dd", function()
-        require("trouble").toggle("document_diagnostics")
-    end)
-    vim.keymap.set("n", "<leader>dw", function()
-        require("trouble").toggle("workspace_diagnostics")
+        require("trouble").toggle("diagnostics")
     end)
     vim.keymap.set("n", "<leader>tt", "<cmd> TodoTrouble<cr>")
 end

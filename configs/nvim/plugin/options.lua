@@ -12,6 +12,8 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamed,unnamedplus"
 
+vim.opt.completeopt = "menu,menuone,noinsert"
+
 vim.opt.number = true
 vim.opt.laststatus = 3
 vim.opt.showmode = false

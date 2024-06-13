@@ -1,7 +1,114 @@
+local methods = vim.lsp.protocol.Methods
+
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
 }
+
+local custom_attach = function(client, bufnr)
+    ---Utility for keymap creation.
+    ---@param lhs string
+    ---@param rhs string|function
+    ---@param opts string|table
+    ---@param mode? string|string[]
+    local function keymap(lhs, rhs, opts, mode)
+        opts = type(opts) == "string" and { desc = opts }
+            or vim.tbl_extend("error", opts --[[@as table]], { buffer = bufnr })
+        mode = mode or "n"
+        vim.keymap.set(mode, lhs, rhs, opts)
+    end
+
+    ---For replacing certain <C-x>... keymaps.
+    ---@param keys string
+    local function feedkeys(keys)
+        vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes(keys, true, false, true),
+            "n",
+            true
+        )
+    end
+
+    ---Is the completion menu open?
+    local function pumvisible()
+        return tonumber(vim.fn.pumvisible()) ~= 0
+    end
+
+    client.server_capabilities.semanticTokensProvider = false
+
+    local toggle_inlay_hints = function()
+        if client.supports_method("textDocument/inlayHint") then
+            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+            local value = not ih.is_enabled({ bufnr })
+            ih.enable(value, { bufnr })
+        end
+    end
+
+    local toggle_diagnostics = function()
+        if vim.diagnostic.is_enabled(bufnr) then
+            vim.diagnostic.enable(false, { bufnr })
+        else
+            vim.diagnostic.enable(true, { bufnr })
+        end
+    end
+
+    keymap("gd", vim.lsp.buf.definition, {})
+    keymap("dl", vim.diagnostic.open_float, {})
+
+    keymap("<leader>td", toggle_diagnostics, {})
+    keymap("<leader>ti", toggle_inlay_hints, {})
+
+    if client.supports_method(methods.textDocument_completion) then
+        vim.lsp.completion.enable(
+            true,
+            client.id,
+            bufnr,
+            { autotrigger = true }
+        )
+
+        -- Use slash to dismiss the completion menu.
+        keymap("/", function()
+            return pumvisible() and "<C-e>" or "/"
+        end, { expr = true }, "i")
+
+        -- Use <C-n> to navigate to the next completion or:
+        -- - Trigger LSP completion.
+        -- - If there's no one, fallback to vanilla omnifunc.
+        keymap("<c-n>", function()
+            if pumvisible() then
+                feedkeys("<C-n>")
+            else
+                if next(vim.lsp.get_clients({ bufnr = 0 })) then
+                    vim.lsp.completion.trigger()
+                else
+                    if vim.bo.omnifunc == "" then
+                        feedkeys("<C-x><C-n>")
+                    else
+                        feedkeys("<C-x><C-o>")
+                    end
+                end
+            end
+        end, {}, "i")
+
+        -- Use <Tab> to navigate between snippet tabstops,
+        keymap("<Tab>", function()
+            if vim.snippet.active({ direction = 1 }) then
+                vim.snippet.jump(1)
+            else
+                feedkeys("<Tab>")
+            end
+        end, {}, { "i", "s" })
+        keymap("<S-Tab>", function()
+            if vim.snippet.active({ direction = -1 }) then
+                vim.snippet.jump(-1)
+            else
+                feedkeys("<S-Tab>")
+            end
+        end, {}, { "i", "s" })
+
+        -- Inside a snippet, use backspace to remove the placeholder.
+        keymap("<BS>", "<C-o>s", {}, "s")
+    end
+end
 
 function M.config()
     vim.diagnostic.config({
@@ -34,62 +141,12 @@ function M.config()
             border = "rounded",
         })
 
-    local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    local capabilities = {}
-    if status then
-        capabilities = cmp_nvim_lsp.default_capabilities()
-    end
-
-    local toggle_inlay_hints = function(client, bufnr)
-        if client.supports_method("textDocument/inlayHint") then
-            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-            local value = not ih.is_enabled({ bufnr })
-            ih.enable(value, { bufnr })
-        end
-    end
-
-    local toggle_diagnostics = function(_, bufnr)
-        if vim.diagnostic.is_enabled(bufnr) then
-            vim.diagnostic.enable(false, { bufnr })
-        else
-            vim.diagnostic.enable(true, { bufnr })
-        end
-    end
-
-    local custom_attach = function(client, bufnr)
-        client.server_capabilities.semanticTokensProvider = false
-
-        local bufopts = { buffer = bufnr }
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-        vim.keymap.set("n", "dl", vim.diagnostic.open_float, bufopts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set(
-            { "n", "i" },
-            "<c-s>",
-            vim.lsp.buf.signature_help,
-            bufopts
-        )
-
-        vim.keymap.set("n", "<leader>td", function()
-            toggle_diagnostics(client, bufnr)
-        end, bufopts)
-
-        vim.keymap.set("n", "<leader>ti", function()
-            toggle_inlay_hints(client, bufnr)
-        end, bufopts)
-
-        -- toggle_inlay_hints(client, bufnr)
-    end
-
     local nvim_lsp = require("lspconfig")
     local server_config = require("lsp_servers")
 
     local setup_server = function(server)
         local opts = server_config.settings[server] or {}
-        opts.capabilities = capabilities
+        opts.capabilities = vim.lsp.protocol.make_client_capabilities()
         opts.on_attach = custom_attach
 
         nvim_lsp[server].setup(opts)
