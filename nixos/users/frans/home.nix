@@ -6,7 +6,7 @@
     kitty
     brave
     firefox
-    discord
+    vesktop
     spotify
     mumble
   ];
