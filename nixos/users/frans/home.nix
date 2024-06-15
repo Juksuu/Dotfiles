@@ -68,10 +68,10 @@
     enable = true;
     package = pkgs.neovim;
     extraPackages = with pkgs; [
-      fswatch
       stylua
       nixfmt-classic
       sumneko-lua-language-server
+      vscode-langservers-extracted
     ];
   };
 
