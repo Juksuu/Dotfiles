@@ -1,0 +1,6 @@
+{
+  "lspconfig": {
+    "jsonls": {},
+    "lua_ls": {}
+  }
+}

@@ -3,6 +3,9 @@ local methods = vim.lsp.protocol.Methods
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
+    dependencies = {
+        { "folke/neoconf.nvim", config = true },
+    },
 }
 
 local custom_attach = function(client, bufnr)
@@ -142,18 +145,13 @@ function M.config()
         })
 
     local nvim_lsp = require("lspconfig")
-    local server_config = require("lsp_servers")
+    local neoconfig_lsp_config = require("neoconf").get("lspconfig")
 
-    local setup_server = function(server)
-        local opts = server_config.settings[server] or {}
-        opts.capabilities = vim.lsp.protocol.make_client_capabilities()
-        opts.on_attach = custom_attach
-
-        nvim_lsp[server].setup(opts)
-    end
-
-    for _, v in pairs(server_config.servers) do
-        setup_server(v)
+    for server, _ in pairs(neoconfig_lsp_config) do
+        nvim_lsp[server].setup({
+            on_attach = custom_attach,
+            capabilities = vim.lsp.protocol.make_client_capabilities(),
+        })
     end
 end
 
