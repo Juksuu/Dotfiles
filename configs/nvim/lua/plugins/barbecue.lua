@@ -8,6 +8,7 @@ local M = {
 
 function M.config()
     require("barbecue").setup({
+        theme = "catppucin",
         kinds = {
             Array = "",
             Boolean = "",

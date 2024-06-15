@@ -80,14 +80,9 @@ function M.config()
             },
             fidget = true,
             gitsigns = true,
-            indent_blankline = {
-                enabled = true,
-            },
-            mini = {
-                enabled = true,
-            },
+            indent_blankline = { enabled = true },
+            mini = { enabled = true },
             neogit = true,
-            cmp = true,
             native_lsp = {
                 enabled = true,
                 inlay_hints = { background = true },
@@ -95,6 +90,7 @@ function M.config()
             semantic_tokens = true,
             treesitter = true,
             telescope = true,
+            lsp_trouble = true,
         },
         highlight_overrides = {
             all = function(colors)
@@ -175,6 +171,11 @@ function M.config()
                     Delimiter = { fg = colors.subtext1 },
                     Ignore = { fg = colors.subtext1 },
                     Macro = { fg = colors.teal },
+
+                    DiagnosticUnderlineError = {
+                        fg = colors.red,
+                        style = { "underline" },
+                    },
 
                     TSAnnotation = { fg = colors.mauve },
                     TSAttribute = { fg = colors.mauve },
