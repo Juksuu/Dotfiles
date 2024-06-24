@@ -3,9 +3,6 @@ local methods = vim.lsp.protocol.Methods
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
-    dependencies = {
-        { "folke/neoconf.nvim", config = true },
-    },
 }
 
 local custom_attach = function(client, bufnr)
@@ -145,13 +142,19 @@ function M.config()
         })
 
     local nvim_lsp = require("lspconfig")
-    local neoconfig_lsp_config = require("neoconf").get("lspconfig")
+    local neoconf_lsp_config = require("neoconf").get("lspconfig")
 
-    for server, _ in pairs(neoconfig_lsp_config) do
-        nvim_lsp[server].setup({
+    for server, config in pairs(neoconf_lsp_config) do
+        local opts = {
             on_attach = custom_attach,
             capabilities = vim.lsp.protocol.make_client_capabilities(),
-        })
+        }
+        local cmd = config["cmd"]
+        if type(cmd) == "table" then
+            opts.cmd = cmd
+        end
+
+        nvim_lsp[server].setup(opts)
     end
 end
 
