@@ -2,7 +2,6 @@ return {
     -- Nvim packages to have by default
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
-    { "folke/neoconf.nvim", config = true },
 
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     {

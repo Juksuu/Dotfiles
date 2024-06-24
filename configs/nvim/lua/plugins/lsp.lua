@@ -3,6 +3,9 @@ local methods = vim.lsp.protocol.Methods
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
+    dependencies = {
+        { "folke/neoconf.nvim", config = true },
+    },
 }
 
 local custom_attach = function(client, bufnr)
