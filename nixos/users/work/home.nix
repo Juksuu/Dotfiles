@@ -16,6 +16,7 @@
     dropbox
     texturepacker
     zoom-us
+    gimp
   ];
 
   # Workaround for HM passing a nonexistent units dir to sd-switch
@@ -62,6 +63,7 @@
     enable = true;
     userName = "Frans Paasonen";
     userEmail = "frans.paasonen@seepiagames.com";
+    lfs.enable = true;
   };
 
   programs.direnv = {
