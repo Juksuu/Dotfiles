@@ -1,5 +1,5 @@
 { self, config, pkgs, makeMutableSymlink, ... }: {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
     fd
@@ -7,10 +7,15 @@
     ripgrep
     kitty
     brave
-    firefox
+    firefox-bin
     vesktop
     spotify
-    mumble
+
+    slack
+    betterbird
+    dropbox
+    texturepacker
+    zoom-us
   ];
 
   # Workaround for HM passing a nonexistent units dir to sd-switch
@@ -19,16 +24,16 @@
   home.file = {
     # Scripts
     "scripts".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/scripts";
     "wallpapers".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/wallpapers";
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/wallpapers";
     ".config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/nvim";
     ".config/kitty".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/kitty";
   };
 
-  home.sessionVariables = { FLAKE = "/home/frans/.dotfiles"; };
+  home.sessionVariables = { FLAKE = "/home/work/.dotfiles"; };
 
   programs.fish = {
     enable = true;
@@ -56,7 +61,7 @@
   programs.git = {
     enable = true;
     userName = "Frans Paasonen";
-    userEmail = "franspaasonen@gmail.com";
+    userEmail = "frans.paasonen@seepiagames.com";
   };
 
   programs.direnv = {
@@ -115,6 +120,4 @@
       bind-key -T copy-mode-vi M-l resize-pane -R 1
     '';
   };
-
-  programs.obs-studio.enable = true;
 }

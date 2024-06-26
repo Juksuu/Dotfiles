@@ -25,6 +25,12 @@
           users = [ "frans" ];
           extraModules = [ ];
         };
+        worknix = utils.makeSystem {
+          system = "x86_64-linux";
+          hostname = "worknix";
+          users = [ "work" ];
+          extraModules = [ ];
+        };
       };
 
       homeConfigurations = {
@@ -32,6 +38,11 @@
           system = "x86_64-linux";
           username = "frans";
           hostname = "homenix";
+        };
+        "work@worknix" = utils.makeHome {
+          system = "x86_64-linux";
+          username = "work";
+          hostname = "worknix";
         };
       };
     };
