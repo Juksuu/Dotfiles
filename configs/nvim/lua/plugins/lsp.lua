@@ -2,7 +2,7 @@ local methods = vim.lsp.protocol.Methods
 
 local M = {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    event = "BufReadPost",
     dependencies = {
         { "folke/neoconf.nvim", config = true },
     },
@@ -55,7 +55,7 @@ local custom_attach = function(client, bufnr)
     end
 
     keymap("gd", vim.lsp.buf.definition, {})
-    keymap("dl", vim.diagnostic.open_float, {})
+    keymap("<leader>dl", vim.diagnostic.open_float, {})
 
     keymap("<leader>td", toggle_diagnostics, {})
     keymap("<leader>ti", toggle_inlay_hints, {})

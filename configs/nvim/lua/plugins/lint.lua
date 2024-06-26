@@ -6,14 +6,17 @@ local M = {
 function M.config()
     local lint = require("lint")
 
-    lint.linters_by_ft = {
-        -- javascript = { "eslint_d" },
-        -- typescript = { "eslint_d" },
-        -- javascriptreact = { "eslint_d" },
-        -- typescriptreact = { "eslint_d" },
-        -- svelte = { "eslint_d" },
-        -- python = { "pylint" },
-    }
+    local linters_by_ft = {}
+
+    local neoconf_linters = require("neoconf").get("linters")
+
+    if type(neoconf_linters) == "table" then
+        for ft, linter in pairs(neoconf_linters) do
+            linters_by_ft[ft] = linter
+        end
+    end
+
+    lint.linters_by_ft = linters_by_ft
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
