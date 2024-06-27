@@ -21,15 +21,10 @@
     gimp
   ];
 
-  # Workaround for HM passing a nonexistent units dir to sd-switch
-  xdg.configFile."systemd/user/.hm-keep".text = "";
-
   home.file = {
     # Scripts
     "scripts".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/scripts";
-    "wallpapers".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/wallpapers";
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/nvim";
     ".config/kitty".source =
