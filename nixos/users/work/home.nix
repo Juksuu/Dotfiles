@@ -1,6 +1,8 @@
 { self, config, pkgs, makeMutableSymlink, ... }: {
   home.stateVersion = "24.05";
 
+  nixpkgs.overlays = [ (import ./overlays/texturepacker.nix) ];
+
   home.packages = with pkgs; [
     fd
     wget
