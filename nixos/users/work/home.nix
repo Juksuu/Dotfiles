@@ -1,7 +1,8 @@
-{ self, config, pkgs, makeMutableSymlink, ... }: {
+{ self, inputs, config, pkgs, ... }: {
   home.stateVersion = "24.05";
 
-  nixpkgs.overlays = [ (import ./overlays/texturepacker.nix) ];
+  nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
+  in [ overlays.modifications overlays.additions ];
 
   home.packages = with pkgs; [
     fd
@@ -19,6 +20,10 @@
     texturepacker
     zoom-us
     gimp
+    libreoffice
+
+    # Custom pkgs
+    font-builder-ui
   ];
 
   home.file = {

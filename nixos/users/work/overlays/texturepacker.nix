@@ -1,4 +1,4 @@
-final: prev: {
+{ final, prev }: {
   texturepacker = prev.texturepacker.overrideAttrs (previousAttrs: rec {
     version = "6.0.2";
     src = prev.fetchurl {
@@ -7,12 +7,19 @@ final: prev: {
       hash = "sha256-Ur45HLr1NK2NpCPKS0cYgwtNPZYogvEWUmw02JiCZv8=";
     };
 
+    autoPatchelfIgnoreMissingDeps = true;
+
     installPhase = ''
-      mkdir -p $out/bin $out/lib
-      cp usr/lib/texturepacker/{libGrantlee_Templates.so.5,libHQX.so.1.0.0,libPVRTexLib.so} $out/lib
-      cp -a usr/lib/texturepacker/grantlee/. $out/bin/grantlee/
-      cp usr/lib/texturepacker/TexturePacker $out/bin
+      runHook preInstall
+      mkdir -p $out/bin $out/lib/texturepacker
+      cp -a usr/lib/texturepacker/. $out/lib/texturepacker/
+      cp usr/bin/TexturePackerGUI $out/bin
       cp -r usr/share $out
+      runHook postInstall
+    '';
+
+    postInstall = ''
+      ln -s $out/lib/texturepacker/TexturePacker $out/bin/TexturePacker
     '';
   });
 }
