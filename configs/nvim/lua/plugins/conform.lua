@@ -33,13 +33,21 @@ function M.config()
         format_on_save = nil,
     })
 
+    vim.g.format_on_save = true
+    local toggle_formatting = function()
+        vim.g.format_on_save = not vim.g.format_on_save
+    end
+    vim.keymap.set("n", "<leader>tf", toggle_formatting, {})
+
     vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function(args)
-            conform.format({
-                lsp_fallback = true,
-                bufnr = args.buf,
-            })
+            if vim.g.format_on_save then
+                conform.format({
+                    lsp_fallback = true,
+                    bufnr = args.buf,
+                })
+            end
         end,
     })
 end
