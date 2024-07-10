@@ -66,6 +66,7 @@
     userName = "Frans Paasonen";
     userEmail = "frans.paasonen@seepiagames.com";
     lfs.enable = true;
+    extraConfig = { pull = { rebase = true; }; };
   };
 
   programs.direnv = {

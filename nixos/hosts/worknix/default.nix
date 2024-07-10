@@ -25,6 +25,11 @@
   networking = {
     hostName = "worknix";
     networkmanager.enable = true;
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 8080 ];
+    };
   };
 
   # Set your time zone.
