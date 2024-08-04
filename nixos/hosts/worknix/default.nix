@@ -18,7 +18,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
   };
 
   # Enable networking
