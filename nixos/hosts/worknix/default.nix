@@ -99,7 +99,7 @@
       open = true;
       modesetting.enable = true;
       powerManagement.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
   };
 
@@ -107,7 +107,7 @@
     desktopManager.plasma6.enable = true;
     displayManager.sddm = {
       enable = true;
-      # wayland.enable = true;
+      wayland.enable = true;
     };
     xserver = {
       enable = true;
