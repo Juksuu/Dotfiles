@@ -47,7 +47,7 @@ local custom_attach = function(client, bufnr)
     end
 
     local toggle_diagnostics = function()
-        if vim.diagnostic.is_enabled(bufnr) then
+        if vim.diagnostic.is_enabled({ bufnr }) then
             vim.diagnostic.enable(false, { bufnr })
         else
             vim.diagnostic.enable(true, { bufnr })
@@ -59,6 +59,14 @@ local custom_attach = function(client, bufnr)
 
     keymap("<leader>td", toggle_diagnostics, {})
     keymap("<leader>ti", toggle_inlay_hints, {})
+
+    keymap("K", function()
+        vim.lsp.buf.hover({ border = "rounded" })
+    end, {})
+
+    keymap("<C-s>", function()
+        vim.lsp.buf.signature_help({ border = "rounded" })
+    end, {})
 
     if client.supports_method(methods.textDocument_completion) then
         vim.lsp.completion.enable(
@@ -133,16 +141,6 @@ function M.config()
             },
         },
     })
-
-    vim.lsp.handlers["textDocument/hover"] =
-        vim.lsp.with(vim.lsp.handlers.hover, {
-            border = "rounded",
-        })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, {
-            border = "rounded",
-        })
 
     local nvim_lsp = require("lspconfig")
     local neoconf_lsp_config = require("neoconf").get("lspconfig")
