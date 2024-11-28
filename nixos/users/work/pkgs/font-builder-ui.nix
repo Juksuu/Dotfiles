@@ -1,13 +1,13 @@
 { stdenv, pkgs, fetchzip, steam-run, makeWrapper }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "font-builder-ui";
-  version = "2.1.1";
+  version = "2.1.3";
   apila-version = "27.0.3";
 
   src = fetchzip {
     url =
       "http://developer.sw.veikkaus.fi/fsbuilderui/FontBuilderUI-linux-x64-${finalAttrs.version}_${finalAttrs.apila-version}.zip";
-    hash = "sha256-oBRtP7sLTJ/GB6FnOV+jCh+t4jVxIMBx7Mju+zUBv1I=";
+    hash = "sha256-D6RtbSBM8AmUyMMvhM8t80nuOUWp2NcU1Om1Q8UScj0=";
   };
 
   nativeBuildInputs = [ makeWrapper ];

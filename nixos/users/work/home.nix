@@ -13,9 +13,10 @@
     firefox-bin
     vesktop
     spotify
+    mpv
 
     slack
-    betterbird
+    thunderbird
     dropbox
     texturepacker
     zoom-us
@@ -24,6 +25,7 @@
 
     # Custom pkgs
     font-builder-ui
+    particle-editor
   ];
 
   home.file = {
