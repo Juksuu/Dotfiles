@@ -124,10 +124,7 @@
   security.rtkit.enable = true;
   virtualisation.docker.enable = true;
 
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Iosevka" ]; })
-    maple-mono-NF
-  ];
+  fonts.packages = with pkgs; [ nerd-fonts.iosevka maple-mono-NF ];
 
   programs.nh = {
     enable = true;
