@@ -1,10 +1,9 @@
-local methods = vim.lsp.protocol.Methods
-
 local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     dependencies = {
         { "folke/neoconf.nvim", config = true },
+        { "saghen/blink.cmp" },
     },
 }
 
@@ -19,21 +18,6 @@ local custom_attach = function(client, bufnr)
             or vim.tbl_extend("error", opts --[[@as table]], { buffer = bufnr })
         mode = mode or "n"
         vim.keymap.set(mode, lhs, rhs, opts)
-    end
-
-    ---For replacing certain <C-x>... keymaps.
-    ---@param keys string
-    local function feedkeys(keys)
-        vim.api.nvim_feedkeys(
-            vim.api.nvim_replace_termcodes(keys, true, false, true),
-            "n",
-            true
-        )
-    end
-
-    ---Is the completion menu open?
-    local function pumvisible()
-        return tonumber(vim.fn.pumvisible()) ~= 0
     end
 
     client.server_capabilities.semanticTokensProvider = false
@@ -67,58 +51,6 @@ local custom_attach = function(client, bufnr)
     keymap("<C-s>", function()
         vim.lsp.buf.signature_help({ border = "rounded" })
     end, {})
-
-    if client.supports_method(methods.textDocument_completion) then
-        vim.lsp.completion.enable(
-            true,
-            client.id,
-            bufnr,
-            { autotrigger = true }
-        )
-
-        -- Use slash to dismiss the completion menu.
-        keymap("/", function()
-            return pumvisible() and "<C-e>" or "/"
-        end, { expr = true }, "i")
-
-        -- Use <C-n> to navigate to the next completion or:
-        -- - Trigger LSP completion.
-        -- - If there's no one, fallback to vanilla omnifunc.
-        keymap("<c-n>", function()
-            if pumvisible() then
-                feedkeys("<C-n>")
-            else
-                if next(vim.lsp.get_clients({ bufnr = 0 })) then
-                    vim.lsp.completion.trigger()
-                else
-                    if vim.bo.omnifunc == "" then
-                        feedkeys("<C-x><C-n>")
-                    else
-                        feedkeys("<C-x><C-o>")
-                    end
-                end
-            end
-        end, {}, "i")
-
-        -- Use <Tab> to navigate between snippet tabstops,
-        keymap("<Tab>", function()
-            if vim.snippet.active({ direction = 1 }) then
-                vim.snippet.jump(1)
-            else
-                feedkeys("<Tab>")
-            end
-        end, {}, { "i", "s" })
-        keymap("<S-Tab>", function()
-            if vim.snippet.active({ direction = -1 }) then
-                vim.snippet.jump(-1)
-            else
-                feedkeys("<S-Tab>")
-            end
-        end, {}, { "i", "s" })
-
-        -- Inside a snippet, use backspace to remove the placeholder.
-        keymap("<BS>", "<C-o>s", {}, "s")
-    end
 end
 
 function M.config()
@@ -144,11 +76,12 @@ function M.config()
 
     local nvim_lsp = require("lspconfig")
     local neoconf_lsp_config = require("neoconf").get("lspconfig")
+    local blink = require("blink.cmp")
 
     for server, config in pairs(neoconf_lsp_config) do
         local opts = {
             on_attach = custom_attach,
-            capabilities = vim.lsp.protocol.make_client_capabilities(),
+            capabilities = blink.get_lsp_capabilities(),
         }
         local cmd = config["cmd"]
         if type(cmd) == "table" then
