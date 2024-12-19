@@ -1,4 +1,4 @@
-{ stdenv, pkgs, fetchzip, steam-run, makeWrapper }:
+{ stdenv, pkgs, fetchzip, steam-run, makeWrapper, lib }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "font-builder-ui";
   version = "2.1.3";
@@ -10,6 +10,8 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-D6RtbSBM8AmUyMMvhM8t80nuOUWp2NcU1Om1Q8UScj0=";
   };
 
+  buildInputs = [ pkgs.nss pkgs.nspr ];
+
   nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
@@ -17,8 +19,9 @@ stdenv.mkDerivation (finalAttrs: {
     mv * $out/opt/font-builder-ui
 
     # Run the binary with steam-run for now
-    makeWrapper ${steam-run}/bin/steam-run $out/bin/FontBuilderUI --add-flags $out/opt/font-builder-ui/FontBuilderUI
-    # ln -s $out/opt/font-builder-ui/FontBuilderUI $out/bin/FontBuilderUI
+    makeWrapper ${steam-run}/bin/steam-run $out/bin/FontBuilderUI \
+    --add-flags $out/opt/font-builder-ui/FontBuilderUI \
+    --set LD_LIBRARY_PATH ${lib.makeLibraryPath [ pkgs.nss pkgs.nspr ]}
   '';
 })
 

@@ -14,6 +14,7 @@
     vesktop
     spotify
     mpv
+    obs-studio
 
     slack
     thunderbird
@@ -22,6 +23,8 @@
     zoom-us
     gimp
     libreoffice
+    awscli2
+    ansible
 
     # Custom pkgs
     font-builder-ui
