@@ -1,6 +1,6 @@
 {
   "barbecue.nvim": { "branch": "main", "commit": "3e31404f0b93a2c30d151abf0648650ac811c664" },
-  "blink.cmp": { "branch": "main", "commit": "a8222cf1ccbf24818ae926f94779267659809ab0" },
+  "blink.cmp": { "branch": "main", "commit": "a9a0f96c6a1029884e37dfd74a88a075b40366dd" },
   "catppuccin": { "branch": "main", "commit": "faf15ab0201b564b6368ffa47b56feefc92ce3f4" },
   "chadtree": { "branch": "chad", "commit": "30cbcf8dcf60d2944e5f3249d6a550715e50bf7c" },
   "conform.nvim": { "branch": "master", "commit": "f4e8837878fc5712d053ba3091a73d27d96a09e2" },
