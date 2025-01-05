@@ -1,5 +1,5 @@
 { self, config, pkgs, makeMutableSymlink, ... }: {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
     fd
