@@ -1,4 +1,4 @@
-{ self, config, pkgs, makeMutableSymlink, ... }: {
+{ self, config, pkgs, inputs, system, ... }: {
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -109,6 +109,11 @@
       bind-key -T copy-mode-vi M-k resize-pane -U 1
       bind-key -T copy-mode-vi M-l resize-pane -R 1
     '';
+  };
+
+  programs.ghostty = {
+    enable = true;
+    package = inputs.ghostty.packages.${system}.default;
   };
 
   programs.obs-studio.enable = true;

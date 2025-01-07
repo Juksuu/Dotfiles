@@ -19,6 +19,7 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = { url = "github:ghostty-org/ghostty"; };
   };
 
   outputs = inputs:
