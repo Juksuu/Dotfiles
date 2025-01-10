@@ -29,6 +29,7 @@
     # Custom pkgs
     font-builder-ui
     particle-editor
+    slotmachine-simulator
   ];
 
   home.file = {
