@@ -1,5 +1,5 @@
 { self, config, pkgs, inputs, system, ... }: {
-  home.stateVersion = "24.11";
+  home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
     fd
