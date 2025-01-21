@@ -11,6 +11,9 @@ return {
                 -- See the configuration section for more details
                 -- Load luvit types when the `vim.uv` word is found
                 { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+
+                -- Load snacks.nvim types when the `Snacks` word is found
+                { path = "snacks.nvim", words = { "Snacks" } },
             },
         },
     },

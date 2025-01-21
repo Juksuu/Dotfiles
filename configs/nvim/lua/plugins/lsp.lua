@@ -8,49 +8,23 @@ local M = {
 }
 
 local custom_attach = function(client, bufnr)
-    ---Utility for keymap creation.
-    ---@param lhs string
-    ---@param rhs string|function
-    ---@param opts string|table
-    ---@param mode? string|string[]
-    local function keymap(lhs, rhs, opts, mode)
-        opts = type(opts) == "string" and { desc = opts }
-            or vim.tbl_extend("error", opts --[[@as table]], { buffer = bufnr })
-        mode = mode or "n"
-        vim.keymap.set(mode, lhs, rhs, opts)
-    end
-
     client.server_capabilities.semanticTokensProvider = false
 
-    local toggle_inlay_hints = function()
-        if client.supports_method("textDocument/inlayHint") then
-            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-            local value = not ih.is_enabled({ bufnr })
-            ih.enable(value, { bufnr })
-        end
-    end
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+    vim.keymap.set(
+        "n",
+        "<leader>dl",
+        vim.diagnostic.open_float,
+        { buffer = bufnr }
+    )
 
-    local toggle_diagnostics = function()
-        if vim.diagnostic.is_enabled({ bufnr }) then
-            vim.diagnostic.enable(false, { bufnr })
-        else
-            vim.diagnostic.enable(true, { bufnr })
-        end
-    end
-
-    keymap("gd", vim.lsp.buf.definition, {})
-    keymap("<leader>dl", vim.diagnostic.open_float, {})
-
-    keymap("<leader>td", toggle_diagnostics, {})
-    keymap("<leader>ti", toggle_inlay_hints, {})
-
-    keymap("K", function()
+    vim.keymap.set("n", "K", function()
         vim.lsp.buf.hover({ border = "rounded" })
-    end, {})
+    end, { buffer = bufnr })
 
-    keymap("<C-s>", function()
+    vim.keymap.set("n", "<C-s>", function()
         vim.lsp.buf.signature_help({ border = "rounded" })
-    end, {})
+    end, { buffer = bufnr })
 end
 
 function M.config()
