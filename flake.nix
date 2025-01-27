@@ -19,12 +19,20 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = { url = "github:ghostty-org/ghostty"; };
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
     let
-      overlays = [ inputs.neovim-overlay.overlays.default ];
+      overlays = [
+        inputs.neovim-overlay.overlays.default
+        (final: prev: {
+          zen-browser = inputs.zen-browser.packages.${prev.pkgs.system}.default;
+        })
+      ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
       darwinUtils = import ./darwinNix/utils.nix { inherit inputs overlays; };
     in {

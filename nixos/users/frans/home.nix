@@ -11,6 +11,7 @@
     vesktop
     spotify
     mumble
+    zen-browser
   ];
 
   home.file = {
@@ -109,11 +110,6 @@
       bind-key -T copy-mode-vi M-k resize-pane -U 1
       bind-key -T copy-mode-vi M-l resize-pane -R 1
     '';
-  };
-
-  programs.ghostty = {
-    enable = true;
-    package = inputs.ghostty.packages.${system}.default;
   };
 
   programs.obs-studio.enable = true;
