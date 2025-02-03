@@ -77,6 +77,7 @@
       alsa-utils
       pavucontrol
       home-manager
+      steam-run
 
       # Wayland stuff
       wl-clipboard

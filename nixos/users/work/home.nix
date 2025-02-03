@@ -15,6 +15,7 @@
     spotify
     mpv
     obs-studio
+    zen-browser
 
     slack
     thunderbird
@@ -60,7 +61,10 @@
         bind \cgw 'bass source ~/scripts/wts.sh'
       end
     '';
-    shellAliases = { wtc = "~/scripts/wtc.sh"; };
+    shellAliases = {
+      wtc = "~/scripts/wtc.sh";
+      gib = "~/scripts/gib.sh";
+    };
     plugins = [{
       name = "bass";
       src = pkgs.fishPlugins.bass.src;
