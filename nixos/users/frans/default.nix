@@ -8,4 +8,6 @@
   };
 
   programs.fish.enable = true;
+
+  home-manager.users.frans = import ./home.nix;
 }

@@ -1,5 +1,12 @@
 { self, inputs, config, pkgs, ... }: {
   home.stateVersion = "24.05";
+  home = {
+    username = "work";
+    homeDirectory = "/home/work";
+  };
+
+  # Let home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
   nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
   in [ overlays.modifications overlays.additions ];

@@ -8,4 +8,6 @@
   };
 
   programs.fish.enable = true;
+
+  home-manager.users.work = import ./home.nix;
 }
