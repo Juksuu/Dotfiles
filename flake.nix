@@ -49,12 +49,24 @@
         };
       };
 
+      homeConfigurations = {
+        "frans@homenix" = utils.makeHome {
+          system = "x86_64-linux";
+          username = "frans";
+          hostname = "homenix";
+        };
+        "work@worknix" = utils.makeHome {
+          system = "x86_64-linux";
+          username = "work";
+          hostname = "worknix";
+        };
+      };
+
       darwinConfigurations = {
         juksumac = darwinUtils.makeSystem {
           system = "x86_64-darwin";
           hostname = "juksumac";
           users = [ "juksu" ];
-          extraModules = [ ];
         };
       };
     };

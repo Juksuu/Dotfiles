@@ -1,12 +1,5 @@
 { self, config, pkgs, inputs, system, ... }: {
   home.stateVersion = "24.05";
-  home = {
-    username = "frans";
-    homeDirectory = "/home/frans";
-  };
-
-  # Let home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
     fd

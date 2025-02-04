@@ -1,6 +1,6 @@
 { inputs, overlays }: {
 
-  makeSystem = { hostname, system, users, extraModules }:
+  makeSystem = { hostname, system, users }:
     inputs.darwin.lib.darwinSystem {
       inherit system;
       modules = [

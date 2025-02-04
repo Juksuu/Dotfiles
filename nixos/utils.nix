@@ -13,11 +13,29 @@
           };
         }
         ./hosts/${hostname}
-        inputs.home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
       ] ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
+    };
+
+  makeHome = { system, username, hostname }:
+    inputs.home-manager.lib.homeManagerConfiguration {
+      extraSpecialArgs = { inherit system hostname inputs; };
+      pkgs = builtins.getAttr system inputs.nixpkgs.outputs.legacyPackages;
+      modules = [
+        {
+          nixpkgs = {
+            inherit overlays;
+            config = {
+              allowUnfree = true;
+              allowUnfreePredicate = (_: true);
+            };
+          };
+          home = {
+            inherit username;
+            homeDirectory = "/home/${username}";
+          };
+          systemd.user.startServices = "sd-switch";
+        }
+        ./users/${username}/home.nix
+      ];
     };
 }
