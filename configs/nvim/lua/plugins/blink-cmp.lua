@@ -8,8 +8,8 @@ local M = {
 function M.config()
     require("blink.cmp").setup({
         signature = { enabled = true },
-        sources = {
-            cmdline = {},
+        cmdline = {
+            sources = {},
         },
     })
 end
