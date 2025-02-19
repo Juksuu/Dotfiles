@@ -23,6 +23,8 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ags.url = "github:aylur/ags";
   };
 
   outputs = inputs:
