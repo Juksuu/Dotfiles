@@ -66,15 +66,20 @@
       pavucontrol
       home-manager
 
-      # Wayland stuff
+      # Wayland
       wl-clipboard
       qt6.qtwayland
 
-      # Programming stuff
+      # Programming
       python3
       codespell
       lazydocker
       docker-compose
+
+      # Hyprland
+      hyprpicker
+      hypridle
+      hyprlock
     ];
 
     plasma6.excludePackages = with pkgs.kdePackages; [
@@ -118,6 +123,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      wireplumber.enable = true;
     };
   };
 
@@ -131,6 +137,8 @@
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
   };
+
+  programs.hyprland.enable = true;
 
   programs.steam.enable = true;
 }

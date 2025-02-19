@@ -12,6 +12,15 @@
     spotify
     mumble
     zen-browser
+
+    grim
+    slurp
+    anyrun
+    swappy
+    swww
+    gnome-keyring
+    polkit_gnome
+    wlogout
   ];
 
   home.file = {
@@ -22,6 +31,12 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
     ".config/kitty".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
+    ".config/hypr".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
+    ".config/ags".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ags";
+    ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/frans/.dotfiles/configs/wlogout";
   };
 
   home.sessionVariables = { FLAKE = "/home/frans/.dotfiles"; };
@@ -113,4 +128,9 @@
   };
 
   programs.obs-studio.enable = true;
+
+  wayland.windowManager.hyprland.plugins = [ pkgs.hyprlandPlugins.hyprexpo ];
+
+  imports = [ inputs.ags.homeManagerModules.default ];
+  programs.ags = { enable = true; };
 }
