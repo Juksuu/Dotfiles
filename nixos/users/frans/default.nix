@@ -3,7 +3,7 @@
     isNormalUser = true;
     home = "/home/frans";
     description = "Frans";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "input" ];
     shell = pkgs.fish;
   };
 
