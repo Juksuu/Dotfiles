@@ -13,6 +13,12 @@
     mumble
     zen-browser
 
+    # Hyprland
+    hyprpicker
+    hypridle
+    hyprlock
+    hyprlandPlugins.hyprexpo
+
     grim
     slurp
     anyrun
@@ -21,6 +27,9 @@
     gnome-keyring
     polkit_gnome
     wlogout
+
+    # Ags
+    inputs.ags-config.packages.${pkgs.stdenv.hostPlatform.system}.ags-bar
   ];
 
   home.file = {
@@ -33,8 +42,6 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
     ".config/hypr".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
-    ".config/ags".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ags";
     ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
       "/home/frans/.dotfiles/configs/wlogout";
   };
@@ -128,9 +135,4 @@
   };
 
   programs.obs-studio.enable = true;
-
-  wayland.windowManager.hyprland.plugins = [ pkgs.hyprlandPlugins.hyprexpo ];
-
-  imports = [ inputs.ags.homeManagerModules.default ];
-  programs.ags = { enable = true; };
 }

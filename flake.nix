@@ -24,7 +24,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags.url = "github:aylur/ags";
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    ags-config.url = "path:./configs/ags";
   };
 
   outputs = inputs:
