@@ -11,6 +11,8 @@
               allowUnfreePredicate = (_: true);
             };
           };
+
+          nix.settings.trusted-users = [ "root" "@wheel" ];
         }
         ./hosts/${hostname}
       ] ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
