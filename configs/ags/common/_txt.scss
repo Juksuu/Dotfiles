@@ -1,0 +1,21 @@
+@use './mixins' as *;
+@use './colors' as *;
+
+.txt {
+    color: $onBackground;
+}
+
+.txt-size-12 {
+    @include mainfont;
+    font-size: 12pt;
+}
+
+.txt-size-11 {
+    @include mainfont;
+    font-size: 11pt;
+}
+
+.txt-size-10 {
+    @include mainfont;
+    font-size: 10pt;
+}

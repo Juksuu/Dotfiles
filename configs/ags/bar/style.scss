@@ -1,0 +1,21 @@
+// Made to be pixel-perfect with 11pt font size
+// 1rem = 11pt = 14.6666666667px
+
+@use 'sass:color';
+@use '../common/colors' as *;
+@use '../common/txt' as *;
+
+.bar-bg {
+    background-color: $layer0;
+    min-height: 2.727rem;
+}
+
+.bar-wintitle-topdesc {
+    margin-top: -0.136rem;
+    margin-bottom: -0.341rem;
+    color: $windowtitleOnLayer0Inactive;
+}
+
+.bar-wintitle-txt {
+    color: $windowtitleOnLayer0;
+}

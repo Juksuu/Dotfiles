@@ -1,0 +1,16 @@
+@use 'sass:color';
+
+$background: #091518;
+$onBackground: #D8E5E9;
+
+$errorContainer: #93000A;
+$surfaceContainerLow: #121D21;
+
+$layer0: $background;
+$onLayer0: $onBackground;
+$onLayer0Inactive: color.mix($onLayer0, $layer0, 70%);
+
+$layer1: $surfaceContainerLow;
+
+$windowtitleOnLayer0: $onLayer0;
+$windowtitleOnLayer0Inactive: $onLayer0Inactive;
