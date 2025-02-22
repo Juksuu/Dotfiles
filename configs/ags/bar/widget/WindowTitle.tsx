@@ -1,6 +1,5 @@
 import { bind, Variable } from "astal";
 import { Gdk, Gtk } from "astal/gtk3";
-import { EventBox } from "astal/gtk3/widget";
 import Hyprland from "gi://AstalHyprland";
 
 export default function WindowTitle(gdkmonitor: Gdk.Monitor) {

@@ -1,3 +1,10 @@
+$rounding_small: 0.818rem;
+
 @mixin mainfont {
     font-family: "Maple Mono NF", "Roboto", "Ubuntu", "Noto Sans", sans-serif;
+}
+
+@mixin small-rounding {
+    border-radius: $rounding_small;
+    -gtk-outline-radius: $rounding_small;
 }
