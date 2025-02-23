@@ -1,6 +1,6 @@
 import { App } from "astal/gtk3"
-import style from "./style.scss"
-import Bar from "./widget/Bar"
+import style from "./css/style.scss"
+import Bar from "./bar/Bar"
 import Hyprland from "gi://AstalHyprland";
 import { execAsync } from 'astal/process';
 

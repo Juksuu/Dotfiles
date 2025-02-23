@@ -8,27 +8,34 @@ export default function WindowTitle(gdkmonitor: Gdk.Monitor) {
     const classComponent = Variable.derive(
         [bind(hyprland, 'focused_client')],
         (client: Hyprland.Client) => {
+            let text = "Desktop";
+            if (client && client.class.length > 0) {
+                text = client.class;
+            }
+
             return <label
                 className={'txt-size-10 bar-wintitle-topdesc txt'}
                 xalign={0}
                 truncate={true}
                 max_width_chars={1}
-                label={client.class.length === 0 ? "Desktop" : client.class}>
+                label={text}>
             </label >
         });
 
     const titleComponent = Variable.derive(
         [bind(hyprland, 'focused_client')],
         (client: Hyprland.Client) => {
+            let text = `Workspace ${hyprland.focused_workspace.id}`;
+            if (client && client.title.length > 0) {
+                text = client.title;
+            }
+
             return <label
                 className={'txt-size-11 bar-wintitle-txt'}
                 xalign={0}
                 truncate={true}
                 max_width_chars={1}
-                label={
-                    client.title.length === 0
-                        ? `Workspace ${hyprland.focused_workspace.id}`
-                        : client.title}>
+                label={text}>
             </label >
         });
 

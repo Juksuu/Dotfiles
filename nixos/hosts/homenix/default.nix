@@ -71,6 +71,7 @@
 
       # Wayland
       wl-clipboard
+      qt5.qtwayland
       qt6.qtwayland
 
       # Programming
