@@ -44,6 +44,10 @@ $bar_ws_width: 1.774rem;
     padding: 0.205rem;
 }
 
+.bar-group-pad-system {
+    padding: 0rem 0.341rem;
+}
+
 .bar-group-standalone {
     @include bar-group-rounding;
     -gtk-outline-radius: 1.364rem;
@@ -68,4 +72,50 @@ $bar_ws_width: 1.774rem;
 .bar-ws-occupied {
     background-color: $layer2;
     color: $workspaceOnLayer2;
+}
+
+.bar-clock-box {
+    margin: 0rem 0.682rem;
+}
+
+.bar-time {
+    @include mainfont;
+    font-size: 1.2727rem;
+    color: $timeOnLayer1;
+}
+
+.bar-date {
+    color: $dateOnLayer1;
+}
+
+.bar-util-btn {
+    @include full-rounding;
+    @include element_decel;
+    background-color: $utilsLayer2;
+    color: $utilsOnLayer2;
+}
+
+.bar-util-btn:hover,
+.bar-util-btn:focus {
+    background-color: $layer2Hover;
+}
+
+.bar-util-btn:active {
+    background-color: $layer2Active;
+}
+
+.bar-spaceright {
+    color: $barspacerightOnLayer0;
+}
+
+.bar-statusicons {
+    @include full-rounding;
+    @include element_decel;
+    margin: 0.273rem;
+    padding: 0rem 0.614rem;
+}
+
+.bar-statusicons-active {
+    background-color: $layer0Active;
+    color: $onLayer0Active;
 }

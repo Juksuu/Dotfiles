@@ -5,6 +5,11 @@
     color: $onBackground;
 }
 
+.txt-size-14 {
+    @include mainfont;
+    font-size: 14pt;
+}
+
 .txt-size-12 {
     @include mainfont;
     font-size: 12pt;
@@ -18,4 +23,8 @@
 .txt-size-10 {
     @include mainfont;
     font-size: 10pt;
+}
+
+.txt-onLayer1 {
+    color: $onLayer1;
 }
