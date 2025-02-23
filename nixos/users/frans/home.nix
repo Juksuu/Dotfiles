@@ -139,7 +139,7 @@
     configDir = null;
 
     # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [ inputs.ags.packages.${system}.hyprland ];
+    extraPackages = with inputs.ags.packages.${system}; [ hyprland tray ];
   };
 
   programs.obs-studio.enable = true;

@@ -19,6 +19,8 @@ $onPrimary: #003640;
 $layer0: $background;
 $onLayer0: $onBackground;
 $onLayer0Inactive: color.mix($onLayer0, $layer0, 70%);
+$layer0Active: $surfaceContainerHigh;
+$onLayer0Active: $onSurface;
 
 $layer1: $surfaceContainerLow;
 $onLayer1: $onSurface;
@@ -26,6 +28,8 @@ $onLayer1Inactive: color.mix($onLayer1, $layer1, 45%);
 
 $layer2: color.mix($surfaceContainer, $surfaceContainerHigh, 55%);
 $onLayer2: $onSurface;
+$layer2Hover: color.mix($layer2, $onLayer2, 90%);
+$layer2Active: color.mix($layer2, $onLayer2, 80%);
 
 $windowtitleOnLayer0: $onLayer0;
 $windowtitleOnLayer0Inactive: $onLayer0Inactive;
@@ -36,3 +40,11 @@ $workspaceOnLayer2: $onSecondaryContainer;
 
 $workspaceLayer3: $primary;
 $workspaceOnLayer3: $onPrimary;
+
+$timeOnLayer1: $onLayer1;
+$dateOnLayer1: $onLayer1;
+
+$utilsLayer2: $layer2;
+$utilsOnLayer2: $onLayer2;
+
+$barspacerightOnLayer0: $onLayer0;

@@ -2,11 +2,13 @@ import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import WindowTitle from "./widget/WindowTitle";
 import Workspaces from "./widget/Workspaces";
 import { CONFIG } from "./config";
+import System from "./widget/System";
+import Indicators from "./widget/Indicators";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
-    const SideModule = (children: JSX.Element[]) => <box
+    const SideModule = (children: Gtk.Widget[]) => <box
         className={'bar-sidemodule'}>
         {children}
     </box>;
@@ -14,7 +16,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     const CenterWidget = <box className={'spacing-h-4'}>
         {SideModule([])}
         {Workspaces()}
-        {SideModule([])}
+        {SideModule([System()])}
     </box>;
 
     return <window
@@ -30,7 +32,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <centerbox
                 className={'bar-bg'}
                 startWidget={WindowTitle(gdkmonitor)}
-                center_widget={CenterWidget}>
+                center_widget={CenterWidget}
+                endWidget={Indicators(gdkmonitor)}>
             </centerbox>
         </stack>
     </window >
