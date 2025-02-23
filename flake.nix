@@ -25,8 +25,7 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    ags-config.url = "path:./configs/ags";
+    ags.url = "github:aylur/ags";
   };
 
   outputs = inputs:

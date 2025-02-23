@@ -1,7 +1,7 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
-import { CONFIG } from "../../common/config";
-import WindowTitle from "./WindowTitle";
-import Workspaces from "./Workspaces";
+import WindowTitle from "./widget/WindowTitle";
+import Workspaces from "./widget/Workspaces";
+import { CONFIG } from "./config";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -18,7 +18,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     </box>;
 
     return <window
-        className="Bar"
+        className={"Bar"}
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}

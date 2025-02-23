@@ -1,6 +1,9 @@
 { self, config, pkgs, inputs, system, ... }: {
   home.stateVersion = "24.05";
 
+  # Import homemanager modules
+  imports = [ inputs.ags.homeManagerModules.default ];
+
   home.packages = with pkgs; [
     fd
     wget
@@ -17,19 +20,14 @@
     hyprpicker
     hypridle
     hyprlock
-    hyprlandPlugins.hyprexpo
+    hyprpolkitagent
 
     grim
     slurp
     anyrun
     swappy
     swww
-    gnome-keyring
-    polkit_gnome
     wlogout
-
-    # Ags
-    inputs.ags-config.packages.${pkgs.stdenv.hostPlatform.system}.ags-bar
   ];
 
   home.file = {
@@ -42,6 +40,8 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
     ".config/hypr".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
+    ".config/ags".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ags";
     ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
       "/home/frans/.dotfiles/configs/wlogout";
   };
@@ -132,6 +132,14 @@
       bind-key -T copy-mode-vi M-k resize-pane -U 1
       bind-key -T copy-mode-vi M-l resize-pane -R 1
     '';
+  };
+
+  programs.ags = {
+    enable = true;
+    configDir = null;
+
+    # additional packages to add to gjs's runtime
+    extraPackages = with pkgs; [ inputs.ags.packages.${system}.hyprland ];
   };
 
   programs.obs-studio.enable = true;

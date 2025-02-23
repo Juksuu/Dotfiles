@@ -1,8 +1,6 @@
 {
-  description = "My Awesome Desktop Shell";
-
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
 
     ags = {
       url = "github:aylur/ags";
@@ -15,35 +13,9 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      packages.${system} = {
-        ags-bar = ags.lib.bundle {
-          inherit pkgs;
-          src = ./.;
-          name = "ags-bar";
-          entry = "./bar/app.ts";
-
-          # additional libraries and executables to add to gjs' runtime
-          extraPackages = [
-            ags.packages.${system}.hyprland
-            # pkgs.fzf
-          ];
-        };
-      };
-
       devShells.${system} = {
         default = pkgs.mkShell {
-          buildInputs = [
-            pkgs.nodePackages.typescript-language-server
-
-
-            # includes astal3 astal4 astal-io by default
-            (ags.packages.${system}.default.override {
-              extraPackages = [
-                # cherry pick packages
-                ags.packages.${system}.hyprland
-              ];
-            })
-          ];
+          buildInputs = [ pkgs.nodePackages.typescript-language-server ];
         };
       };
     };
