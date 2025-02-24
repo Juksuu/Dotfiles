@@ -18,6 +18,20 @@ $bar_ws_width: 1.774rem;
     min-height: 2.727rem;
 }
 
+.bar-corner-spacing {
+    min-width: $rounding_large;
+    min-height: $rounding_large;
+}
+
+.bar-space-button {
+    padding: 0.341rem;
+}
+
+.bar-space-button>box:first-child {
+    @include full-rounding;
+    padding: 0rem 0.682rem;
+}
+
 .bar-wintitle-topdesc {
     margin-top: -0.136rem;
     margin-bottom: -0.341rem;
