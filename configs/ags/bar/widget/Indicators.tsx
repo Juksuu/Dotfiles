@@ -56,6 +56,7 @@ export default function Indicators(gdkmonitor: Gdk.Monitor) {
                 {ClickBox([SystemTray()])}
                 {ClickBox([IndicatorArea])}
             </box>
+            {ClickBox([<box className={'bar-corner-spacing'} />])}
         </box>
     </EventBox >
 }
