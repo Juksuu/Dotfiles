@@ -46,15 +46,10 @@ export default function WindowTitle(gdkmonitor: Gdk.Monitor) {
             <box hexpand={true}></box>,
             <box className={'bar-sidemodule'} hexpand={true}>
                 <box className={'bar-space-button'} vertical={true}>
-                    <scrollable
-                        hexpand={true}
-                        hscroll={Gtk.PolicyType.AUTOMATIC}
-                        vscroll={Gtk.PolicyType.NEVER}>
-                        <box vertical={true}>
-                            {classComponent()}
-                            {titleComponent()}
-                        </box>
-                    </scrollable>
+                    <box vertical={true} hexpand={true}>
+                        {classComponent()}
+                        {titleComponent()}
+                    </box>
                 </box>
             </box>
         ]
