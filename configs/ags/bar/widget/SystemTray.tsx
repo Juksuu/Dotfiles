@@ -8,7 +8,6 @@ export default function SystemTray() {
     const tray = Tray.get_default();
 
     const SysTrayItem = (item: Tray.TrayItem) => {
-        console.log("testing item", item.id);
         if (item === null) return null;
 
         return <Button
