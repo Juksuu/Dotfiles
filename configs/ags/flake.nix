@@ -15,7 +15,11 @@
     in {
       devShells.${system} = {
         default = pkgs.mkShell {
-          buildInputs = [ pkgs.nodePackages.typescript-language-server ];
+          buildInputs = with pkgs; [
+            nodePackages.typescript-language-server
+            prettierd
+            nodejs_23
+          ];
         };
       };
     };
