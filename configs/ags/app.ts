@@ -7,7 +7,7 @@ import { execAsync } from 'astal/process';
 const hyprland = Hyprland.get_default();
 
 hyprland.connect("monitor-added", () => {
-    execAsync(["bash", "-c", 'pkill ags-bar; ags-bar &']);
+    execAsync(["bash", "-c", 'ags quit; ags-run']);
 });
 
 App.start({

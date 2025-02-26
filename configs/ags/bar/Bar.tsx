@@ -5,7 +5,7 @@ import { CONFIG } from "./config";
 import System from "./widget/System";
 import Indicators from "./widget/Indicators";
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
+export default function Bar(gdkmonitor: Gdk.Monitor, monitorIndex: number) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     const SideModule = (children: Gtk.Widget[]) => <box
@@ -20,6 +20,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     </box>;
 
     return <window
+        name={`bar_${monitorIndex}`}
         className={"Bar"}
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
