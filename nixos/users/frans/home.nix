@@ -143,6 +143,7 @@
       hyprland
       tray
       notifd
+      network
     ];
   };
 
