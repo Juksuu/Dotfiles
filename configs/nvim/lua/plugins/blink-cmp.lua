@@ -9,7 +9,7 @@ function M.config()
     require("blink.cmp").setup({
         signature = { enabled = true },
         cmdline = {
-            sources = {},
+            enabled = false,
         },
     })
 end
