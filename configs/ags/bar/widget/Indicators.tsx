@@ -14,7 +14,7 @@ export default function Indicators(gdkmonitor: Gdk.Monitor) {
 
   const SeparatorDot = () => {
     const update = (self: Revealer) => {
-      const items = tray.items ?? [];
+      const items = tray.get_items() ?? [];
       self.set_reveal_child(items.length > 0);
     };
 

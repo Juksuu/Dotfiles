@@ -22,7 +22,7 @@ export default function SystemTray() {
           }
         }}
       >
-        <Icon icon={item.iconName}></Icon>
+        {item.iconName ? <Icon icon={item.iconName}></Icon> : ""}
       </Button>
     );
   };
