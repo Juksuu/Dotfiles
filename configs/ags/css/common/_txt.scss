@@ -5,6 +5,11 @@
     color: $onBackground;
 }
 
+.txt-size-16 {
+    @include mainfont;
+    font-size: 16pt;
+}
+
 .txt-size-14 {
     @include mainfont;
     font-size: 14pt;
@@ -27,4 +32,8 @@
 
 .txt-onLayer1 {
     color: $onLayer1;
+}
+
+.txt-action {
+    @include actiontext;
 }

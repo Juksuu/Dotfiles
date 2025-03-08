@@ -3,12 +3,16 @@
 $background: #091518;
 $onBackground: #D8E5E9;
 
+$shadow: #000000;
+
 $errorContainer: #93000A;
 
 $surfaceContainerLow: #121D21;
 $surfaceContainer: #162125;
 $surfaceContainerHigh: #202C2F;
 
+$secondary: #A8CBE2;
+$onSecondary: #0D3446;
 $onSecondaryContainer: #C7E9FF;
 
 $onSurface: #D8E5E9;
@@ -48,3 +52,5 @@ $utilsLayer2: $layer2;
 $utilsOnLayer2: $onLayer2;
 
 $barspacerightOnLayer0: $onLayer0;
+
+$actiontext: color.mix($onBackground, $background, 85%);

@@ -144,6 +144,7 @@
       tray
       notifd
       network
+      apps
     ];
   };
 
