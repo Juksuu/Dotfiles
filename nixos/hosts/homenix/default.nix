@@ -72,6 +72,7 @@
       pavucontrol
       home-manager
       libnotify
+      rofi-wayland
 
       # Wayland
       wl-clipboard

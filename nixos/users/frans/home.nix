@@ -42,6 +42,8 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
     ".config/ags".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ags";
+    ".config/rofi".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/rofi";
     ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
       "/home/frans/.dotfiles/configs/wlogout";
     ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
