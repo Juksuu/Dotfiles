@@ -44,6 +44,8 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ags";
     ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
       "/home/frans/.dotfiles/configs/wlogout";
+    ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/frans/.dotfiles/configs/kvantum";
   };
 
   home.sessionVariables = { FLAKE = "/home/frans/.dotfiles"; };

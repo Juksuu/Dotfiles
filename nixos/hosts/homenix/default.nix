@@ -56,6 +56,9 @@
       LIBVA_DRIVER_NAME = "nvidia";
       GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+      # Qt
+      QT_QPA_PLATFORMTHEME = "qt6ct";
     };
 
     systemPackages = with pkgs; [
@@ -80,6 +83,12 @@
       codespell
       lazydocker
       docker-compose
+
+      # Theming
+      kdePackages.qtstyleplugin-kvantum
+      kdePackages.qt6ct
+      nwg-look
+      bibata-cursors
     ];
 
     plasma6.excludePackages = with pkgs.kdePackages; [
