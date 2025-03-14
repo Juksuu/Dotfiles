@@ -18,16 +18,17 @@
 
     # Hyprland
     hyprpicker
+    hyprpaper
     hypridle
     hyprlock
     hyprpolkitagent
 
+    # Tools
     grim
     slurp
-    anyrun
     swappy
-    swww
     wlogout
+    pywal
   ];
 
   home.file = {
@@ -65,10 +66,10 @@
 
       function fish_user_key_bindings
         bind \cf '~/scripts/tmux-sessionizer.sh'
-        bind \cgw 'bass source ~/scripts/wts.sh'
+        bind \cgw 'bass source ~/scripts/git/wts.sh'
       end
     '';
-    shellAliases = { wtc = "~/scripts/wtc.sh"; };
+    shellAliases = { wtc = "~/scripts/git/wtc.sh"; };
     plugins = [{
       name = "bass";
       src = pkgs.fishPlugins.bass.src;
