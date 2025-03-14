@@ -1,7 +1,6 @@
 import { App, Gdk, Gtk } from "astal/gtk3";
 import style from "./css/style.scss";
 import Bar from "./bar/Bar";
-import Overview from "./overview/Overview";
 
 App.start({
   css: style,
@@ -21,7 +20,5 @@ App.start({
       bars.get(gdkmonitor)?.destroy();
       bars.delete(gdkmonitor);
     });
-
-    Overview();
   },
 });
