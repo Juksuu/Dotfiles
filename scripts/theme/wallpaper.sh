@@ -2,17 +2,6 @@
 
 current_wallpaper_path=~/wallpapers/current
 
-load_current() {
-  if [ -f $current_wallpaper_path ]
-  then
-    echo "Loading current wallpaper"
-    hyprctl hyprpaper reload ,$current_wallpaper_path
-    wal -e -n -s -t -i "$current_wallpaper_path" > /dev/null 2>&1
-  else
-    echo "No current wallpaper!"
-  fi
-}
-
 set_current() {
   if [ -f $1 ]
   then
@@ -25,7 +14,8 @@ set_current() {
     fi
 
     ln -s $1 $current_wallpaper_path
-    load_current
+    hyprctl hyprpaper reload ,$current_wallpaper_path
+    wal -e -n -s -t -i "$1" > /dev/null 2>&1
   else
     echo "Invalid wallpaper path!"
   fi
