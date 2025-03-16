@@ -68,6 +68,7 @@
       fzf
       fish
       htop
+      sassc
       alsa-utils
       pavucontrol
       home-manager
@@ -135,6 +136,8 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
+
+    gvfs.enable = true;
   };
 
   security.rtkit.enable = true;

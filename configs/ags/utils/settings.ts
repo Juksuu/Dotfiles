@@ -1,0 +1,122 @@
+import { readJSONFile, writeJSONFile } from "./json";
+
+const settingsPath = "./assets/settings/settings.json";
+
+export interface HyprlandSetting {
+  value: any;
+  type: string;
+  min: number;
+  max: number;
+}
+
+export interface Settings {
+  hyprland: {
+    decoration: {
+      rounding: HyprlandSetting;
+      active_opacity: HyprlandSetting;
+      inactive_opacity: HyprlandSetting;
+      blur: {
+        enabled: HyprlandSetting;
+        size: HyprlandSetting;
+        passes: HyprlandSetting;
+      };
+    };
+  };
+  notifications: {
+    dnd: boolean;
+  };
+  globalOpacity: number;
+  bar: {
+    visibility: boolean;
+    lock: boolean;
+    orientation: boolean;
+  };
+  rightPanel: {
+    visibility: boolean;
+    exclusivity: boolean;
+    width: number;
+    widgets: string[];
+    lock: boolean;
+  };
+  quickLauncher: {
+    apps: {
+      name: string;
+      app_name: string;
+      exec: string;
+      icon: string;
+    }[];
+  };
+}
+
+export const defaultSettings: Settings = {
+  hyprland: {
+    decoration: {
+      rounding: { value: 15, min: 0, max: 50, type: "int" },
+      active_opacity: { value: 0.8, min: 0, max: 1, type: "float" },
+      inactive_opacity: { value: 0.5, min: 0, max: 1, type: "float" },
+      blur: {
+        enabled: { value: true, type: "bool", min: 0, max: 1 },
+        size: { value: 3, type: "int", min: 0, max: 10 },
+        passes: { value: 3, type: "int", min: 0, max: 10 },
+      },
+    },
+  },
+  notifications: {
+    dnd: false,
+  },
+  globalOpacity: 1,
+  bar: {
+    visibility: true,
+    lock: true,
+    orientation: true,
+  },
+  rightPanel: {
+    exclusivity: true,
+    lock: true,
+    width: 300,
+    visibility: true,
+    widgets: [],
+  },
+  quickLauncher: {
+    apps: [
+      {
+        name: "Browser",
+        app_name: "zen-browser",
+        exec: "zen-browser",
+        icon: "",
+      },
+      { name: "Terminal", app_name: "kitty", exec: "kitty", icon: "" },
+      { name: "Files", app_name: "thunar", exec: "thunar", icon: "" },
+    ],
+  },
+};
+
+function deepMerge(target: any, source: any): any {
+  for (const key in source) {
+    if (
+      source[key] &&
+      typeof source[key] === "object" &&
+      !Array.isArray(source[key])
+    ) {
+      // Recursively merge objects
+      target[key] = deepMerge(target[key] || {}, source[key]);
+    } else {
+      // Directly copy primitive values and arrays
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+
+export function createSettings() {
+  if (Object.keys(readJSONFile(settingsPath)).length !== 0) {
+    return deepMerge(defaultSettings, readJSONFile(settingsPath));
+  }
+
+  writeJSONFile(settingsPath, defaultSettings);
+  return defaultSettings;
+}
+
+export function writeSettings(settings: Settings) {
+  writeJSONFile(settingsPath, settings);
+}

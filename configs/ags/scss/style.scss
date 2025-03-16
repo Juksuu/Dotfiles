@@ -1,0 +1,10 @@
+@import "colors.scss";
+
+@import "lib.scss";
+@import "widgets/bar.scss";
+
+window {
+  background-color: transparent;
+  transition: all 1s;
+  font-size: 10px;
+}

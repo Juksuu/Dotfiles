@@ -1,0 +1,161 @@
+import { bind, GLib, Variable } from "astal";
+import Mpris from "gi://AstalMpris";
+import { playerToIcon } from "../../../utils/icon";
+import { playerToColor } from "../../../utils/color";
+import { App, Gtk } from "astal/gtk3";
+import {
+  emptyWorkspace,
+  focusedClient,
+  HYPRLAND,
+  TRANSITION_DURATION,
+} from "../../../variables";
+import CustomRevealer from "./CustomRevealer";
+
+export default function BarMiddle() {
+  function Media() {
+    const mpris = Mpris.get_default();
+
+    const progress = (player: Mpris.Player) => {
+      const playerIcon = bind(player, "entry").as((e) => playerToIcon(e));
+      return (
+        <circularprogress
+          className={"progress"}
+          rounded
+          borderWidth={1}
+          value={bind(player, "position").as((p) =>
+            player.length > 0 ? p / player.length : 0,
+          )}
+        >
+          <label css={"font-size:12px"} label={playerIcon} />
+        </circularprogress>
+      );
+    };
+
+    const title = (player: Mpris.Player) => (
+      <label
+        className={"label"}
+        maxWidthChars={20}
+        truncate
+        label={bind(player, "title").as((t) => t || "Unknown Track")}
+      ></label>
+    );
+
+    const artist = (player: Mpris.Player) => (
+      <label
+        className={"label"}
+        maxWidthChars={20}
+        truncate
+        label={bind(player, "artist").as((a) => `[${a}]` || "Unknown Artist")}
+      ></label>
+    );
+
+    const coverArt = (player: Mpris.Player) =>
+      bind(player, "coverArt").as(
+        (c) => `
+          color: ${playerToColor(player.entry)};
+          background-image: linear-gradient(
+              to right,
+              #000000,
+              rgba(0, 0, 0, 0.5)
+            ),
+            url("${c}");
+        `,
+      );
+
+    function Player(player: Mpris.Player) {
+      return (
+        <box className={"media"} css={coverArt(player)} spacing={10}>
+          {progress(player)}
+          {title(player)}
+          {artist(player)}
+        </box>
+      );
+    }
+
+    const activePlayer = () =>
+      Player(
+        mpris.players.find(
+          (player) => player.playbackStatus === Mpris.PlaybackStatus.PLAYING,
+        ) || mpris.players[0],
+      );
+
+    return (
+      <revealer
+        revealChild={bind(mpris, "players").as((arr) => arr.length > 0)}
+        transitionDuration={TRANSITION_DURATION}
+        transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+      >
+        <eventbox
+          className={"media-event"}
+          onClick={() =>
+            HYPRLAND.message_async("dispatch workspace 4", (res) => print(res))
+          }
+          onHover={() => {
+            App.get_window("media")?.show();
+          }}
+        >
+          {bind(mpris, "players").as((arr) =>
+            arr.length > 0 ? activePlayer() : <box />,
+          )}
+        </eventbox>
+      </revealer>
+    );
+  }
+
+  const dateShort = Variable("").poll(
+    1000,
+    () => GLib.DateTime.new_now_local().format("%H:%M") ?? "",
+  );
+
+  const dateLong = Variable("").poll(
+    1000,
+    () => GLib.DateTime.new_now_local().format(":%S %b %e, %A.") ?? "",
+  );
+
+  function Clock() {
+    const revealer = (
+      <label className={"revealer"} label={bind(dateLong)}></label>
+    );
+    const trigger = (
+      <label className={"trigger"} label={bind(dateShort)}></label>
+    );
+    return CustomRevealer(trigger, revealer, "clock");
+  }
+
+  function ClientTitle() {
+    return (
+      <revealer
+        revealChild={emptyWorkspace.as((empty) => !empty)}
+        transitionDuration={TRANSITION_DURATION}
+        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+      >
+        {focusedClient.as((client) => {
+          const text = Variable.derive(
+            [bind(client, "class"), bind(client, "title")],
+            (p, t) => `${p} ${t}`,
+          );
+
+          return (
+            client && (
+              <box
+                className={"focused-client"}
+                halign={Gtk.Align.START}
+                hexpand
+              >
+                <label maxWidthChars={30} truncate label={bind(text)} />
+              </box>
+            )
+          );
+        })}
+      </revealer>
+    );
+  }
+
+  return (
+    <box className={"bar-middle"} spacing={5} hexpand>
+      <Media />
+      <Clock />
+      <ClientTitle />
+    </box>
+  );
+}

@@ -1,0 +1,108 @@
+* {
+  font-family: "Maple Mono NF", "Noto Font";
+  transition: all 0.5s;
+}
+
+.module {
+  background: $module-background;
+  color: $foreground;
+  min-height: 1px;
+  border: none;
+  box-shadow: none;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-shadow: none;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.danger {
+  background: $red;
+  color: $foreground;
+  &:hover,
+  &:checked {
+    background: rgba($red, 0.8); // Pre-calculated hover and checked state
+  }
+}
+
+button,
+.button {
+  @extend .module;
+  background: $secondary-background;
+  &:hover {
+    background: $background;
+    text-shadow: $foreground 0 0 1px;
+  }
+  &:focus,
+  &:checked {
+    outline: none;
+    // border-color: transparent;
+  }
+  &.checked {
+    background: $secondary;
+    color: $color0;
+  }
+}
+
+.custom-revealer {
+  @extend .module;
+  label {
+    margin: 0 10px;
+  }
+  .icon {
+    font-size: 1.5em;
+    all: unset;
+    // margin: 0 10px;
+    min-width: 35px;
+  }
+}
+
+.icon, image {
+  font-size: 12px;
+  color: $foreground;
+}
+
+.icon {
+  font-size: 10px;
+}
+
+.slider {
+  padding: 0px 2px;
+
+  through {
+    border-radius: 10px;
+    background: $module-background;
+    color: black;
+
+    slider {
+      background: transparent;
+      min-height: 0px;
+      min-width: 0px;
+      margin: 5px;
+    }
+
+    highlight {
+      background: $secondary;
+    }
+  }
+
+  &:hover highlight {
+    background: $tertiary;
+  }
+}
+
+menu {
+  @extend .module;
+  border-radius: 0;
+  background: $background;
+  padding: 0;
+  menuitem {
+    border-radius: 0;
+    padding: 5px 0;
+    margin: 2.5px 0;
+    &:hover {
+      background: $secondary;
+    }
+  }
+}

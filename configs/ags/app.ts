@@ -1,9 +1,11 @@
 import { App, Gdk, Gtk } from "astal/gtk3";
-import style from "./css/style.scss";
-import Bar from "./bar/Bar";
+import { getCssPath, refreshCss } from "./utils/scss";
+import Bar from "./widgets/bar/Bar";
+
+refreshCss();
 
 App.start({
-  css: style,
+  css: getCssPath(),
   main() {
     let monitorId = 0;
 

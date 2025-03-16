@@ -149,6 +149,8 @@
       notifd
       network
       apps
+      mpris
+      wireplumber
     ];
   };
 
