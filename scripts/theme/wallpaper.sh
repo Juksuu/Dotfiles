@@ -15,7 +15,7 @@ set_current() {
 
     ln -s $1 $current_wallpaper_path
     hyprctl hyprpaper reload ,$current_wallpaper_path
-    wal -e -n -s -t -i "$1" > /dev/null 2>&1
+    wal --backend colorthief -e -n -s -t -i "$1" > /dev/null 2>&1
   else
     echo "Invalid wallpaper path!"
   fi

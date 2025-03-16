@@ -28,7 +28,6 @@
     slurp
     swappy
     wlogout
-    pywal
   ];
 
   home.file = {

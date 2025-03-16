@@ -80,10 +80,10 @@
       qt6.qtwayland
 
       # Programming
-      python3
       codespell
       lazydocker
       docker-compose
+      (python3.withPackages (ps: with ps; [ pywal colorthief ]))
 
       # Theming
       kdePackages.qtstyleplugin-kvantum
