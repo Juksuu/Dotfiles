@@ -130,6 +130,8 @@ export default function BarMiddle() {
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
       >
         {focusedClient.as((client) => {
+          if (!client) return <box />;
+
           const text = Variable.derive(
             [bind(client, "class"), bind(client, "title")],
             (p, t) => `${p} ${t}`,
