@@ -6,7 +6,6 @@ import { App, Gtk } from "astal/gtk3";
 import {
   emptyWorkspace,
   focusedClient,
-  HYPRLAND,
   TRANSITION_DURATION,
 } from "../../../variables";
 import CustomRevealer from "./CustomRevealer";
@@ -72,12 +71,13 @@ export default function BarMiddle() {
       );
     }
 
-    const activePlayer = () =>
-      Player(
+    const activePlayer = () => {
+      return Player(
         mpris.players.find(
           (player) => player.playbackStatus === Mpris.PlaybackStatus.PLAYING,
         ) || mpris.players[0],
       );
+    };
 
     return (
       <revealer
@@ -87,9 +87,6 @@ export default function BarMiddle() {
       >
         <eventbox
           className={"media-event"}
-          onClick={() =>
-            HYPRLAND.message_async("dispatch workspace 4", (res) => print(res))
-          }
           onHover={() => {
             App.get_window("media")?.show();
           }}

@@ -9,6 +9,7 @@ export function playerToColor(name: string) {
     Chromium: "#FF9500",
     Firefox: "#FF9500",
     firefox: "#FF9500",
+    zen: "#FF9500",
   };
 
   return colors[name];

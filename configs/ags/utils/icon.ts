@@ -3,14 +3,15 @@ export function playerToIcon(name: string) {
     [key: string]: string;
   } = {
     spotify: "󰓇",
-    VLC: "󰓈",
-    YouTube: "󰓉",
+    VLC: "󰕼",
+    YouTube: "",
     Brave: "󰓊",
     Audacious: "󰓋",
     Rhythmbox: "󰓌",
     Chromium: "󰓍",
-    Firefox: "󰈹",
-    firefox: "󰈹",
+    Firefox: "",
+    firefox: "",
+    zen: "",
   };
   return icons[name];
 }

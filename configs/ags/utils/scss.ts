@@ -12,7 +12,10 @@ const scss = `~/.config/ags/scss/style.scss`;
 const walColors = `~/.cache/wal/colors.scss`;
 const defaultColors = "~/.config/ags/scss/default_colors.scss";
 
-export const getCssPath = () => tmpCss;
+export const getCssPath = () => {
+  refreshCss();
+  return tmpCss;
+};
 
 export function refreshCss() {
   // console.log("refresh css");
