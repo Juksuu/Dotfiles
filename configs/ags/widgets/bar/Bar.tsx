@@ -1,19 +1,21 @@
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import { App, Astal, Gdk } from "astal/gtk3";
-import {
-  barOrientation,
-  barVisibility,
-  emptyWorkspace,
-  DEFAULT_MARGIN,
-} from "../../variables";
+import { barOrientation, barVisibility, DEFAULT_MARGIN } from "../../variables";
 import BarLeft from "./components/BarLeft";
 import BarMiddle from "./components/BarMiddle";
 import BarRight from "./components/BarRight";
+import Hyprland from "gi://AstalHyprland";
+import { getGdkMonitor, isMonitorWorkspaceEmpty } from "../../utils/monitor";
 
-export default function Bar(gdkmonitor: Gdk.Monitor, monitorIndex: number) {
+export default function Bar(
+  gdkmonitor: Gdk.Monitor,
+  monitorIdentifier: string,
+) {
+  const emptyWorkspace = isMonitorWorkspaceEmpty(monitorIdentifier);
+
   return (
     <window
-      name={`bar_${monitorIndex}`}
+      name={`bar_${monitorIdentifier}`}
       className={"Bar"}
       gdkmonitor={gdkmonitor}
       application={App}
@@ -28,13 +30,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitorIndex: number) {
               Astal.WindowAnchor.LEFT |
               Astal.WindowAnchor.RIGHT;
       })}
-      margin={emptyWorkspace.as((empty) => (empty ? DEFAULT_MARGIN : 5))}
+      margin={bind(emptyWorkspace).as((empty) => (empty ? DEFAULT_MARGIN : 5))}
       visible={bind(barVisibility)}
     >
       <centerbox
-        className={emptyWorkspace.as((empty) =>
-          empty ? "bar empty" : "bar full",
-        )}
+        className={bind(emptyWorkspace).as((empty) => {
+          return empty ? "bar empty" : "bar full";
+        })}
         startWidget={
           <box name={"start-widget"}>
             <BarLeft />
@@ -42,7 +44,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor, monitorIndex: number) {
         }
         centerWidget={
           <box name={"center-widget"}>
-            <BarMiddle />
+            <BarMiddle monitorIdentifier={monitorIdentifier} />
           </box>
         }
         endWidget={

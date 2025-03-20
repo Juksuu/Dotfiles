@@ -3,14 +3,16 @@ import Mpris from "gi://AstalMpris";
 import { playerToIcon } from "../../../utils/icon";
 import { playerToColor } from "../../../utils/color";
 import { App, Gtk } from "astal/gtk3";
-import {
-  emptyWorkspace,
-  focusedClient,
-  TRANSITION_DURATION,
-} from "../../../variables";
+import { TRANSITION_DURATION } from "../../../variables";
 import CustomRevealer from "./CustomRevealer";
+import Hyprland from "gi://AstalHyprland";
+import { getGdkMonitor, isMonitorWorkspaceEmpty } from "../../../utils/monitor";
 
-export default function BarMiddle() {
+type Props = {
+  monitorIdentifier: string;
+};
+
+export default function BarMiddle({ monitorIdentifier }: Props) {
   function Media() {
     const mpris = Mpris.get_default();
 
@@ -120,32 +122,34 @@ export default function BarMiddle() {
   }
 
   function ClientTitle() {
+    const hyprland = Hyprland.get_default();
+
+    const emptyWorkspace = isMonitorWorkspaceEmpty(monitorIdentifier);
+
     return (
       <revealer
-        revealChild={emptyWorkspace.as((empty) => !empty)}
+        revealChild={bind(emptyWorkspace).as((empty) => !empty)}
         transitionDuration={TRANSITION_DURATION}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
       >
-        {focusedClient.as((client) => {
-          if (!client) return <box />;
+        <box className={"focused-client"} halign={Gtk.Align.START} hexpand>
+          {bind(hyprland, "focusedClient").as((client) => {
+            const currentGdkMonitor = getGdkMonitor(monitorIdentifier);
+            const hyprlandMonitor = hyprland.monitors.find(
+              (m) => m.model === currentGdkMonitor?.model,
+            );
 
-          const text = Variable.derive(
-            [bind(client, "class"), bind(client, "title")],
-            (p, t) => `${p} ${t}`,
-          );
+            if (!client || client.monitor.id !== hyprlandMonitor?.id)
+              return <box />;
 
-          return (
-            client && (
-              <box
-                className={"focused-client"}
-                halign={Gtk.Align.START}
-                hexpand
-              >
-                <label maxWidthChars={30} truncate label={bind(text)} />
-              </box>
-            )
-          );
-        })}
+            const text = Variable.derive(
+              [bind(client, "class"), bind(client, "title")],
+              (p, t) => `${p} ${t}`,
+            );
+
+            return <label maxWidthChars={30} truncate label={bind(text)} />;
+          })}
+        </box>
       </revealer>
     );
   }

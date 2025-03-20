@@ -1,22 +1,11 @@
-import { bind, Binding, Variable } from "astal";
+import { Variable } from "astal";
 import { refreshCss } from "./utils/scss";
 import { createSettings, Settings, writeSettings } from "./utils/settings";
-import Hyprland from "gi://AstalHyprland";
 
 export const NOTIFICATION_DELAY = 5000;
 export const DEFAULT_MARGIN = 14;
 export const TRANSITION_DURATION = 500;
 export const WIDGET_LIMIT = 5;
-
-export const HYPRLAND = Hyprland.get_default();
-
-export const focusedClient: Binding<Hyprland.Client> = bind(
-  HYPRLAND,
-  "focusedClient",
-);
-export const emptyWorkspace: Binding<boolean> = focusedClient.as(
-  (client) => !client,
-);
 
 export const newAppWorkspace = Variable(0);
 export const userPanelVisibility = Variable(false);
