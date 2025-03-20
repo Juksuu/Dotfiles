@@ -5,13 +5,13 @@ import Tray from "gi://AstalTray";
 import CustomRevealer from "./CustomRevealer";
 import ToggleButton from "./ToggleButton";
 import {
-  barLock,
-  barOrientation,
+  barPosition,
   dnd,
   rightPanelLock,
   rightPanelVisibility,
   TRANSITION_DURATION,
 } from "../../../variables";
+import { BarPosition } from "../../../utils/settings";
 
 export default function BarRight() {
   function Volume() {
@@ -56,20 +56,6 @@ export default function BarRight() {
     return <box className={"system-tray"}>{items}</box>;
   }
 
-  function PinBar() {
-    return (
-      <ToggleButton
-        state={barLock.get()}
-        onToggled={(self, on) => {
-          barLock.set(on);
-          self.label = on ? "" : "";
-        }}
-        className={"icon"}
-        label={barLock.get() ? "" : ""}
-      />
-    );
-  }
-
   function DndToggle() {
     return (
       <ToggleButton
@@ -87,10 +73,16 @@ export default function BarRight() {
   function BarOrientationToggle() {
     return (
       <button
-        onClicked={() => barOrientation.set(!barOrientation.get())}
+        onClicked={() =>
+          barPosition.set(
+            barPosition.get() === BarPosition.Top
+              ? BarPosition.Bottom
+              : BarPosition.Top,
+          )
+        }
         className={"icon"}
-        label={bind(barOrientation).as((orientation) =>
-          orientation ? "" : "",
+        label={bind(barPosition).as((position) =>
+          position === BarPosition.Top ? "" : "",
         )}
       />
     );
@@ -118,7 +110,6 @@ export default function BarRight() {
     <box className={"bar-right"} spacing={5} halign={Gtk.Align.END} hexpand>
       <Volume />
       <SysTray />
-      <PinBar />
       <DndToggle />
       <BarOrientationToggle />
       <RightPanel />

@@ -1,6 +1,11 @@
 import { Variable } from "astal";
 import { refreshCss } from "./utils/scss";
-import { createSettings, Settings, writeSettings } from "./utils/settings";
+import {
+  BarPosition,
+  createSettings,
+  Settings,
+  writeSettings,
+} from "./utils/settings";
 
 export const NOTIFICATION_DELAY = 5000;
 export const DEFAULT_MARGIN = 14;
@@ -24,20 +29,10 @@ globalOpacity.subscribe((value) => {
   refreshCss();
 });
 
-export const barOrientation = Variable<boolean>(
-  getGlobalSetting("bar.orientation"),
+export const barPosition = Variable<BarPosition>(
+  getGlobalSetting("bar.position"),
 );
-barOrientation.subscribe((value) => setGlobalSetting("bar.orientation", value));
-
-export const barVisibility = Variable<boolean>(
-  getGlobalSetting("bar.visibility"),
-);
-barVisibility.subscribe((value) => setGlobalSetting("bar.visibility", value));
-
-export const barLock: Variable<boolean> = Variable(
-  getGlobalSetting("bar.lock"),
-);
-barLock.subscribe((value) => setGlobalSetting("bar.lock", value));
+barPosition.subscribe((value) => setGlobalSetting("bar.position", value));
 
 export const dnd = Variable<boolean>(getGlobalSetting("notifications.dnd"));
 dnd.subscribe((value) => setGlobalSetting("notifications.dnd", value));

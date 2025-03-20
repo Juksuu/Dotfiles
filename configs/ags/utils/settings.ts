@@ -2,14 +2,19 @@ import { readJSONFile, writeJSONFile } from "./json";
 
 const settingsPath = "./assets/settings/settings.json";
 
-export interface HyprlandSetting {
+export type HyprlandSetting = {
   value: any;
   type: string;
   min: number;
   max: number;
+};
+
+export enum BarPosition {
+  Top,
+  Bottom,
 }
 
-export interface Settings {
+export type Settings = {
   hyprland: {
     decoration: {
       rounding: HyprlandSetting;
@@ -27,9 +32,7 @@ export interface Settings {
   };
   globalOpacity: number;
   bar: {
-    visibility: boolean;
-    lock: boolean;
-    orientation: boolean;
+    position: BarPosition;
   };
   rightPanel: {
     visibility: boolean;
@@ -46,7 +49,7 @@ export interface Settings {
       icon: string;
     }[];
   };
-}
+};
 
 export const defaultSettings: Settings = {
   hyprland: {
@@ -66,9 +69,7 @@ export const defaultSettings: Settings = {
   },
   globalOpacity: 1,
   bar: {
-    visibility: true,
-    lock: true,
-    orientation: true,
+    position: BarPosition.Top,
   },
   rightPanel: {
     exclusivity: true,
