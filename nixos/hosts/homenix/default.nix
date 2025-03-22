@@ -74,6 +74,7 @@
       home-manager
       libnotify
       rofi-wayland
+      paprefs
 
       # Wayland
       wl-clipboard
