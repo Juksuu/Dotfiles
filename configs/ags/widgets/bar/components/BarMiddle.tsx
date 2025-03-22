@@ -2,7 +2,7 @@ import { bind, GLib, Variable } from "astal";
 import Mpris from "gi://AstalMpris";
 import { playerToIcon } from "../../../utils/icon";
 import { playerToColor } from "../../../utils/color";
-import { App, Gtk } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 import { TRANSITION_DURATION } from "../../../variables";
 import CustomRevealer from "./CustomRevealer";
 import Hyprland from "gi://AstalHyprland";
@@ -50,8 +50,8 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
     const artist = (player?: Mpris.Player) => {
       const artist = player
-        ? bind(player, "artist").as((a) => `[${a}]` || "Unknown Artist")
-        : "Unknown artist";
+        ? bind(player, "artist").as((a) => (a ? `[${a}]` : ""))
+        : "";
       return (
         <label
           className={"label"}
@@ -115,7 +115,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
           <eventbox
             className={"media-event"}
             onHover={() => {
-              App.get_window("media")?.show();
+              // App.get_window("media")?.show();
             }}
           >
             {activePlayer()}

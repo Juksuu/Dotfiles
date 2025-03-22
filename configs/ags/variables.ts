@@ -6,11 +6,12 @@ import {
   Settings,
   writeSettings,
 } from "./utils/settings";
+import { WIDGET_SELECTORS, WidgetSelector } from "./utils/right-panel-widgets";
 
 export const NOTIFICATION_DELAY = 5000;
 export const DEFAULT_MARGIN = 14;
 export const TRANSITION_DURATION = 500;
-export const WIDGET_LIMIT = 5;
+export const RIGHT_PANEL_WIDGET_LIMIT = 5;
 
 export const newAppWorkspace = Variable(0);
 export const userPanelVisibility = Variable(false);
@@ -43,24 +44,25 @@ export const rightPanelExclusivity = Variable<boolean>(
 rightPanelExclusivity.subscribe((value) =>
   setGlobalSetting("rightPanel.exclusivity", value),
 );
-// export const rightPanelWidth = Variable<number>(
-//   getGlobalSetting("rightPanel.width"),
-// );
-// rightPanelWidth.subscribe((value) =>
-//   setGlobalSetting("rightPanel.width", value),
-// );
 
-// export const widgets = Variable<WidgetSelector[]>(
-//   getSetting("rightPanel.widgets").map((name: string) =>
-//     WidgetSelectors.find((widget) => widget.name === name),
-//   ),
-// );
-// widgets.subscribe((value) =>
-//   setSetting(
-//     "rightPanel.widgets",
-//     value.map((widget) => widget.name),
-//   ),
-// );
+export const rightPanelWidth = Variable<number>(
+  getGlobalSetting("rightPanel.width"),
+);
+rightPanelWidth.subscribe((value) =>
+  setGlobalSetting("rightPanel.width", value),
+);
+
+export const rightPanelWidgets = Variable<WidgetSelector[]>(
+  getGlobalSetting("rightPanel.widgets").map((name: string) =>
+    WIDGET_SELECTORS.find((widget) => widget.name === name),
+  ),
+);
+rightPanelWidgets.subscribe((value) =>
+  setGlobalSetting(
+    "rightPanel.widgets",
+    value.map((widget) => widget.name),
+  ),
+);
 
 // Some helper functions for getting and setting globalSettings values
 export function setGlobalSetting(key: string, value: any): any {

@@ -2,6 +2,7 @@ import { App, Gdk, Gtk, Widget } from "astal/gtk3";
 import { getCssPath } from "./utils/scss";
 import Bar from "./widgets/bar/Bar";
 import { getMonitorPlugName } from "./utils/monitor";
+import RightPanel from "./widgets/right-panel/RightPanel";
 
 type MonitorWidgets = {
   visibleAtStart: Gtk.Widget[];
@@ -11,7 +12,7 @@ type MonitorWidgets = {
 function createWidgets(gdkmonitor: Gdk.Monitor, name: string): MonitorWidgets {
   return {
     visibleAtStart: [Bar(gdkmonitor, name)],
-    hiddenAtStart: [],
+    hiddenAtStart: [RightPanel(gdkmonitor, name)],
   };
 }
 

@@ -1,3 +1,5 @@
+import { exec } from "astal";
+
 export function playerToColor(name: string) {
   let colors: Record<string, string> = {
     spotify: "#1ED760",
@@ -13,4 +15,8 @@ export function playerToColor(name: string) {
   };
 
   return colors[name];
+}
+
+export function getDominantImageColor(imagePath: string) {
+  return exec(`bash ./scripts/get-image-dominant-color.sh ${imagePath}`);
 }

@@ -35,11 +35,9 @@ export type Settings = {
     position: BarPosition;
   };
   rightPanel: {
-    visibility: boolean;
     exclusivity: boolean;
     width: number;
     widgets: string[];
-    lock: boolean;
   };
   quickLauncher: {
     apps: {
@@ -72,10 +70,8 @@ export const defaultSettings: Settings = {
     position: BarPosition.Top,
   },
   rightPanel: {
-    exclusivity: true,
-    lock: true,
+    exclusivity: false,
     width: 300,
-    visibility: true,
     widgets: [],
   },
   quickLauncher: {

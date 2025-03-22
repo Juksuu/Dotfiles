@@ -3,9 +3,9 @@ import { Gtk } from "astal/gtk3";
 import Wp from "gi://AstalWp";
 import Tray from "gi://AstalTray";
 import CustomRevealer from "./CustomRevealer";
-import ToggleButton from "./ToggleButton";
 import { barPosition, dnd } from "../../../variables";
 import { BarPosition } from "../../../utils/settings";
+import ToggleButton from "../../common/ToggleButton";
 
 export default function BarRight() {
   function Volume() {
