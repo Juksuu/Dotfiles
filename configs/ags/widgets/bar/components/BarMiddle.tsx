@@ -16,7 +16,9 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
   function Media() {
     const mpris = Mpris.get_default();
 
-    const progress = (player: Mpris.Player) => {
+    const progress = (player?: Mpris.Player) => {
+      if (!player) return <box />;
+
       const playerIcon = bind(player, "entry").as((e) => playerToIcon(e));
       return (
         <circularprogress
@@ -32,38 +34,53 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
       );
     };
 
-    const title = (player: Mpris.Player) => (
-      <label
-        className={"label"}
-        maxWidthChars={20}
-        truncate
-        label={bind(player, "title").as((t) => t || "Unknown Track")}
-      ></label>
-    );
-
-    const artist = (player: Mpris.Player) => (
-      <label
-        className={"label"}
-        maxWidthChars={20}
-        truncate
-        label={bind(player, "artist").as((a) => `[${a}]` || "Unknown Artist")}
-      ></label>
-    );
-
-    const coverArt = (player: Mpris.Player) =>
-      bind(player, "coverArt").as(
-        (c) => `
-          color: ${playerToColor(player.entry)};
-          background-image: linear-gradient(
-              to right,
-              #000000,
-              rgba(0, 0, 0, 0.5)
-            ),
-            url("${c}");
-        `,
+    const title = (player?: Mpris.Player) => {
+      const title = player
+        ? bind(player, "title").as((t) => t || "Unknown Track")
+        : "Unknown Track";
+      return (
+        <label
+          className={"label"}
+          maxWidthChars={20}
+          truncate
+          label={title}
+        ></label>
       );
+    };
 
-    function Player(player: Mpris.Player) {
+    const artist = (player?: Mpris.Player) => {
+      const artist = player
+        ? bind(player, "artist").as((a) => `[${a}]` || "Unknown Artist")
+        : "Unknown artist";
+      return (
+        <label
+          className={"label"}
+          maxWidthChars={20}
+          truncate
+          label={artist}
+        ></label>
+      );
+    };
+
+    const coverArt = (player?: Mpris.Player) => {
+      if (player) {
+        return bind(player, "coverArt").as(
+          (c) => `
+            color: ${playerToColor(player.entry)};
+            background-image: linear-gradient(
+                to right,
+                #000000,
+                rgba(0, 0, 0, 0.5)
+              ),
+              url("${c}");
+          `,
+        );
+      }
+
+      return `background-image: linear-gradient( to right, #000000, rgba(0, 0, 0, 0.5)); `;
+    };
+
+    function Player(player?: Mpris.Player) {
       return (
         <box className={"media"} css={coverArt(player)} spacing={10}>
           {progress(player)}
@@ -74,30 +91,37 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
     }
 
     const activePlayer = () => {
-      return Player(
-        mpris.players.find(
-          (player) => player.playbackStatus === Mpris.PlaybackStatus.PLAYING,
-        ) || mpris.players[0],
-      );
+      return bind(mpris, "players").as((players) => {
+        const player =
+          players.length > 0
+            ? players.find(
+                (player) =>
+                  player.playbackStatus === Mpris.PlaybackStatus.PLAYING,
+              ) || players[0]
+            : undefined;
+        return Player(player);
+      });
     };
 
     return (
-      <revealer
-        revealChild={bind(mpris, "players").as((arr) => arr.length > 0)}
-        transitionDuration={TRANSITION_DURATION}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-      >
-        <eventbox
-          className={"media-event"}
-          onHover={() => {
-            App.get_window("media")?.show();
-          }}
+      <box className={"media-container"} halign={Gtk.Align.END} hexpand>
+        <revealer
+          revealChild={bind(mpris, "players").as((arr) => arr.length > 0)}
+          transitionDuration={TRANSITION_DURATION}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+          halign={Gtk.Align.END}
+          hexpand
         >
-          {bind(mpris, "players").as((arr) =>
-            arr.length > 0 ? activePlayer() : <box />,
-          )}
-        </eventbox>
-      </revealer>
+          <eventbox
+            className={"media-event"}
+            onHover={() => {
+              App.get_window("media")?.show();
+            }}
+          >
+            {activePlayer()}
+          </eventbox>
+        </revealer>
+      </box>
     );
   }
 
@@ -127,12 +151,14 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
     const emptyWorkspace = isMonitorWorkspaceEmpty(monitorIdentifier);
 
     return (
-      <revealer
-        revealChild={bind(emptyWorkspace).as((empty) => !empty)}
-        transitionDuration={TRANSITION_DURATION}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-      >
-        <box className={"focused-client"} halign={Gtk.Align.START} hexpand>
+      <box className={"focused-client"} halign={Gtk.Align.START} hexpand>
+        <revealer
+          revealChild={bind(emptyWorkspace).as((empty) => !empty)}
+          transitionDuration={TRANSITION_DURATION}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+          halign={Gtk.Align.START}
+          hexpand
+        >
           {bind(hyprland, "focusedClient").as((client) => {
             const currentGdkMonitor = getGdkMonitor(monitorIdentifier);
             const hyprlandMonitor = hyprland.monitors.find(
@@ -149,8 +175,8 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
             return <label maxWidthChars={30} truncate label={bind(text)} />;
           })}
-        </box>
-      </revealer>
+        </revealer>
+      </box>
     );
   }
 

@@ -15,10 +15,10 @@ export default function Bar(
 
   return (
     <window
-      name={`bar_${monitorIdentifier}`}
-      className={"Bar"}
       gdkmonitor={gdkmonitor}
       application={App}
+      name={`bar_${monitorIdentifier}`}
+      className={"Bar"}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       layer={Astal.Layer.TOP}
       anchor={bind(barPosition).as((orientation) => {

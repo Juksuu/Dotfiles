@@ -13,5 +13,5 @@ export function playerToIcon(name: string) {
     firefox: "",
     zen: "",
   };
-  return icons[name];
+  return icons[name] ?? "";
 }

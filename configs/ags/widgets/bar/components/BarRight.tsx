@@ -4,13 +4,7 @@ import Wp from "gi://AstalWp";
 import Tray from "gi://AstalTray";
 import CustomRevealer from "./CustomRevealer";
 import ToggleButton from "./ToggleButton";
-import {
-  barPosition,
-  dnd,
-  rightPanelLock,
-  rightPanelVisibility,
-  TRANSITION_DURATION,
-} from "../../../variables";
+import { barPosition, dnd } from "../../../variables";
 import { BarPosition } from "../../../utils/settings";
 
 export default function BarRight() {
@@ -88,31 +82,12 @@ export default function BarRight() {
     );
   }
 
-  function RightPanel() {
-    return (
-      <revealer
-        revealChild={bind(rightPanelLock).as((lock) => lock)}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-        transitionDuration={TRANSITION_DURATION}
-        child={
-          <ToggleButton
-            state={bind(rightPanelVisibility)}
-            label={bind(rightPanelVisibility).as((v) => (v ? "" : ""))}
-            onToggled={(_, on) => rightPanelVisibility.set(on)}
-            className={"icon"}
-          />
-        }
-      />
-    );
-  }
-
   return (
     <box className={"bar-right"} spacing={5} halign={Gtk.Align.END} hexpand>
       <Volume />
       <SysTray />
       <DndToggle />
       <BarOrientationToggle />
-      <RightPanel />
     </box>
   );
 }

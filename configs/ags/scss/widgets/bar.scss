@@ -131,6 +131,10 @@ linear-gradient(to bottom right, $gradient-Colors);
     }
   }
 
+  .media-container {
+    min-width: 300px;
+  }
+
   .focused-client {
     min-width: 300px;
 

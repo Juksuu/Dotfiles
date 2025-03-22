@@ -37,22 +37,12 @@ barPosition.subscribe((value) => setGlobalSetting("bar.position", value));
 export const dnd = Variable<boolean>(getGlobalSetting("notifications.dnd"));
 dnd.subscribe((value) => setGlobalSetting("notifications.dnd", value));
 
-export const rightPanelLock = Variable<boolean>(
-  getGlobalSetting("rightPanel.lock"),
+export const rightPanelExclusivity = Variable<boolean>(
+  getGlobalSetting("rightPanel.exclusivity"),
 );
-rightPanelLock.subscribe((value) => setGlobalSetting("rightPanel.lock", value));
-export const rightPanelVisibility = Variable<boolean>(
-  getGlobalSetting("rightPanel.visibility"),
+rightPanelExclusivity.subscribe((value) =>
+  setGlobalSetting("rightPanel.exclusivity", value),
 );
-rightPanelVisibility.subscribe((value) =>
-  setGlobalSetting("rightPanel.visibility", value),
-);
-// export const rightPanelExclusivity = Variable<boolean>(
-//   getGlobalSetting("rightPanel.exclusivity"),
-// );
-// rightPanelExclusivity.subscribe((value) =>
-//   setGlobalSetting("rightPanel.exclusivity", value),
-// );
 // export const rightPanelWidth = Variable<number>(
 //   getGlobalSetting("rightPanel.width"),
 // );
