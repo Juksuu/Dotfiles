@@ -1,10 +1,10 @@
-import { execAsync, timeout, Variable } from "astal";
+import { bind, execAsync, timeout, Variable } from "astal";
 import { NOTIFICATION_DELAY, TRANSITION_DURATION } from "../../variables";
 import Notifd from "gi://AstalNotifd";
 import { Astal, Gtk } from "astal/gtk3";
 import ToggleButton from "./ToggleButton";
 import { Revealer } from "astal/gtk3/widget";
-import { asyncSleep, time } from "../../utils/time";
+import { time, timerWithCallback } from "../../utils/time";
 
 const TRANSITION = 200;
 
@@ -69,23 +69,16 @@ export default function Notification({
   );
 
   const NotificationTimer = () => {
-    const progress = (
+    const timer = Variable(NOTIFICATION_DELAY);
+    timerWithCallback(timer.get(), 50, (v) => timer.set(v));
+
+    return (
       <circularprogress
         className={"circular-progress"}
         rounded
-        value={NOTIFICATION_DELAY}
-        setup={async (self) => {
-          const step = 10;
-          while (self.value >= 0) {
-            self.value -= step;
-            await asyncSleep(step);
-          }
-          self.hide();
-        }}
+        value={bind(timer).as((t) => t / NOTIFICATION_DELAY)}
       />
     );
-
-    return progress;
   };
 
   const Title = (

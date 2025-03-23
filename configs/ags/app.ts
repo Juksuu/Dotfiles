@@ -3,6 +3,7 @@ import { getCssPath } from "./utils/scss";
 import Bar from "./widgets/bar/Bar";
 import { getMonitorPlugName } from "./utils/monitor";
 import RightPanel from "./widgets/right-panel/RightPanel";
+import NotificationPopups from "./widgets/notification-popups/NotificationPopups";
 
 type MonitorWidgets = {
   visibleAtStart: Gtk.Widget[];
@@ -12,7 +13,10 @@ type MonitorWidgets = {
 function createWidgets(gdkmonitor: Gdk.Monitor, name: string): MonitorWidgets {
   return {
     visibleAtStart: [Bar(gdkmonitor, name)],
-    hiddenAtStart: [RightPanel(gdkmonitor, name)],
+    hiddenAtStart: [
+      RightPanel(gdkmonitor, name),
+      NotificationPopups(gdkmonitor, name),
+    ],
   };
 }
 
