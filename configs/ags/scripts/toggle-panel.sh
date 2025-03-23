@@ -8,6 +8,10 @@ right() {
     ags toggle rightpanel_$(get_monitor_plug_name)
 }
 
+settings() {
+    ags toggle settings_$(get_monitor_plug_name)
+}
+
 if [ ! -z "$1" ]
 then
   # Check if the function exists (bash specific)

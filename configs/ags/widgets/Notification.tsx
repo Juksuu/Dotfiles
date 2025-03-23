@@ -22,7 +22,7 @@ export default function Notification({
   function closeNotification() {
     timeout(TRANSITION_DURATION - 300, () => {
       if (popup) {
-        Parent.destroy();
+        Parent.hide();
       }
     });
   }

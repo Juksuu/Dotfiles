@@ -9,6 +9,14 @@ export type HyprlandSetting = {
   max: number;
 };
 
+export interface AGSSetting {
+  name: string;
+  value: any;
+  type: string;
+  min: number;
+  max: number;
+}
+
 export enum BarPosition {
   Top,
   Bottom,
@@ -30,7 +38,8 @@ export type Settings = {
   notifications: {
     dnd: boolean;
   };
-  globalOpacity: number;
+  globalOpacity: AGSSetting;
+  globalIconSize: AGSSetting;
   bar: {
     position: BarPosition;
   };
@@ -65,7 +74,20 @@ export const defaultSettings: Settings = {
   notifications: {
     dnd: false,
   },
-  globalOpacity: 1,
+  globalOpacity: {
+    name: "Global Opacity",
+    value: 0.9,
+    type: "float",
+    min: 0,
+    max: 1,
+  },
+  globalIconSize: {
+    name: "Global Icon Size",
+    value: 10,
+    type: "int",
+    min: 5,
+    max: 20,
+  },
   bar: {
     position: BarPosition.Top,
   },

@@ -1,6 +1,6 @@
 import { exec } from "astal";
 import { monitorFile } from "astal/file";
-import { globalOpacity } from "../variables";
+import { globalIconSize, globalOpacity } from "../variables";
 import { App } from "astal/gtk3";
 
 // target css file
@@ -21,11 +21,11 @@ export function refreshCss() {
   // console.log("refresh css");
   // console.log(
   //   "command: ",
-  //   `bash -c "echo '\\$OPACITY: ${globalOpacity.get()};' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"`,
+  //   `bash -c "echo -e '\\$OPACITY: ${globalOpacity.get().value};\n\\$ICON-SIZE: ${globalIconSize.get().value}px;' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"`,
   // );
 
   exec(
-    `bash -c "echo '\\$OPACITY: ${globalOpacity.get()};' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"`,
+    `bash -c "echo -e '\\$OPACITY: ${globalOpacity.get().value};\n\\$ICON-SIZE: ${globalIconSize.get().value}px;' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"`,
   );
 
   App.reset_css();

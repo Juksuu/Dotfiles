@@ -29,6 +29,7 @@
 button,
 .button {
   @extend .module;
+  font-size: $ICON-SIZE;
   background: $secondary-background;
   &:hover {
     background: $background;
@@ -64,7 +65,7 @@ button,
 }
 
 .icon {
-  font-size: 10px;
+  font-size: $ICON-SIZE;
 }
 
 .slider {

@@ -1,6 +1,7 @@
 import { Variable } from "astal";
 import { refreshCss } from "./utils/scss";
 import {
+  AGSSetting,
   BarPosition,
   createSettings,
   Settings,
@@ -22,11 +23,19 @@ export const appLauncherVisibility = Variable(false);
 export const globalSettings = Variable<Settings>(createSettings());
 globalSettings.subscribe((value) => writeSettings(value));
 
-export const globalOpacity = Variable<number>(
+export const globalOpacity = Variable<AGSSetting>(
   getGlobalSetting("globalOpacity"),
 );
 globalOpacity.subscribe((value) => {
   setGlobalSetting("globalOpacity", value);
+  refreshCss();
+});
+
+export const globalIconSize = Variable<AGSSetting>(
+  getGlobalSetting("globalIconSize"),
+);
+globalIconSize.subscribe((value) => {
+  setGlobalSetting("globalIconSize", value);
   refreshCss();
 });
 

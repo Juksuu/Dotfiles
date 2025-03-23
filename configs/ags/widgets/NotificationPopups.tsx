@@ -75,14 +75,14 @@ class NotificationMap implements Subscribable {
   }
 
   private set(key: number, value: Gtk.Widget) {
-    // in case of replacecment destroy previous widget
-    this.notificationMap.get(key)?.destroy();
+    // in case of replacecment hide previous widget
+    this.notificationMap.get(key)?.hide();
     this.notificationMap.set(key, value);
     this.notify();
   }
 
   private delete(key: number) {
-    this.notificationMap.get(key)?.destroy();
+    this.notificationMap.get(key)?.hide();
     this.notificationMap.delete(key);
     this.notify();
   }
