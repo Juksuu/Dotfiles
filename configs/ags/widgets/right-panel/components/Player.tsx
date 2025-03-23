@@ -53,20 +53,21 @@ export function Player({ player, playerType }: Props) {
   }
 
   function PositionSlider() {
-    const customCss = bind(player, "coverArt").as((art) => {
-      return art
-        ? `
-        highlight {
-          background: ${getDominantImageColor(art)}00};
-        }
-      `
-        : "";
-    });
+    // TODO: Fix customCss selectors
+    // const customCss = bind(player, "coverArt").as((art) => {
+    //   return art
+    //     ? `
+    //     .highlight {
+    //       background: ${getDominantImageColor(art)}00};
+    //     }
+    //   `
+    //     : "";
+    // });
 
     return (
       <slider
         className={"slider"}
-        css={customCss}
+        // css={customCss}
         onDragged={({ value }) => {
           player.position = value * player.length;
         }}
