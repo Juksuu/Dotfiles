@@ -20,24 +20,27 @@ export default function NotificationHistory() {
 
   const notificationFilter = Variable<Filter>({ name: "", class: "" });
 
-  function Filter() {
+  function FilterDisplay() {
     return (
       <box className={"filter"} hexpand>
         {FILTERS.map((filter) => {
-          <button
-            className={bind(notificationFilter).as((f) =>
-              f.class === filter.class ? "active" : "",
-            )}
-            onClicked={() => {
-              notificationFilter.set(
-                notificationFilter.get() === filter
-                  ? { name: "", class: "" }
-                  : filter,
-              );
-            }}
-            hexpand
-            label={filter.name}
-          ></button>;
+          return (
+            <button
+              className={bind(notificationFilter).as((f) => {
+                return f.class === filter.class ? filter.class : "";
+              })}
+              onClicked={() => {
+                const data =
+                  notificationFilter.get().class === filter.class
+                    ? { name: "", class: "" }
+                    : filter;
+
+                notificationFilter.set(data);
+              }}
+              hexpand
+              label={filter.name}
+            ></button>
+          );
         })}
       </box>
     );
@@ -89,7 +92,7 @@ export default function NotificationHistory() {
 
   return (
     <box className={"notification-history"} spacing={5} vertical>
-      <Filter />
+      <FilterDisplay />
       <NotificationsDisplay />
       <ClearNotifications />
     </box>

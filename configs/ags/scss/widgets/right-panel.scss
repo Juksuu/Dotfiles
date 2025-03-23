@@ -65,9 +65,7 @@
     .clipboard {
       background: $blue-background;
     }
-    .update {
-      background: $orange-background;
-    }
+
     button {
       padding: 5px 0px;
       border-radius: 0px;
@@ -83,6 +81,7 @@
       }
     }
   }
+
   .notification {
     min-width: 0px;
     min-height: 0px;
