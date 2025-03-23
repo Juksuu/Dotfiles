@@ -1,6 +1,6 @@
 import { Variable, bind } from "astal";
 import { Gtk } from "astal/gtk3";
-import Notification from "../../common/Notification";
+import Notification from "../../Notification";
 import Notifd from "gi://AstalNotifd";
 
 type Filter = {

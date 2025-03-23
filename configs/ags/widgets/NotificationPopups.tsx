@@ -1,8 +1,8 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
-import { DEFAULT_MARGIN, dnd } from "../../variables";
 import { bind, Variable } from "astal";
 import { Subscribable } from "astal/binding";
-import Notification from "../common/Notification";
+import { DEFAULT_MARGIN, dnd } from "../variables";
+import Notification from "./Notification";
 import Notifd from "gi://AstalNotifd";
 
 export default function NotificationPopups(

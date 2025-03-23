@@ -2,7 +2,7 @@ import { App } from "astal/gtk3";
 import { settingsVisibility, userPanelVisibility } from "../../../variables";
 import { bind, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
-import ToggleButton from "../../common/ToggleButton";
+import ToggleButton from "../../ToggleButton";
 
 export default function BarLeft() {
   function Workspaces() {

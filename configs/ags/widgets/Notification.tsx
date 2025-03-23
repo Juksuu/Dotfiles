@@ -1,10 +1,10 @@
 import { bind, execAsync, timeout, Variable } from "astal";
-import { NOTIFICATION_DELAY, TRANSITION_DURATION } from "../../variables";
 import Notifd from "gi://AstalNotifd";
 import { Astal, Gtk } from "astal/gtk3";
 import ToggleButton from "./ToggleButton";
 import { Revealer } from "astal/gtk3/widget";
-import { time, timerWithCallback } from "../../utils/time";
+import { NOTIFICATION_DELAY, TRANSITION_DURATION } from "../variables";
+import { time, timerWithCallback } from "../utils/time";
 
 const TRANSITION = 200;
 

@@ -5,7 +5,7 @@ import Tray from "gi://AstalTray";
 import CustomRevealer from "./CustomRevealer";
 import { barPosition, dnd } from "../../../variables";
 import { BarPosition } from "../../../utils/settings";
-import ToggleButton from "../../common/ToggleButton";
+import ToggleButton from "../../ToggleButton";
 
 export default function BarRight() {
   function Volume() {

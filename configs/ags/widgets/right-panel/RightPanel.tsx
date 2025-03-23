@@ -1,14 +1,13 @@
 import { bind } from "astal";
 import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import {
-  DEFAULT_MARGIN,
   RIGHT_PANEL_WIDGET_LIMIT,
   rightPanelExclusivity,
   rightPanelWidgets,
   rightPanelWidth,
 } from "../../variables";
-import ToggleButton from "../common/ToggleButton";
 import { WIDGET_SELECTORS } from "../../utils/right-panel-widgets";
+import ToggleButton from "../ToggleButton";
 
 const maxRightPanelWidth = 600;
 const minRightPanelWidth = 200;

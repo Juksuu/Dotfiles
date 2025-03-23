@@ -3,7 +3,7 @@ import { getCssPath } from "./utils/scss";
 import Bar from "./widgets/bar/Bar";
 import { getMonitorPlugName } from "./utils/monitor";
 import RightPanel from "./widgets/right-panel/RightPanel";
-import NotificationPopups from "./widgets/notification-popups/NotificationPopups";
+import NotificationPopups from "./widgets/NotificationPopups";
 
 type MonitorWidgets = {
   visibleAtStart: Gtk.Widget[];
