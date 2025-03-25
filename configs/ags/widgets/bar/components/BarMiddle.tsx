@@ -29,7 +29,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
             player.length > 0 ? p / player.length : 0,
           )}
         >
-          <label css={"font-size:12px"} label={playerIcon} />
+          <label className={"icon"} label={playerIcon} />
         </circularprogress>
       );
     };

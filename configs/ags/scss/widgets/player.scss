@@ -42,21 +42,11 @@
   }
 
   button {
-    min-height: 1em;
-    min-width: 1em;
+    min-height: 1rem;
+    min-width: 1rem;
   }
 
   button.play-pause {
-    margin: 0 0.3em;
-  }
-
-  &.widget {
-    .title {
-      font-size: 1.2em;
-    }
-
-    .artist {
-      font-size: 1.2em;
-    }
+    margin: 0 0.3rem;
   }
 }

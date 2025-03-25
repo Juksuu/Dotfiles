@@ -146,7 +146,7 @@
 
   fonts.packages = with pkgs; [
     nerd-fonts.iosevka
-    maple-mono-NF
+    maple-mono.NF
     material-symbols
   ];
 

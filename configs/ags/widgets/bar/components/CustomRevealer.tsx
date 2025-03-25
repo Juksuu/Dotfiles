@@ -24,7 +24,7 @@ export default function CustomRevealer(
 
   return (
     <eventbox
-      className={`custom-revealer button ${customClass}`}
+      className={`custom-revealer ${customClass}`}
       onHover={() => {
         (revealer as Revealer).revealChild = true;
       }}

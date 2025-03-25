@@ -8,7 +8,9 @@
 @import "widgets/settings.scss";
 
 window {
-  background-color: transparent;
-  transition: all 1s;
+  font-family: "Maple Mono NF", "Noto Font";
   font-size: 10px;
+
+  background-color: transparent;
+  transition: all 0.5s;
 }
