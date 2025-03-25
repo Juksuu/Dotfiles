@@ -1,45 +1,51 @@
+import { readFile, writeFile } from "astal/file";
 import { readJSONFile, writeJSONFile } from "./json";
+import { exec } from "astal";
 
 const settingsPath = "./assets/settings/settings.json";
+const hyprlandCustomDir = "../hypr/hyprland/custom/settings.conf";
 
-export type HyprlandSetting = {
+export type AdjustableSetting = {
+  name: string;
   value: any;
   type: string;
   min: number;
   max: number;
 };
 
-export interface AGSSetting {
-  name: string;
-  value: any;
-  type: string;
-  min: number;
-  max: number;
-}
-
 export enum BarPosition {
   Top,
   Bottom,
 }
 
+export interface NestedSetting {
+  [key: string]: AdjustableSetting | NestedSetting;
+}
+
+export function isAdjustableSetting(
+  s: AdjustableSetting | NestedSetting,
+): s is AdjustableSetting {
+  return Object.keys(s).find((v) => v === "name") !== undefined;
+}
+
 export type Settings = {
   hyprland: {
     decoration: {
-      rounding: HyprlandSetting;
-      active_opacity: HyprlandSetting;
-      inactive_opacity: HyprlandSetting;
+      rounding: AdjustableSetting;
+      active_opacity: AdjustableSetting;
+      inactive_opacity: AdjustableSetting;
       blur: {
-        enabled: HyprlandSetting;
-        size: HyprlandSetting;
-        passes: HyprlandSetting;
+        enabled: AdjustableSetting;
+        size: AdjustableSetting;
+        passes: AdjustableSetting;
       };
     };
   };
   notifications: {
     dnd: boolean;
   };
-  globalOpacity: AGSSetting;
-  globalIconSize: AGSSetting;
+  globalOpacity: AdjustableSetting;
+  globalIconSize: AdjustableSetting;
   bar: {
     position: BarPosition;
   };
@@ -61,13 +67,25 @@ export type Settings = {
 export const defaultSettings: Settings = {
   hyprland: {
     decoration: {
-      rounding: { value: 15, min: 0, max: 50, type: "int" },
-      active_opacity: { value: 0.8, min: 0, max: 1, type: "float" },
-      inactive_opacity: { value: 0.5, min: 0, max: 1, type: "float" },
+      rounding: { name: "rounding", value: 15, min: 0, max: 50, type: "int" },
+      active_opacity: {
+        name: "active opacity",
+        value: 0.97,
+        min: 0,
+        max: 1,
+        type: "float",
+      },
+      inactive_opacity: {
+        name: "inactive opacity",
+        value: 0.8,
+        min: 0,
+        max: 1,
+        type: "float",
+      },
       blur: {
-        enabled: { value: true, type: "bool", min: 0, max: 1 },
-        size: { value: 3, type: "int", min: 0, max: 10 },
-        passes: { value: 3, type: "int", min: 0, max: 10 },
+        enabled: { name: "blur", value: true, type: "bool", min: 0, max: 1 },
+        size: { name: "blur size", value: 3, type: "int", min: 0, max: 10 },
+        passes: { name: "blur passes", value: 3, type: "int", min: 0, max: 10 },
       },
     },
   },
@@ -151,9 +169,83 @@ export function createSettings() {
   }
 
   writeJSONFile(settingsPath, defaultSettings);
+  writeHyprlandSettings(defaultSettings.hyprland);
   return defaultSettings;
 }
 
 export function writeSettings(settings: Settings) {
   writeJSONFile(settingsPath, settings);
+  writeHyprlandSettings(settings.hyprland);
+}
+
+function writeHyprlandSettings(settings: NestedSetting) {
+  let settingsString = "";
+
+  let nestLevel = 0;
+  processNestedSettings(
+    settings,
+    "hyprland",
+    (k) => {
+      settingsString += "\t".repeat(nestLevel);
+
+      const key = k.split(".").slice(-1);
+      settingsString += `${key}\t{\n`;
+      nestLevel++;
+    },
+    (p, k, v) => {
+      const parent = k.split(".").slice(-1);
+      settingsString += "\t".repeat(nestLevel);
+      settingsString += `${parent}=${v.value}\n`;
+    },
+    () => {
+      nestLevel--;
+      settingsString += "\t".repeat(nestLevel);
+      settingsString += `}\n`;
+    },
+  );
+
+  if (readFile(hyprlandCustomDir) == "")
+    exec(`mkdir -p ${hyprlandCustomDir.split("/").slice(0, -1).join("/")}`);
+  try {
+    writeFile(hyprlandCustomDir, settingsString);
+  } catch (e) {
+    console.error("Error:", e);
+  }
+}
+
+export function processNestedSettings(
+  data: AdjustableSetting | NestedSetting,
+  parentKey: string,
+  nestedCb: (path: string, key: string) => void,
+  valueCb: (path: string, key: string, value: AdjustableSetting) => void,
+  denestedCb: () => void,
+  key?: string,
+) {
+  if (key) {
+    parentKey += `.${key}`;
+  }
+
+  if (isAdjustableSetting(data)) {
+    valueCb(parentKey, key ?? "", data);
+  } else {
+    if (key) {
+      nestedCb(parentKey, key);
+    }
+
+    // Iterate over the entries of the current value
+    for (const [childKey, childValue] of Object.entries(data)) {
+      processNestedSettings(
+        childValue,
+        parentKey,
+        nestedCb,
+        valueCb,
+        denestedCb,
+        childKey,
+      );
+    }
+
+    if (key) {
+      denestedCb();
+    }
+  }
 }
