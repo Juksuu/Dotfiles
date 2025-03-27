@@ -30,17 +30,17 @@ export default function RightPanel(
               onToggled={(self, on) => {
                 if (on) {
                   if (
-                    rightPanelWidgets.get().length >= RIGHT_PANEL_WIDGET_LIMIT
-                  )
-                    return;
-                  if (!selector.widgetInstance) {
-                    selector.widgetInstance = selector.widget();
+                    rightPanelWidgets.get().length < RIGHT_PANEL_WIDGET_LIMIT
+                  ) {
+                    rightPanelWidgets.set([
+                      ...rightPanelWidgets.get(),
+                      selector,
+                    ]);
                   }
-                  rightPanelWidgets.set([...rightPanelWidgets.get(), selector]);
                 } else {
                   const newWidgets = rightPanelWidgets
                     .get()
-                    .filter((w) => w !== selector);
+                    .filter((w) => w.name !== selector.name);
                   rightPanelWidgets.set(newWidgets);
                 }
               }}
