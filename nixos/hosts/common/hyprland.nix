@@ -11,6 +11,8 @@
 
       programs.hyprland = {
         enable = true;
+        withUWSM = true;
+
         # set the flake package
         package =
           inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

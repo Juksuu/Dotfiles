@@ -47,10 +47,6 @@
   };
 
   services = {
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
     xserver = {
       enable = true;
       xkb = {
@@ -59,9 +55,13 @@
         options = "grp:win_space_toggle";
       };
       videoDrivers = [ "nvidia" ];
+      displayManager.lightdm.enable = false;
     };
 
-    dbus.enable = true;
+    dbus = {
+      enable = true;
+      implementation = "broker";
+    };
 
     pipewire = {
       enable = true;
@@ -97,6 +97,7 @@
       fzf
       fish
       htop
+      uwsm
       sassc
       paprefs
       libnotify

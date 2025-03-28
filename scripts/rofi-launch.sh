@@ -34,4 +34,5 @@ esac
 
 rofi -show "${r_mode}" \
     -show-icons \
-    -theme "${rofi_config}" &
+    -theme "${rofi_config}" \
+    -run-command "uwsm app -- {cmd}"

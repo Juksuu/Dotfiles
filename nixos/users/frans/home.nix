@@ -54,6 +54,13 @@
 
   programs.fish = {
     enable = true;
+
+    loginShellInit = ''
+      if uwsm check may-start && uwsm select
+        uwsm start default
+      end
+    '';
+
     interactiveShellInit = ''
       set fish_greeting
 
@@ -110,6 +117,7 @@
     keyMode = "vi";
     extraConfig = ''
       set -g status off
+      set -g default-command ~/.nix-profile/bin/fish
       set -s set-clipboard external
       set-option -g default-terminal "screen-256color"
       set-option -sa terminal-features ',xterm-kitty:RGB'
