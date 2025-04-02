@@ -4,7 +4,6 @@
     ./hardware-configuration.nix
 
     ../common/core.nix
-    ../common/hyprland.nix
     ../common/plasma6.nix
   ];
 
