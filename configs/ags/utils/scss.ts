@@ -1,7 +1,13 @@
-import { exec } from "astal";
+import { exec, execAsync } from "astal";
 import { monitorFile } from "astal/file";
-import { globalIconSize, globalOpacity } from "../variables";
+import {
+  globalFontSize,
+  globalIconSize,
+  globalOpacity,
+  globalScale,
+} from "../variables";
 import { App } from "astal/gtk3";
+import { notify } from "./notification";
 
 // target css file
 const tmpCss = `/tmp/tmp-style.css`;
@@ -17,16 +23,22 @@ export const getCssPath = () => {
   return tmpCss;
 };
 
-export function refreshCss() {
-  // console.log("refresh css");
-  // console.log(
-  //   "command: ",
-  //   `bash -c "echo -e '\\$OPACITY: ${globalOpacity.get().value};\n\\$ICON-SIZE: ${globalIconSize.get().value}px;' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"`,
-  // );
-
-  exec(
-    `bash -c "echo -e '\\$OPACITY: ${globalOpacity.get().value};\n\\$ICON-SIZE: ${globalIconSize.get().value}px;' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"`,
-  );
+export async function refreshCss() {
+  try {
+    await execAsync(
+      `
+      bash -c "echo -e '
+      \\$OPACITY: ${globalOpacity.get().value};\n
+      \\$ICON-SIZE: ${globalIconSize.get().value}px;\n
+      \\$FONT-SIZE: ${globalFontSize.get().value}px;\n
+      \\$SCALE: ${globalScale.get().value}px;
+      ' | cat - ${defaultColors} ${walColors} ${scss} > ${tmpScss} && sassc ${tmpScss} ${tmpCss} -I ${scssDir}"
+      `,
+    );
+  } catch (e) {
+    notify({ summary: `Error while generating css`, body: String(e) });
+    console.error(e);
+  }
 
   App.reset_css();
   App.apply_css(tmpCss);

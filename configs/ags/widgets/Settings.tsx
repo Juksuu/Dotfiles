@@ -2,13 +2,16 @@ import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import {
   DEFAULT_MARGIN,
   getGlobalSetting,
+  globalFontSize,
   globalIconSize,
   globalOpacity,
+  globalScale,
   globalSettings,
   setGlobalSetting,
 } from "../variables";
-import { execAsync, Variable } from "astal";
+import { bind, execAsync, Variable } from "astal";
 import { AdjustableSetting, processNestedSettings } from "../utils/settings";
+import { Label } from "astal/gtk3/widget";
 
 function InnerCategory(title: string) {
   return <label label={title} />;
@@ -20,6 +23,8 @@ function normalizeValue(value: number, type: string) {
       return Math.round(value);
     case "float":
       return value.toFixed(2);
+    default:
+      throw new Error(`No normalize method implemented for type: ${type}`);
   }
 }
 
@@ -68,6 +73,8 @@ export default function Settings(
           <label className={"category"} label={"AGS"} />
           {createSettingWidget(globalOpacity)}
           {createSettingWidget(globalIconSize)}
+          {createSettingWidget(globalScale)}
+          {createSettingWidget(globalFontSize)}
           <label className={"category"} label={"Hyprland"} />
           {hyprlandSettings}
         </box>
@@ -111,24 +118,16 @@ function createSettingWidget(setting: Variable<AdjustableSetting> | string) {
         halign={Gtk.Align.END}
         step={1}
         widthRequest={169}
-        value={settingValue.value / (settingValue.max - settingValue.min)}
+        value={settingValue.value}
+        min={settingValue.min}
+        max={settingValue.max}
         onDragged={({ value }) => {
           settingVar.set({
             ...settingValue,
-            value: normalizeValue(
-              value * (settingValue.max - settingValue.min),
-              settingValue.type,
-            ),
+            value: normalizeValue(value, settingValue.type),
           });
         }}
       />
-      {/* <label */}
-      {/*   xalign={1} */}
-      {/*   hexpand */}
-      {/*   label={bind(setting).as( */}
-      {/*     (s) => `${Math.round((s.value / (s.max - s.min)) * 100)}`, */}
-      {/*   )} */}
-      {/* /> */}
     </box>
   );
 
@@ -144,11 +143,6 @@ function createSettingWidget(setting: Variable<AdjustableSetting> | string) {
           });
         }}
       />
-      {/* <label */}
-      {/*   xalign={1} */}
-      {/*   hexpand */}
-      {/*   label={bind(setting).as((s) => (s.value ? "On" : "Off"))} */}
-      {/* /> */}
     </box>
   );
 

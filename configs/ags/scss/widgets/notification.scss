@@ -30,22 +30,15 @@ window.notification-popups {
     min-width: 20px;
     min-height: 10px;
     font-size: 5px;
-
-    label {
-      font-size: 10px;
-      font-weight: 800;
-      color: $foreground;
-    }
   }
 
   .app-name {
-    font-size: 0.7rem;
-    font-weight: 900;
+    font-size: 0.9em;
     color: $foreground;
   }
 
   .time {
-    font-size: 0.7rem;
+    font-size: 0.9em;
     color: $foreground-secondary;
   }
 
@@ -79,8 +72,6 @@ window.notification-popups {
 
   .title {
     color: $secondary;
-    font-size: 0.9rem;
-    font-weight: 900;
   }
 
   .body {
@@ -89,7 +80,6 @@ window.notification-popups {
   }
   .actions {
     button {
-      // border-radius: 0px;
       margin-top: 10px;
       border-radius: 0px;
 
@@ -109,8 +99,6 @@ window.notification-popups {
         border-radius: 0px 10px 10px 0px;
       }
     }
-    // margin: 0 0.4em;
-    // margin-top: 0.8em;
   }
 }
 

@@ -29,24 +29,21 @@
 
   .title {
     margin: 5px 0px;
+    background: $background-secondary;
+    padding: 0px 10px;
+    border-radius: 50px;
     color: $secondary;
+    font-size: 0.9em;
   }
 
   .artist {
-    margin: 5px 0px;
-  }
-
-  .icon {
-    margin: 0px;
-    padding: 0px;
+    background: $background-secondary;
+    padding: 0px 10px;
+    border-radius: 50px;
+    font-size: 0.9em;
   }
 
   button {
-    min-height: 1rem;
-    min-width: 1rem;
-  }
-
-  button.play-pause {
-    margin: 0 0.3rem;
+    padding: $SCALE - 10 $SCALE;
   }
 }

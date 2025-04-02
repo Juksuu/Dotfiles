@@ -39,6 +39,22 @@ globalIconSize.subscribe((value) => {
   refreshCss();
 });
 
+export const globalScale = Variable<AdjustableSetting>(
+  getGlobalSetting("globalScale"),
+);
+globalScale.subscribe((value) => {
+  setGlobalSetting("globalScale", value);
+  refreshCss();
+});
+
+export const globalFontSize = Variable<AdjustableSetting>(
+  getGlobalSetting("globalFontSize"),
+);
+globalFontSize.subscribe((value) => {
+  setGlobalSetting("globalFontSize", value);
+  refreshCss();
+});
+
 export const barPosition = Variable<BarPosition>(
   getGlobalSetting("bar.position"),
 );

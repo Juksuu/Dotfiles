@@ -11,10 +11,10 @@ function lengthStr(length: number) {
   return `${min}:${sec0}${sec}`;
 }
 
-const PLAY_ICON = "media-playback-start-symbolic";
-const PAUSE_ICON = "media-playback-pause-symbolic";
-const PREV_ICON = "media-skip-backward-symbolic";
-const NEXT_ICON = "media-skip-forward-symbolic";
+const PLAY_ICON = "media-playback-start";
+const PAUSE_ICON = "media-playback-pause";
+const PREV_ICON = "media-skip-backward";
+const NEXT_ICON = "media-skip-forward";
 
 type Props = {
   player: Mpris.Player;
@@ -159,11 +159,12 @@ export function Player({ player, playerType }: Props) {
         <box vexpand />
         <Title />
         <PositionSlider />
-        <centerbox>
-          <PositionLabel />
-          <Actions />
-          <LengthLabel />
-        </centerbox>
+        <centerbox
+          spacing={5}
+          startWidget={PositionLabel()}
+          centerWidget={Actions()}
+          endWidget={LengthLabel()}
+        />
       </box>
     </box>
   );

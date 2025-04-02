@@ -1,32 +1,11 @@
-import { bind, execAsync } from "astal";
+import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
-import Wp from "gi://AstalWp";
 import Tray from "gi://AstalTray";
-import CustomRevealer from "./CustomRevealer";
 import { barPosition, dnd } from "../../../variables";
 import { BarPosition } from "../../../utils/settings";
 import ToggleButton from "../../ToggleButton";
 
 export default function BarRight() {
-  function Volume() {
-    const wp = Wp.get_default();
-    const speaker = wp?.audio.defaultSpeaker!;
-
-    const icon = <icon className={"icon"} icon={bind(speaker, "volumeIcon")} />;
-
-    const slider = (
-      <slider
-        className={"slider"}
-        step={0.1}
-        widthRequest={100}
-        onDragged={({ value }) => (speaker.volume = value)}
-        value={bind(speaker, "volume")}
-      />
-    );
-
-    return CustomRevealer(icon, slider, "", () => execAsync("pavucontrol"));
-  }
-
   function SysTray() {
     const tray = Tray.get_default();
 
@@ -84,7 +63,6 @@ export default function BarRight() {
 
   return (
     <box className={"bar-right"} spacing={5} halign={Gtk.Align.END} hexpand>
-      <Volume />
       <SysTray />
       <DndToggle />
       <BarOrientationToggle />

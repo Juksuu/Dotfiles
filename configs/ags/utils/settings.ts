@@ -46,6 +46,8 @@ export type Settings = {
   };
   globalOpacity: AdjustableSetting;
   globalIconSize: AdjustableSetting;
+  globalScale: AdjustableSetting;
+  globalFontSize: AdjustableSetting;
   bar: {
     position: BarPosition;
   };
@@ -105,6 +107,20 @@ export const defaultSettings: Settings = {
     type: "int",
     min: 5,
     max: 20,
+  },
+  globalScale: {
+    name: "Global Scale",
+    value: 10,
+    type: "int",
+    min: 10,
+    max: 30,
+  },
+  globalFontSize: {
+    name: "Global Font Size",
+    value: 12,
+    type: "int",
+    min: 12,
+    max: 30,
   },
   bar: {
     position: BarPosition.Top,

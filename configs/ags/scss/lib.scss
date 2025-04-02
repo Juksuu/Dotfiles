@@ -1,14 +1,13 @@
 .module {
-  background: $module-background;
+  background: $background-transparent;
   color: $foreground;
   min-height: 1px;
   border: none;
   box-shadow: none;
   border-radius: 10px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: $FONT-SIZE;
   text-shadow: none;
-  padding: 0 10px;
+  padding: $SCALE - 10;
   margin: 0;
 }
 
@@ -24,8 +23,11 @@
 button,
 .button {
   @extend .module;
-  font-size: $ICON-SIZE;
-  background: $secondary-background;
+  padding: $SCALE / 2 $SCALE;
+  background: $background-secondary;
+  min-width: 20px;
+  min-height: 20px;
+
   &:hover {
     background: $background;
     text-shadow: $foreground 0 0 1px;
@@ -33,7 +35,6 @@ button,
   &:focus,
   &:checked {
     outline: none;
-    // border-color: transparent;
   }
   &.checked {
     background: $secondary;
@@ -43,13 +44,21 @@ button,
 
 .custom-revealer {
   @extend .module;
+
+  background: $background-secondary;
+
+  &:hover {
+    background: $background;
+    text-shadow: $foreground 0 0 1px;
+  }
+
   label {
     margin: 0 10px;
   }
+
   .icon {
     font-size: 1.5em;
     all: unset;
-    // margin: 0 10px;
     min-width: 35px;
   }
 }
@@ -64,11 +73,11 @@ button,
 }
 
 .slider {
-  padding: 0px 2px;
+  padding: 0px;
 
   through {
     border-radius: 10px;
-    background: $module-background;
+    background: $background-transparent;
     color: black;
 
     slider {

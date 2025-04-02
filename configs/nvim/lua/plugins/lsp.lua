@@ -8,8 +8,6 @@ local M = {
 }
 
 local custom_attach = function(client, bufnr)
-    client.server_capabilities.semanticTokensProvider = false
-
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
     vim.keymap.set(
         "n",

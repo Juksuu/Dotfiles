@@ -27,7 +27,7 @@
 
     button,.icon {
       border-radius: 0px;
-      padding: 10px 0px;
+      padding: $SCALE $SCALE - 10;
     }
 
     .custom-revealer {
@@ -53,7 +53,6 @@
     margin: 0px;
     padding: 5px 0px;
     border: 0px;
-    font-weight: 700;
   }
 }
 
@@ -99,5 +98,6 @@
   }
   .clear {
     @extend .danger;
+    padding: 0px;
   }
 }
