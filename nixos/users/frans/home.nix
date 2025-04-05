@@ -119,6 +119,8 @@
       set -g status off
       set -g default-command ~/.nix-profile/bin/fish
       set -s set-clipboard external
+
+      set-option -g focus-events on
       set-option -g default-terminal "screen-256color"
       set-option -sa terminal-features ',xterm-kitty:RGB'
 
