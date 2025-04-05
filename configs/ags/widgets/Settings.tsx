@@ -9,9 +9,8 @@ import {
   globalSettings,
   setGlobalSetting,
 } from "../variables";
-import { bind, execAsync, Variable } from "astal";
+import { execAsync, Variable } from "astal";
 import { AdjustableSetting, processNestedSettings } from "../utils/settings";
-import { Label } from "astal/gtk3/widget";
 
 function InnerCategory(title: string) {
   return <label label={title} />;
@@ -84,6 +83,7 @@ export default function Settings(
 
   return (
     <window
+      namespace={"settings"}
       gdkmonitor={gdkmonitor}
       name={`settings_${monitorIdentifier}`}
       application={App}

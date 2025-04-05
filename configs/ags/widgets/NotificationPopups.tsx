@@ -12,6 +12,7 @@ export default function NotificationPopups(
   const notifications = new NotificationMap();
   return (
     <window
+      namespace={"notification-popups"}
       gdkmonitor={gdkMonitor}
       name={`notification_popups_${monitorIdentifier}`}
       application={App}

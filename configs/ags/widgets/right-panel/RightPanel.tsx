@@ -106,6 +106,7 @@ export default function RightPanel(
 
   return (
     <window
+      namespace={"right-panel"}
       gdkmonitor={gdkMonitor}
       application={App}
       name={`rightpanel_${monitorIdentifier}`}

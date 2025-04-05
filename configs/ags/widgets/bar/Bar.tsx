@@ -15,6 +15,7 @@ export default function Bar(
 
   return (
     <window
+      namespace={"bar"}
       gdkmonitor={gdkmonitor}
       application={App}
       name={`bar_${monitorIdentifier}`}
