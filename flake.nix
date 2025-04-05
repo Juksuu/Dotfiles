@@ -32,9 +32,21 @@
     let
       overlays = [
         inputs.neovim-overlay.overlays.default
-        (final: prev: {
-          zen-browser = inputs.zen-browser.packages.${prev.pkgs.system}.default;
-        })
+        (final: prev:
+          let
+            zen-browser-unwrapped =
+              inputs.zen-browser.packages.${prev.pkgs.system}.zen-browser-unwrapped.overrideAttrs
+              (previousAttrs: {
+                src = prev.fetchurl {
+                  url =
+                    "https://github.com/zen-browser/desktop/releases/download/1.11b/zen.linux-x86_64.tar.xz";
+                  hash = "sha256-xAjzK6z6gSJ0iP7EvqzF5+sENU1o5Ud2syivAw8ivDs=";
+                };
+              });
+          in {
+            zen-browser =
+              prev.wrapFirefox zen-browser-unwrapped { pname = "zen-browser"; };
+          })
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
       darwinUtils = import ./darwinNix/utils.nix { inherit inputs overlays; };
