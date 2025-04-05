@@ -107,10 +107,11 @@
       alsa-utils
       pavucontrol
       home-manager
-      rofi-wayland
 
       # Wayland
       wl-clipboard
+      cliphist
+      rofi-wayland
       qt5.qtwayland
       qt6.qtwayland
 
