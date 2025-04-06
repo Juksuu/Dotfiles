@@ -112,14 +112,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
           halign={Gtk.Align.END}
           hexpand
         >
-          <eventbox
-            className={"media-event"}
-            onHover={() => {
-              // App.get_window("media")?.show();
-            }}
-          >
-            {activePlayer()}
-          </eventbox>
+          <box className={"media-event"}>{activePlayer()}</box>
         </revealer>
       </box>
     );

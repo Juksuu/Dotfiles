@@ -10,6 +10,11 @@ export default function Media() {
 
   mpris.connect("player-added", (_, player) => {
     bind(player, "playbackStatus").subscribe(updateActivePlayer);
+    updateActivePlayer();
+  });
+
+  mpris.connect("player-closed", () => {
+    updateActivePlayer();
   });
 
   function updateActivePlayer() {
