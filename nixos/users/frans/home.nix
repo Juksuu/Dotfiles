@@ -28,12 +28,21 @@
     slurp
     swappy
     wlogout
+
+    # Theming
+    bibata-cursors
   ];
 
   home.file = {
+    # Cursor icons
+    ".icons".source =
+      config.lib.file.mkOutOfStoreSymlink "${pkgs.bibata-cursors}/share/icons";
+
     # Scripts
     "scripts".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";
+
+    # Configs
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
     ".config/kitty".source =

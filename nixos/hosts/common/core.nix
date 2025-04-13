@@ -127,7 +127,6 @@
       kdePackages.qtstyleplugin-kvantum
       kdePackages.qt6ct
       nwg-look
-      bibata-cursors
     ];
   };
 
