@@ -21,7 +21,7 @@ function normalizeValue(value: number, type: string) {
     case "int":
       return Math.round(value);
     case "float":
-      return value.toFixed(2);
+      return Math.round(value * 100) / 100;
     default:
       throw new Error(`No normalize method implemented for type: ${type}`);
   }
