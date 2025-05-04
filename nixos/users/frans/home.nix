@@ -57,9 +57,17 @@
       "/home/frans/.dotfiles/configs/wlogout";
     ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
       "/home/frans/.dotfiles/configs/kvantum";
+
+    # XDG menus
+    ".config/menus".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/menus";
   };
 
-  home.sessionVariables = { FLAKE = "/home/frans/.dotfiles"; };
+  home.sessionVariables = {
+    NH_FLAKE = "/home/frans/.dotfiles";
+    EDITOR = "nvim";
+    TERMINAL = "kitty";
+  };
 
   programs.fish = {
     enable = true;

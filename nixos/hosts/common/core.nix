@@ -107,8 +107,12 @@
       alsa-utils
       pavucontrol
       home-manager
-      nautilus
       kdePackages.breeze-icons
+      kdePackages.ark
+      kdePackages.dolphin
+      kdePackages.kde-cli-tools
+      kdePackages.kcmutils
+      kdePackages.kservice
 
       # Wayland
       wl-clipboard
