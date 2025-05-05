@@ -115,6 +115,7 @@
       kdePackages.breeze-icons
       kdePackages.ark
       kdePackages.dolphin
+      kdePackages.dolphin-plugins
       kdePackages.kde-cli-tools
       kdePackages.kcmutils
       kdePackages.kservice
