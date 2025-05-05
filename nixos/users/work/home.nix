@@ -1,5 +1,8 @@
-{ self, inputs, config, pkgs, ... }: {
+{ self, config, pkgs, inputs, system, ... }: {
   home.stateVersion = "24.05";
+
+  # Import homemanager modules
+  imports = [ inputs.ags.homeManagerModules.default ];
 
   nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
   in [ overlays.modifications overlays.additions ];
@@ -10,11 +13,10 @@
     ripgrep
     kitty
     brave
-    firefox-bin
+    firefox
     vesktop
     spotify
     mpv
-    obs-studio
     zen-browser
 
     slack
@@ -28,6 +30,22 @@
     ansible
     kdePackages.kcolorchooser
 
+    # Hyprland
+    hyprpicker
+    hyprpaper
+    hypridle
+    hyprlock
+    hyprpolkitagent
+
+    # Tools
+    grim
+    slurp
+    swappy
+    wlogout
+
+    # Theming
+    bibata-cursors
+
     # Custom pkgs
     font-builder-ui
     particle-editor
@@ -36,19 +54,50 @@
   ];
 
   home.file = {
+    # Cursor icons
+    ".icons".source =
+      config.lib.file.mkOutOfStoreSymlink "${pkgs.bibata-cursors}/share/icons";
+
     # Scripts
     "scripts".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/scripts";
+
+    # Configs
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/nvim";
     ".config/kitty".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/kitty";
+    ".config/hypr".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/hypr";
+    ".config/ags".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/ags";
+    ".config/rofi".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/rofi";
+    ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/work/.dotfiles/configs/wlogout";
+    ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/work/.dotfiles/configs/kvantum";
+
+    # XDG menus
+    ".config/menus".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/menus";
   };
 
-  home.sessionVariables = { FLAKE = "/home/work/.dotfiles"; };
+  home.sessionVariables = {
+    NH_FLAKE = "/home/work/.dotfiles";
+    EDITOR = "nvim";
+    TERMINAL = "kitty";
+  };
 
   programs.fish = {
     enable = true;
+
+    loginShellInit = ''
+      if uwsm check may-start && uwsm select
+        uwsm start default
+      end
+    '';
+
     interactiveShellInit = ''
       set fish_greeting
 
@@ -60,13 +109,15 @@
 
       function fish_user_key_bindings
         bind \cf '~/scripts/tmux-sessionizer.sh'
-        bind \cgw 'bass source ~/scripts/wts.sh'
+        bind \cgw 'bass source ~/scripts/git/wts.sh'
       end
     '';
+
     shellAliases = {
       wtc = "~/scripts/wtc.sh";
       gib = "~/scripts/gib.sh";
     };
+
     plugins = [{
       name = "bass";
       src = pkgs.fishPlugins.bass.src;
@@ -110,7 +161,10 @@
     keyMode = "vi";
     extraConfig = ''
       set -g status off
+      set -g default-command ~/.nix-profile/bin/fish
       set -s set-clipboard external
+
+      set-option -g focus-events on
       set-option -g default-terminal "screen-256color"
       set-option -sa terminal-features ',xterm-kitty:RGB'
 
@@ -137,4 +191,22 @@
       bind-key -T copy-mode-vi M-l resize-pane -R 1
     '';
   };
+
+  programs.ags = {
+    enable = true;
+    configDir = null;
+
+    # additional packages to add to gjs's runtime
+    extraPackages = with inputs.ags.packages.${system}; [
+      hyprland
+      tray
+      notifd
+      network
+      apps
+      mpris
+      wireplumber
+    ];
+  };
+
+  programs.obs-studio.enable = true;
 }
