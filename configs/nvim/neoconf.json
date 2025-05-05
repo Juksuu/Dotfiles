@@ -3,5 +3,13 @@
     "jsonls": {},
     "lua_ls": {},
     "html": {}
+  },
+  "formatters": {
+    "jsonc": [
+      "jq"
+    ],
+    "json": [
+      "jq"
+    ]
   }
 }

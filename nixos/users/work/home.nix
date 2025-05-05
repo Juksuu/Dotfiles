@@ -26,11 +26,13 @@
     libreoffice
     awscli2
     ansible
+    kdePackages.kcolorchooser
 
     # Custom pkgs
     font-builder-ui
     particle-editor
     slotmachine-simulator
+    veikkaus-vpn
   ];
 
   home.file = {

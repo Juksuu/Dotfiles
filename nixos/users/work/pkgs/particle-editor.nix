@@ -1,12 +1,12 @@
 { stdenv, pkgs, fetchzip, steam-run, makeWrapper, lib }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "particle-editor";
-  version = "2.1.2";
+  version = "5.1.3";
 
   src = fetchzip {
     url =
       "http://developer.sw.veikkaus.fi/particle-editor/ParticleEditor-linux-x64-${finalAttrs.version}.zip";
-    hash = "sha256-2Ogx8nohd+cHqEP+dP3Wz4eyUkWkxeJ1y03I/HpJHy0=";
+    hash = "sha256-q7Z+ukqBc/S43KI2yJlwbn4jquwAH0Ih8EkEfgj4rp4=";
   };
 
   buildInputs = [ pkgs.nss ];
