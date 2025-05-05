@@ -75,6 +75,11 @@
     };
 
     gvfs.enable = true;
+
+    usbmuxd = {
+      enable = true;
+      package = pkgs.usbmuxd2;
+    };
   };
 
   security.rtkit.enable = true;
@@ -131,6 +136,10 @@
       kdePackages.qtstyleplugin-kvantum
       kdePackages.qt6ct
       nwg-look
+
+      # Tools
+      libimobiledevice
+      ifuse
     ];
   };
 
