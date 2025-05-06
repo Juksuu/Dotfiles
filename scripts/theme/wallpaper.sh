@@ -1,7 +1,8 @@
 #!/bin/sh
 
-current_wallpaper_path=~/wallpapers/current
-current_lockscreen_wallpaper_path=~/wallpapers/current_lockscreen
+current_wallpaper_path=~/wallpapers/current.wallp
+current_lockscreen_wallpaper_path=~/wallpapers/current_lockscreen.wallp
+
 wallpaper_dir=~/wallpapers
 thumbnail_dir=~/wallpapers/thumbnails
 
@@ -19,6 +20,7 @@ set_current() {
     ln -s $1 $current_wallpaper_path
     hyprctl hyprpaper reload ,$current_wallpaper_path
     wal --backend colorthief -e -n -s -t -i "$1" > /dev/null 2>&1
+
   else
     echo "Invalid wallpaper path!"
   fi
@@ -70,7 +72,6 @@ get_wallpapers() {
 
   for path in $wallpaper_dir/*; do
     if [ -f $path ] && [ ! -L $path ]; then
-      # path_converted=$(realpath --relative-to="${PWD}" "$path")
       wallpaper_paths+=("\"$path\"")
     fi
   done
@@ -84,7 +85,6 @@ get_thumbnails() {
 
   for path in $thumbnail_dir/*; do
     if [ -f $path ] && [ ! -L $path ]; then
-      # path_converted=$(realpath --relative-to="${PWD}" "$path")
       thumbnail_paths+=("\"$path\"")
     fi
   done

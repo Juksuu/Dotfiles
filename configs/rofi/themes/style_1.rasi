@@ -34,7 +34,7 @@ mainbox {
     orientation:                 vertical;
     children:                    [ "inputbar" , "listbox" ];
     background-color:            transparent;
-    background-image:            url("~/wallpapers/lakeside_sunset.png", height);
+    background-image:            url("~/wallpapers/current.wallp", height);
 }
 
 inputbar {
@@ -43,7 +43,7 @@ inputbar {
     padding:                     5em;
     children:                    [ "entry" ];
     background-color:            transparent;
-    background-image:            url("~/wallpapers/lakeside_sunset.png", width);
+    background-image:            url("~/wallpapers/current.wallp", width);
 }
 entry {
     border-radius:               2em;

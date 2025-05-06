@@ -8,8 +8,8 @@ import { TRANSITION_DURATION } from "../variables";
 const targetTypes = ["hyprpaper", "lockscreen"];
 const targetType = Variable<string>("hyprpaper");
 const targetWallpapers: Record<string, string> = {
-  ["hyprpaper"]: "../../wallpapers/current",
-  ["lockscreen"]: "../../wallpapers/current_lockscreen",
+  ["hyprpaper"]: "../../wallpapers/current.wallp",
+  ["lockscreen"]: "../../wallpapers/current_lockscreen.wallp",
 };
 
 const wallpapers = Variable<string[]>([]);
