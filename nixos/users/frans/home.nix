@@ -103,6 +103,7 @@
     enable = true;
     userName = "Frans Paasonen";
     userEmail = "franspaasonen@gmail.com";
+    extraConfig = { pull = { rebase = true; }; };
   };
 
   programs.direnv = {
