@@ -7,4 +7,6 @@ done <<< "$(git worktree list)"
 
 selected=$(printf "%s\n" "${branches[@]}" | fzf)
 
-cd $selected
+if [[ -n $selected ]]; then
+    cd $selected
+fi
