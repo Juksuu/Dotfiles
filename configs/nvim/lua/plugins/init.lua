@@ -38,7 +38,6 @@ return {
         "NeogitOrg/neogit",
         dependencies = {
             "sindrets/diffview.nvim", -- optional - Diff integration
-            "nvim-telescope/telescope.nvim", -- optional - Pretty selection
         },
         opts = { disable_commit_confirmation = true },
         keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },
