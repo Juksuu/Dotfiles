@@ -88,8 +88,8 @@ done
 
 ACTION=${1:-usage}
 SUBJECT=${2:-screen}
-FILE=${3:-$(getTargetDirectory)/$(date -Ins).png}
-FILE_EDITOR=${3:-$(tmp_editor_directory)/$(date -Ins).png}
+FILE=${3:-$(getTargetDirectory)/Screenshot_$(date '+%Y%m%d_%H%M%S').png}
+FILE_EDITOR=${3:-$(tmp_editor_directory)/Screenshot_$(date '+%Y%m%d_%H%M%S').png}
 
 if [ "$ACTION" != "save" ] && [ "$ACTION" != "copy" ] && [ "$ACTION" != "edit" ] && [ "$ACTION" != "copysave" ] && [ "$ACTION" != "check" ]; then
   echo "Usage:"

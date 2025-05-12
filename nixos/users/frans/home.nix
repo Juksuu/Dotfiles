@@ -57,6 +57,8 @@
       "/home/frans/.dotfiles/configs/wlogout";
     ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
       "/home/frans/.dotfiles/configs/kvantum";
+    ".config/swappy".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/frans/.dotfiles/configs/swappy";
 
     # XDG menus
     ".config/menus".source =
