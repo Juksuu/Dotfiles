@@ -62,11 +62,10 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
       );
     };
 
-    const coverArt = (player?: Mpris.Player) => {
+    const coverArtToCss = (player?: Mpris.Player) => {
       if (player) {
         return bind(player, "coverArt").as(
           (c) => `
-            color: ${playerToColor(player.entry)};
             background-image: linear-gradient(
                 to right,
                 #000000,
@@ -82,7 +81,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
     function Player(player?: Mpris.Player) {
       return (
-        <box className={"media"} css={coverArt(player)} spacing={10}>
+        <box className={"media"} css={coverArtToCss(player)} spacing={10}>
           {progress(player)}
           {title(player)}
           {artist(player)}
