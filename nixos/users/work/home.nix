@@ -116,8 +116,8 @@
     '';
 
     shellAliases = {
-      wtc = "~/scripts/wtc.sh";
-      gib = "~/scripts/gib.sh";
+      wtc = "~/scripts/git/wtc.sh";
+      gib = "~/scripts/git/gib.sh";
     };
 
     plugins = [{
