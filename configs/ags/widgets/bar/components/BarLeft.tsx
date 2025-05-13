@@ -1,10 +1,14 @@
 import { App } from "astal/gtk3";
-import { settingsVisibility, userPanelVisibility } from "../../../variables";
+import { userPanelVisibility } from "../../../variables";
 import { bind, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
 import ToggleButton from "../../ToggleButton";
 
-export default function BarLeft() {
+type Props = {
+  monitorIdentifier: string;
+};
+
+export default function BarLeft({ monitorIdentifier }: Props) {
   function Workspaces() {
     const hyprland = Hyprland.get_default();
 
@@ -107,7 +111,7 @@ export default function BarLeft() {
       <ToggleButton
         className={"settings"}
         label={""}
-        onToggled={(_, on) => settingsVisibility.set(on)}
+        onToggled={() => App.toggle_window(`settings_${monitorIdentifier}`)}
       />
     );
   }

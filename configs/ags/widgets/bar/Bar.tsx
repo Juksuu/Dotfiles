@@ -46,7 +46,7 @@ export default function Bar(
         })}
         startWidget={
           <box name={"start-widget"}>
-            <BarLeft />
+            <BarLeft monitorIdentifier={monitorIdentifier} />
           </box>
         }
         centerWidget={

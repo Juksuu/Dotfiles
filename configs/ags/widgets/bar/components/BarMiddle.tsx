@@ -1,7 +1,6 @@
 import { bind, GLib, Variable } from "astal";
 import Mpris from "gi://AstalMpris";
 import { playerToIcon } from "../../../utils/icon";
-import { playerToColor } from "../../../utils/color";
 import { Gtk } from "astal/gtk3";
 import { TRANSITION_DURATION } from "../../../variables";
 import CustomRevealer from "./CustomRevealer";

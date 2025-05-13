@@ -14,10 +14,7 @@ export const DEFAULT_MARGIN = 14;
 export const TRANSITION_DURATION = 500;
 export const RIGHT_PANEL_WIDGET_LIMIT = 5;
 
-export const newAppWorkspace = Variable(0);
 export const userPanelVisibility = Variable(false);
-export const settingsVisibility = Variable(false);
-export const appLauncherVisibility = Variable(false);
 
 // Settings are stored in a json file, containing all the settings, check if it exists, if not, create it
 export const globalSettings = Variable<Settings>(createSettings());
