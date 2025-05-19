@@ -26,7 +26,13 @@ export default function BarRight() {
       }),
     );
 
-    return <box className={"system-tray"}>{items}</box>;
+    const visible = bind(items).as((i) => i.length > 0);
+
+    return (
+      <box className={"system-tray"} visible={visible}>
+        {items}
+      </box>
+    );
   }
 
   function DndToggle() {
