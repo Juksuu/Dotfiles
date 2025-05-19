@@ -48,6 +48,9 @@ export default function BarLeft({ monitorIdentifier }: Props) {
 
           let class_names: string[] = ["button"]; // Default class names
 
+          // TODO: Better solution for centering workspace icon correctly
+          let horizontalAlignment = 0.5;
+
           if (isFocused) {
             if (previousWorkspace !== currentWorkspace) {
               class_names.push("focused");
@@ -58,6 +61,10 @@ export default function BarLeft({ monitorIdentifier }: Props) {
           }
 
           if (isActive) {
+            if (isFocused) {
+              horizontalAlignment = 0.42;
+            }
+
             if (!inActiveGroup) {
               if (workspaceIds.includes(id + 1)) {
                 class_names.push("first");
@@ -81,6 +88,7 @@ export default function BarLeft({ monitorIdentifier }: Props) {
             <button
               className={class_names.join(" ")}
               label={icon}
+              xalign={horizontalAlignment}
               onClicked={() => {
                 hyprland.message(`dispatch workspace ${id}`);
               }}
