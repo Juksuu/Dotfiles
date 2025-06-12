@@ -1,9 +1,6 @@
 local M = {
     "stevearc/conform.nvim",
     event = "BufReadPost",
-    dependencies = {
-        { "folke/neoconf.nvim", config = true },
-    },
 }
 
 function M.config()
@@ -20,35 +17,38 @@ function M.config()
         NeogitCommitMessage = nil,
     }
 
-    local neoconf_formatters = require("neoconf").get("formatters")
-
-    if type(neoconf_formatters) == "table" then
-        for ft, formatters in pairs(neoconf_formatters) do
-            formatters_by_ft[ft] = formatters
-        end
-    end
-
     conform.setup({
         formatters_by_ft = formatters_by_ft,
-        format_on_save = nil,
+        format_on_save = function(bufnr)
+            -- Disable with a global or buffer-local variable
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                return
+            end
+            -- Disable autoformat for files in a certain path
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+            if bufname:match("/node_modules/") then
+                return
+            end
+            return { timeout_ms = 500, lsp_format = "first" }
+        end,
     })
 
-    vim.g.format_on_save = true
-    local toggle_formatting = function()
-        vim.g.format_on_save = not vim.g.format_on_save
-    end
-    vim.keymap.set("n", "<leader>tf", toggle_formatting, {})
-
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-            if vim.g.format_on_save then
-                conform.format({
-                    lsp_fallback = true,
-                    bufnr = args.buf,
-                })
-            end
-        end,
+    vim.api.nvim_create_user_command("FormatDisable", function(args)
+        if args.bang then
+            -- FormatDisable! will disable formatting just for this buffer
+            vim.b.disable_autoformat = true
+        else
+            vim.g.disable_autoformat = true
+        end
+    end, {
+        desc = "Disable autoformat-on-save",
+        bang = true,
+    })
+    vim.api.nvim_create_user_command("FormatEnable", function()
+        vim.b.disable_autoformat = false
+        vim.g.disable_autoformat = false
+    end, {
+        desc = "Re-enable autoformat-on-save",
     })
 end
 
