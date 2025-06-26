@@ -84,6 +84,7 @@
 
   security.rtkit.enable = true;
   virtualisation.docker.enable = true;
+  documentation.man.generateCaches = false;
 
   environment = {
     sessionVariables = {
