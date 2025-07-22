@@ -13,7 +13,11 @@
         pyqt6
         pyqt6-webengine
         setuptools
+        setuptools-scm
       ];
+
+      pyproject = true;
+      build-system = with prev.pkgs.python3Packages; [ setuptools ];
 
       preBuild = ''
         cat > setup.py << EOF
