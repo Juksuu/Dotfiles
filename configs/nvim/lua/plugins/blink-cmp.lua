@@ -2,7 +2,8 @@ local M = {
     "saghen/blink.cmp",
     lazy = false,
     dependencies = "rafamadriz/friendly-snippets",
-    build = "nix run .#build-plugin --accept-flake-config",
+    version = "1.*",
+    -- build = "nix run .#build-plugin --accept-flake-config",
 }
 
 function M.config()
