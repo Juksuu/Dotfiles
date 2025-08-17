@@ -1,4 +1,5 @@
-import { App, Gdk, Gtk, Widget } from "astal/gtk3";
+import app from "ags/gtk3/app";
+import { Astal, Gdk, Gtk } from "ags/gtk3";
 import { getCssPath } from "./utils/scss";
 import Bar from "./widgets/bar/Bar";
 import { getMonitorPlugName } from "./utils/monitor";
@@ -14,12 +15,12 @@ type MonitorWidgets = {
 
 function createWidgets(gdkmonitor: Gdk.Monitor, name: string): MonitorWidgets {
   return {
-    visibleAtStart: [Bar(gdkmonitor, name)],
+    visibleAtStart: [Bar(gdkmonitor, name) as Gtk.Widget],
     hiddenAtStart: [
-      RightPanel(gdkmonitor, name),
-      NotificationPopups(gdkmonitor, name),
-      Settings(gdkmonitor, name),
-      WallpaperSwitcher(gdkmonitor, name),
+      RightPanel(gdkmonitor, name) as Gtk.Widget,
+      NotificationPopups(gdkmonitor, name) as Gtk.Widget,
+      Settings(gdkmonitor, name) as Gtk.Widget,
+      WallpaperSwitcher(gdkmonitor, name) as Gtk.Widget,
     ],
   };
 }
@@ -30,27 +31,27 @@ function updateMonitorWidgets(
 ) {
   for (const widget of monitorWidgets.visibleAtStart) {
     widget.visible = true;
-    (widget as Widget.Window).gdkmonitor = newGdkMonitor;
+    (widget as Astal.Window).gdkmonitor = newGdkMonitor;
   }
   for (const widget of monitorWidgets.hiddenAtStart) {
     widget.visible = false;
-    (widget as Widget.Window).gdkmonitor = newGdkMonitor;
+    (widget as Astal.Window).gdkmonitor = newGdkMonitor;
   }
 }
 
-App.start({
+app.start({
   css: getCssPath(),
   main() {
     const widgets = new Map<string, MonitorWidgets>();
 
-    for (const gdkmonitor of App.get_monitors()) {
+    for (const gdkmonitor of app.get_monitors()) {
       const name = getMonitorPlugName(gdkmonitor);
       if (name) {
         widgets.set(name, createWidgets(gdkmonitor, name));
       }
     }
 
-    App.connect("monitor-added", (_, newGdkMonitor) => {
+    app.connect("monitor-added", (_, newGdkMonitor) => {
       const name = getMonitorPlugName(newGdkMonitor);
       if (name) {
         const monitorWidgets = widgets.get(name);
@@ -62,7 +63,7 @@ App.start({
       }
     });
 
-    App.connect("monitor-removed", (_, gdkmonitor) => {
+    app.connect("monitor-removed", (_, gdkmonitor) => {
       const name = getMonitorPlugName(gdkmonitor);
       if (name) {
         const monitorWidgets = widgets.get(name);

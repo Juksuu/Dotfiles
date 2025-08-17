@@ -1,6 +1,7 @@
-import { bind, Variable } from "astal";
-import { App, Gdk } from "astal/gtk3";
+import app from "ags/gtk3/app";
+import Gdk from "gi://Gdk?version=3.0";
 import Hyprland from "gi://AstalHyprland";
+import { createBinding, createComputed, createConnection } from "ags";
 
 export function getMonitorPlugName(gdkmonitor: Gdk.Monitor) {
   const display = gdkmonitor.display;
@@ -13,7 +14,7 @@ export function getMonitorPlugName(gdkmonitor: Gdk.Monitor) {
 }
 
 export function getGdkMonitor(monitorPlugName: string) {
-  for (const gdkMonitor of App.get_monitors()) {
+  for (const gdkMonitor of app.get_monitors()) {
     if (getMonitorPlugName(gdkMonitor) === monitorPlugName) {
       return gdkMonitor;
     }
@@ -23,10 +24,10 @@ export function getGdkMonitor(monitorPlugName: string) {
 export function isMonitorWorkspaceEmpty(monitorIdentifier: string) {
   const hyprland = Hyprland.get_default();
 
-  const clientMovedToCurrentMonitorWorkspace = Variable(false).observe(
+  const clientMovedToCurrentMonitorWorkspace = createConnection(false, [
     hyprland,
     "client-moved",
-    (_, c: Hyprland.Client, ws: Hyprland.Workspace) => {
+    (c: Hyprland.Client, ws: Hyprland.Workspace, _) => {
       const currentGdkMonitor = getGdkMonitor(monitorIdentifier);
       const hyprlandMonitor = hyprland.monitors.find(
         (m) => m.model === currentGdkMonitor?.model,
@@ -34,12 +35,12 @@ export function isMonitorWorkspaceEmpty(monitorIdentifier: string) {
 
       return ws.monitor.id === hyprlandMonitor?.id;
     },
-  );
+  ]);
 
-  return Variable.derive(
+  return createComputed(
     [
-      bind(hyprland, "clients"),
-      bind(hyprland, "workspaces"),
+      createBinding(hyprland, "clients"),
+      createBinding(hyprland, "workspaces"),
       clientMovedToCurrentMonitorWorkspace,
     ],
     (_, ws, cmw) => {

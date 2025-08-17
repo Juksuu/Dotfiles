@@ -1,10 +1,10 @@
-import { bind, execAsync, timeout, Variable } from "astal";
 import Notifd from "gi://AstalNotifd";
-import { Astal, Gtk } from "astal/gtk3";
-import ToggleButton from "./ToggleButton";
-import { Revealer } from "astal/gtk3/widget";
+import { Astal, Gtk } from "ags/gtk3";
+import { execAsync } from "ags/process";
+import { timeout } from "ags/time";
 import { NOTIFICATION_DELAY, TRANSITION_DURATION } from "../variables";
 import { time, timerWithCallback } from "../utils/time";
+import { createState } from "ags";
 
 const TRANSITION = 200;
 
@@ -22,14 +22,14 @@ export default function Notification({
   function closeNotification() {
     timeout(TRANSITION_DURATION - 300, () => {
       if (popup) {
-        Parent.hide();
+        (Parent as Gtk.Widget).hide();
       }
     });
   }
 
-  const isLocked = Variable(false);
-  isLocked.subscribe((v) => {
-    if (!v) {
+  const [isLocked, setIsLocked] = createState(false);
+  isLocked.subscribe(() => {
+    if (!isLocked.get()) {
       timeout(NOTIFICATION_DELAY, () => {
         if (!isLocked.get() && popup) closeNotification();
       });
@@ -37,18 +37,18 @@ export default function Notification({
   });
 
   const LockButton = (
-    <ToggleButton
-      className={"lock"}
+    <Gtk.ToggleButton
+      class={"lock"}
       label={""}
-      onToggled={(self, on) => {
-        isLocked.set(on);
+      onToggled={({ active }) => {
+        setIsLocked(active);
       }}
     />
   );
 
   const CopyButton = (
     <button
-      className={"copy"}
+      class={"copy"}
       label={""}
       onClicked={() => {
         execAsync(`wl-copy ${notification.body}`).catch((err) =>
@@ -69,21 +69,21 @@ export default function Notification({
   );
 
   const NotificationTimer = () => {
-    const timer = Variable(NOTIFICATION_DELAY);
-    timerWithCallback(timer.get(), 50, (v) => timer.set(v));
+    const [timer, setTimer] = createState(NOTIFICATION_DELAY);
+    timerWithCallback(timer.get(), 50, (v) => setTimer(v));
 
     return (
       <circularprogress
-        className={"circular-progress"}
+        class={"circular-progress"}
         rounded
-        value={bind(timer).as((t) => t / NOTIFICATION_DELAY)}
+        value={timer.as((t) => t / NOTIFICATION_DELAY)}
       />
     );
   };
 
   const Title = (
     <label
-      className={"title"}
+      class={"title"}
       xalign={0}
       justify={Gtk.Justification.LEFT}
       maxWidthChars={24}
@@ -97,7 +97,7 @@ export default function Notification({
 
   const Body = (
     <label
-      className={"body"}
+      class={"body"}
       xalign={0}
       justify={Gtk.Justification.LEFT}
       maxWidthChars={24}
@@ -109,13 +109,13 @@ export default function Notification({
   );
 
   const Expand = (
-    <ToggleButton
-      className={"expand"}
+    <Gtk.ToggleButton
+      class={"expand"}
       label={""}
-      onToggled={(self, on) => {
-        Title.set_property("truncate", !on);
-        Body.set_property("truncate", !on);
-        self.label = on ? "" : "";
+      onToggled={(self) => {
+        Title.set_property("truncate", !self.active);
+        Body.set_property("truncate", !self.active);
+        self.label = self.active ? "" : "";
       }}
     />
   );
@@ -126,7 +126,7 @@ export default function Notification({
       transitionDuration={TRANSITION_DURATION}
     >
       <button
-        className={"close"}
+        class={"close"}
         label={""}
         onClicked={() => {
           closeNotification();
@@ -137,11 +137,11 @@ export default function Notification({
   );
 
   const TopBar = (
-    <box className={"top-bar"} spacing={5} hexpand>
+    <box class={"top-bar"} spacing={5} hexpand>
       {LeftRevealer}
       {popup ? <NotificationTimer /> : <box />}
       <label
-        className={"app-name"}
+        class={"app-name"}
         xalign={0}
         truncate={popup}
         label={notification.appName}
@@ -149,7 +149,7 @@ export default function Notification({
         wrap
       />
       <label
-        className={"time"}
+        class={"time"}
         xalign={1}
         label={time(notification.time)}
         hexpand
@@ -160,16 +160,14 @@ export default function Notification({
   );
 
   const Icon = (
-    <box className={"icon"} valign={Gtk.Align.START} halign={Gtk.Align.CENTER}>
+    <box class={"icon"} valign={Gtk.Align.START} halign={Gtk.Align.CENTER}>
       {notificationIcon(notification)}
     </box>
   );
 
   const Content = (
-    <box
-      className={`notification ${notification.urgency} ${notification.appName}`}
-    >
-      <box className={"main-content"} spacing={10} vertical>
+    <box class={`notification ${notification.urgency} ${notification.appName}`}>
+      <box class={"main-content"} spacing={10} vertical>
         {TopBar}
         <box spacing={5}>
           {Icon}
@@ -194,7 +192,7 @@ export default function Notification({
 
   const Parent = (
     <box
-      setup={(self) => {
+      $={() => {
         timeout(NOTIFICATION_DELAY, () => {
           if (!isLocked.get() && popup) closeNotification();
         });
@@ -202,15 +200,18 @@ export default function Notification({
     >
       <eventbox
         onHover={() => {
-          (LeftRevealer as Revealer).revealChild = true;
-          (CloseRevealer as Revealer).revealChild = true;
+          (LeftRevealer as Gtk.Revealer).revealChild = true;
+          (CloseRevealer as Gtk.Revealer).revealChild = true;
         }}
         onHoverLost={() => {
-          if (!isLocked.get()) (LeftRevealer as Revealer).revealChild = false;
-          (CloseRevealer as Revealer).revealChild = false;
+          if (!isLocked.get())
+            (LeftRevealer as Gtk.Revealer).revealChild = false;
+          (CloseRevealer as Gtk.Revealer).revealChild = false;
         }}
         onClick={() => {
-          popup ? LockButton.activate() : CopyButton.activate();
+          popup
+            ? (LockButton as Gtk.Button).activate()
+            : (CopyButton as Gtk.Button).activate();
         }}
       >
         {Revealer}
@@ -227,7 +228,7 @@ function notificationIcon(notification: Notifd.Notification) {
   if (notification.image) {
     return (
       <box
-        className={"image"}
+        class={"image"}
         css={`
           background-image: url("${notification.image}");
           background-size: cover;
@@ -245,5 +246,5 @@ function notificationIcon(notification: Notifd.Notification) {
   if (notification.desktopEntry && isIcon(notification.desktopEntry))
     icon = notification.desktopEntry;
 
-  return <icon className={"icon"} icon={icon} />;
+  return <icon class={"icon"} icon={icon} />;
 }

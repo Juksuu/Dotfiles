@@ -1,4 +1,4 @@
-import { GLib } from "astal";
+import GLib from "gi://GLib?version=2.0";
 
 export function asyncSleep(duration: number) {
   return new Promise((resolve) => setTimeout(resolve, duration));

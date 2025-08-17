@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
-
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +17,7 @@
           buildInputs = with pkgs; [
             nodePackages.typescript-language-server
             prettierd
-            nodejs_23
+            nodejs
           ];
         };
       };

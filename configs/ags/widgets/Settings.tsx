@@ -1,4 +1,7 @@
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import app from "ags/gtk3/app";
+import { Astal, Gdk, Gtk } from "ags/gtk3";
+import { execAsync } from "ags/process";
+import { Accessor, createState, Setter } from "ags";
 import {
   DEFAULT_MARGIN,
   getGlobalSetting,
@@ -7,9 +10,12 @@ import {
   globalOpacity,
   globalScale,
   globalSettings,
+  setGlobalFontSize,
+  setGlobalIconSize,
+  setGlobalOpacity,
+  setGlobalScale,
   setGlobalSetting,
 } from "../variables";
-import { execAsync, Variable } from "astal";
 import { AdjustableSetting, processNestedSettings } from "../utils/settings";
 
 function InnerCategory(title: string) {
@@ -33,13 +39,13 @@ export default function Settings(
 ) {
   function WindowActions() {
     return (
-      <box className={"window-actions"} hexpand>
+      <box class={"window-actions"} hexpand>
         <box halign={Gtk.Align.START} hexpand>
           <button
             halign={Gtk.Align.END}
             label={""}
             onClicked={() =>
-              App.get_window(`settings_${monitorIdentifier}`)?.hide()
+              app.get_window(`settings_${monitorIdentifier}`)?.hide()
             }
           />
         </box>
@@ -58,23 +64,23 @@ export default function Settings(
       globalSettings.get().hyprland,
       "hyprland",
       (p, k) => {
-        hyprlandSettings.push(InnerCategory(k));
+        hyprlandSettings.push(InnerCategory(k) as Gtk.Widget);
       },
       (p, k, v) => {
-        hyprlandSettings.push(createSettingWidget(p));
+        hyprlandSettings.push(createSettingWidget(p) as Gtk.Widget);
       },
       () => {},
     );
 
     return (
       <scrollable heightRequest={500}>
-        <box className={"settings"} spacing={5} vertical>
-          <label className={"category"} label={"AGS"} />
-          {createSettingWidget(globalOpacity)}
-          {createSettingWidget(globalIconSize)}
-          {createSettingWidget(globalScale)}
-          {createSettingWidget(globalFontSize)}
-          <label className={"category"} label={"Hyprland"} />
+        <box class={"settings"} spacing={5} vertical>
+          <label class={"category"} label={"AGS"} />
+          {createSettingWidget(globalOpacity, setGlobalOpacity)}
+          {createSettingWidget(globalIconSize, setGlobalIconSize)}
+          {createSettingWidget(globalScale, setGlobalScale)}
+          {createSettingWidget(globalFontSize, setGlobalFontSize)}
+          <label class={"category"} label={"Hyprland"} />
           {hyprlandSettings}
         </box>
       </scrollable>
@@ -86,12 +92,12 @@ export default function Settings(
       namespace={"settings"}
       gdkmonitor={gdkmonitor}
       name={`settings_${monitorIdentifier}`}
-      application={App}
+      application={app}
       anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       visible={false}
       margin={DEFAULT_MARGIN}
     >
-      <box className={"settings-widget"} vertical>
+      <box class={"settings-widget"} vertical>
         <WindowActions />
         <Settings />
       </box>
@@ -99,22 +105,33 @@ export default function Settings(
   );
 }
 
-function createSettingWidget(setting: Variable<AdjustableSetting> | string) {
-  let settingVar: Variable<AdjustableSetting>;
+function createSettingWidget(
+  setting: Accessor<AdjustableSetting> | string,
+  setter?: Setter<AdjustableSetting>,
+) {
+  let settingAccess: Accessor<AdjustableSetting>;
+  let settingSetter: Setter<AdjustableSetting>;
 
   if (typeof setting === "string") {
-    settingVar = Variable(getGlobalSetting(setting));
-    settingVar.subscribe((v) => setGlobalSetting(setting, v));
+    const [state, setState] = createState(getGlobalSetting(setting));
+    settingAccess = state;
+    settingSetter = setState;
+    settingAccess.subscribe(() =>
+      setGlobalSetting(setting, settingAccess.get()),
+    );
+  } else if (setter) {
+    settingAccess = setting;
+    settingSetter = setter;
   } else {
-    settingVar = setting;
+    throw new Error("Setter not set when using accessor for setting widget");
   }
 
-  const settingValue = settingVar.get();
+  const settingValue = settingAccess.get();
 
   const sliderWidget = (
     <box halign={Gtk.Align.END} spacing={5} hexpand>
       <slider
-        className={"slider"}
+        class={"slider"}
         halign={Gtk.Align.END}
         step={1}
         widthRequest={169}
@@ -122,7 +139,7 @@ function createSettingWidget(setting: Variable<AdjustableSetting> | string) {
         min={settingValue.min}
         max={settingValue.max}
         onDragged={({ value }) => {
-          settingVar.set({
+          settingSetter({
             ...settingValue,
             value: normalizeValue(value, settingValue.type),
           });
@@ -137,7 +154,7 @@ function createSettingWidget(setting: Variable<AdjustableSetting> | string) {
         active={settingValue.value}
         onButtonPressEvent={({ active }) => {
           active = !active;
-          settingVar.set({
+          settingSetter({
             ...settingValue,
             value: active,
           });
@@ -147,7 +164,7 @@ function createSettingWidget(setting: Variable<AdjustableSetting> | string) {
   );
 
   return (
-    <box className={"setting"} spacing={5} hexpand>
+    <box class={"setting"} spacing={5} hexpand>
       <label halign={Gtk.Align.START} label={settingValue.name} />
       {settingValue.type === "bool" ? switchWidget : sliderWidget}
     </box>

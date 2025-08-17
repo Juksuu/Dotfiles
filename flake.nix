@@ -25,7 +25,7 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-    ags.url = "github:aylur/ags?ref=v2.3.0";
+    ags.url = "github:aylur/ags";
   };
 
   outputs = inputs:

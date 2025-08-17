@@ -1,49 +1,47 @@
-import { bind } from "astal";
-import { Gtk } from "astal/gtk3";
 import Tray from "gi://AstalTray";
-import { barPosition, dnd } from "../../../variables";
+import { Gtk } from "ags/gtk3";
+import { createBinding, For } from "ags";
+import { barPosition, dnd, setBarPosition, setDnd } from "../../../variables";
 import { BarPosition } from "../../../utils/settings";
-import ToggleButton from "../../ToggleButton";
 
 export default function BarRight() {
   function SysTray() {
     const tray = Tray.get_default();
 
-    const items = bind(tray, "items").as((items) =>
+    const items = createBinding(tray, "items").as((items) =>
       items.map((item) => {
         return (
           <menubutton
             margin={0}
             usePopover={false}
-            cursor={"pointer"}
-            tooltipMarkup={bind(item, "tooltipMarkup")}
-            actionGroup={bind(item, "actionGroup").as((ag) => ["dbusmenu", ag])}
-            menuModel={bind(item, "menuModel")}
+            // cursor={"pointer"}
+            tooltipMarkup={createBinding(item, "tooltipMarkup")}
+            menuModel={createBinding(item, "menuModel")}
           >
-            <icon gicon={bind(item, "gicon")} />
+            <icon gicon={createBinding(item, "gicon")} />
           </menubutton>
         );
       }),
     );
 
-    const visible = bind(items).as((i) => i.length > 0);
+    const visible = items.as((i) => i.length > 0);
 
     return (
-      <box className={"system-tray"} visible={visible}>
-        {items}
+      <box class={"system-tray"} visible={visible}>
+        <For each={items}>{(item) => item}</For>
       </box>
     );
   }
 
   function DndToggle() {
     return (
-      <ToggleButton
-        state={dnd.get()}
-        onToggled={(self, on) => {
-          dnd.set(on);
+      <Gtk.ToggleButton
+        active={dnd.get()}
+        onToggled={(self) => {
+          setDnd(self.active);
           self.label = dnd.get() ? "" : "";
         }}
-        className={"icon"}
+        class={"icon"}
         label={dnd.get() ? "" : ""}
       />
     );
@@ -53,14 +51,14 @@ export default function BarRight() {
     return (
       <button
         onClicked={() =>
-          barPosition.set(
+          setBarPosition(
             barPosition.get() === BarPosition.Top
               ? BarPosition.Bottom
               : BarPosition.Top,
           )
         }
-        className={"icon"}
-        label={bind(barPosition).as((position) =>
+        class={"icon"}
+        label={barPosition.as((position) =>
           position === BarPosition.Top ? "" : "",
         )}
       />
@@ -68,7 +66,7 @@ export default function BarRight() {
   }
 
   return (
-    <box className={"bar-right"} spacing={5} halign={Gtk.Align.END} hexpand>
+    <box class={"bar-right"} spacing={5} halign={Gtk.Align.END} hexpand>
       <SysTray />
       <DndToggle />
       <BarOrientationToggle />

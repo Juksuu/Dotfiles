@@ -1,4 +1,4 @@
-import { Variable } from "astal";
+import { createState } from "ags";
 import { refreshCss } from "./utils/scss";
 import {
   BarPosition,
@@ -14,75 +14,79 @@ export const DEFAULT_MARGIN = 14;
 export const TRANSITION_DURATION = 500;
 export const RIGHT_PANEL_WIDGET_LIMIT = 5;
 
-export const userPanelVisibility = Variable(false);
+export const [userPanelVisibility, setUserPanelVisibility] = createState(false);
 
 // Settings are stored in a json file, containing all the settings, check if it exists, if not, create it
-export const globalSettings = Variable<Settings>(createSettings());
-globalSettings.subscribe((value) => writeSettings(value));
+export const [globalSettings, setGlobalSettings] =
+  createState<Settings>(createSettings());
+globalSettings.subscribe(() => writeSettings(globalSettings.get()));
 
-export const globalOpacity = Variable<AdjustableSetting>(
+export const [globalOpacity, setGlobalOpacity] = createState<AdjustableSetting>(
   getGlobalSetting("globalOpacity"),
 );
-globalOpacity.subscribe((value) => {
-  setGlobalSetting("globalOpacity", value);
+globalOpacity.subscribe(() => {
+  setGlobalSetting("globalOpacity", globalOpacity.get());
   refreshCss();
 });
 
-export const globalIconSize = Variable<AdjustableSetting>(
-  getGlobalSetting("globalIconSize"),
-);
-globalIconSize.subscribe((value) => {
-  setGlobalSetting("globalIconSize", value);
+export const [globalIconSize, setGlobalIconSize] =
+  createState<AdjustableSetting>(getGlobalSetting("globalIconSize"));
+globalIconSize.subscribe(() => {
+  setGlobalSetting("globalIconSize", globalIconSize.get());
   refreshCss();
 });
 
-export const globalScale = Variable<AdjustableSetting>(
+export const [globalScale, setGlobalScale] = createState<AdjustableSetting>(
   getGlobalSetting("globalScale"),
 );
-globalScale.subscribe((value) => {
-  setGlobalSetting("globalScale", value);
+globalScale.subscribe(() => {
+  setGlobalSetting("globalScale", globalScale.get());
   refreshCss();
 });
 
-export const globalFontSize = Variable<AdjustableSetting>(
-  getGlobalSetting("globalFontSize"),
-);
-globalFontSize.subscribe((value) => {
-  setGlobalSetting("globalFontSize", value);
+export const [globalFontSize, setGlobalFontSize] =
+  createState<AdjustableSetting>(getGlobalSetting("globalFontSize"));
+globalFontSize.subscribe(() => {
+  setGlobalSetting("globalFontSize", globalFontSize.get());
   refreshCss();
 });
 
-export const barPosition = Variable<BarPosition>(
+export const [barPosition, setBarPosition] = createState<BarPosition>(
   getGlobalSetting("bar.position"),
 );
-barPosition.subscribe((value) => setGlobalSetting("bar.position", value));
-
-export const dnd = Variable<boolean>(getGlobalSetting("notifications.dnd"));
-dnd.subscribe((value) => setGlobalSetting("notifications.dnd", value));
-
-export const rightPanelExclusivity = Variable<boolean>(
-  getGlobalSetting("rightPanel.exclusivity"),
-);
-rightPanelExclusivity.subscribe((value) =>
-  setGlobalSetting("rightPanel.exclusivity", value),
+barPosition.subscribe(() =>
+  setGlobalSetting("bar.position", barPosition.get()),
 );
 
-export const rightPanelWidth = Variable<number>(
+export const [dnd, setDnd] = createState<boolean>(
+  getGlobalSetting("notifications.dnd"),
+);
+dnd.subscribe(() => setGlobalSetting("notifications.dnd", dnd.get()));
+
+export const [rightPanelExclusivity, setRightPanelExclusivity] =
+  createState<boolean>(getGlobalSetting("rightPanel.exclusivity"));
+rightPanelExclusivity.subscribe(() =>
+  setGlobalSetting("rightPanel.exclusivity", rightPanelExclusivity.get()),
+);
+
+export const [rightPanelWidth, setRightPanelWidth] = createState<number>(
   getGlobalSetting("rightPanel.width"),
 );
-rightPanelWidth.subscribe((value) =>
-  setGlobalSetting("rightPanel.width", value),
+rightPanelWidth.subscribe(() =>
+  setGlobalSetting("rightPanel.width", rightPanelWidth.get()),
 );
 
-export const rightPanelWidgets = Variable<WidgetSelector[]>(
+export const [rightPanelWidgets, setRightPanelWidgets] = createState<
+  WidgetSelector[]
+>(
   getGlobalSetting("rightPanel.widgets").map((name: string) =>
     WIDGET_SELECTORS.find((widget) => widget.name === name),
   ),
 );
-rightPanelWidgets.subscribe((value) =>
+rightPanelWidgets.subscribe(() =>
   setGlobalSetting(
     "rightPanel.widgets",
-    value.map((widget) => widget.name),
+    rightPanelWidgets.get().map((widget) => widget.name),
   ),
 );
 
@@ -96,7 +100,7 @@ export function setGlobalSetting(key: string, value: any): any {
       o,
     );
 
-  globalSettings.set({ ...o });
+  setGlobalSettings({ ...o });
 }
 
 export function getGlobalSetting(key: string): any {

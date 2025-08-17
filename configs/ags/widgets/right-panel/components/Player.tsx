@@ -1,8 +1,8 @@
-import { bind, Variable } from "astal";
-import { rightPanelWidth } from "../../../variables";
-import { Gtk } from "astal/gtk3";
-import { getDominantImageColor } from "../../../utils/color";
 import Mpris from "gi://AstalMpris";
+import { Gtk } from "ags/gtk3";
+import { createBinding, createComputed } from "ags";
+import { rightPanelWidth } from "../../../variables";
+import { getDominantImageColor } from "../../../utils/color";
 
 function lengthStr(length: number) {
   const min = Math.floor(length / 60);
@@ -25,7 +25,7 @@ export function Player({ player, playerType }: Props) {
   function Image() {
     if (playerType === "widget") return <box />;
 
-    const customCss = bind(player, "coverArt").as((art) => {
+    const customCss = createBinding(player, "coverArt").as((art) => {
       return `
         background-image: url('${art}');
         box-shadow: 0 0 5px 0 ${getDominantImageColor(art)};
@@ -33,23 +33,19 @@ export function Player({ player, playerType }: Props) {
     });
     return (
       <box valign={Gtk.Align.CENTER}>
-        <box className={"img"} css={customCss}></box>
+        <box class={"img"} css={customCss}></box>
       </box>
     );
   }
 
   function Artist() {
-    const text = bind(player, "artist").as((a) => a || "");
-    return (
-      <label className={"artist"} maxWidthChars={20} truncate label={text} />
-    );
+    const text = createBinding(player, "artist").as((a) => a || "");
+    return <label class={"artist"} maxWidthChars={20} truncate label={text} />;
   }
 
   function Title() {
-    const text = bind(player, "title").as((a) => a || "Unknown Track");
-    return (
-      <label className={"title"} maxWidthChars={20} truncate label={text} />
-    );
+    const text = createBinding(player, "title").as((a) => a || "Unknown Track");
+    return <label class={"title"} maxWidthChars={20} truncate label={text} />;
   }
 
   function PositionSlider() {
@@ -66,13 +62,13 @@ export function Player({ player, playerType }: Props) {
 
     return (
       <slider
-        className={"slider"}
+        class={"slider"}
         // css={customCss}
         onDragged={({ value }) => {
           player.position = value * player.length;
         }}
-        visible={bind(player, "length").as((l) => l > 0)}
-        value={bind(player, "position").as((p) =>
+        visible={createBinding(player, "length").as((l) => l > 0)}
+        value={createBinding(player, "position").as((p) =>
           player.length > 0 ? p / player.length : 0,
         )}
       />
@@ -82,20 +78,20 @@ export function Player({ player, playerType }: Props) {
   function PositionLabel() {
     return (
       <label
-        className={"position"}
-        visible={bind(player, "position").as((l) => l > 0)}
-        label={bind(player, "position").as(lengthStr)}
+        class={"position"}
+        visible={createBinding(player, "position").as((l) => l > 0)}
+        label={createBinding(player, "position").as(lengthStr)}
       />
     );
   }
 
   function Actions() {
-    const playPauseVisible = Variable.derive(
-      [bind(player, "can_play"), bind(player, "can_pause")],
+    const playPauseVisible = createComputed(
+      [createBinding(player, "can_play"), createBinding(player, "can_pause")],
       (play, pause) => play || pause,
     );
 
-    const playPauseIcon = bind(player, "playback_status").as((s) => {
+    const playPauseIcon = createBinding(player, "playback_status").as((s) => {
       switch (s) {
         case Mpris.PlaybackStatus.PLAYING:
           return PAUSE_ICON;
@@ -109,19 +105,19 @@ export function Player({ player, playerType }: Props) {
       <box>
         <button
           onClicked={() => player.previous()}
-          visible={bind(player, "can_go_previous")}
+          visible={createBinding(player, "can_go_previous")}
         >
           <icon icon={PREV_ICON} />
         </button>
         <button
           onClicked={() => player.play_pause()}
-          visible={bind(playPauseVisible)}
+          visible={playPauseVisible}
         >
           <icon icon={playPauseIcon} />
         </button>
         <button
           onClicked={() => player.next()}
-          visible={bind(player, "can_go_next")}
+          visible={createBinding(player, "can_go_next")}
         >
           <icon icon={NEXT_ICON} />
         </button>
@@ -132,15 +128,15 @@ export function Player({ player, playerType }: Props) {
   function LengthLabel() {
     return (
       <label
-        className={"length"}
-        visible={bind(player, "length").as((l) => l > 0)}
-        label={bind(player, "length").as(lengthStr)}
+        class={"length"}
+        visible={createBinding(player, "length").as((l) => l > 0)}
+        label={createBinding(player, "length").as(lengthStr)}
       />
     );
   }
 
-  const customCss = Variable.derive(
-    [bind(player, "coverArt"), bind(rightPanelWidth)],
+  const customCss = createComputed(
+    [createBinding(player, "coverArt"), rightPanelWidth],
     (art, width) => {
       return playerType == "widget"
         ? `
@@ -152,7 +148,7 @@ export function Player({ player, playerType }: Props) {
   );
 
   return (
-    <box className={`player ${playerType}`} css={bind(customCss)} vexpand>
+    <box class={`player ${playerType}`} css={customCss} vexpand>
       <Image />
       <box spacing={5} vertical hexpand>
         <Artist />
@@ -161,9 +157,9 @@ export function Player({ player, playerType }: Props) {
         <PositionSlider />
         <centerbox
           spacing={5}
-          startWidget={PositionLabel()}
-          centerWidget={Actions()}
-          endWidget={LengthLabel()}
+          startWidget={PositionLabel() as Gtk.Widget}
+          centerWidget={Actions() as Gtk.Widget}
+          endWidget={LengthLabel() as Gtk.Widget}
         />
       </box>
     </box>

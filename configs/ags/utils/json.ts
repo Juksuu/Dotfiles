@@ -1,4 +1,5 @@
-import { exec, readFile, writeFile } from "astal";
+import { exec } from "ags/process";
+import { readFile, writeFile } from "ags/file";
 
 export function readJSONFile(filePath: string): any {
   if (readFile(filePath) == "") return {};

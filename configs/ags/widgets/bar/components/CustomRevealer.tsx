@@ -1,6 +1,5 @@
-import { Gtk } from "astal/gtk3";
+import { Gtk } from "ags/gtk3";
 import { TRANSITION_DURATION } from "../../../variables";
-import { Revealer } from "astal/gtk3/widget";
 
 export default function CustomRevealer(
   trigger: Gtk.Widget,
@@ -24,12 +23,12 @@ export default function CustomRevealer(
 
   return (
     <eventbox
-      className={`custom-revealer ${customClass}`}
+      class={`custom-revealer ${customClass}`}
       onHover={() => {
-        (revealer as Revealer).revealChild = true;
+        (revealer as Gtk.Revealer).revealChild = true;
       }}
       onHoverLost={() => {
-        (revealer as Revealer).revealChild = false;
+        (revealer as Gtk.Revealer).revealChild = false;
       }}
       onClick={onPrimaryClick}
     >

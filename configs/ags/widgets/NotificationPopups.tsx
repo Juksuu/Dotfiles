@@ -1,9 +1,9 @@
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
-import { bind, Variable } from "astal";
-import { Subscribable } from "astal/binding";
-import { DEFAULT_MARGIN, dnd } from "../variables";
+import app from "ags/gtk3/app";
 import Notification from "./Notification";
 import Notifd from "gi://AstalNotifd";
+import { Astal, Gdk, Gtk } from "ags/gtk3";
+import { Accessor, For, createState } from "ags";
+import { DEFAULT_MARGIN, dnd } from "../variables";
 
 export default function NotificationPopups(
   gdkMonitor: Gdk.Monitor,
@@ -15,8 +15,8 @@ export default function NotificationPopups(
       namespace={"notification-popups"}
       gdkmonitor={gdkMonitor}
       name={`notification_popups_${monitorIdentifier}`}
-      application={App}
-      className={"notification-popups"}
+      application={app}
+      class={"notification-popups"}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       layer={Astal.Layer.OVERLAY}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
@@ -24,7 +24,9 @@ export default function NotificationPopups(
       widthRequest={400}
     >
       <box spacing={DEFAULT_MARGIN} vertical vexpand>
-        {bind(notifications)}
+        <For each={notifications.getAccessor()}>
+          {(notification) => notification}
+        </For>
       </box>
     </window>
   );
@@ -33,17 +35,18 @@ export default function NotificationPopups(
 // The purpose if this class is to replace Variable<Array<Widget>>
 // with a Map<number, Widget> type in order to track notification widgets
 // by their id, while making it conveniently bindable as an array
-class NotificationMap implements Subscribable {
+class NotificationMap {
   // the underlying notificationMap to keep track of id widget pairs
   private notificationMap: Map<number, Gtk.Widget> = new Map();
 
   // it makes sense to use a Variable under the hood and use its
   // reactivity implementation instead of keeping track of subscribers ourselves
-  private notifications: Variable<Array<Gtk.Widget>> = Variable([]);
+  private notifications = createState<Array<Gtk.Widget>>([]);
 
   // notify subscribers to re-render when state changes
   private notify() {
-    this.notifications.set([...this.notificationMap.values()].reverse());
+    const [_, setNotifications] = this.notifications;
+    setNotifications([...this.notificationMap.values()].reverse());
   }
 
   constructor() {
@@ -64,7 +67,7 @@ class NotificationMap implements Subscribable {
         Notification({
           notification: notifd.get_notification(id)!,
           popup: true,
-        }),
+        }) as Gtk.Widget,
       );
     });
 
@@ -73,6 +76,11 @@ class NotificationMap implements Subscribable {
     notifd.connect("resolved", (_, id) => {
       this.delete(id);
     });
+  }
+
+  public getAccessor() {
+    const [notifications, _] = this.notifications;
+    return notifications;
   }
 
   private set(key: number, value: Gtk.Widget) {
@@ -90,11 +98,13 @@ class NotificationMap implements Subscribable {
 
   // needed by the Subscribable interface
   get() {
-    return this.notifications.get();
+    const [notifications, _] = this.notifications;
+    return notifications.get();
   }
 
   // needed by the Subscribable interface
-  subscribe(callback: (list: Array<Gtk.Widget>) => void) {
-    return this.notifications.subscribe(callback);
+  subscribe(callback: () => void) {
+    const [notifications, _] = this.notifications;
+    return notifications.subscribe(callback);
   }
 }

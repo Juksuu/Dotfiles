@@ -1,19 +1,20 @@
-import { bind, execAsync, monitorFile, Variable } from "astal";
-import { App, Gdk, Gtk } from "astal/gtk3";
-import { notify } from "../utils/notification";
-import ToggleButton from "./ToggleButton";
-import { Revealer } from "astal/gtk3/widget";
+import app from "ags/gtk3/app";
+import { Gdk, Gtk } from "ags/gtk3";
+import { execAsync } from "ags/process";
+import { monitorFile } from "ags/file";
+import { createState, For } from "ags";
 import { TRANSITION_DURATION } from "../variables";
+import { notify } from "../utils/notification";
 
 const targetTypes = ["hyprpaper", "lockscreen"];
-const targetType = Variable<string>("hyprpaper");
+const [targetType, setTargetType] = createState<string>("hyprpaper");
 const targetWallpapers: Record<string, string> = {
   ["hyprpaper"]: "../../wallpapers/current.wallp",
   ["lockscreen"]: "../../wallpapers/current_lockscreen.wallp",
 };
 
-const wallpapers = Variable<string[]>([]);
-const thumbnails = Variable<string[]>([]);
+const [wallpapers, setWallpapers] = createState<string[]>([]);
+const [thumbnails, setThumbnails] = createState<string[]>([]);
 
 async function fetchWallpapers() {
   try {
@@ -34,8 +35,8 @@ async function fetchWallpapers() {
       ),
     ]);
 
-    wallpapers.set(wp);
-    thumbnails.set(tn);
+    setWallpapers(wp);
+    setThumbnails(tn);
   } catch (err) {
     notify({ summary: "Error fetching wallpapers", body: String(err) });
   }
@@ -49,13 +50,13 @@ export default function WallpaperSwitcher(
   monitorIdentifier: string,
 ) {
   function Wallpapers() {
-    const images = Variable.derive([bind(thumbnails)], (tn) => {
+    const images = thumbnails.as((tn) => {
       const wp = wallpapers.get();
-      if (wp.length !== tn.length) return <box />;
+      if (wp.length !== tn.length) return [<box />];
       return wp.map((wallpaper, index) => {
         return (
           <eventbox
-            className={"wallpaper-event-box"}
+            class={"wallpaper-event-box"}
             onClick={() => {
               const target = targetType.get();
               const command = {
@@ -74,7 +75,7 @@ export default function WallpaperSwitcher(
             }}
           >
             <box
-              className={"wallpaper"}
+              class={"wallpaper"}
               vertical
               css={`
                 background-image: url("${tn[index]}");
@@ -87,14 +88,14 @@ export default function WallpaperSwitcher(
 
     const getAllWallpapers = () => (
       <scrollable
-        className={"all-wallpapers-scrollable"}
+        class={"all-wallpapers-scrollable"}
         hscrollbarPolicy={Gtk.PolicyType.ALWAYS}
         vscrollbarPolicy={Gtk.PolicyType.NEVER}
         hexpand
         vexpand
       >
-        <box className={"all-wallpapers"} spacing={5}>
-          {bind(images)}
+        <box class={"all-wallpapers"} spacing={5}>
+          <For each={images}>{(image) => image}</For>
         </box>
       </scrollable>
     );
@@ -107,25 +108,25 @@ export default function WallpaperSwitcher(
             css={`
               background-image: url("${targetWallpapers[target]}");
             `}
-            className={bind(targetType).as((t) => {
+            class={targetType.as((t) => {
               return t === target
                 ? "workspace-wallpaper focused"
                 : "workspace-wallpaper";
             })}
             label={target}
             onClicked={() => {
-              targetType.set(target);
-              (bottomRevealer as Revealer).reveal_child = true;
+              setTargetType(target);
+              (bottomRevealer as Gtk.Revealer).reveal_child = true;
             }}
           />
-        );
+        ) as Gtk.Widget;
       });
     };
 
     const reset = (
       <button
         valign={Gtk.Align.CENTER}
-        className={"reload-wallpapers"}
+        class={"reload-wallpapers"}
         label={"󰑐"}
         onClicked={() => {
           fetchWallpapers();
@@ -133,33 +134,34 @@ export default function WallpaperSwitcher(
       />
     );
 
+    const wallpaperList = wallpapers.as(() => getWallpapers());
     const top = (
       <box halign={Gtk.Align.CENTER} spacing={10} hexpand vexpand>
-        {bind(wallpapers).as((w) => getWallpapers())}
+        <For each={wallpaperList}>{(wallpaper) => wallpaper}</For>
       </box>
     );
 
     const revealButton = (
-      <ToggleButton
-        className={"bottom-revealer-button"}
+      <Gtk.ToggleButton
+        class={"bottom-revealer-button"}
         label={""}
-        onToggled={(self, on) => {
-          (bottomRevealer as Revealer).reveal_child = on;
-          self.label = on ? "" : "";
+        onToggled={(self) => {
+          (bottomRevealer as Gtk.Revealer).reveal_child = self.active;
+          self.label = self.active ? "" : "";
         }}
       />
     );
 
     const targets = (
-      <box className={"targets"} halign={Gtk.Align.CENTER} hexpand>
+      <box class={"targets"} halign={Gtk.Align.CENTER} hexpand>
         {targetTypes.map((type) => (
-          <ToggleButton
+          <Gtk.ToggleButton
             valign={Gtk.Align.CENTER}
-            className={type}
+            class={type}
             label={type}
-            state={bind(targetType).as((t) => t === type)}
+            active={targetType.as((t) => t === type)}
             onToggled={() => {
-              targetType.set(type);
+              setTargetType(type);
             }}
           />
         ))}
@@ -167,7 +169,7 @@ export default function WallpaperSwitcher(
     );
 
     const actions = (
-      <box className={"actions"} halign={Gtk.Align.CENTER} spacing={10} hexpand>
+      <box class={"actions"} halign={Gtk.Align.CENTER} spacing={10} hexpand>
         {targets}
         {revealButton}
         {reset}
@@ -181,18 +183,18 @@ export default function WallpaperSwitcher(
         reveal_child={false}
         visible
       >
-        <box child={getAllWallpapers()}></box>
+        <box>{getAllWallpapers()}</box>
       </revealer>
     );
 
     const bottom = (
-      <box className={"bottom"} hexpand vexpand>
+      <box class={"bottom"} hexpand vexpand>
         {bottomRevealer}
       </box>
     );
 
     return (
-      <box className={"wallpaper-switcher"} spacing={20} vertical>
+      <box class={"wallpaper-switcher"} spacing={20} vertical>
         {top}
         {actions}
         {bottom}
@@ -205,7 +207,7 @@ export default function WallpaperSwitcher(
       namespace={"wallpaper-switcher"}
       gdkmonitor={gdkmonitor}
       name={`wallpaper_switcher_${monitorIdentifier}`}
-      application={App}
+      application={app}
       visible={false}
     >
       <Wallpapers />

@@ -1,7 +1,7 @@
-import { Gtk } from "astal/gtk3";
 import Media from "../widgets/right-panel/components/Media";
 import Calendar from "../widgets/right-panel/components/Calendar";
 import NotificationHistory from "../widgets/right-panel/components/NotificationHistory";
+import { Gtk } from "ags/gtk3";
 
 export interface WidgetSelector {
   name: string;
@@ -15,16 +15,16 @@ export const WIDGET_SELECTORS: WidgetSelector[] = [
   {
     name: "Media",
     icon: "",
-    widget: () => Media(),
+    widget: () => Media() as Gtk.Widget,
   },
   {
     name: "NotificationHistory",
     icon: "",
-    widget: () => NotificationHistory(),
+    widget: () => NotificationHistory() as Gtk.Widget,
   },
   {
     name: "Calendar",
     icon: "",
-    widget: () => Calendar(),
+    widget: () => Calendar() as Gtk.Widget,
   },
 ];

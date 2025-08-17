@@ -1,7 +1,7 @@
-import { Variable, bind } from "astal";
-import { Gtk } from "astal/gtk3";
 import Notification from "../../Notification";
 import Notifd from "gi://AstalNotifd";
+import { Gtk } from "ags/gtk3";
+import { createBinding, createComputed, createState, For } from "ags";
 
 type Filter = {
   name: string;
@@ -18,15 +18,18 @@ const MAX_NOTIFICATIONS = 10;
 export default function NotificationHistory() {
   const notifd = Notifd.get_default();
 
-  const notificationFilter = Variable<Filter>({ name: "", class: "" });
+  const [notificationFilter, setNotificationFilter] = createState<Filter>({
+    name: "",
+    class: "",
+  });
 
   function FilterDisplay() {
     return (
-      <box className={"filter"} hexpand>
+      <box class={"filter"} hexpand>
         {FILTERS.map((filter) => {
           return (
             <button
-              className={bind(notificationFilter).as((f) => {
+              class={notificationFilter.as((f) => {
                 return f.class === filter.class ? filter.class : "";
               })}
               onClicked={() => {
@@ -35,7 +38,7 @@ export default function NotificationHistory() {
                     ? { name: "", class: "" }
                     : filter;
 
-                notificationFilter.set(data);
+                setNotificationFilter(data);
               }}
               hexpand
               label={filter.name}
@@ -47,8 +50,8 @@ export default function NotificationHistory() {
   }
 
   function History() {
-    const notifications = Variable.derive(
-      [bind(notifd, "notifications"), notificationFilter],
+    const notifications = createComputed(
+      [createBinding(notifd, "notifications"), notificationFilter],
       (notifs, filter) => {
         if (!notifs) return [];
         return filterNotifications(notifs, filter.name).map((notification) => (
@@ -59,7 +62,7 @@ export default function NotificationHistory() {
 
     return (
       <box spacing={5} vertical>
-        {bind(notifications)}
+        <For each={notifications}>{(notification) => notification}</For>
       </box>
     );
   }
@@ -79,7 +82,7 @@ export default function NotificationHistory() {
   function ClearNotifications() {
     return (
       <button
-        className={"clear"}
+        class={"clear"}
         label={""}
         onClicked={() => {
           for (const notification of notifd.notifications) {
@@ -91,7 +94,7 @@ export default function NotificationHistory() {
   }
 
   return (
-    <box className={"notification-history"} spacing={5} vertical>
+    <box class={"notification-history"} spacing={5} vertical>
       <FilterDisplay />
       <NotificationsDisplay />
       <ClearNotifications />

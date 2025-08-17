@@ -1,10 +1,12 @@
-import { bind, GLib, Variable } from "astal";
 import Mpris from "gi://AstalMpris";
-import { playerToIcon } from "../../../utils/icon";
-import { Gtk } from "astal/gtk3";
-import { TRANSITION_DURATION } from "../../../variables";
-import CustomRevealer from "./CustomRevealer";
 import Hyprland from "gi://AstalHyprland";
+import CustomRevealer from "./CustomRevealer";
+import GLib from "gi://GLib?version=2.0";
+import { Gtk } from "ags/gtk3";
+import { createPoll } from "ags/time";
+import { createBinding, createComputed, With } from "ags";
+import { playerToIcon } from "../../../utils/icon";
+import { TRANSITION_DURATION } from "../../../variables";
 import { getGdkMonitor, isMonitorWorkspaceEmpty } from "../../../utils/monitor";
 
 type Props = {
@@ -18,28 +20,30 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
     const progress = (player?: Mpris.Player) => {
       if (!player) return <box />;
 
-      const playerIcon = bind(player, "entry").as((e) => playerToIcon(e));
+      const playerIcon = createBinding(player, "entry").as((e) =>
+        playerToIcon(e),
+      );
       return (
         <circularprogress
-          className={"progress"}
+          class={"progress"}
           rounded
           borderWidth={1}
-          value={bind(player, "position").as((p) =>
+          value={createBinding(player, "position").as((p) =>
             player.length > 0 ? p / player.length : 0,
           )}
         >
-          <label className={"icon"} label={playerIcon} />
+          <label class={"icon"} label={playerIcon} />
         </circularprogress>
       );
     };
 
     const title = (player?: Mpris.Player) => {
       const title = player
-        ? bind(player, "title").as((t) => t || "Unknown Track")
+        ? createBinding(player, "title").as((t) => t || "Unknown Track")
         : "Unknown Track";
       return (
         <label
-          className={"label"}
+          class={"label"}
           maxWidthChars={20}
           truncate
           label={title}
@@ -49,11 +53,11 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
     const artist = (player?: Mpris.Player) => {
       const artist = player
-        ? bind(player, "artist").as((a) => (a ? `[${a}]` : ""))
+        ? createBinding(player, "artist").as((a) => (a ? `[${a}]` : ""))
         : "";
       return (
         <label
-          className={"label"}
+          class={"label"}
           maxWidthChars={20}
           truncate
           label={artist}
@@ -63,7 +67,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
     const coverArtToCss = (player?: Mpris.Player) => {
       if (player) {
-        return bind(player, "coverArt").as(
+        return createBinding(player, "coverArt").as(
           (c) => `
             background-image: linear-gradient(
                 to right,
@@ -80,7 +84,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
     function Player(player?: Mpris.Player) {
       return (
-        <box className={"media"} css={coverArtToCss(player)} spacing={10}>
+        <box class={"media"} css={coverArtToCss(player)} spacing={10}>
           {progress(player)}
           {title(player)}
           {artist(player)}
@@ -89,7 +93,7 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
     }
 
     const activePlayer = () => {
-      return bind(mpris, "players").as((players) => {
+      return createBinding(mpris, "players").as((players) => {
         const player =
           players.length > 0
             ? players.find(
@@ -102,38 +106,44 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
     };
 
     return (
-      <box className={"media-container"} halign={Gtk.Align.END} hexpand>
+      <box class={"media-container"} halign={Gtk.Align.END} hexpand>
         <revealer
-          revealChild={bind(mpris, "players").as((arr) => arr.length > 0)}
+          revealChild={createBinding(mpris, "players").as(
+            (arr) => arr.length > 0,
+          )}
           transitionDuration={TRANSITION_DURATION}
           transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
           halign={Gtk.Align.END}
           hexpand
         >
-          <box className={"media-event"}>{activePlayer()}</box>
+          <box class={"media-event"}>
+            <With value={activePlayer()}>{(value) => value}</With>
+          </box>
         </revealer>
       </box>
     );
   }
 
-  const dateShort = Variable("").poll(
+  const dateShort = createPoll(
+    "",
     1000,
     () => GLib.DateTime.new_now_local().format("%H:%M") ?? "",
   );
 
-  const dateLong = Variable("").poll(
+  const dateLong = createPoll(
+    "",
     1000,
     () => GLib.DateTime.new_now_local().format(":%S %b %e, %A.") ?? "",
   );
 
   function Clock() {
-    const revealer = (
-      <label className={"revealer"} label={bind(dateLong)}></label>
+    const revealer = <label class={"revealer"} label={dateLong}></label>;
+    const trigger = <label class={"trigger"} label={dateShort}></label>;
+    return CustomRevealer(
+      trigger as Gtk.Widget,
+      revealer as Gtk.Widget,
+      "clock",
     );
-    const trigger = (
-      <label className={"trigger"} label={bind(dateShort)}></label>
-    );
-    return CustomRevealer(trigger, revealer, "clock");
   }
 
   function ClientTitle() {
@@ -141,38 +151,42 @@ export default function BarMiddle({ monitorIdentifier }: Props) {
 
     const emptyWorkspace = isMonitorWorkspaceEmpty(monitorIdentifier);
 
+    const focusedClient = createBinding(hyprland, "focusedClient").as(
+      (client) => {
+        const currentGdkMonitor = getGdkMonitor(monitorIdentifier);
+        const hyprlandMonitor = hyprland.monitors.find(
+          (m) => m.model === currentGdkMonitor?.model,
+        );
+
+        if (!client || client.monitor.id !== hyprlandMonitor?.id)
+          return <box />;
+
+        const text = createComputed(
+          [createBinding(client, "class"), createBinding(client, "title")],
+          (p, t) => `${p} ${t}`,
+        );
+
+        return <label maxWidthChars={30} truncate label={text} />;
+      },
+    );
+
     return (
-      <box className={"focused-client"} halign={Gtk.Align.START} hexpand>
+      <box class={"focused-client"} halign={Gtk.Align.START} hexpand>
         <revealer
-          revealChild={bind(emptyWorkspace).as((empty) => !empty)}
+          revealChild={emptyWorkspace.as((empty) => !empty)}
           transitionDuration={TRANSITION_DURATION}
           transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
           halign={Gtk.Align.START}
           hexpand
         >
-          {bind(hyprland, "focusedClient").as((client) => {
-            const currentGdkMonitor = getGdkMonitor(monitorIdentifier);
-            const hyprlandMonitor = hyprland.monitors.find(
-              (m) => m.model === currentGdkMonitor?.model,
-            );
-
-            if (!client || client.monitor.id !== hyprlandMonitor?.id)
-              return <box />;
-
-            const text = Variable.derive(
-              [bind(client, "class"), bind(client, "title")],
-              (p, t) => `${p} ${t}`,
-            );
-
-            return <label maxWidthChars={30} truncate label={bind(text)} />;
-          })}
+          <With value={focusedClient}>{(value) => value}</With>
         </revealer>
       </box>
     );
   }
 
   return (
-    <box className={"bar-middle"} spacing={5} hexpand>
+    <box class={"bar-middle"} spacing={5} hexpand>
       <Media />
       <Clock />
       <ClientTitle />

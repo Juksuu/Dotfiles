@@ -1,8 +1,8 @@
-import { App } from "astal/gtk3";
-import { userPanelVisibility } from "../../../variables";
-import { bind, Variable } from "astal";
+import app from "ags/gtk3/app";
 import Hyprland from "gi://AstalHyprland";
-import ToggleButton from "../../ToggleButton";
+import { setUserPanelVisibility } from "../../../variables";
+import { createBinding, createComputed, For } from "ags";
+import { Gtk } from "ags/gtk3";
 
 type Props = {
   monitorIdentifier: string;
@@ -19,10 +19,10 @@ export default function BarLeft({ monitorIdentifier }: Props) {
     const extraWorkspaceIcon = ""; // Icon for workspaces beyond the maximum limit
     const maxWorkspaces = 10;
 
-    const workspaces = Variable.derive(
+    const workspaces = createComputed(
       [
-        bind(hyprland, "workspaces"),
-        bind(hyprland, "focusedWorkspace").as((w) => w.id),
+        createBinding(hyprland, "workspaces"),
+        createBinding(hyprland, "focusedWorkspace").as((w) => w.id),
       ],
       (workspaces, currentWorkspace) => {
         const workspaceIds = workspaces.map((w) => w.id);
@@ -86,7 +86,7 @@ export default function BarLeft({ monitorIdentifier }: Props) {
 
           return (
             <button
-              className={class_names.join(" ")}
+              class={class_names.join(" ")}
               label={icon}
               xalign={horizontalAlignment}
               onClicked={() => {
@@ -101,51 +101,44 @@ export default function BarLeft({ monitorIdentifier }: Props) {
       },
     );
 
-    return <box className={"workspaces"}>{bind(workspaces)}</box>;
-  }
-
-  function AppLauncher() {
     return (
-      <ToggleButton
-        className={"app-search"}
-        label={""}
-        onToggled={() => App.toggle_window("app-launcher")}
-      />
+      <box class={"workspaces"}>
+        <For each={workspaces}>{(item) => item}</For>
+      </box>
     );
   }
 
   function Settings() {
     return (
-      <ToggleButton
-        className={"settings"}
+      <Gtk.ToggleButton
+        class={"settings"}
         label={""}
-        onToggled={() => App.toggle_window(`settings_${monitorIdentifier}`)}
+        onToggled={() => app.toggle_window(`settings_${monitorIdentifier}`)}
       />
     );
   }
 
   function UserPanel() {
     return (
-      <ToggleButton
-        className={"user-panel"}
+      <Gtk.ToggleButton
+        class={"user-panel"}
         label={""}
-        onToggled={(_, on) => userPanelVisibility.set(on)}
+        onToggled={({ active }) => setUserPanelVisibility(active)}
       />
     );
   }
 
   function Actions() {
     return (
-      <box className={"actions"}>
+      <box class={"actions"}>
         <UserPanel />
         <Settings />
-        <AppLauncher />
       </box>
     );
   }
 
   return (
-    <box className={"bar-left"} spacing={5}>
+    <box class={"bar-left"} spacing={5}>
       <Actions />
       <Workspaces />
     </box>

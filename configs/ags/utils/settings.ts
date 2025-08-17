@@ -1,6 +1,6 @@
-import { readFile, writeFile } from "astal/file";
+import { exec } from "ags/process";
+import { readFile, writeFile } from "ags/file";
 import { readJSONFile, writeJSONFile } from "./json";
-import { exec } from "astal";
 
 const settingsPath = "./assets/settings/settings.json";
 const hyprlandCustomDir = "../hypr/hyprland/custom/settings.conf";

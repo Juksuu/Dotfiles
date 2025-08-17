@@ -1,15 +1,17 @@
-import { Gtk } from "astal/gtk3";
 import Mpris from "gi://AstalMpris";
+import { Gtk } from "ags/gtk3";
 import { Player } from "./Player";
-import { bind, Variable } from "astal";
+import { createBinding, createState, With } from "ags";
 
 export default function Media() {
   const mpris = Mpris.get_default();
 
-  const activePlayer = Variable<Mpris.Player | undefined>(undefined);
+  const [activePlayer, setActivePlayer] = createState<Mpris.Player | undefined>(
+    undefined,
+  );
 
   mpris.connect("player-added", (_, player) => {
-    bind(player, "playbackStatus").subscribe(updateActivePlayer);
+    createBinding(player, "playbackStatus").subscribe(updateActivePlayer);
     updateActivePlayer();
   });
 
@@ -19,21 +21,21 @@ export default function Media() {
 
   function updateActivePlayer() {
     if (mpris.players.length === 0) {
-      activePlayer.set(undefined);
+      setActivePlayer(undefined);
     } else {
       const player =
         mpris.players.find(
           (p) => p.playbackStatus === Mpris.PlaybackStatus.PLAYING,
         ) || mpris.players[0];
 
-      activePlayer.set(player);
+      setActivePlayer(player);
     }
   }
 
   function NoPlayerFound() {
     return (
       <box
-        className={"module"}
+        class={"module"}
         halign={Gtk.Align.CENTER}
         valign={Gtk.Align.CENTER}
         hexpand
@@ -45,12 +47,14 @@ export default function Media() {
 
   updateActivePlayer();
 
+  const player = activePlayer.as((player) => {
+    if (!player) return <NoPlayerFound />;
+    return <Player player={player} playerType={"widget"} />;
+  });
+
   return (
     <box>
-      {bind(activePlayer).as((player) => {
-        if (!player) return <NoPlayerFound />;
-        return <Player player={player} playerType={"widget"} />;
-      })}
+      <With value={player}>{(player) => player}</With>
     </box>
   );
 }

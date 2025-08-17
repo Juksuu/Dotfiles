@@ -1,12 +1,12 @@
-import { exec, execAsync } from "astal";
-import { monitorFile } from "astal/file";
+import app from "ags/gtk3/app";
+import { execAsync } from "ags/process";
+import { monitorFile } from "ags/file";
 import {
   globalFontSize,
   globalIconSize,
   globalOpacity,
   globalScale,
 } from "../variables";
-import { App } from "astal/gtk3";
 import { notify } from "./notification";
 
 // target css file
@@ -40,8 +40,8 @@ export async function refreshCss() {
     console.error(e);
   }
 
-  App.reset_css();
-  App.apply_css(tmpCss);
+  app.reset_css();
+  app.apply_css(tmpCss);
 }
 
 monitorFile(

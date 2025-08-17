@@ -1,13 +1,16 @@
-import { bind } from "astal";
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import app from "ags/gtk3/app";
+import { For } from "ags";
+import { Astal, Gdk, Gtk } from "ags/gtk3";
 import {
   RIGHT_PANEL_WIDGET_LIMIT,
   rightPanelExclusivity,
   rightPanelWidgets,
   rightPanelWidth,
+  setRightPanelExclusivity,
+  setRightPanelWidgets,
+  setRightPanelWidth,
 } from "../../variables";
 import { WIDGET_SELECTORS } from "../../utils/right-panel-widgets";
-import ToggleButton from "../ToggleButton";
 
 const maxRightPanelWidth = 600;
 const minRightPanelWidth = 200;
@@ -24,15 +27,15 @@ export default function RightPanel(
             .get()
             .some((w) => w.name === selector.name);
           return (
-            <ToggleButton
+            <Gtk.ToggleButton
               label={selector.icon}
-              state={isActive}
-              onToggled={(self, on) => {
-                if (on) {
+              active={isActive}
+              onToggled={({ active }) => {
+                if (active) {
                   if (
                     rightPanelWidgets.get().length < RIGHT_PANEL_WIDGET_LIMIT
                   ) {
-                    rightPanelWidgets.set([
+                    setRightPanelWidgets([
                       ...rightPanelWidgets.get(),
                       selector,
                     ]);
@@ -41,7 +44,7 @@ export default function RightPanel(
                   const newWidgets = rightPanelWidgets
                     .get()
                     .filter((w) => w.name !== selector.name);
-                  rightPanelWidgets.set(newWidgets);
+                  setRightPanelWidgets(newWidgets);
                 }
               }}
             />
@@ -56,9 +59,9 @@ export default function RightPanel(
       <box halign={Gtk.Align.END} valign={Gtk.Align.END} vertical vexpand>
         <button
           label={""}
-          className={"expand-window"}
+          class={"expand-window"}
           onClicked={() => {
-            rightPanelWidth.set(
+            setRightPanelWidth(
               rightPanelWidth.get() < maxRightPanelWidth
                 ? rightPanelWidth.get() + 50
                 : maxRightPanelWidth,
@@ -67,28 +70,28 @@ export default function RightPanel(
         />
         <button
           label={""}
-          className={"shrink-window"}
+          class={"shrink-window"}
           onClicked={() => {
-            rightPanelWidth.set(
+            setRightPanelWidth(
               rightPanelWidth.get() > minRightPanelWidth
                 ? rightPanelWidth.get() - 50
                 : minRightPanelWidth,
             );
           }}
         />
-        <ToggleButton
+        <Gtk.ToggleButton
           label={""}
-          className={"exclusivity"}
-          state={rightPanelExclusivity.get()}
-          onToggled={(self, on) => {
-            rightPanelExclusivity.set(on);
+          class={"exclusivity"}
+          active={rightPanelExclusivity.get()}
+          onToggled={({ active }) => {
+            setRightPanelExclusivity(active);
           }}
         />
         <button
           label={""}
-          className={"close"}
+          class={"close"}
           onClicked={() => {
-            App.get_window(`rightpanel_${monitorIdentifier}`)?.hide();
+            app.get_window(`rightpanel_${monitorIdentifier}`)?.hide();
           }}
         />
       </box>
@@ -97,20 +100,31 @@ export default function RightPanel(
 
   function Actions() {
     return (
-      <box className={"right-panel-actions"} vertical>
+      <box class={"right-panel-actions"} vertical>
         <WidgetActions />
         <WindowActions />
       </box>
     );
   }
 
+  const widgets = rightPanelWidgets.as((widgets) => {
+    return widgets.map((w) => {
+      try {
+        return w.widget();
+      } catch (err) {
+        print(`Error rendering widget ${w.name}`, err);
+        return <box />;
+      }
+    });
+  });
+
   return (
     <window
       namespace={"right-panel"}
       gdkmonitor={gdkMonitor}
-      application={App}
+      application={app}
       name={`rightpanel_${monitorIdentifier}`}
-      className={bind(rightPanelExclusivity).as((exclusive) =>
+      class={rightPanelExclusivity.as((exclusive) =>
         exclusive ? "right-panel exclusive" : "right-panel normal",
       )}
       anchor={
@@ -118,10 +132,10 @@ export default function RightPanel(
         Astal.WindowAnchor.TOP |
         Astal.WindowAnchor.BOTTOM
       }
-      exclusivity={bind(rightPanelExclusivity).as((exclusive) =>
+      exclusivity={rightPanelExclusivity.as((exclusive) =>
         exclusive ? Astal.Exclusivity.EXCLUSIVE : Astal.Exclusivity.NORMAL,
       )}
-      layer={bind(rightPanelExclusivity).as((exclusive) =>
+      layer={rightPanelExclusivity.as((exclusive) =>
         exclusive ? Astal.Layer.BOTTOM : Astal.Layer.TOP,
       )}
       keymode={Astal.Keymode.ON_DEMAND}
@@ -129,21 +143,12 @@ export default function RightPanel(
     >
       <box>
         <box
-          className={"main-content"}
-          css={bind(rightPanelWidth).as((width) => `*{min-width: ${width}px;}`)}
+          class={"main-content"}
+          css={rightPanelWidth.as((width) => `*{min-width: ${width}px;}`)}
           spacing={10}
           vertical
         >
-          {bind(rightPanelWidgets).as((widgets) => {
-            return widgets.map((w) => {
-              try {
-                return w.widget();
-              } catch (err) {
-                print(`Error rendering widget ${w.name}`, err);
-                return <box />;
-              }
-            });
-          })}
+          <For each={widgets}>{(widget) => widget}</For>
         </box>
         <Actions />
       </box>
