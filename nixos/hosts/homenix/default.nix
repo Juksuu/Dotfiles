@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
 
     ../common/core.nix
-    ../common/plasma6.nix
+    # ../common/plasma6.nix
   ];
 
   networking.hostName = "homenix";
