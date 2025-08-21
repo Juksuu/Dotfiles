@@ -36,7 +36,7 @@ button,
   &:checked {
     outline: none;
   }
-  &.checked {
+  &:checked {
     background: $secondary;
     color: $color0;
   }
