@@ -1,8 +1,8 @@
 import app from "ags/gtk3/app";
 import Hyprland from "gi://AstalHyprland";
-import { setUserPanelVisibility } from "../../../variables";
-import { createBinding, createComputed, For } from "ags";
 import { Gtk } from "ags/gtk3";
+import { execAsync } from "ags/process";
+import { createBinding, createComputed, For } from "ags";
 
 type Props = {
   monitorIdentifier: string;
@@ -120,10 +120,12 @@ export default function BarLeft({ monitorIdentifier }: Props) {
 
   function UserPanel() {
     return (
-      <Gtk.ToggleButton
+      <button
         class={"user-panel"}
         label={""}
-        onToggled={({ active }) => setUserPanelVisibility(active)}
+        onButtonPressEvent={() => {
+          execAsync("wlogout -p layer-shell");
+        }}
       />
     );
   }

@@ -14,8 +14,6 @@ export const DEFAULT_MARGIN = 14;
 export const TRANSITION_DURATION = 500;
 export const RIGHT_PANEL_WIDGET_LIMIT = 5;
 
-export const [userPanelVisibility, setUserPanelVisibility] = createState(false);
-
 // Settings are stored in a json file, containing all the settings, check if it exists, if not, create it
 export const [globalSettings, setGlobalSettings] =
   createState<Settings>(createSettings());
