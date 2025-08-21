@@ -14,9 +14,11 @@ export default function BarRight() {
           <menubutton
             margin={0}
             usePopover={false}
-            // cursor={"pointer"}
             tooltipMarkup={createBinding(item, "tooltipMarkup")}
             menuModel={createBinding(item, "menuModel")}
+            $={(self) => {
+              self.insert_action_group("dbusmenu", item.actionGroup);
+            }}
           >
             <icon gicon={createBinding(item, "gicon")} />
           </menubutton>
