@@ -11,17 +11,18 @@ function M.config()
         scope = { enabled = true },
         scroll = { enabled = true },
         words = { enabled = true },
+        picker = { enabled = true },
     })
 
 
     -- stylua: ignore start
     -- Keymaps for snacks modules
-    vim.keymap.set("n", "<leader>s",  function() Snacks.scratch() end)
+    vim.keymap.set("n", "<leader>s", function() Snacks.scratch() end)
     vim.keymap.set("n", "<leader>ss", function() Snacks.scratch.select() end)
     vim.keymap.set("n", "<leader>bd", function() Snacks.bufdelete() end)
     vim.keymap.set("n", "<leader>gb", function() Snacks.git.blame_line() end)
-    vim.keymap.set("n", "]]",         function() Snacks.words.jump(vim.v.count1) end)
-    vim.keymap.set("n", "[[",         function() Snacks.words.jump(-vim.v.count1) end)
+    vim.keymap.set("n", "]]", function() Snacks.words.jump(vim.v.count1) end)
+    vim.keymap.set("n", "[[", function() Snacks.words.jump(-vim.v.count1) end)
     -- stylua: ignore end
 
     -- stylua: ignore start

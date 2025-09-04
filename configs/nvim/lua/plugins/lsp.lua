@@ -24,6 +24,8 @@ function M.config()
         },
     })
 
+    vim.lsp.on_type_formatting.enable()
+
     vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
             vim.keymap.set(

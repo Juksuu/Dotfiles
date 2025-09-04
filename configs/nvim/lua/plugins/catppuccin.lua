@@ -5,6 +5,8 @@ local M = {
 }
 
 function M.config()
+    ---@type CatppuccinOptions
+    ---@diagnostic disable-next-line: missing-fields
     require("catppuccin").setup({
         background = {
             light = "latte",
@@ -70,7 +72,7 @@ function M.config()
         },
         transparent_background = false,
         show_end_of_buffer = false,
-        integration_default = false,
+        default_integrations = false,
         integrations = {
             barbecue = {
                 dim_dirname = true,
@@ -78,18 +80,40 @@ function M.config()
                 dim_context = false,
                 alt_background = false,
             },
+            blink_cmp = {
+                enabled = true,
+                style = "bordered",
+            },
             fidget = true,
             gitsigns = true,
             indent_blankline = { enabled = true },
             mini = { enabled = true },
             neogit = true,
+            dap = true,
+            dap_ui = true,
             native_lsp = {
                 enabled = true,
-                inlay_hints = { background = true },
+                virtual_text = {
+                    errors = { "italic" },
+                    hints = { "italic" },
+                    warnings = { "italic" },
+                    information = { "italic" },
+                    ok = { "italic" },
+                },
+                underlines = {
+                    errors = { "underline" },
+                    hints = { "underline" },
+                    warnings = { "underline" },
+                    information = { "underline" },
+                    ok = { "underline" },
+                },
+                inlay_hints = {
+                    background = true,
+                },
             },
             semantic_tokens = true,
             treesitter = true,
-            telescope = true,
+            snacks = { enabled = true },
             lsp_trouble = true,
         },
         highlight_overrides = {

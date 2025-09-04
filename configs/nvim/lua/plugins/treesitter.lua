@@ -10,10 +10,12 @@ function M.config()
         ensure_installed = {
             "vim",
             "lua",
+            "regex",
         },
         auto_install = true,
         highlight = {
             enable = true,
+            additional_vim_regex_highlighting = false,
             disable = function(_, buf)
                 local max_filesize = 500 * 1024 -- 500 KB
                 local ok, stats =
