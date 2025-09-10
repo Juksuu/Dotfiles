@@ -124,7 +124,7 @@
       # Wayland
       wl-clipboard
       cliphist
-      rofi-wayland
+      rofi
       qt5.qtwayland
       qt6.qtwayland
 
