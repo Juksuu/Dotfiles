@@ -60,11 +60,20 @@ export default function NotificationHistory() {
       },
     );
 
-    return (
-      <box spacing={5} vertical>
-        <For each={notifications}>{(notification) => notification}</For>
-      </box>
-    );
+    const box = (<box spacing={5} vertical></box>) as Gtk.Box;
+
+    function updateNotifs() {
+      for (const child of box.get_children()) {
+        box.remove(child);
+      }
+      for (const notif of notifications.get()) {
+        box.add(notif as Gtk.Widget);
+      }
+    }
+    notifications.subscribe(() => updateNotifs());
+    updateNotifs();
+
+    return box;
   }
 
   function NotificationsDisplay() {

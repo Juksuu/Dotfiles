@@ -1,7 +1,7 @@
 import Mpris from "gi://AstalMpris";
 import { Gtk } from "ags/gtk3";
 import { Player } from "./Player";
-import { createBinding, createState, With } from "ags";
+import { Accessor, createBinding, createState, With } from "ags";
 
 export default function Media() {
   const mpris = Mpris.get_default();
@@ -52,9 +52,5 @@ export default function Media() {
     return <Player player={player} playerType={"widget"} />;
   });
 
-  return (
-    <box>
-      <With value={player}>{(player) => player}</With>
-    </box>
-  );
+  return <box child={player as Accessor<Gtk.Widget>}></box>;
 }
