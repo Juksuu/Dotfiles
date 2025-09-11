@@ -25,7 +25,7 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-    ags.url = "github:aylur/ags?rev=d637fba0fc9929d2c689e7365a4293ef7a42b024";
+    ags.url = "github:aylur/ags";
   };
 
   outputs = inputs:
