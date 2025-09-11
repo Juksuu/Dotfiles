@@ -4,10 +4,6 @@ get_monitor_plug_name() {
     echo $(hyprctl activeworkspace -j | jq -r '.monitor')
 }
 
-right() {
-    ags toggle rightpanel_$(get_monitor_plug_name)
-}
-
 settings() {
     ags toggle settings_$(get_monitor_plug_name)
 }

@@ -3,7 +3,6 @@ import { Astal, Gdk, Gtk } from "ags/gtk3";
 import { getCssPath } from "./utils/scss";
 import Bar from "./widgets/bar/Bar";
 import { getMonitorPlugName } from "./utils/monitor";
-import RightPanel from "./widgets/right-panel/RightPanel";
 import NotificationPopups from "./widgets/NotificationPopups";
 import Settings from "./widgets/Settings";
 import WallpaperSwitcher from "./widgets/WallpaperSwitcher";
@@ -17,7 +16,6 @@ function createWidgets(gdkmonitor: Gdk.Monitor, name: string): MonitorWidgets {
   return {
     visibleAtStart: [Bar(gdkmonitor, name) as Gtk.Widget],
     hiddenAtStart: [
-      RightPanel(gdkmonitor, name) as Gtk.Widget,
       NotificationPopups(gdkmonitor, name) as Gtk.Widget,
       Settings(gdkmonitor, name) as Gtk.Widget,
       WallpaperSwitcher(gdkmonitor, name) as Gtk.Widget,

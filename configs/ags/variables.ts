@@ -7,12 +7,10 @@ import {
   Settings,
   writeSettings,
 } from "./utils/settings";
-import { WIDGET_SELECTORS, WidgetSelector } from "./utils/right-panel-widgets";
 
 export const NOTIFICATION_DELAY = 5000;
 export const DEFAULT_MARGIN = 14;
 export const TRANSITION_DURATION = 500;
-export const RIGHT_PANEL_WIDGET_LIMIT = 5;
 
 // Settings are stored in a json file, containing all the settings, check if it exists, if not, create it
 export const [globalSettings, setGlobalSettings] =
@@ -60,33 +58,6 @@ export const [dnd, setDnd] = createState<boolean>(
   getGlobalSetting("notifications.dnd"),
 );
 dnd.subscribe(() => setGlobalSetting("notifications.dnd", dnd.get()));
-
-export const [rightPanelExclusivity, setRightPanelExclusivity] =
-  createState<boolean>(getGlobalSetting("rightPanel.exclusivity"));
-rightPanelExclusivity.subscribe(() =>
-  setGlobalSetting("rightPanel.exclusivity", rightPanelExclusivity.get()),
-);
-
-export const [rightPanelWidth, setRightPanelWidth] = createState<number>(
-  getGlobalSetting("rightPanel.width"),
-);
-rightPanelWidth.subscribe(() =>
-  setGlobalSetting("rightPanel.width", rightPanelWidth.get()),
-);
-
-export const [rightPanelWidgets, setRightPanelWidgets] = createState<
-  WidgetSelector[]
->(
-  getGlobalSetting("rightPanel.widgets").map((name: string) =>
-    WIDGET_SELECTORS.find((widget) => widget.name === name),
-  ),
-);
-rightPanelWidgets.subscribe(() =>
-  setGlobalSetting(
-    "rightPanel.widgets",
-    rightPanelWidgets.get().map((widget) => widget.name),
-  ),
-);
 
 // Some helper functions for getting and setting globalSettings values
 export function setGlobalSetting(key: string, value: any): any {
