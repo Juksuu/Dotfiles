@@ -5,6 +5,7 @@
     auto-optimise-store = true;
     experimental-features = "nix-command flakes";
     substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys =
       [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
@@ -47,6 +48,7 @@
       powerManagement.enable = true;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
+    graphics.extraPackages = [ pkgs.nvidia-vaapi-driver ];
   };
 
   services = {
@@ -91,6 +93,7 @@
       NIXOS_OZONE_WL = "1";
 
       # Nvidia specific
+      NVD_BACKEND = "direct";
       LIBVA_DRIVER_NAME = "nvidia";
       GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
