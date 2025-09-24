@@ -17,6 +17,7 @@
     spotify
     mumble
     zen-browser
+    gimp3
 
     # Theming
     nwg-look
@@ -40,6 +41,8 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
     ".config/niri".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/niri";
+    ".config/DankMaterialShell".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/frans/.dotfiles/configs/dankMaterialShell";
   };
 
   home.sessionVariables = {
@@ -147,6 +150,7 @@
     enableBrightnessControl = false;
     enableNightMode = false;
     enableAudioWavelength = false;
+    quickshell = { package = pkgs.quickshell; };
   };
 
   programs.obs-studio.enable = true;

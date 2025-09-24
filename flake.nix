@@ -26,6 +26,10 @@
 
     niri.url = "github:sodiboo/niri-flake";
     dms.url = "github:AvengeMedia/DankMaterialShell";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -35,6 +39,9 @@
         inputs.niri.overlays.niri
         (final: prev: {
           zen-browser = inputs.zen-browser.packages.${prev.pkgs.system}.default;
+        })
+        (final: prev: {
+          quickshell = inputs.quickshell.packages.${prev.pkgs.system}.default;
         })
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };

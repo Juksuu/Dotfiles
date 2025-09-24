@@ -65,6 +65,7 @@
       implementation = "broker";
     };
 
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -114,6 +115,7 @@
       home-manager
       xfce.thunar
       xarchiver
+      kdePackages.qtmultimedia
 
       # Terminal (alacritty used in most setups as default)
       alacritty
@@ -148,6 +150,8 @@
   };
 
   programs.nix-ld.enable = true;
+
+  programs.dconf.enable = true;
 
   programs.niri = {
     enable = true;
