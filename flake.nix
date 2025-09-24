@@ -24,14 +24,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    ags.url = "github:aylur/ags";
+    niri.url = "github:sodiboo/niri-flake";
+    dms.url = "github:AvengeMedia/DankMaterialShell";
   };
 
   outputs = inputs:
     let
       overlays = [
         inputs.neovim-overlay.overlays.default
+        inputs.niri.overlays.niri
         (final: prev: {
           zen-browser = inputs.zen-browser.packages.${prev.pkgs.system}.default;
         })

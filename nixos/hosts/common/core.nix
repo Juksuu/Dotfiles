@@ -4,10 +4,6 @@
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = "nix-command flakes";
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys =
-      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   # Bootloader.
@@ -60,8 +56,9 @@
         options = "grp:win_space_toggle";
       };
       videoDrivers = [ "nvidia" ];
-      displayManager.lightdm.enable = false;
     };
+
+    displayManager.gdm.enable = true;
 
     dbus = {
       enable = true;
@@ -77,6 +74,7 @@
     };
 
     gvfs.enable = true;
+    tumbler.enable = true;
 
     usbmuxd = {
       enable = true;
@@ -100,6 +98,7 @@
 
       # Qt
       QT_QPA_PLATFORMTHEME = "qt6ct";
+      QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
     };
 
     systemPackages = with pkgs; [
@@ -109,25 +108,19 @@
       fzf
       fish
       htop
-      uwsm
-      sassc
-      paprefs
       libnotify
       alsa-utils
       pavucontrol
       home-manager
-      kdePackages.breeze-icons
-      kdePackages.ark
-      kdePackages.dolphin
-      kdePackages.dolphin-plugins
-      kdePackages.kde-cli-tools
-      kdePackages.kcmutils
-      kdePackages.kservice
+      xfce.thunar
+      xarchiver
+
+      # Terminal (alacritty used in most setups as default)
+      alacritty
 
       # Wayland
       wl-clipboard
       cliphist
-      rofi
       qt5.qtwayland
       qt6.qtwayland
 
@@ -135,12 +128,6 @@
       codespell
       lazydocker
       docker-compose
-      (python3.withPackages (ps: with ps; [ pywal colorthief ]))
-
-      # Theming
-      kdePackages.qtstyleplugin-kvantum
-      kdePackages.qt6ct
-      nwg-look
 
       # Tools
       libimobiledevice
@@ -162,15 +149,29 @@
 
   programs.nix-ld.enable = true;
 
-  programs.hyprland = {
+  programs.niri = {
     enable = true;
-    withUWSM = true;
+    package = pkgs.niri-unstable;
+  };
 
-    # set the flake package
-    package =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-dropbox-plugin
+    thunar-archive-plugin
+    thunar-volman
+  ];
+
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart =
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
   };
 }

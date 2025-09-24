@@ -2,7 +2,8 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.ags.homeManagerModules.default ];
+  imports =
+    [ inputs.niri.homeModules.config inputs.dms.homeModules.dankMaterialShell ];
 
   home.packages = with pkgs; [
     fd
@@ -17,20 +18,9 @@
     mumble
     zen-browser
 
-    # Hyprland
-    hyprpicker
-    hyprpaper
-    hypridle
-    hyprlock
-    hyprpolkitagent
-
-    # Tools
-    grim
-    slurp
-    swappy
-    wlogout
-
     # Theming
+    nwg-look
+    colloid-gtk-theme
     bibata-cursors
   ];
 
@@ -48,22 +38,8 @@
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
     ".config/kitty".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
-    ".config/hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/hypr";
-    ".config/ags".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ags";
-    ".config/rofi".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/rofi";
-    ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/frans/.dotfiles/configs/wlogout";
-    ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/frans/.dotfiles/configs/kvantum";
-    ".config/swappy".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/frans/.dotfiles/configs/swappy";
-
-    # XDG menus
-    ".config/menus".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/menus";
+    ".config/niri".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/niri";
   };
 
   home.sessionVariables = {
@@ -74,12 +50,6 @@
 
   programs.fish = {
     enable = true;
-
-    loginShellInit = ''
-      if uwsm check may-start && uwsm select
-        uwsm start default
-      end
-    '';
 
     interactiveShellInit = ''
       set fish_greeting
@@ -169,20 +139,14 @@
     '';
   };
 
-  programs.ags = {
+  programs.dankMaterialShell = {
     enable = true;
-    configDir = null;
-
-    # additional packages to add to gjs's runtime
-    extraPackages = with inputs.ags.packages.${system}; [
-      hyprland
-      tray
-      notifd
-      network
-      apps
-      mpris
-      wireplumber
-    ];
+    enableKeybinds = false;
+    enableSystemd = false;
+    enableSpawn = false;
+    enableBrightnessControl = false;
+    enableNightMode = false;
+    enableAudioWavelength = false;
   };
 
   programs.obs-studio.enable = true;
