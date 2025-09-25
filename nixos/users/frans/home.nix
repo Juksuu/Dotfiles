@@ -6,10 +6,17 @@
     [ inputs.niri.homeModules.config inputs.dms.homeModules.dankMaterialShell ];
 
   home.packages = with pkgs; [
+    # Theming
+    nwg-look
+    colloid-gtk-theme
+
+    # CLI
     fd
     sqlite
     wget
     ripgrep
+
+    # GUI
     kitty
     brave
     firefox
@@ -18,18 +25,10 @@
     mumble
     zen-browser
     gimp3
-
-    # Theming
-    nwg-look
-    colloid-gtk-theme
-    bibata-cursors
+    xfce.ristretto
   ];
 
   home.file = {
-    # Cursor icons
-    ".icons".source =
-      config.lib.file.mkOutOfStoreSymlink "${pkgs.bibata-cursors}/share/icons";
-
     # Scripts
     "scripts".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";

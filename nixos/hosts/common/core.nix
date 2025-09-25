@@ -134,6 +134,10 @@
       # Tools
       libimobiledevice
       ifuse
+
+      # Theming
+      bibata-cursors
+      oranchelo-icon-theme
     ];
   };
 
