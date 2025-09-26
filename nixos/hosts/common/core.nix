@@ -113,7 +113,6 @@
       alsa-utils
       pavucontrol
       home-manager
-      xfce.thunar
       xarchiver
       kdePackages.qtmultimedia
 
@@ -131,6 +130,7 @@
       codespell
       lazydocker
       docker-compose
+      python3
 
       # Tools
       libimobiledevice
@@ -163,11 +163,14 @@
     package = pkgs.niri-unstable;
   };
 
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-dropbox-plugin
-    thunar-archive-plugin
-    thunar-volman
-  ];
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-dropbox-plugin
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
