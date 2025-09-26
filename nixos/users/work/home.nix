@@ -2,49 +2,42 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.ags.homeManagerModules.default ];
+  imports =
+    [ inputs.niri.homeModules.config inputs.dms.homeModules.dankMaterialShell ];
 
   nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
   in [ overlays.modifications overlays.additions ];
 
   home.packages = with pkgs; [
+    # Theming
+    nwg-look
+    colloid-gtk-theme
+
+    # CLI
     fd
+    sqlite
     wget
     ripgrep
+    awscli2
+    ansible
+
+    # GUI
     kitty
     brave
     firefox
     vesktop
     spotify
-    mpv
+    mumble
     zen-browser
-
+    gimp3
+    xfce.ristretto
+    mpv
     slack
-    thunderbird
     dropbox
+    thunderbird
     texturepacker
     zoom-us
-    gimp
     libreoffice
-    awscli2
-    ansible
-    kdePackages.kcolorchooser
-
-    # Hyprland
-    hyprpicker
-    hyprpaper
-    hypridle
-    hyprlock
-    hyprpolkitagent
-
-    # Tools
-    grim
-    slurp
-    swappy
-    wlogout
-
-    # Theming
-    bibata-cursors
 
     # Custom pkgs
     font-builder-ui
@@ -54,10 +47,6 @@
   ];
 
   home.file = {
-    # Cursor icons
-    ".icons".source =
-      config.lib.file.mkOutOfStoreSymlink "${pkgs.bibata-cursors}/share/icons";
-
     # Scripts
     "scripts".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/scripts";
@@ -67,22 +56,10 @@
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/nvim";
     ".config/kitty".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/kitty";
-    ".config/hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/hypr";
-    ".config/ags".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/ags";
-    ".config/rofi".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/rofi";
-    ".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/work/.dotfiles/configs/wlogout";
-    ".config/Kvantum".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/work/.dotfiles/configs/kvantum";
-    ".config/swappy".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/swappy";
-
-    # XDG menus
-    ".config/menus".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/menus";
+    ".config/niri".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/niri";
+    ".config/DankMaterialShell".source = config.lib.file.mkOutOfStoreSymlink
+      "/home/work/.dotfiles/configs/dankMaterialShell";
   };
 
   home.sessionVariables = {
@@ -93,12 +70,6 @@
 
   programs.fish = {
     enable = true;
-
-    loginShellInit = ''
-      if uwsm check may-start && uwsm select
-        uwsm start default
-      end
-    '';
 
     interactiveShellInit = ''
       set fish_greeting
@@ -194,20 +165,15 @@
     '';
   };
 
-  programs.ags = {
+  programs.dankMaterialShell = {
     enable = true;
-    configDir = null;
-
-    # additional packages to add to gjs's runtime
-    extraPackages = with inputs.ags.packages.${system}; [
-      hyprland
-      tray
-      notifd
-      network
-      apps
-      mpris
-      wireplumber
-    ];
+    enableKeybinds = false;
+    enableSystemd = false;
+    enableSpawn = false;
+    enableBrightnessControl = false;
+    enableNightMode = false;
+    enableAudioWavelength = false;
+    quickshell = { package = pkgs.quickshell; };
   };
 
   programs.obs-studio.enable = true;

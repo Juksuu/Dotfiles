@@ -27,11 +27,10 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      steam-run
-
-      # vpn stuff
-      openconnect
-    ];
+    systemPackages = with pkgs;
+      [
+        # vpn stuff
+        openconnect
+      ];
   };
 }
