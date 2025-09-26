@@ -125,6 +125,7 @@
       cliphist
       qt5.qtwayland
       qt6.qtwayland
+      xwayland-satellite
 
       # Programming
       codespell
