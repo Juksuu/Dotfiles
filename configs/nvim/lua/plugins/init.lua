@@ -23,7 +23,7 @@ return {
 
     { "tpope/vim-sleuth", event = "VeryLazy" },
     { "aserowy/tmux.nvim", config = true, event = "VeryLazy" },
-    { "echasnovski/mini.pairs", config = true, event = "VeryLazy" },
+    { "nvim-mini/mini.pairs", config = true, event = "VeryLazy" },
     {
         "lewis6991/gitsigns.nvim",
         config = true,
