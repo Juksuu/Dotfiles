@@ -2,8 +2,7 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports =
-    [ inputs.niri.homeModules.config inputs.dms.homeModules.dankMaterialShell ];
+  imports = [ inputs.dms.homeModules.dankMaterialShell.default ];
 
   home.packages = with pkgs; [
     # Theming
@@ -143,9 +142,7 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    enableKeybinds = false;
     enableSystemd = false;
-    enableSpawn = false;
     enableBrightnessControl = false;
     enableNightMode = false;
     enableAudioWavelength = false;
