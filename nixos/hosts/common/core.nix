@@ -1,6 +1,8 @@
 { inputs, lib, config, pkgs, ... }: {
   system.stateVersion = "24.05";
 
+  imports = [ inputs.niri.nixosModules.niri ];
+
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = "nix-command flakes";
@@ -87,6 +89,11 @@
   virtualisation.docker.enable = true;
   documentation.man.generateCaches = false;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -160,7 +167,11 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable;
+    package = pkgs.niri-unstable.overrideAttrs (finalAttrs: previousAttrs: {
+      preInstall = ''
+        echo "org.freedesktop.impl.portal.FileChooser=gtk;" >> "resources/niri-portals.conf"
+      '';
+    });
   };
 
   programs.thunar = {
@@ -170,20 +181,5 @@
       thunar-archive-plugin
       thunar-volman
     ];
-  };
-
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart =
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      Restart = "on-failure";
-      RestartSec = 1;
-      TimeoutStopSec = 10;
-    };
   };
 }

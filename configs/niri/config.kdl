@@ -74,6 +74,11 @@ layout {
     }
 }
 
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
+spawn-at-startup "dbus-update-activation-environment" "--all"
 
 // Required for clipboard history integration
 spawn-sh-at-startup "wl-paste --watch cliphist store &"
