@@ -2,8 +2,8 @@
   "currentThemeName": "dynamic",
   "customThemeFile": "",
   "matugenScheme": "scheme-tonal-spot",
-  "topBarTransparency": 0.7,
-  "topBarWidgetTransparency": 1,
+  "dankBarTransparency": 0.7,
+  "dankBarWidgetTransparency": 1,
   "popupTransparency": 1,
   "dockTransparency": 1,
   "use24HourClock": true,
@@ -69,17 +69,17 @@
   "clockDateFormat": "",
   "lockDateFormat": "",
   "mediaSize": 1,
-  "topBarLeftWidgets": [
+  "dankBarLeftWidgets": [
     "launcherButton",
     "workspaceSwitcher",
     "focusedWindow"
   ],
-  "topBarCenterWidgets": [
+  "dankBarCenterWidgets": [
     "music",
     "clock",
     "weather"
   ],
-  "topBarRightWidgets": [
+  "dankBarRightWidgets": [
     {
       "id": "systemTray",
       "enabled": true
@@ -91,7 +91,7 @@
     {
       "id": "spacer",
       "enabled": true,
-      "size": 10
+      "size": 5
     },
     {
       "id": "clipboard",
@@ -100,15 +100,25 @@
     {
       "id": "spacer",
       "enabled": true,
-      "size": 10
+      "size": 5
     },
     {
       "id": "cpuUsage",
       "enabled": true
     },
     {
+      "id": "spacer",
+      "enabled": true,
+      "size": 10
+    },
+    {
       "id": "memUsage",
       "enabled": true
+    },
+    {
+      "id": "spacer",
+      "enabled": true,
+      "size": 10
     },
     {
       "id": "separator",
@@ -127,14 +137,18 @@
   "spotlightModalViewMode": "list",
   "networkPreference": "auto",
   "iconTheme": "System Default",
-  "useOSLogo": true,
-  "osLogoColorOverride": "",
-  "osLogoBrightness": 0.5,
-  "osLogoContrast": 1,
+  "launcherLogoMode": "os",
+  "launcherLogoCustomPath": "",
+  "launcherLogoColorOverride": "",
+  "launcherLogoColorInvertOnMode": false,
+  "launcherLogoBrightness": 0.5,
+  "launcherLogoContrast": 1,
+  "launcherLogoSizeOffset": 0,
   "fontFamily": "Maple Mono NF",
   "monoFontFamily": "Maple Mono NF",
   "fontWeight": 400,
   "fontScale": 1,
+  "dankBarFontScale": 1,
   "notepadUseMonospace": true,
   "notepadFontFamily": "",
   "notepadFontSize": 14,
@@ -146,17 +160,23 @@
   "showDock": false,
   "dockAutoHide": false,
   "dockGroupByApp": false,
+  "dockOpenOnOverview": false,
+  "dockPosition": 1,
+  "dockSpacing": 4,
+  "dockBottomGap": 0,
   "cornerRadius": 10,
   "notificationOverlayEnabled": false,
-  "topBarAutoHide": false,
-  "topBarOpenOnOverview": false,
-  "topBarVisible": true,
-  "topBarSpacing": 4,
-  "topBarBottomGap": 0,
-  "topBarInnerPadding": 8,
-  "topBarSquareCorners": false,
-  "topBarNoBackground": true,
-  "topBarGothCornersEnabled": false,
+  "dankBarAutoHide": false,
+  "dankBarOpenOnOverview": true,
+  "dankBarVisible": true,
+  "dankBarSpacing": 4,
+  "dankBarBottomGap": 0,
+  "dankBarInnerPadding": 8,
+  "dankBarSquareCorners": false,
+  "dankBarNoBackground": true,
+  "dankBarGothCornersEnabled": false,
+  "dankBarBorderEnabled": false,
+  "dankBarPosition": 0,
   "lockScreenShowPowerActions": true,
   "hideBrightnessSlider": false,
   "widgetBackgroundColor": "sth",
@@ -164,5 +184,8 @@
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
-  "screenPreferences": {}
+  "notificationPopupPosition": 0,
+  "osdAlwaysShowValue": false,
+  "screenPreferences": {},
+  "animationSpeed": 2
 }
