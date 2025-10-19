@@ -31,6 +31,11 @@ function M.config()
                         },
                     },
                 },
+                lsp = {
+                    -- You may enable the buffer source, when LSP is available, by setting this to `{}`
+                    -- You may want to set the score_offset of the buffer source to a lower value, such as -5 in this case
+                    fallbacks = { "buffer", "ripgrep" },
+                },
             },
         },
     })

@@ -75,9 +75,13 @@
 
   programs.git = {
     enable = true;
-    userName = "Frans Paasonen";
-    userEmail = "franspaasonen@gmail.com";
-    extraConfig = { pull = { rebase = true; }; };
+    settings = {
+      user = {
+        name = "Frans Paasonen";
+        email = "franspaasonen@gmail.com";
+      };
+      pull = { rebase = true; };
+    };
   };
 
   programs.direnv = {
