@@ -98,10 +98,14 @@
 
   programs.git = {
     enable = true;
-    userName = "Frans Paasonen";
-    userEmail = "frans.paasonen@seepiagames.com";
+    settings = {
+      user = {
+        name = "Frans Paasonen";
+        email = "frans.paasonen@seepiagames.com";
+      };
+      pull = { rebase = true; };
+    };
     lfs.enable = true;
-    extraConfig = { pull = { rebase = true; }; };
   };
 
   programs.direnv = {
