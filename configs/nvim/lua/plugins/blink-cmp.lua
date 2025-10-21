@@ -18,7 +18,7 @@ function M.config()
             enabled = false,
         },
         sources = {
-            default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+            default = { "lsp", "path", "snippets", "ripgrep" },
             providers = {
                 ripgrep = {
                     module = "blink-ripgrep",
@@ -30,11 +30,12 @@ function M.config()
                             use = "gitgrep-or-ripgrep",
                         },
                     },
+                    score_offset = -2,
                 },
                 lsp = {
                     -- You may enable the buffer source, when LSP is available, by setting this to `{}`
                     -- You may want to set the score_offset of the buffer source to a lower value, such as -5 in this case
-                    fallbacks = { "buffer", "ripgrep" },
+                    fallbacks = { "ripgrep" },
                 },
             },
         },
