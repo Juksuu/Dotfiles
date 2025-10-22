@@ -120,7 +120,6 @@
       alsa-utils
       pavucontrol
       home-manager
-      xarchiver
       kdePackages.qtmultimedia
 
       # Terminal (alacritty used in most setups as default)
@@ -140,6 +139,7 @@
       python3
 
       # Tools
+      kdePackages.ark
       libimobiledevice
       ifuse
 
