@@ -2,6 +2,7 @@
 include "dms/colors.kdl"
 include "dms/layout.kdl"
 
+// Outputs
 output "DP-6" {
     mode "2560x1440@300.000"
 
@@ -26,6 +27,11 @@ output "DP-4" {
     }
 }
 
+// Default workspaces for main monitor
+workspace "coding"
+workspace "browser"
+
+// Misc
 input {
     keyboard {
         xkb {
@@ -44,38 +50,9 @@ input {
     focus-follows-mouse max-scroll-amount="95%"
 }
 
-
 cursor {
     xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
-}
-
-
-layout {
-    gaps 16
-
-    always-center-single-column
-    center-focused-column "never"
-
-    default-column-width { proportion 0.5; }
-
-    focus-ring {
-        off
-    }
-
-    border {
-        off
-    }
-
-    shadow {
-        on
-        // draw-behind-window true
-        softness 9
-        spread 6
-        offset x=0 y=2
-        color "#060B14"
-        // color "#2A4C8C"
-    }
 }
 
 environment {
@@ -104,6 +81,35 @@ prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H-%M-%S.png"
 
+// Layout
+layout {
+    gaps 16
+
+    always-center-single-column
+    center-focused-column "never"
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        off
+    }
+
+    shadow {
+        on
+        // draw-behind-window true
+        softness 9
+        spread 6
+        offset x=0 y=2
+        color "#060B14"
+        // color "#2A4C8C"
+    }
+}
+
+// Layer rules
 layer-rule {
     match namespace="quickshell:notification"
     block-out-from "screencast"
@@ -120,6 +126,7 @@ layer-rule {
     opacity 1.0
 }
 
+// Window rules
 window-rule {
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
     open-floating true
@@ -148,6 +155,7 @@ window-rule {
     }
 }
 
+// Binds
 binds {
     // Change target for dynamic screencast
     Mod+BracketRight { spawn-sh "niri msg action set-dynamic-cast-window --id $(niri msg --json pick-window | jq .id)"; }

@@ -80,9 +80,28 @@
     "focusedWindow"
   ],
   "dankBarCenterWidgets": [
-    "music",
-    "clock",
-    "weather"
+    {
+      "id": "music",
+      "enabled": true
+    },
+    {
+      "id": "spacer",
+      "enabled": true,
+      "size": 10
+    },
+    {
+      "id": "clock",
+      "enabled": true
+    },
+    {
+      "id": "spacer",
+      "enabled": true,
+      "size": 10
+    },
+    {
+      "id": "weather",
+      "enabled": true
+    }
   ],
   "dankBarRightWidgets": [
     {
