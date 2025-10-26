@@ -2,12 +2,12 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.dms.homeModules.dankMaterialShell.default ];
+  imports = [ inputs.dankMaterialShell.homeModules.dankMaterialShell.default ];
 
   home.packages = with pkgs; [
     # Theming
     nwg-look
-    colloid-gtk-theme
+    adw-gtk3
 
     # CLI
     fd
@@ -148,7 +148,6 @@
     enable = true;
     enableSystemd = false;
     enableBrightnessControl = false;
-    enableNightMode = false;
     enableAudioWavelength = false;
     quickshell = { package = pkgs.quickshell; };
   };

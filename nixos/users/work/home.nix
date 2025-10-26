@@ -2,7 +2,7 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.dms.homeModules.dankMaterialShell.default ];
+  imports = [ inputs.dankMaterialShell.homeModules.dankMaterialShell.default ];
 
   nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
   in [ overlays.modifications overlays.additions ];
@@ -10,7 +10,7 @@
   home.packages = with pkgs; [
     # Theming
     nwg-look
-    colloid-gtk-theme
+    adw-gtk3
 
     # CLI
     fd

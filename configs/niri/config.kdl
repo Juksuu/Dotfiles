@@ -1,3 +1,7 @@
+// DMS integration
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+
 output "DP-6" {
     mode "2560x1440@300.000"
 
@@ -103,6 +107,17 @@ screenshot-path "~/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H-%M-%S.png"
 layer-rule {
     match namespace="quickshell:notification"
     block-out-from "screencast"
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    opacity 0.0
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+    opacity 1.0
 }
 
 window-rule {
