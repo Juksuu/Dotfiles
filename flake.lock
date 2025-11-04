@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762272766,
-        "narHash": "sha256-heD9OU+J8cirvR/i3I+qTfpc3RyYh47I4Na5j0OM3Gs=",
+        "lastModified": 1762283352,
+        "narHash": "sha256-sZHJ+5JNlQvyVOrX/YbeQo+rHDBx0QciMUDYSQwCm+g=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "bca5ee0c0dd4d92c380fc90c61b46a3f5899b156",
+        "rev": "f6efd2363a7d5756d51a63ca5dee464e53064187",
         "type": "github"
       },
       "original": {
@@ -330,6 +330,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1762111121,
+        "narHash": "sha256-4vhDuZ7OZaZmKKrnDpxLZZpGIJvAeMtK6FKLJYUtAdw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b3d51a0365f6695e7dd5cdf3e180604530ed33b4",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1762111121,
@@ -348,17 +363,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1762278912,
-        "narHash": "sha256-XVIoTbxVt8v2LiIfBQ2DRkJgIR3zBMewP42jY4+4+Hk=",
+        "lastModified": 1762156382,
+        "narHash": "sha256-Yg7Ag7ov5+36jEFC1DaZh/12SEXo6OO3/8rqADRxiqs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7687f55dc50230782e1adb1f5ef17ce5cb73ddfb",
+        "rev": "7241bcbb4f099a66aafca120d37c65e8dda32717",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "quickshell": {
@@ -392,6 +406,7 @@
         "neovim-overlay": "neovim-overlay",
         "niri": "niri",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "quickshell": "quickshell",
         "zen-browser": "zen-browser"
       }

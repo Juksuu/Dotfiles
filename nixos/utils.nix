@@ -1,7 +1,10 @@
 { inputs, overlays }: {
   makeSystem = { hostname, system, users }:
     inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs system hostname; };
+      specialArgs = {
+        inherit inputs system hostname;
+        pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+      };
       modules = [
         {
           nixpkgs = {
@@ -20,8 +23,11 @@
 
   makeHome = { system, username, hostname }:
     inputs.home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = { inherit system hostname inputs; };
       pkgs = builtins.getAttr system inputs.nixpkgs.outputs.legacyPackages;
+      extraSpecialArgs = {
+        inherit system hostname inputs;
+        pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+      };
       modules = [
         {
           nixpkgs = {

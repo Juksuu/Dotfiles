@@ -1,4 +1,4 @@
-{ self, config, pkgs, inputs, system, ... }: {
+{ self, config, pkgs, pkgs-unstable, inputs, system, ... }: {
   home.stateVersion = "24.05";
 
   # Import homemanager modules
@@ -7,7 +7,7 @@
   nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
   in [ overlays.modifications overlays.additions ];
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     # Theming
     nwg-look
     adw-gtk3
@@ -36,14 +36,13 @@
     thunderbird
     texturepacker
     zoom-us
-    libreoffice
 
     # Custom pkgs
     font-builder-ui
     particle-editor
     slotmachine-simulator
     veikkaus-vpn
-  ];
+  ]) ++ (with pkgs-unstable; [ libreoffice ]);
 
   home.file = {
     # Scripts
@@ -124,7 +123,7 @@
     extraPackages = with pkgs; [
       stylua
       nixfmt-classic
-      sumneko-lua-language-server
+      lua-language-server
       vscode-langservers-extracted
     ];
   };
@@ -172,7 +171,6 @@
     enable = true;
     enableSystemd = false;
     enableBrightnessControl = false;
-    enableNightMode = false;
     enableAudioWavelength = false;
     quickshell = { package = pkgs.quickshell; };
   };
