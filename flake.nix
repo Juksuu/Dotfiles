@@ -52,10 +52,12 @@
         inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.niri
         (final: prev: {
-          zen-browser = inputs.zen-browser.packages.${prev.pkgs.system}.default;
+          zen-browser =
+            inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
         })
         (final: prev: {
-          quickshell = inputs.quickshell.packages.${prev.pkgs.system}.default;
+          quickshell =
+            inputs.quickshell.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
         })
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };

@@ -100,7 +100,7 @@
     extraPackages = with pkgs; [
       stylua
       nixfmt-classic
-      sumneko-lua-language-server
+      lua-language-server
       vscode-langservers-extracted
     ];
   };
