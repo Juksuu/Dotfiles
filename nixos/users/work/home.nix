@@ -23,7 +23,6 @@
     # GUI
     kitty
     brave
-    firefox
     vesktop
     spotify
     mumble
@@ -33,16 +32,17 @@
     mpv
     slack
     dropbox
-    thunderbird
     texturepacker
     zoom-us
+    kdePackages.kcolorchooser
 
     # Custom pkgs
     font-builder-ui
     particle-editor
     slotmachine-simulator
     veikkaus-vpn
-  ]) ++ (with pkgs-unstable; [ libreoffice ]);
+    font-style-editor
+  ]) ++ (with pkgs-unstable; [ libreoffice thunderbird firefox ]);
 
   home.file = {
     # Scripts
@@ -169,7 +169,7 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    enableSystemd = false;
+    systemd = { enable = false; };
     enableBrightnessControl = false;
     enableAudioWavelength = false;
     quickshell = { package = pkgs.quickshell; };
