@@ -146,7 +146,7 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    enableSystemd = false;
+    systemd = { enable = false; };
     enableBrightnessControl = false;
     enableAudioWavelength = false;
     quickshell = { package = pkgs.quickshell; };
