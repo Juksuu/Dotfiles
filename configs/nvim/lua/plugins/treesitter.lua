@@ -1,30 +1,52 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    branch = "main",
+    lazy = false,
 }
 
-function M.config()
-    ---@type TSConfig
-    ---@diagnostic disable-next-line: missing-fields
-    require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-            "vim",
-            "lua",
-            "regex",
-        },
-        auto_install = true,
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-            disable = function(_, buf)
-                local max_filesize = 500 * 1024 -- 500 KB
-                local ok, stats =
-                    pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then
-                    return true
-                end
-            end,
-        },
+function M.enableTreesitter(lang, buf)
+    if vim.treesitter.language.add(lang) then
+        local parser = vim.treesitter.get_parser(buf, lang)
+        if parser then
+            parser:invalidate()
+        end
+
+        -- Highlights
+        if vim.treesitter.query.get(lang, "highlights") then
+            vim.treesitter.start(buf, lang)
+        end
+
+        -- Indentation
+        -- if vim.treesitter.query.get(lang, "indents") then
+        --     vim.opt_local.indentexpr =
+        --         'v:lua.require("nvim-treesitter").indentexpr()'
+        -- end
+
+        -- Folding
+        -- if vim.treesitter.query.get(lang, "folds") then
+        --     vim.opt_local.foldmethod = "expr"
+        --     vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        -- end
+    end
+end
+
+function M.init()
+    vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup(
+            "tree-sitter-enable",
+            { clear = true }
+        ),
+        callback = function(args)
+            local lang = vim.treesitter.language.get_lang(args.match)
+            if not lang then
+                return
+            end
+
+            require("nvim-treesitter").install({ lang }):await(function()
+                M.enableTreesitter(lang, args.buf)
+            end)
+        end,
     })
 end
 

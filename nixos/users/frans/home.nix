@@ -102,6 +102,7 @@
       nixfmt-classic
       lua-language-server
       vscode-langservers-extracted
+      tree-sitter
     ];
   };
 
