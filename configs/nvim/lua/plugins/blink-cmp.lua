@@ -1,45 +1,28 @@
-local M = {
-    "saghen/blink.cmp",
-    lazy = false,
-    dependencies = {
-        "rafamadriz/friendly-snippets",
-        {
-            "mikavilpas/blink-ripgrep.nvim",
-            version = "*", -- use the latest stable version
-        },
+require("blink.cmp").setup({
+    signature = { enabled = true },
+    cmdline = {
+        enabled = false,
     },
-    build = "nix run .#build-plugin --accept-flake-config",
-}
-
-function M.config()
-    require("blink.cmp").setup({
-        signature = { enabled = true },
-        cmdline = {
-            enabled = false,
-        },
-        sources = {
-            default = { "lsp", "path", "snippets", "ripgrep" },
-            providers = {
-                ripgrep = {
-                    module = "blink-ripgrep",
-                    name = "Ripgrep",
-                    ---@module "blink-ripgrep"
-                    ---@type blink-ripgrep.Options
-                    opts = {
-                        backend = {
-                            use = "gitgrep-or-ripgrep",
-                        },
+    sources = {
+        default = { "lsp", "path", "snippets", "ripgrep" },
+        providers = {
+            ripgrep = {
+                module = "blink-ripgrep",
+                name = "Ripgrep",
+                ---@module "blink-ripgrep"
+                ---@type blink-ripgrep.Options
+                opts = {
+                    backend = {
+                        use = "gitgrep-or-ripgrep",
                     },
-                    score_offset = -2,
                 },
-                lsp = {
-                    -- You may enable the buffer source, when LSP is available, by setting this to `{}`
-                    -- You may want to set the score_offset of the buffer source to a lower value, such as -5 in this case
-                    fallbacks = { "ripgrep" },
-                },
+                score_offset = -2,
+            },
+            lsp = {
+                -- You may enable the buffer source, when LSP is available, by setting this to `{}`
+                -- You may want to set the score_offset of the buffer source to a lower value, such as -5 in this case
+                fallbacks = { "ripgrep" },
             },
         },
-    })
-end
-
-return M
+    },
+})

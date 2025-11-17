@@ -1,11 +1,4 @@
-local M = {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    branch = "main",
-    lazy = false,
-}
-
-function M.enableTreesitter(lang, buf)
+local function enableTreesitter(lang, buf)
     if vim.treesitter.language.add(lang) then
         local parser = vim.treesitter.get_parser(buf, lang)
         if parser then
@@ -31,23 +24,16 @@ function M.enableTreesitter(lang, buf)
     end
 end
 
-function M.init()
-    vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup(
-            "tree-sitter-enable",
-            { clear = true }
-        ),
-        callback = function(args)
-            local lang = vim.treesitter.language.get_lang(args.match)
-            if not lang then
-                return
-            end
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("tree-sitter-enable", { clear = true }),
+    callback = function(args)
+        local lang = vim.treesitter.language.get_lang(args.match)
+        if not lang then
+            return
+        end
 
-            require("nvim-treesitter").install({ lang }):await(function()
-                M.enableTreesitter(lang, args.buf)
-            end)
-        end,
-    })
-end
-
-return M
+        require("nvim-treesitter").install({ lang }):await(function()
+            enableTreesitter(lang, args.buf)
+        end)
+    end,
+})

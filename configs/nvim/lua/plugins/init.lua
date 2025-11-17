@@ -1,64 +1,101 @@
-return {
-    -- Nvim packages to have by default
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
+vim.api.nvim_create_autocmd("PackChanged", {
+    callback = function(ev)
+        local name, kind = ev.data.spec.name, ev.data.kind
 
-    {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-            library = {
-                -- See the configuration section for more details
-                -- Load luvit types when the `vim.uv` word is found
-                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        if name == "chadtree" and (kind == "install" or kind == "update") then
+            vim.system(
+                { "python3", "-m", "chadtree", "deps" },
+                { cwd = ev.data.path }
+            )
+                :wait()
+        end
 
-                -- Load snacks.nvim types when the `Snacks` word is found
-                { path = "snacks.nvim", words = { "Snacks" } },
-            },
-        },
-    },
+        if name == "blink.cmp" and (kind == "install" or kind == "update") then
+            vim.system(
+                { "nix", "run", ".#build-plugin", "--accept-flake-config" },
+                { cwd = ev.data.path }
+            ):wait()
+        end
 
-    -- Language/tooling support
-    "direnv/direnv.vim",
+        if
+            name == "nvim-treesitter"
+            and (kind == "install" or kind == "update")
+        then
+            if not ev.data.active then
+                vim.cmd.packadd("nvim-treesitter")
+            end
+            vim.cmd("TSUpdate")
+        end
+    end,
+})
 
-    { "tpope/vim-sleuth", event = "VeryLazy" },
-    { "aserowy/tmux.nvim", config = true, event = "VeryLazy" },
-    { "nvim-mini/mini.pairs", config = true, event = "VeryLazy" },
-    {
-        "lewis6991/gitsigns.nvim",
-        config = true,
-        event = "VeryLazy",
-    },
+vim.pack.add({
+    "https://github.com/nvim-lua/plenary.nvim",
+    "https://github.com/nvim-tree/nvim-web-devicons",
+    "https://github.com/folke/lazydev.nvim",
+    "https://github.com/direnv/direnv.vim",
+    "https://github.com/tpope/vim-sleuth",
+    "https://github.com/aserowy/tmux.nvim",
+    "https://github.com/nvim-mini/mini.pairs",
+    "https://github.com/lewis6991/gitsigns.nvim",
+    "https://github.com/j-hui/fidget.nvim",
+    "https://github.com/stevearc/conform.nvim",
+    "https://github.com/rebelot/heirline.nvim",
+    "https://github.com/mfussenegger/nvim-lint",
+    "https://github.com/neovim/nvim-lspconfig",
+    "https://github.com/hrsh7th/nvim-pasta",
+    "https://github.com/folke/snacks.nvim",
+    -- stylua: ignore start
+    { src = "https://github.com/ms-jpq/chadtree",                 version = "chad" },
+    { src = "https://github.com/catppuccin/nvim",                 name = "catppuccin" },
+    { src = "https://github.com/Juksuu/worktrees.nvim",           name = "worktrees" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    -- stylua: ignore end
 
-    {
-        "Juksuu/worktrees.nvim",
-        event = "VeryLazy",
-        config = true,
-        -- name = "worktrees",
-        -- dir = "~/code/worktrees.nvim/main",
-    },
+    "https://github.com/NeogitOrg/neogit",
+    "https://github.com/sindrets/diffview.nvim",
 
-    {
-        "NeogitOrg/neogit",
-        dependencies = {
-            "sindrets/diffview.nvim", -- optional - Diff integration
-        },
-        opts = { disable_commit_confirmation = true },
-        keys = { { "<leader>gs", "<cmd>Neogit<CR>" } },
-    },
+    "https://github.com/utilyre/barbecue.nvim",
+    "https://github.com/SmiteshP/nvim-navic",
 
-    {
-        "j-hui/fidget.nvim",
-        config = true,
-        event = "LspAttach",
-    },
+    "https://github.com/saghen/blink.cmp",
+    "https://github.com/rafamadriz/friendly-snippets",
+    -- stylua: ignore start
+    { src = "https://github.com/mikavilpas/blink-ripgrep.nvim", version = vim.version.range("2") },
+    -- stylua: ignore end
 
-    {
-        "ms-jpq/chadtree",
-        branch = "chad",
-        build = "python3 -m chadtree deps",
-        keys = {
-            { "<leader>fo", "<cmd>CHADopen<CR>" },
-        },
-    },
-}
+    "https://github.com/mfussenegger/nvim-dap",
+    "https://github.com/rcarriga/nvim-dap-ui",
+    "https://github.com/nvim-neotest/nvim-nio",
+    "https://github.com/ldelossa/nvim-dap-projects",
+
+    "https://github.com/folke/trouble.nvim",
+    "https://github.com/folke/todo-comments.nvim",
+})
+
+require("tmux").setup()
+require("gitsigns").setup()
+require("fidget").setup({})
+require("mini.pairs").setup({})
+
+require("neogit").setup({ disable_commit_confirmation = true })
+
+vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
+vim.keymap.set("n", "<leader>fo", "<cmd>CHADopen<CR>")
+
+-- Load plugin files
+require("plugins.catppuccin")
+require("plugins.treesitter")
+require("plugins.heirline")
+require("plugins.barbecue")
+require("plugins.blink-cmp")
+require("plugins.lsp")
+require("plugins.conform")
+require("plugins.lint")
+require("plugins.dap")
+require("plugins.nvim-pasta")
+require("plugins.snacks")
+require("plugins.trouble")
+
+-- Load worktrees plugin last as it has extra functionality if other plugins are loaded
+require("worktrees").setup()
