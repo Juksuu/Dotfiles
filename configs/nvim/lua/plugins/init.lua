@@ -73,12 +73,16 @@ vim.pack.add({
     "https://github.com/folke/todo-comments.nvim",
 })
 
-require("tmux").setup()
 require("gitsigns").setup()
 require("fidget").setup({})
 require("mini.pairs").setup({})
 
 require("neogit").setup({ disable_commit_confirmation = true })
+require("tmux").setup({
+    copy_sync = {
+        enable = false,
+    },
+})
 
 vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
 vim.keymap.set("n", "<leader>fo", "<cmd>CHADopen<CR>")

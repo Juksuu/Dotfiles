@@ -1,5 +1,17 @@
 local function enableTreesitter(lang, buf)
     if vim.treesitter.language.add(lang) then
+        local bufferExists = false
+        for _, v in ipairs(vim.api.nvim_list_bufs()) do
+            if v == buf then
+                bufferExists = true
+                break
+            end
+        end
+
+        if not bufferExists then
+            return
+        end
+
         local parser = vim.treesitter.get_parser(buf, lang)
         if parser then
             parser:invalidate()

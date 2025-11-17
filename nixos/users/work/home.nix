@@ -23,7 +23,6 @@
     # GUI
     kitty
     brave
-    vesktop
     spotify
     mumble
     zen-browser
@@ -125,6 +124,7 @@
       nixfmt-classic
       lua-language-server
       vscode-langservers-extracted
+      tree-sitter
     ];
   };
 
