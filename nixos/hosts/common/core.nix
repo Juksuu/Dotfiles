@@ -114,7 +114,6 @@
       gcc
       vim
       fzf
-      fish
       htop
       libnotify
       alsa-utils
