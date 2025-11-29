@@ -4,8 +4,6 @@
   "matugenScheme": "scheme-tonal-spot",
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
-  "dankBarTransparency": 0.7,
-  "dankBarWidgetTransparency": 1,
   "popupTransparency": 1,
   "dockTransparency": 1,
   "widgetBackgroundColor": "sth",
@@ -41,6 +39,11 @@
   "controlCenterShowNetworkIcon": true,
   "controlCenterShowBluetoothIcon": true,
   "controlCenterShowAudioIcon": true,
+  "controlCenterShowVpnIcon": false,
+  "controlCenterShowBrightnessIcon": false,
+  "controlCenterShowMicIcon": false,
+  "controlCenterShowBatteryIcon": false,
+  "controlCenterShowPrinterIcon": false,
   "showPrivacyButton": true,
   "privacyShowMicIcon": false,
   "privacyShowCameraIcon": false,
@@ -73,6 +76,7 @@
   "showWorkspaceApps": false,
   "maxWorkspaceIcons": 3,
   "workspacesPerMonitor": true,
+  "showOccupiedWorkspacesOnly": false,
   "dwlShowAllTags": false,
   "workspaceNameIcons": {},
   "waveProgressEnabled": false,
@@ -85,90 +89,6 @@
   "clockDateFormat": "",
   "lockDateFormat": "",
   "mediaSize": 1,
-  "dankBarLeftWidgets": [
-    "launcherButton",
-    "workspaceSwitcher",
-    "focusedWindow"
-  ],
-  "dankBarCenterWidgets": [
-    {
-      "id": "music",
-      "enabled": true
-    },
-    {
-      "id": "spacer",
-      "enabled": true,
-      "size": 10
-    },
-    {
-      "id": "clock",
-      "enabled": true
-    },
-    {
-      "id": "spacer",
-      "enabled": true,
-      "size": 10
-    },
-    {
-      "id": "weather",
-      "enabled": true
-    }
-  ],
-  "dankBarRightWidgets": [
-    {
-      "id": "systemTray",
-      "enabled": true
-    },
-    {
-      "id": "keyboard_layout_name",
-      "enabled": true
-    },
-    {
-      "id": "spacer",
-      "enabled": true,
-      "size": 5
-    },
-    {
-      "id": "clipboard",
-      "enabled": true
-    },
-    {
-      "id": "spacer",
-      "enabled": true,
-      "size": 5
-    },
-    {
-      "id": "cpuUsage",
-      "enabled": true
-    },
-    {
-      "id": "spacer",
-      "enabled": true,
-      "size": 10
-    },
-    {
-      "id": "memUsage",
-      "enabled": true
-    },
-    {
-      "id": "spacer",
-      "enabled": true,
-      "size": 10
-    },
-    {
-      "id": "separator",
-      "enabled": true
-    },
-    {
-      "id": "notificationButton",
-      "enabled": true
-    },
-    {
-      "id": "controlCenterButton",
-      "enabled": true
-    }
-  ],
-  "dankBarWidgetOrder": [],
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
@@ -192,7 +112,6 @@
   "monoFontFamily": "Maple Mono NF",
   "fontWeight": 400,
   "fontScale": 1,
-  "dankBarFontScale": 1,
   "notepadUseMonospace": true,
   "notepadFontFamily": "",
   "notepadFontSize": 14,
@@ -215,6 +134,8 @@
   "lockBeforeSuspend": false,
   "preventIdleForMedia": false,
   "loginctlLockIntegration": true,
+  "fadeToLockEnabled": false,
+  "fadeToLockGracePeriod": 5,
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {},
@@ -236,25 +157,6 @@
   "dockIconSize": 40,
   "dockIndicatorStyle": "circle",
   "notificationOverlayEnabled": false,
-  "dankBarAutoHide": false,
-  "dankBarAutoHideDelay": 250,
-  "dankBarOpenOnOverview": true,
-  "dankBarVisible": true,
-  "dankBarSpacing": 4,
-  "dankBarBottomGap": 0,
-  "dankBarInnerPadding": 8,
-  "dankBarPosition": 0,
-  "dankBarSquareCorners": false,
-  "dankBarNoBackground": true,
-  "dankBarGothCornersEnabled": false,
-  "dankBarGothCornerRadiusOverride": false,
-  "dankBarGothCornerRadiusValue": 12,
-  "dankBarBorderEnabled": false,
-  "dankBarBorderColor": "surfaceText",
-  "dankBarBorderOpacity": 1,
-  "dankBarBorderThickness": 1,
-  "popupGapsAuto": true,
-  "popupGapsManual": 4,
   "modalDarkenBackground": true,
   "lockScreenShowPowerActions": true,
   "enableFprint": false,
@@ -267,12 +169,14 @@
   "osdAlwaysShowValue": true,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
+  "osdMediaVolumeEnabled": true,
   "osdBrightnessEnabled": true,
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
   "osdCapsLockEnabled": true,
   "osdPowerProfileEnabled": true,
   "powerActionConfirm": true,
+  "powerActionHoldDuration": 1,
   "powerMenuActions": [
     "reboot",
     "logout",
@@ -295,5 +199,122 @@
   "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
-  "configVersion": 1
+  "barConfigs": [
+    {
+      "id": "default",
+      "name": "Main Bar",
+      "enabled": true,
+      "position": 0,
+      "screenPreferences": [
+        "all"
+      ],
+      "showOnLastDisplay": true,
+      "leftWidgets": [
+        "launcherButton",
+        "workspaceSwitcher",
+        "focusedWindow"
+      ],
+      "centerWidgets": [
+        {
+          "id": "music",
+          "enabled": true
+        },
+        {
+          "id": "spacer",
+          "enabled": true,
+          "size": 10
+        },
+        {
+          "id": "clock",
+          "enabled": true
+        },
+        {
+          "id": "spacer",
+          "enabled": true,
+          "size": 10
+        },
+        {
+          "id": "weather",
+          "enabled": true
+        }
+      ],
+      "rightWidgets": [
+        {
+          "id": "systemTray",
+          "enabled": true
+        },
+        {
+          "id": "keyboard_layout_name",
+          "enabled": true,
+          "keyboardLayoutNameCompactMode": false
+        },
+        {
+          "id": "spacer",
+          "enabled": true,
+          "size": 5
+        },
+        {
+          "id": "clipboard",
+          "enabled": true
+        },
+        {
+          "id": "spacer",
+          "enabled": true,
+          "size": 5
+        },
+        {
+          "id": "cpuUsage",
+          "enabled": true
+        },
+        {
+          "id": "spacer",
+          "enabled": true,
+          "size": 10
+        },
+        {
+          "id": "memUsage",
+          "enabled": true
+        },
+        {
+          "id": "spacer",
+          "enabled": true,
+          "size": 10
+        },
+        {
+          "id": "separator",
+          "enabled": true
+        },
+        {
+          "id": "notificationButton",
+          "enabled": true
+        },
+        {
+          "id": "controlCenterButton",
+          "enabled": true
+        }
+      ],
+      "spacing": 4,
+      "innerPadding": 8,
+      "bottomGap": 0,
+      "transparency": 0.7,
+      "widgetTransparency": 1,
+      "squareCorners": false,
+      "noBackground": true,
+      "gothCornersEnabled": false,
+      "gothCornerRadiusOverride": false,
+      "gothCornerRadiusValue": 12,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "fontScale": 1,
+      "autoHide": false,
+      "autoHideDelay": 250,
+      "openOnOverview": true,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 4
+    }
+  ],
+  "configVersion": 2
 }
