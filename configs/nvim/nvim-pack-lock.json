@@ -59,7 +59,7 @@
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neogit": {
-      "rev": "a24620e541be8814f2357ae334bde947f7dae5a8",
+      "rev": "40347fbc45bd87339eb702bb70dab23c40c15482",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-dap": {
@@ -79,7 +79,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "07f4e93de92e8d4ea7ab99602e3a8c9ac0fb778a",
+      "rev": "effe4bf2e1afb881ea67291c648b68dd3dfc927a",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -95,7 +95,7 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "17885756e63df73ed90db62e4630f744ceda6514",
+      "rev": "00c906abb9550e72bc0c640545b5499b9525bb40",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
