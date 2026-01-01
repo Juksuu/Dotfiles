@@ -1,6 +1,7 @@
 // DMS integration
 include "dms/colors.kdl"
 include "dms/layout.kdl"
+include "dms/alttab.kdl"
 
 // Outputs
 output "DP-6" {

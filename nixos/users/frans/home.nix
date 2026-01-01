@@ -2,7 +2,7 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.dankMaterialShell.homeModules.dankMaterialShell.default ];
+  imports = [ inputs.dankMaterialShell.homeModules.dank-material-shell ];
 
   home.packages = with pkgs; [
     # Theming
@@ -24,7 +24,7 @@
     mumble
     zen-browser
     gimp3
-    xfce.ristretto
+    ristretto
   ];
 
   home.file = {
@@ -145,11 +145,9 @@
     '';
   };
 
-  programs.dankMaterialShell = {
+  programs.dank-material-shell = {
     enable = true;
     systemd = { enable = false; };
-    enableBrightnessControl = false;
-    enableAudioWavelength = false;
     quickshell = { package = pkgs.quickshell; };
   };
 

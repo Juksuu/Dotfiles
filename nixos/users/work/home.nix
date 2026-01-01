@@ -2,7 +2,7 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.dankMaterialShell.homeModules.dankMaterialShell.default ];
+  imports = [ inputs.dankMaterialShell.homeModules.dank-material-shell ];
 
   nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
   in [ overlays.modifications overlays.additions ];
@@ -27,7 +27,7 @@
     mumble
     zen-browser
     gimp3
-    xfce.ristretto
+    ristretto
     mpv
     slack
     dropbox
@@ -167,11 +167,9 @@
     '';
   };
 
-  programs.dankMaterialShell = {
+  programs.dank-material-shell = {
     enable = true;
     systemd = { enable = false; };
-    enableBrightnessControl = false;
-    enableAudioWavelength = false;
     quickshell = { package = pkgs.quickshell; };
   };
 
