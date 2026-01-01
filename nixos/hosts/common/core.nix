@@ -97,6 +97,7 @@
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
 
       # Nvidia specific
       NVD_BACKEND = "direct";
@@ -105,6 +106,7 @@
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
       # Qt
+      QT_QPA_PLATFORM = "wayland";
       QT_QPA_PLATFORMTHEME = "qt6ct";
       QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
     };
@@ -164,6 +166,7 @@
 
   programs.dconf.enable = true;
 
+  systemd.user.services.niri-flake-polkit.enable = false;
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable.overrideAttrs (finalAttrs: previousAttrs: {

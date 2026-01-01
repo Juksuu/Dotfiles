@@ -8,6 +8,7 @@
     # Theming
     nwg-look
     adw-gtk3
+    qt6Packages.qt6ct
 
     # CLI
     fd
