@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/nvim-tree/nvim-web-devicons",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/direnv/direnv.vim",
     "https://github.com/tpope/vim-sleuth",
@@ -46,10 +47,9 @@ vim.pack.add({
     "https://github.com/hrsh7th/nvim-pasta",
     "https://github.com/folke/snacks.nvim",
     -- stylua: ignore start
-    { src = "https://github.com/ms-jpq/chadtree",                 version = "chad" },
-    { src = "https://github.com/catppuccin/nvim",                 name = "catppuccin" },
-    { src = "https://github.com/Juksuu/worktrees.nvim",           name = "worktrees" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/ms-jpq/chadtree",       version = "chad" },
+    { src = "https://github.com/catppuccin/nvim",       name = "catppuccin" },
+    { src = "https://github.com/Juksuu/worktrees.nvim", name = "worktrees" },
     -- stylua: ignore end
 
     "https://github.com/NeogitOrg/neogit",
