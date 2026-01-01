@@ -60,8 +60,6 @@
       videoDrivers = [ "nvidia" ];
     };
 
-    displayManager.gdm.enable = true;
-
     dbus = {
       enable = true;
       implementation = "broker";
@@ -117,6 +115,7 @@
       vim
       fzf
       htop
+      greetd
       libnotify
       alsa-utils
       pavucontrol
