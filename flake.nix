@@ -36,6 +36,10 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    openconnect-pulse-launcher = {
+      url = "github:erahhal/openconnect-pulse-launcher";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -50,6 +54,10 @@
         (final: prev: {
           quickshell =
             inputs.quickshell.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
+        })
+        (final: prev: {
+          openconnect-pulse-launcher =
+            inputs.openconnect-pulse-launcher.packages.${prev.pkgs.stdenv.hostPlatform.system}.openconnect-pulse-launcher;
         })
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };

@@ -40,7 +40,7 @@
     font-builder-ui
     particle-editor
     slotmachine-simulator
-    veikkaus-vpn
+    openconnect-pulse-launcher
     font-style-editor
   ]) ++ (with pkgs-unstable; [ libreoffice thunderbird firefox ]);
 

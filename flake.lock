@@ -401,6 +401,26 @@
         "type": "indirect"
       }
     },
+    "openconnect-pulse-launcher": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766114450,
+        "narHash": "sha256-kzdkucTXXTaFg5mzU/SpVeRTP3u+APhWRmsant+a2oU=",
+        "owner": "erahhal",
+        "repo": "openconnect-pulse-launcher",
+        "rev": "eb703630817447f9fc383109022dd68c81791814",
+        "type": "github"
+      },
+      "original": {
+        "owner": "erahhal",
+        "repo": "openconnect-pulse-launcher",
+        "type": "github"
+      }
+    },
     "quickshell": {
       "inputs": {
         "nixpkgs": [
@@ -453,6 +473,7 @@
         "niri": "niri",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "openconnect-pulse-launcher": "openconnect-pulse-launcher",
         "quickshell": "quickshell_2",
         "zen-browser": "zen-browser"
       }
