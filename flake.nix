@@ -2,7 +2,7 @@
   description = "NixOS system";
 
   inputs = {
-    nixpkgs.url = "nixpkgs";
+    nixpkgs.url = "nixpkgs/master";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
