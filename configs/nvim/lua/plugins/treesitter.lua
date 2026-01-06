@@ -44,6 +44,11 @@ vim.api.nvim_create_autocmd("FileType", {
             return
         end
 
+        local parsers = require("nvim-treesitter.parsers")
+        if parsers[lang] == nil then
+            return
+        end
+
         require("nvim-treesitter").install({ lang }):await(function()
             enableTreesitter(lang, args.buf)
         end)
