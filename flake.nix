@@ -42,18 +42,17 @@
     };
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     let
       overlays = [
         inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.niri
         (final: prev: {
-          zen-browser =
-            inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
+          zen-browser = inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
         })
         (final: prev: {
-          quickshell =
-            inputs.quickshell.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
+          quickshell = inputs.quickshell.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
         })
         (final: prev: {
           openconnect-pulse-launcher =
@@ -62,7 +61,8 @@
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
       darwinUtils = import ./darwinNix/utils.nix { inherit inputs overlays; };
-    in {
+    in
+    {
       nixosConfigurations = {
         homenix = utils.makeSystem {
           system = "x86_64-linux";

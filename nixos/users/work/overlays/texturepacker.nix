@@ -1,9 +1,9 @@
-{ final, prev }: {
+{ final, prev }:
+{
   texturepacker = prev.texturepacker.overrideAttrs (previousAttrs: rec {
     version = "6.0.2";
     src = prev.fetchurl {
-      url =
-        "https://www.codeandweb.com/download/texturepacker/${version}/TexturePacker-${version}.deb";
+      url = "https://www.codeandweb.com/download/texturepacker/${version}/TexturePacker-${version}.deb";
       hash = "sha256-Ur45HLr1NK2NpCPKS0cYgwtNPZYogvEWUmw02JiCZv8=";
     };
 

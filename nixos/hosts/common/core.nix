@@ -1,4 +1,11 @@
-{ inputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   system.stateVersion = "24.05";
 
   imports = [ inputs.niri.nixosModules.niri ];
@@ -168,11 +175,13 @@
   systemd.user.services.niri-flake-polkit.enable = false;
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable.overrideAttrs (finalAttrs: previousAttrs: {
-      preInstall = ''
-        echo "org.freedesktop.impl.portal.FileChooser=gtk;" >> "resources/niri-portals.conf"
-      '';
-    });
+    package = pkgs.niri-unstable.overrideAttrs (
+      finalAttrs: previousAttrs: {
+        preInstall = ''
+          echo "org.freedesktop.impl.portal.FileChooser=gtk;" >> "resources/niri-portals.conf"
+        '';
+      }
+    );
   };
 
   programs.thunar = {

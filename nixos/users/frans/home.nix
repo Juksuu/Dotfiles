@@ -1,4 +1,12 @@
-{ self, config, pkgs, inputs, system, ... }: {
+{
+  self,
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
+{
   home.stateVersion = "24.05";
 
   # Import homemanager modules
@@ -30,18 +38,14 @@
 
   home.file = {
     # Scripts
-    "scripts".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";
+    "scripts".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/scripts";
 
     # Configs
-    ".config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
-    ".config/kitty".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
-    ".config/niri".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/niri";
-    ".config/DankMaterialShell".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/frans/.dotfiles/configs/dankMaterialShell";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
+    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
+    ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/niri";
+    ".config/DankMaterialShell".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/dankMaterialShell";
   };
 
   home.sessionVariables = {
@@ -67,11 +71,15 @@
         bind \cgw 'bass source ~/scripts/git/wts.sh'
       end
     '';
-    shellAliases = { wtc = "~/scripts/git/wtc.sh"; };
-    plugins = [{
-      name = "bass";
-      src = pkgs.fishPlugins.bass.src;
-    }];
+    shellAliases = {
+      wtc = "~/scripts/git/wtc.sh";
+    };
+    plugins = [
+      {
+        name = "bass";
+        src = pkgs.fishPlugins.bass.src;
+      }
+    ];
   };
 
   programs.git = {
@@ -81,7 +89,9 @@
         name = "Frans Paasonen";
         email = "franspaasonen@gmail.com";
       };
-      pull = { rebase = true; };
+      pull = {
+        rebase = true;
+      };
     };
   };
 
@@ -100,7 +110,7 @@
     package = pkgs.neovim;
     extraPackages = with pkgs; [
       stylua
-      nixfmt-classic
+      nixfmt
       lua-language-server
       vscode-langservers-extracted
       tree-sitter
@@ -148,8 +158,12 @@
 
   programs.dank-material-shell = {
     enable = true;
-    systemd = { enable = false; };
-    quickshell = { package = pkgs.quickshell; };
+    systemd = {
+      enable = false;
+    };
+    quickshell = {
+      package = pkgs.quickshell;
+    };
   };
 
   programs.obs-studio.enable = true;

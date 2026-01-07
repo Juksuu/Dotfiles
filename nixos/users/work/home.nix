@@ -1,63 +1,80 @@
-{ self, config, pkgs, pkgs-unstable, inputs, system, ... }: {
+{
+  self,
+  config,
+  pkgs,
+  pkgs-unstable,
+  inputs,
+  system,
+  ...
+}:
+{
   home.stateVersion = "24.05";
 
   # Import homemanager modules
   imports = [ inputs.dankMaterialShell.homeModules.dank-material-shell ];
 
-  nixpkgs.overlays = let overlays = import ./overlays { inherit inputs; };
-  in [ overlays.modifications overlays.additions ];
+  nixpkgs.overlays =
+    let
+      overlays = import ./overlays { inherit inputs; };
+    in
+    [
+      overlays.modifications
+      overlays.additions
+    ];
 
-  home.packages = (with pkgs; [
-    # Theming
-    nwg-look
-    adw-gtk3
-    qt6Packages.qt6ct
+  home.packages =
+    (with pkgs; [
+      # Theming
+      nwg-look
+      adw-gtk3
+      qt6Packages.qt6ct
 
-    # CLI
-    fd
-    sqlite
-    wget
-    ripgrep
-    awscli2
-    ansible
+      # CLI
+      fd
+      sqlite
+      wget
+      ripgrep
+      awscli2
+      ansible
 
-    # GUI
-    kitty
-    brave
-    spotify
-    mumble
-    zen-browser
-    gimp3
-    ristretto
-    mpv
-    slack
-    dropbox
-    texturepacker
-    zoom-us
-    kdePackages.kcolorchooser
+      # GUI
+      kitty
+      brave
+      spotify
+      mumble
+      zen-browser
+      gimp3
+      ristretto
+      mpv
+      slack
+      dropbox
+      texturepacker
+      zoom-us
+      kdePackages.kcolorchooser
 
-    # Custom pkgs
-    font-builder-ui
-    particle-editor
-    slotmachine-simulator
-    openconnect-pulse-launcher
-    font-style-editor
-  ]) ++ (with pkgs-unstable; [ libreoffice thunderbird firefox ]);
+      # Custom pkgs
+      font-builder-ui
+      particle-editor
+      slotmachine-simulator
+      openconnect-pulse-launcher
+      font-style-editor
+    ])
+    ++ (with pkgs-unstable; [
+      libreoffice
+      thunderbird
+      firefox
+    ]);
 
   home.file = {
     # Scripts
-    "scripts".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/scripts";
+    "scripts".source = config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/scripts";
 
     # Configs
-    ".config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/nvim";
-    ".config/kitty".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/kitty";
-    ".config/niri".source =
-      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/niri";
-    ".config/DankMaterialShell".source = config.lib.file.mkOutOfStoreSymlink
-      "/home/work/.dotfiles/configs/dankMaterialShell";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/nvim";
+    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/kitty";
+    ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/niri";
+    ".config/DankMaterialShell".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/dankMaterialShell";
   };
 
   home.sessionVariables = {
@@ -89,10 +106,12 @@
       gib = "~/scripts/git/gib.sh";
     };
 
-    plugins = [{
-      name = "bass";
-      src = pkgs.fishPlugins.bass.src;
-    }];
+    plugins = [
+      {
+        name = "bass";
+        src = pkgs.fishPlugins.bass.src;
+      }
+    ];
   };
 
   programs.git = {
@@ -102,7 +121,9 @@
         name = "Frans Paasonen";
         email = "frans.paasonen@seepiagames.com";
       };
-      pull = { rebase = true; };
+      pull = {
+        rebase = true;
+      };
     };
     lfs.enable = true;
   };
@@ -122,7 +143,7 @@
     package = pkgs.neovim;
     extraPackages = with pkgs; [
       stylua
-      nixfmt-classic
+      nixfmt
       lua-language-server
       vscode-langservers-extracted
       tree-sitter
@@ -170,8 +191,12 @@
 
   programs.dank-material-shell = {
     enable = true;
-    systemd = { enable = false; };
-    quickshell = { package = pkgs.quickshell; };
+    systemd = {
+      enable = false;
+    };
+    quickshell = {
+      package = pkgs.quickshell;
+    };
   };
 
   programs.obs-studio.enable = true;

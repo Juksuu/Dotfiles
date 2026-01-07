@@ -1,5 +1,11 @@
-{ inputs, overlays }: {
-  makeSystem = { hostname, system, users }:
+{ inputs, overlays }:
+{
+  makeSystem =
+    {
+      hostname,
+      system,
+      users,
+    }:
     inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {
         inherit inputs system hostname;
@@ -15,13 +21,22 @@
             };
           };
 
-          nix.settings.trusted-users = [ "root" "@wheel" ];
+          nix.settings.trusted-users = [
+            "root"
+            "@wheel"
+          ];
         }
         ./hosts/${hostname}
-      ] ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
+      ]
+      ++ inputs.nixpkgs.lib.forEach users (u: ./users/${u});
     };
 
-  makeHome = { system, username, hostname }:
+  makeHome =
+    {
+      system,
+      username,
+      hostname,
+    }:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = builtins.getAttr system inputs.nixpkgs.outputs.legacyPackages;
       extraSpecialArgs = {

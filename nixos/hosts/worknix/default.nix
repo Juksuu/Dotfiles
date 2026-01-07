@@ -1,10 +1,16 @@
-{ inputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
     ../common/core.nix
-    # ../common/plasma6.nix
 
     inputs.dankMaterialShell.nixosModules.greeter
   ];
@@ -29,11 +35,10 @@
   };
 
   environment = {
-    systemPackages = with pkgs;
-      [
-        # vpn stuff
-        openconnect
-      ];
+    systemPackages = with pkgs; [
+      # vpn stuff
+      openconnect
+    ];
   };
 
   programs.dank-material-shell.greeter = {

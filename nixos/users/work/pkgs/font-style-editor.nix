@@ -1,11 +1,15 @@
-{ stdenv, pkgs, fetchzip, lib }:
+{
+  stdenv,
+  pkgs,
+  fetchzip,
+  lib,
+}:
 stdenv.mkDerivation rec {
   pname = "FontStyleEditor";
   version = "1.0.2";
 
   src = fetchzip {
-    url =
-      "http://developer.sw.veikkaus.fi/fse/launcher/FontStyleEditor-linux-x64-${version}.zip";
+    url = "http://developer.sw.veikkaus.fi/fse/launcher/FontStyleEditor-linux-x64-${version}.zip";
     hash = "sha256-0hfdpZYryheevhU19HgrEFCvOAiJflrJUaOjVNqryHc=";
   };
 
@@ -15,9 +19,18 @@ stdenv.mkDerivation rec {
     wrapGAppsHook3
   ];
 
-  buildInputs = with pkgs; [ nss libdrm libgbm alsa-lib udev ];
+  buildInputs = with pkgs; [
+    nss
+    libdrm
+    libgbm
+    alsa-lib
+    udev
+  ];
 
-  autoPatchelfIgnoreMissingDeps = [ "libsendfile.so" "libsocket.so" ];
+  autoPatchelfIgnoreMissingDeps = [
+    "libsendfile.so"
+    "libsocket.so"
+  ];
 
   # avoid double-wrapping
   dontWrapGApps = true;
@@ -29,9 +42,7 @@ stdenv.mkDerivation rec {
 
   postFixup = ''
     makeWrapper $out/opt/font-style-editor/FontStyleEditor $out/bin/FontStyleEditor \
-    --prefix LD_LIBRARY_PATH : ${
-      lib.makeLibraryPath buildInputs
-    }:$out/opt/font-style-editor \
+    --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath buildInputs}:$out/opt/font-style-editor \
     "''${gappsWrapperArgs[@]}"
   '';
 }
