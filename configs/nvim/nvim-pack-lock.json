@@ -10,20 +10,20 @@
       "version": "2.0.0 - 3.0.0"
     },
     "blink.cmp": {
-      "rev": "6a4914ca987453464a7dfc7fc237a992adb567d0",
+      "rev": "820f1ddf634ec267412e403711bf74be26cac677",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "catppuccin": {
-      "rev": "6efc53e42cfc97700f19043105bf73ba83c4ae7d",
+      "rev": "beaf41a30c26fd7d6c386d383155cbd65dd554cd",
       "src": "https://github.com/catppuccin/nvim"
     },
     "chadtree": {
-      "rev": "b2ca716282d3d4e048865dfd1aabc3a8760d03b4",
+      "rev": "6c37557462f9a8b51d0fc873c63863672a45cf5a",
       "src": "https://github.com/ms-jpq/chadtree",
       "version": "'chad'"
     },
     "conform.nvim": {
-      "rev": "8314f4c9e205e7f30b62147069729f9a1227d8bf",
+      "rev": "5ac2bb57a9096f00ca50e1a3c46020d5930319b8",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffview.nvim": {
@@ -35,7 +35,7 @@
       "src": "https://github.com/direnv/direnv.vim"
     },
     "fidget.nvim": {
-      "rev": "64463022a1f2ff1318ab22a2ea4125ed9313a483",
+      "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "friendly-snippets": {
@@ -43,7 +43,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "dfac404ac94b0eb1461bd7da32279e16950dfd67",
+      "rev": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "heirline.nvim": {
@@ -75,11 +75,11 @@
       "src": "https://github.com/rcarriga/nvim-dap-ui"
     },
     "nvim-lint": {
-      "rev": "1e6b2ac034d1a7588d11b0b8e862a7ad89368376",
+      "rev": "ca6ea12daf0a4d92dc24c5c9ae22a1f0418ade37",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "0b38bc74487e73489624d61396af7805af9cc75f",
+      "rev": "92ee7d42320edfbb81f3cad851314ab197fa324a",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -95,11 +95,11 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "b033ab331ca0bccbd93c3c2b4f886fdfc09abec0",
+      "rev": "d9a5fb8484374e8ed5d88dd9e0475a760c168d6a",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "6788013bb9cb784e606ada44206b0e755e4323d7",
+      "rev": "803353450c374192393f5387b6a0176d0972b848",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
