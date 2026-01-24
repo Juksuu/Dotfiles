@@ -59,6 +59,7 @@
 
     interactiveShellInit = ''
       set fish_greeting
+      set fish_color_command blue
 
       if test -z (pgrep ssh-agent | string collect)
         eval (ssh-agent -c) > /dev/null
