@@ -39,7 +39,6 @@
 
       # GUI
       kitty
-      brave
       spotify
       mumble
       zen-browser
