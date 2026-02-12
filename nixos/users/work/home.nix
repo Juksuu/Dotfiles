@@ -185,6 +185,16 @@
       bind-key -T copy-mode-vi M-j resize-pane -D 1
       bind-key -T copy-mode-vi M-k resize-pane -U 1
       bind-key -T copy-mode-vi M-l resize-pane -R 1
+
+      # Vi-style copy mode keybindings
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+
+      # You should change `pbcopy` to your clipboard command!
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel "pbcopy"
+
+      # Don't exit copy mode when dragging with mouse
+      unbind -T copy-mode-vi MouseDragEnd1Pane
     '';
   };
 
