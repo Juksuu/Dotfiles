@@ -1,0 +1,7 @@
+binds {
+    Ctrl+Shift+Q hotkey-overlay-title="Power Menu: Toggle" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Super+Alt+L hotkey-overlay-title="Lock Screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Super+N hotkey-overlay-title="Notifications: Toggle" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Super+R hotkey-overlay-title="App Launcher: Toggle" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Super+S hotkey-overlay-title="Settings: Focus or Toggle" { spawn "dms" "ipc" "call" "settings" "focusOrToggle"; }
+}
