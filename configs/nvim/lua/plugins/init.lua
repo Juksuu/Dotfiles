@@ -73,6 +73,9 @@ vim.pack.add({
     "https://github.com/folke/todo-comments.nvim",
 })
 
+-- Local project paths
+-- vim.opt.rtp:append("~/code/worktrees.nvim/main")
+
 require("gitsigns").setup()
 require("fidget").setup({})
 require("mini.pairs").setup({})
