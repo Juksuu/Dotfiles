@@ -10,7 +10,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "blink.cmp": {
-      "rev": "7c80e36023c5499a97e097cb5f229e9b635725a0",
+      "rev": "85666c58d8ed49539794e913fd15f508af2ca8fb",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "catppuccin": {
@@ -43,7 +43,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "31217271a7314c343606acb4072a94a039a19fb5",
+      "rev": "9f3c6dd7868bcc116e9c1c1929ce063b978fa519",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "heirline.nvim": {
@@ -59,7 +59,7 @@
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neogit": {
-      "rev": "73870229977fdd8747025820e15e98cfde787b9c",
+      "rev": "75ca811db3ca3e43137596d25d26e57331540ee0",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-dap": {
@@ -79,7 +79,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "f4e9d367d4e067d7a5fabc9fd3f1349b291eb718",
+      "rev": "44acfe887d4056f704ccc4f17513ed41c9e2b2e6",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -127,8 +127,8 @@
       "src": "https://github.com/tpope/vim-sleuth"
     },
     "worktrees": {
-      "rev": "6b63756f476ecfbcf2c074f62e550bdbef9d1e4e",
-      "src": "https://github.com/Juksuu/worktrees.nvim"
+      "rev": "c52a0fcdef8b5472b63798885cbf75f12c9276b7",
+      "src": "file:///home/frans/code/worktrees.nvim/main"
     }
   }
 }
