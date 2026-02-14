@@ -10,7 +10,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "blink.cmp": {
-      "rev": "85666c58d8ed49539794e913fd15f508af2ca8fb",
+      "rev": "d162ef84327a937669b31f7a32dc2971178cc4c2",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "catppuccin": {
@@ -95,7 +95,7 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "9f2dad22ef8bb14fd1e0a3aa8859cdc88170668b",
+      "rev": "4d9466677a5ceadef104eaa0fe08d60d91c4e9a7",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
@@ -128,7 +128,7 @@
     },
     "worktrees": {
       "rev": "c52a0fcdef8b5472b63798885cbf75f12c9276b7",
-      "src": "file:///home/frans/code/worktrees.nvim/main"
+      "src": "https://github.com/Juksuu/worktrees.nvim"
     }
   }
 }
