@@ -62,6 +62,7 @@
       libreoffice
       thunderbird
       firefox
+      chromium
     ]);
 
   home.file = {

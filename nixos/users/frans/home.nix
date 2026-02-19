@@ -28,7 +28,6 @@
 
       # GUI
       kitty
-      brave
       vesktop
       spotify
       mumble
@@ -38,6 +37,7 @@
     ])
     ++ (with pkgs-unstable; [
       firefox
+      chromium
     ]);
 
   home.file = {
