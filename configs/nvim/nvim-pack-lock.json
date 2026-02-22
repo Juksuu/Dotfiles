@@ -5,12 +5,12 @@
       "src": "https://github.com/utilyre/barbecue.nvim"
     },
     "blink-ripgrep.nvim": {
-      "rev": "71027ced21dfc27d3466ebc569d9987f3b8d15c1",
+      "rev": "1d1486d52b1a4da3e26a61e64185d27da58f7c3a",
       "src": "https://github.com/mikavilpas/blink-ripgrep.nvim",
       "version": "2.0.0 - 3.0.0"
     },
     "blink.cmp": {
-      "rev": "cd79f572971c58784ca72551af29af3a63da9168",
+      "rev": "b4d379393882561f9055abe780342ee00f02c573",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "catppuccin": {
@@ -55,11 +55,11 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini.pairs": {
-      "rev": "4089aa6ea6423e02e1a8326a7a7a00159f6f5e04",
+      "rev": "b7fde3719340946feb75017ef9d75edebdeb0566",
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neogit": {
-      "rev": "22433eae87236c217e0810c836fa5e529c043d4c",
+      "rev": "0ea6b87ae19e8e5a235c682f8db1305774824f9b",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-dap": {
@@ -79,7 +79,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "44acfe887d4056f704ccc4f17513ed41c9e2b2e6",
+      "rev": "5a855bcfec7973767a1a472335684bbd71d2fa2b",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -95,7 +95,7 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "3edb01f912867603c2aef9079f208f0244c0885b",
+      "rev": "dc42c209f3820bdfaae0956f15de29689aa6b451",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
