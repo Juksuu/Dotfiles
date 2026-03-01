@@ -604,5 +604,6 @@
   "clipboardEnterToPaste": false,
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
-  "configVersion": 5
+  "configVersion": 6,
+  "barElevationEnabled": false
 }
