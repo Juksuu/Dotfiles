@@ -172,6 +172,8 @@
 
   programs.dconf.enable = true;
 
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   systemd.user.services.niri-flake-polkit.enable = false;
   programs.niri = {
     enable = true;

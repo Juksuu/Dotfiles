@@ -5,16 +5,16 @@
       "src": "https://github.com/utilyre/barbecue.nvim"
     },
     "blink-ripgrep.nvim": {
-      "rev": "1d1486d52b1a4da3e26a61e64185d27da58f7c3a",
+      "rev": "68ba39ed06b2ac4a15c77427eb4ce53fae11a534",
       "src": "https://github.com/mikavilpas/blink-ripgrep.nvim",
       "version": "2.0.0 - 3.0.0"
     },
     "blink.cmp": {
-      "rev": "658d0ec1d93646ff999fe6044098af89d81428ed",
+      "rev": "62c3d54f7d739ee46f850ea6832383e3b7ca2ee1",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "catppuccin": {
-      "rev": "12c004cde3f36cb1d57242f1e6aac46b09a0e5b4",
+      "rev": "384f304c8b04664c9e0091fbfb3923c5f97c1bcf",
       "src": "https://github.com/catppuccin/nvim"
     },
     "chadtree": {
@@ -51,7 +51,7 @@
       "src": "https://github.com/rebelot/heirline.nvim"
     },
     "lazydev.nvim": {
-      "rev": "5231c62aa83c2f8dc8e7ba957aa77098cda1257d",
+      "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mini.pairs": {
@@ -59,7 +59,7 @@
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neogit": {
-      "rev": "b8bfe77ba9a350ce8ea05c38133e28d776a6457c",
+      "rev": "d3890fc3cdf0859845a86b2be306bba01458df1a",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-dap": {
@@ -79,7 +79,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "0203a9608d63eda57679b01e69f33a7b4c34b0d1",
+      "rev": "841c6d4139aedb8a3f2baf30cef5327371385b93",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -95,7 +95,7 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "493890b87a81dfe6a7e577dbc364ae33fa482da9",
+      "rev": "e5f65e31a5ec0e8526b2311ff8c7aaea4a581c82",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
@@ -107,7 +107,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "snacks.nvim": {
-      "rev": "9912042fc8bca2209105526ac7534e9a0c2071b2",
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tmux.nvim": {
