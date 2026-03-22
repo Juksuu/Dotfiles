@@ -42,3 +42,5 @@ vim.opt.updatetime = 100
 
 vim.opt.scrolloff = 10
 vim.opt.smoothscroll = true
+
+vim.opt.autoread = true

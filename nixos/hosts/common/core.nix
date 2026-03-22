@@ -122,6 +122,7 @@
       vim
       fzf
       htop
+      lsof
       greetd
       libnotify
       alsa-utils

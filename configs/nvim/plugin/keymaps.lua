@@ -9,3 +9,6 @@ vim.keymap.set("v", "Y", "myY`y")
 -- Move visual selection with J and K
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
+vim.keymap.set("t", "<c-c>", "<c-\\><c-n>")

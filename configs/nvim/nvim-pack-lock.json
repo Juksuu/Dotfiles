@@ -14,7 +14,7 @@
       "src": "https://github.com/saghen/blink.cmp"
     },
     "catppuccin": {
-      "rev": "384f304c8b04664c9e0091fbfb3923c5f97c1bcf",
+      "rev": "a7788416689dbefea659d9e9415c87926b0ba5d8",
       "src": "https://github.com/catppuccin/nvim"
     },
     "chadtree": {
@@ -95,12 +95,17 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "e5f65e31a5ec0e8526b2311ff8c7aaea4a581c82",
+      "rev": "875515255192864c33981c3ed66ad94e561b904a",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
       "rev": "d7462543c9e366c0d196c7f67a945eaaf5d99414",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "opencode.nvim": {
+      "rev": "1088ee70dd997d785a1757d351c07407f0abfc9f",
+      "src": "https://github.com/nickjvandyke/opencode.nvim",
+      "version": "0.5.0 - 0.6.0"
     },
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",

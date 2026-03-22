@@ -1,0 +1,18 @@
+models:
+  "gpt-oss-medium:20b":
+    cmd: |
+      llama-server
+      -hf ggml-org/gpt-oss-20b-GGUF
+      --port ''${PORT}
+      --chat-template-kwargs '{"reasoning_effort": "medium"}'
+
+  "qwen3-coder:30b-a3b-instruct":
+    cmd: |
+      llama-server
+      -hf unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF
+      --port ''${PORT}
+
+# TTL keeps models in memory for specified seconds after last use
+ttl: 3600  # Keep models loaded for 1 hour (like OLLAMA_KEEP_ALIVE)
+
+healthCheckTimeout: 600  # 10 minutes for large model download + loading

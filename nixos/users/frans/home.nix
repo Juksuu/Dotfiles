@@ -13,6 +13,15 @@
   # Import homemanager modules
   imports = [ inputs.dankMaterialShell.homeModules.dank-material-shell ];
 
+  nixpkgs.overlays =
+    let
+      overlays = import ./overlays { inherit inputs; };
+    in
+    [
+      overlays.modifications
+      overlays.additions
+    ];
+
   home.packages =
     (with pkgs; [
       # Theming
@@ -34,6 +43,11 @@
       zen-browser
       gimp3
       ristretto
+
+      # Ai stuff
+      opencode
+      llama-swap
+      llama-cpp
     ])
     ++ (with pkgs-unstable; [
       firefox
@@ -50,6 +64,10 @@
     ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/niri";
     ".config/DankMaterialShell".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/dankMaterialShell";
+    ".config/llama-swap".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/llama-swap/";
+    ".config/opencode".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/opencode/";
   };
 
   home.sessionVariables = {
@@ -78,6 +96,7 @@
     '';
     shellAliases = {
       wtc = "~/scripts/git/wtc.sh";
+      llmStart = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
     };
     plugins = [
       {

@@ -5,7 +5,21 @@ require("snacks").setup({
     scope = { enabled = true },
     scroll = { enabled = true },
     words = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+        enabled = true,
+        actions = {
+            opencode_send = function(...)
+                return require("opencode").snacks_picker_send(...)
+            end,
+        },
+        win = {
+            input = {
+                keys = {
+                    ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+                },
+            },
+        },
+    },
 })
 
 

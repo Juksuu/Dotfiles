@@ -47,9 +47,10 @@ vim.pack.add({
     "https://github.com/hrsh7th/nvim-pasta",
     "https://github.com/folke/snacks.nvim",
     -- stylua: ignore start
-    { src = "https://github.com/ms-jpq/chadtree",       version = "chad" },
-    { src = "https://github.com/catppuccin/nvim",       name = "catppuccin" },
-    { src = "https://github.com/Juksuu/worktrees.nvim", name = "worktrees" },
+    { src = "https://github.com/ms-jpq/chadtree",            version = "chad" },
+    { src = "https://github.com/catppuccin/nvim",            name = "catppuccin" },
+    { src = "https://github.com/Juksuu/worktrees.nvim",      name = "worktrees" },
+    { src = "https://github.com/nickjvandyke/opencode.nvim", version = vim.version.range("^0.5") },
     -- stylua: ignore end
 
     "https://github.com/NeogitOrg/neogit",
@@ -103,6 +104,7 @@ require("plugins.dap")
 require("plugins.nvim-pasta")
 require("plugins.snacks")
 require("plugins.trouble")
+require("plugins.opencode")
 
 -- Load worktrees plugin last as it has extra functionality if other plugins are loaded
 require("worktrees").setup()
