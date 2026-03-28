@@ -1,6 +1,6 @@
 {
   "currentThemeName": "dynamic",
-  "currentThemeCategory": "generic",
+  "currentThemeCategory": "dynamic",
   "customThemeFile": "",
   "registryThemeVariants": {},
   "matugenScheme": "scheme-tonal-spot",
@@ -316,6 +316,7 @@
       "harmony": 0.5
     }
   },
+  "matugenTemplateNeovimSetBackground": true,
   "showDock": false,
   "dockAutoHide": false,
   "dockSmartAutoHide": false,

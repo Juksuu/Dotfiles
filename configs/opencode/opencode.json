@@ -4,7 +4,13 @@
         "opencode-plugin-llama.cpp@latest"
     ],
     "permission": {
-        "*": "ask"
+        "*": "ask",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "skill": "allow",
+        "lsp": "allow",
     },
     "provider": {
         "llama.cpp": {
