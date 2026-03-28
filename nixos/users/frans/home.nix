@@ -135,9 +135,9 @@
     extraPackages = with pkgs; [
       stylua
       nixfmt
+      tree-sitter
       lua-language-server
       vscode-langservers-extracted
-      tree-sitter
     ];
   };
 
