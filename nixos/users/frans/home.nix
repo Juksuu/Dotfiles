@@ -96,7 +96,7 @@
     '';
     shellAliases = {
       wtc = "~/scripts/git/wtc.sh";
-      llmStart = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
+      llm = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
     };
     plugins = [
       {
@@ -108,6 +108,7 @@
 
   programs.git = {
     enable = true;
+    signing.format = null;
     settings = {
       user = {
         name = "Frans Paasonen";
@@ -131,6 +132,8 @@
 
   programs.neovim = {
     enable = true;
+    withRuby = false;
+    withPython3 = false;
     package = pkgs.neovim;
     extraPackages = with pkgs; [
       stylua

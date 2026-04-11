@@ -98,6 +98,7 @@
 
     interactiveShellInit = ''
       set fish_greeting
+      set fish_color_command blue
 
       if test -z (pgrep ssh-agent | string collect)
         eval (ssh-agent -c) > /dev/null
@@ -114,7 +115,7 @@
     shellAliases = {
       wtc = "~/scripts/git/wtc.sh";
       gib = "~/scripts/git/gib.sh";
-      llmStart = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
+      llm = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
     };
 
     plugins = [
@@ -127,6 +128,7 @@
 
   programs.git = {
     enable = true;
+    signing.format = null;
     settings = {
       user = {
         name = "Frans Paasonen";
@@ -151,6 +153,8 @@
 
   programs.neovim = {
     enable = true;
+    withRuby = false;
+    withPython3 = false;
     package = pkgs.neovim;
     extraPackages = with pkgs; [
       stylua
