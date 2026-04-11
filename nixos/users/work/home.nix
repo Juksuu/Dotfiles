@@ -40,7 +40,6 @@
       # GUI
       kitty
       spotify
-      mumble
       zen-browser
       gimp3
       ristretto
@@ -50,16 +49,23 @@
       texturepacker
       zoom-us
       kdePackages.kcolorchooser
+      fontforge-gtk
+      libreoffice
+
+      # Ai stuff
+      opencode
+      llama-swap
+      llama-cpp
 
       # Custom pkgs
+      openconnect-pulse-launcher
+      veikkaus-vpn
       font-builder-ui
       particle-editor
       slotmachine-simulator
-      openconnect-pulse-launcher
       font-style-editor
     ])
     ++ (with pkgs-unstable; [
-      libreoffice
       thunderbird
       firefox
       chromium
@@ -75,6 +81,10 @@
     ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/niri";
     ".config/DankMaterialShell".source =
       config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/dankMaterialShell";
+    ".config/llama-swap".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/llama-swap/";
+    ".config/opencode".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/work/.dotfiles/configs/opencode/";
   };
 
   home.sessionVariables = {
@@ -104,6 +114,7 @@
     shellAliases = {
       wtc = "~/scripts/git/wtc.sh";
       gib = "~/scripts/git/gib.sh";
+      llmStart = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
     };
 
     plugins = [
@@ -144,9 +155,9 @@
     extraPackages = with pkgs; [
       stylua
       nixfmt
+      tree-sitter
       lua-language-server
       vscode-langservers-extracted
-      tree-sitter
     ];
   };
 

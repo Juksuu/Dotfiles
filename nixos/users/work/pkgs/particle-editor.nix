@@ -6,11 +6,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "particle-editor";
-  version = "5.3.0";
+  version = "5.3.2";
 
   src = fetchzip {
     url = "http://developer.sw.veikkaus.fi/particle-editor/ParticleEditor-linux-x64-${version}.zip";
-    hash = "sha256-MgQqZuMyezhMQY1CUi5oGGZ7ahmmvS2W2H40dp/Ep4c=";
+    hash = "sha256-8C1uEf9gkBDQ1G89UelUBWKW7RGQmCeuaIbsZTKUdkc=";
   };
 
   nativeBuildInputs = with pkgs; [
