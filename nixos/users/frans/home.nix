@@ -134,6 +134,7 @@
     enable = true;
     withRuby = false;
     withPython3 = false;
+    sideloadInitLua = true;
     package = pkgs.neovim;
     extraPackages = with pkgs; [
       stylua
