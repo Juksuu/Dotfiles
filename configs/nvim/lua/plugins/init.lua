@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
             vim.system(
                 { "nix", "run", ".#build-plugin", "--accept-flake-config" },
                 { cwd = ev.data.path }
-            ):wait()
+            ):wait(60000)
         end
 
         if
@@ -50,7 +50,6 @@ vim.pack.add({
     "https://github.com/sindrets/diffview.nvim",
     "https://github.com/utilyre/barbecue.nvim",
     "https://github.com/SmiteshP/nvim-navic",
-    "https://github.com/saghen/blink.cmp",
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/mfussenegger/nvim-dap",
     "https://github.com/rcarriga/nvim-dap-ui",
@@ -66,6 +65,7 @@ vim.pack.add({
     { src = "https://github.com/catppuccin/nvim",               name = "catppuccin" },
     { src = "https://github.com/Juksuu/worktrees.nvim",         name = "worktrees" },
     { src = "https://github.com/mikavilpas/blink-ripgrep.nvim", version = vim.version.range("2") },
+    { src = "https://github.com/saghen/blink.cmp",              version = vim.version.range("1") },
     -- stylua: ignore end
 })
 

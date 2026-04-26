@@ -37,7 +37,6 @@
 
       # GUI
       kitty
-      vesktop
       spotify
       mumble
       zen-browser
@@ -52,6 +51,7 @@
     ++ (with pkgs-unstable; [
       firefox
       chromium
+      vesktop
     ]);
 
   home.file = {
