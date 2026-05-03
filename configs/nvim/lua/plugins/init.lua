@@ -72,6 +72,8 @@ vim.pack.add({
 -- Local project paths
 -- vim.opt.rtp:append("~/code/worktrees.nvim/main")
 
+vim.cmd.packadd("nvim.undotree")
+
 require("gitsigns").setup()
 require("fidget").setup({})
 require("mini.pairs").setup()
