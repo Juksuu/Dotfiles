@@ -49,7 +49,13 @@
         inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.niri
         (final: prev: {
-          zen-browser = inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
+          zen-browser =
+            inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
+              (previousAttrs: {
+                buildInputs = (previousAttrs.buildInputs or [ ]) ++ [
+                  prev.pkgs.libgbm
+                ];
+              });
         })
         (final: prev: {
           quickshell = inputs.quickshell.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
