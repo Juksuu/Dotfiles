@@ -96,7 +96,10 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
   };
 
   environment = {
@@ -128,7 +131,7 @@
       alsa-utils
       pavucontrol
       home-manager
-      kdePackages.qtmultimedia
+      nvtopPackages.nvidia
 
       # Terminal (alacritty used in most setups as default)
       alacritty
@@ -170,8 +173,6 @@
   };
 
   programs.nix-ld.enable = true;
-
-  programs.dconf.enable = true;
 
   systemd.services.NetworkManager-wait-online.enable = false;
 

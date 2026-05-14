@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "configurations": [
+    {
+      "id": "profile_1770917895938_421frm",
+      "name": "Home",
+      "outputs": {
+        "DP-4": {
+          "mode": "2560x1440@143.998",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "scale": 1,
+          "transform": "90",
+          "vrr": true,
+          "disabled": false,
+          "niri": {
+            "vrrOnDemand": true,
+            "hotCorners": {
+              "off": true
+            }
+          }
+        },
+        "DP-6": {
+          "mode": "2560x1440@300.000",
+          "position": {
+            "x": 1440,
+            "y": 840
+          },
+          "scale": 1,
+          "transform": "Normal",
+          "vrr": true,
+          "disabled": false,
+          "niri": {
+            "vrrOnDemand": true,
+            "hotCorners": {
+              "off": true
+            }
+          }
+        }
+      }
+    }
+  ]
+}
