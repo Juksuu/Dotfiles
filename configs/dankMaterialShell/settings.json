@@ -455,17 +455,23 @@
   "updaterIntervalSeconds": 1800,
   "updaterIncludeFlatpak": true,
   "updaterAllowAUR": true,
-  "displayNameMode": "system",
+  "displayNameMode": "model",
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "niriOutputSettings": {
-    "DP-6": {
+    "ASUSTek COMPUTER INC XG27AQMR R5LMTF030397": {
       "vrrOnDemand": true,
       "hotCorners": {
         "off": true
       }
     },
-    "DP-4": {
+    "Acer Technologies XB271HU #ASOE4vm0VOrd": {
+      "vrrOnDemand": true,
+      "hotCorners": {
+        "off": true
+      }
+    },
+    "ASUSTek COMPUTER INC PG27AQWP-W TBLMAS011736": {
       "vrrOnDemand": true,
       "hotCorners": {
         "off": true
