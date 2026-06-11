@@ -127,7 +127,7 @@
   "showWorkspacePadding": true,
   "workspaceScrolling": false,
   "showWorkspaceApps": false,
-  "workspaceDragReorder": true,
+  "workspaceDragReorder": false,
   "maxWorkspaceIcons": 3,
   "workspaceAppIconSizeOffset": 0,
   "groupWorkspaceApps": true,
@@ -582,7 +582,8 @@
       "popupGapsManual": 4,
       "widgetOutlineEnabled": false,
       "iconScale": 1,
-      "widgetPadding": 8
+      "widgetPadding": 8,
+      "shadowIntensity": 0
     }
   ],
   "desktopClockEnabled": false,
