@@ -46,8 +46,14 @@
     inputs:
     let
       overlays = [
-        inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.niri
+        (final: prev: {
+          neovim =
+            inputs.neovim-overlay.packages.${prev.pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
+              (previousAttrs: {
+                patches = [ ];
+              });
+        })
         (final: prev: {
           zen-browser =
             inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
