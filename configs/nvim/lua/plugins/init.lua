@@ -11,10 +11,17 @@ vim.api.nvim_create_autocmd("PackChanged", {
         end
 
         if name == "blink.cmp" and (kind == "install" or kind == "update") then
+            if not ev.data.active then
+                vim.cmd.packadd("blink.lib")
+                vim.cmd.packadd("blink.cmp")
+            end
+            vim.system({ "nix", "build", "." }, { cwd = ev.data.path }):wait()
+            vim.system({ "rm", "-rf", "lib" }, { cwd = ev.data.path }):wait()
+            vim.system({ "mkdir", "-p", "lib" }, { cwd = ev.data.path }):wait()
             vim.system(
-                { "nix", "run", ".#build-plugin", "--accept-flake-config" },
+                { "cp", "result/lib/libblink_cmp_fuzzy.so", "lib/" },
                 { cwd = ev.data.path }
-            ):wait(60000)
+            ):wait()
         end
 
         if
@@ -59,13 +66,14 @@ vim.pack.add({
     "https://github.com/folke/todo-comments.nvim",
     "https://github.com/MeanderingProgrammer/render-markdown.nvim",
     "https://github.com/sudo-tee/opencode.nvim",
+    "https://github.com/saghen/blink.cmp",
+    "https://github.com/saghen/blink.lib",
 
     -- stylua: ignore start
     { src = "https://github.com/ms-jpq/chadtree",               version = "chad" },
     { src = "https://github.com/catppuccin/nvim",               name = "catppuccin" },
     { src = "https://github.com/Juksuu/worktrees.nvim",         name = "worktrees" },
     { src = "https://github.com/mikavilpas/blink-ripgrep.nvim", version = vim.version.range("2") },
-    { src = "https://github.com/saghen/blink.cmp",              version = vim.version.range("1") },
     -- stylua: ignore end
 })
 
