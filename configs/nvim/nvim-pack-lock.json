@@ -15,7 +15,7 @@
       "version": "1.0.0 - 2.0.0"
     },
     "catppuccin": {
-      "rev": "0303a7208dba448c459767486a38a6ec05c4216b",
+      "rev": "49a926655a2f5579e9c276470fc300baaa49e524",
       "src": "https://github.com/catppuccin/nvim"
     },
     "chadtree": {
@@ -80,7 +80,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
+      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -104,7 +104,7 @@
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "opencode.nvim": {
-      "rev": "50d85bbef571d4621485a061a9241de5f883d750",
+      "rev": "d83f986c478fbf3e1343f2c8d7cb5c7f455b1414",
       "src": "https://github.com/sudo-tee/opencode.nvim"
     },
     "plenary.nvim": {
