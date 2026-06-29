@@ -52,17 +52,6 @@
         };
       };
 
-      # pulse-cookie-wrapper =
-      #   prev.pkgs.runCommand "pulse-cookie-wrapper"
-      #     {
-      #       buildInputs = [ prev.pkgs.makeWrapper ];
-      #     }
-      #     ''
-      #       makeWrapper ${pulse-cookie}/bin/get-pulse-cookie $out/bin/get-pulse-cookie \
-      #         --set QT_PLUGIN_PATH "${prev.pkgs.lib.getLib prev.pkgs.qt6.qtbase}/lib/qt-6.2/plugins" \
-      #         --set QML2_IMPORT_PATH "${prev.pkgs.qt6.qtbase}/qml"
-      #     '';
-
       pulse-vpn-shell-script = prev.pkgs.writeShellScriptBin "veikkaus-vpn" ''
         HOST=https://partnergate.veikkaus.fi/dika
 

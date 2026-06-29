@@ -47,8 +47,6 @@
       slack
       dropbox
       texturepacker
-      zoom-us
-      kdePackages.kcolorchooser
       fontforge-gtk
       libreoffice
 
@@ -56,13 +54,11 @@
       opencode
       llama-swap
       llama-cpp
+      claude-code
 
       # Custom pkgs
-      openconnect-pulse-launcher
       veikkaus-vpn
-      font-builder-ui
       particle-editor
-      slotmachine-simulator
       font-style-editor
     ])
     ++ (with pkgs-unstable; [

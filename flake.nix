@@ -40,6 +40,7 @@
       url = "github:erahhal/openconnect-pulse-launcher";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    claude-desktop.url = "github:aaddrick/claude-desktop-debian";
   };
 
   outputs =
@@ -48,6 +49,7 @@
       overlays = [
         inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.niri
+        inputs.claude-desktop.overlays.default
         (final: prev: {
           zen-browser =
             inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default.overrideAttrs

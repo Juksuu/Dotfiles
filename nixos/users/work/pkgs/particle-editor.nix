@@ -6,7 +6,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "particle-editor";
-  version = "5.3.2";
+  version = "5.3.3";
 
   src = fetchzip {
     url = "http://developer.sw.veikkaus.fi/particle-editor/ParticleEditor-linux-x64-${version}.zip";
