@@ -5,23 +5,6 @@
       "id": "profile_1770917895938_421frm",
       "name": "Home",
       "outputs": {
-        "ASUSTek COMPUTER INC PG27AQWP-W TBLMAS011736": {
-          "mode": "2560x1440@540.000",
-          "position": {
-            "x": 1440,
-            "y": 1440
-          },
-          "scale": 1,
-          "transform": "Normal",
-          "vrr": false,
-          "disabled": false,
-          "niri": {
-            "vrrOnDemand": true,
-            "hotCorners": {
-              "off": true
-            }
-          }
-        },
         "Acer Technologies XB271HU #ASOE4vm0VOrd": {
           "mode": "2560x1440@143.998",
           "position": {
@@ -40,13 +23,30 @@
           }
         },
         "ASUSTek COMPUTER INC XG27AQMR R5LMTF030397": {
-          "mode": "2560x1440@300.000",
+          "mode": "2560x1440@270.001",
           "position": {
             "x": 1440,
             "y": 0
           },
           "scale": 1,
           "transform": "180",
+          "vrr": false,
+          "disabled": false,
+          "niri": {
+            "vrrOnDemand": true,
+            "hotCorners": {
+              "off": true
+            }
+          }
+        },
+        "ASUSTek COMPUTER INC PG27AQWP-W TBLMAS011736": {
+          "mode": "2560x1440@540.000",
+          "position": {
+            "x": 1440,
+            "y": 1440
+          },
+          "scale": 1,
+          "transform": "Normal",
           "vrr": false,
           "disabled": false,
           "niri": {

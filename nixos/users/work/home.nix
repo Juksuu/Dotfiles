@@ -43,6 +43,7 @@
       zen-browser
       gimp3
       ristretto
+      obs-studio
       mpv
       slack
       dropbox
@@ -219,7 +220,6 @@
     quickshell = {
       package = pkgs.quickshell;
     };
+    enableCalendarEvents = false;
   };
-
-  programs.obs-studio.enable = true;
 }

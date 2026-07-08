@@ -42,6 +42,7 @@
       zen-browser
       gimp3
       ristretto
+      obs-studio
 
       # Ai stuff
       opencode
@@ -202,7 +203,6 @@
     quickshell = {
       package = pkgs.quickshell;
     };
+    enableCalendarEvents = false;
   };
-
-  programs.obs-studio.enable = true;
 }
