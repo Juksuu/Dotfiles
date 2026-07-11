@@ -2,14 +2,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
     callback = function(ev)
         local name, kind = ev.data.spec.name, ev.data.kind
 
-        if name == "chadtree" and (kind == "install" or kind == "update") then
-            vim.system(
-                { "python3", "-m", "chadtree", "deps" },
-                { cwd = ev.data.path }
-            )
-                :wait()
-        end
-
         if name == "blink.cmp" and (kind == "install" or kind == "update") then
             if not ev.data.active then
                 vim.cmd.packadd("blink.lib")
@@ -69,7 +61,6 @@ vim.pack.add({
     "https://github.com/Bekaboo/dropbar.nvim",
 
     -- stylua: ignore start
-    { src = "https://github.com/ms-jpq/chadtree",               version = "chad" },
     { src = "https://github.com/catppuccin/nvim",               name = "catppuccin" },
     { src = "https://github.com/Juksuu/worktrees.nvim",         name = "worktrees" },
     { src = "https://github.com/mikavilpas/blink-ripgrep.nvim", version = vim.version.range("2") },
@@ -97,7 +88,6 @@ require("render-markdown").setup({
 })
 
 vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
-vim.keymap.set("n", "<leader>fo", "<cmd>CHADopen<CR>")
 
 -- Load plugin files
 require("plugins.catppuccin")

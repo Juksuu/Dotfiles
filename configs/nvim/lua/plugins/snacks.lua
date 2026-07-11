@@ -20,8 +20,10 @@ require("snacks").setup({
             },
         },
     },
+    explorer = {
+        trash = true,
+    },
 })
-
 
 -- stylua: ignore start
 -- Keymaps for snacks modules
@@ -38,6 +40,7 @@ vim.keymap.set("n", "[[", function() Snacks.words.jump(-vim.v.count1) end)
 vim.keymap.set("n", "<leader>ss", function() Snacks.picker.grep() end)
 vim.keymap.set("n", "<leader>sg", function() Snacks.picker.git_files() end)
 vim.keymap.set("n", "<leader>sf", function() Snacks.picker.files() end)
+vim.keymap.set("n", "<leader>fo", function() Snacks.picker.explorer() end)
 -- stylua: ignore end
 
 -- stylua: ignore start

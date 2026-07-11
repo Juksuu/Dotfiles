@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "barbecue.nvim": {
-      "rev": "3e31404f0b93a2c30d151abf0648650ac811c664",
-      "src": "https://github.com/utilyre/barbecue.nvim"
-    },
     "blink-ripgrep.nvim": {
       "rev": "5ed7bac817777994cb80abccd052b73eb844166c",
       "src": "https://github.com/mikavilpas/blink-ripgrep.nvim",
@@ -20,11 +16,6 @@
     "catppuccin": {
       "rev": "05e8787020dcfdb937bf2ff23855ea2415b4e072",
       "src": "https://github.com/catppuccin/nvim"
-    },
-    "chadtree": {
-      "rev": "6c37557462f9a8b51d0fc873c63863672a45cf5a",
-      "src": "https://github.com/ms-jpq/chadtree",
-      "version": "'chad'"
     },
     "conform.nvim": {
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
@@ -89,10 +80,6 @@
     "nvim-lspconfig": {
       "rev": "5955a100ae7155962330643924e21a798b9bdc91",
       "src": "https://github.com/neovim/nvim-lspconfig"
-    },
-    "nvim-navic": {
-      "rev": "f5eba192f39b453675d115351808bd51276d9de5",
-      "src": "https://github.com/SmiteshP/nvim-navic"
     },
     "nvim-nio": {
       "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
