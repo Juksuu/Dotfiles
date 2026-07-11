@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
-        vim.hl.on_yank({ higroup = "IncSearch", timeout = 400 })
+        vim.hl.hl_op({ higroup = "IncSearch", timeout = 400 })
     end,
 })
 
@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
         local contents = vim.secure.read(
             string.format("%s/%s", args.file, PROJECT_CONFIG_FILE_NAME)
         )
-        if contents then
+        if type(contents) == "string" then
             assert(loadstring(contents))()
         end
     end,
@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
         local contents = vim.secure.read(
             string.format("%s/%s", vim.fn.getcwd(), PROJECT_CONFIG_FILE_NAME)
         )
-        if contents then
+        if type(contents) == "string" then
             assert(loadstring(contents))()
         end
     end,

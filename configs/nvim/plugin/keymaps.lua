@@ -12,3 +12,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
 vim.keymap.set("t", "<c-c>", "<c-\\><c-n>")
+
+-- Maintain cursor position when joining lines
+vim.keymap.set("n", "J", "mzJ`z")

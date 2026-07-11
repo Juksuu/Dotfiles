@@ -12,35 +12,17 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamed,unnamedplus"
 
-vim.opt.completeopt = "menu,menuone,noinsert"
-
 vim.opt.number = true
-vim.opt.laststatus = 3
-vim.opt.showmode = false
-vim.opt.showtabline = 0
 vim.opt.signcolumn = "yes:1"
+vim.opt.colorcolumn = "80"
+vim.opt.scrolloff = 8
+vim.opt.wrap = false
 
 vim.opt.list = true
 vim.opt.listchars = "tab:→ ,trail:·"
-vim.opt.fillchars = {
-    horiz = "─",
-    horizup = "─",
-    horizdown = "─",
-    vert = "▏",
-    vertleft = "▏",
-    vertright = "▕",
-    verthoriz = "─",
-    eob = " ",
-    diff = "╱",
-}
 
 vim.opt.undofile = true
 vim.opt.swapfile = false
 
 vim.opt.confirm = true
-vim.opt.updatetime = 100
-
-vim.opt.scrolloff = 10
-vim.opt.smoothscroll = true
-
-vim.opt.autoread = true
+vim.opt.updatetime = 50

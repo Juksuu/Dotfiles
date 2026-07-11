@@ -55,8 +55,6 @@ vim.pack.add({
     "https://github.com/folke/snacks.nvim",
     "https://github.com/NeogitOrg/neogit",
     "https://github.com/sindrets/diffview.nvim",
-    "https://github.com/utilyre/barbecue.nvim",
-    "https://github.com/SmiteshP/nvim-navic",
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/mfussenegger/nvim-dap",
     "https://github.com/rcarriga/nvim-dap-ui",
@@ -68,6 +66,7 @@ vim.pack.add({
     "https://github.com/sudo-tee/opencode.nvim",
     "https://github.com/saghen/blink.cmp",
     "https://github.com/saghen/blink.lib",
+    "https://github.com/Bekaboo/dropbar.nvim",
 
     -- stylua: ignore start
     { src = "https://github.com/ms-jpq/chadtree",               version = "chad" },
@@ -104,7 +103,6 @@ vim.keymap.set("n", "<leader>fo", "<cmd>CHADopen<CR>")
 require("plugins.catppuccin")
 require("plugins.treesitter")
 require("plugins.heirline")
-require("plugins.barbecue")
 require("plugins.blink-cmp")
 require("plugins.lsp")
 require("plugins.conform")
