@@ -9,14 +9,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     niri.url = "github:sodiboo/niri-flake";
     quickshell = {
@@ -50,6 +42,7 @@
         inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.niri
         inputs.claude-desktop.overlays.default
+        inputs.quickshell.overlays.default
         (final: prev: {
           zen-browser =
             inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
@@ -60,15 +53,11 @@
               });
         })
         (final: prev: {
-          quickshell = inputs.quickshell.packages.${prev.pkgs.stdenv.hostPlatform.system}.default;
-        })
-        (final: prev: {
           openconnect-pulse-launcher =
             inputs.openconnect-pulse-launcher.packages.${prev.pkgs.stdenv.hostPlatform.system}.openconnect-pulse-launcher;
         })
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };
-      darwinUtils = import ./darwinNix/utils.nix { inherit inputs overlays; };
     in
     {
       nixosConfigurations = {
@@ -94,14 +83,6 @@
           system = "x86_64-linux";
           username = "work";
           hostname = "worknix";
-        };
-      };
-
-      darwinConfigurations = {
-        juksumac = darwinUtils.makeSystem {
-          system = "x86_64-darwin";
-          hostname = "juksumac";
-          users = [ "juksu" ];
         };
       };
     };
