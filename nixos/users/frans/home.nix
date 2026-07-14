@@ -37,6 +37,7 @@
 
       # GUI
       kitty
+      ghostty
       spotify
       mumble
       zen-browser
@@ -63,6 +64,10 @@
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/nvim";
     ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/kitty";
     ".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/niri";
+    ".config/ghostty".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/ghostty";
+    ".config/matugen".source =
+      config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/matugen";
     ".config/DankMaterialShell".source =
       config.lib.file.mkOutOfStoreSymlink "/home/frans/.dotfiles/configs/dankMaterialShell";
     ".config/llama-swap".source =
@@ -82,7 +87,6 @@
 
     interactiveShellInit = ''
       set fish_greeting
-      set fish_color_command blue
 
       if test -z (pgrep ssh-agent | string collect)
         eval (ssh-agent -c) > /dev/null

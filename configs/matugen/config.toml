@@ -1,0 +1,5 @@
+[config]
+
+[templates.fish]
+input_path = "~/.config/matugen/templates/fish.fish"
+output_path = "~/.config/fish/conf.d/matugen_colors.fish"

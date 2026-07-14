@@ -180,6 +180,7 @@
   "scrollTitleEnabled": true,
   "mediaAdaptiveWidthEnabled": true,
   "audioVisualizerEnabled": true,
+  "mediaUseAlbumArtAccent": false,
   "audioScrollMode": "volume",
   "audioWheelScrollAmount": 5,
   "audioDeviceScrollVolumeEnabled": false,
@@ -416,7 +417,7 @@
   "matugenTemplateVesktop": true,
   "matugenTemplateVencord": true,
   "matugenTemplateEquibop": false,
-  "matugenTemplateGhostty": false,
+  "matugenTemplateGhostty": true,
   "matugenTemplateKitty": true,
   "matugenTemplateFoot": false,
   "matugenTemplateAlacritty": false,
@@ -426,7 +427,7 @@
   "matugenTemplateKcolorscheme": false,
   "matugenTemplateVscode": false,
   "matugenTemplateEmacs": false,
-  "matugenTemplateZed": true,
+  "matugenTemplateZed": false,
   "matugenTemplateNeovimSettings": {
     "dark": {
       "baseTheme": "github_dark",
