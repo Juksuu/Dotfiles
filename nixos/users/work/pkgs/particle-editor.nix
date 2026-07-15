@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "http://developer.sw.veikkaus.fi/particle-editor/ParticleEditor-linux-x64-${version}.zip";
-    hash = "sha256-8C1uEf9gkBDQ1G89UelUBWKW7RGQmCeuaIbsZTKUdkc=";
+    hash = "sha256-3SOtTX6ObVFS+u7YVia+TRyVq+w66LbjUJOCaGI68A0=";
   };
 
   nativeBuildInputs = with pkgs; [

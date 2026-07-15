@@ -6,11 +6,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "FontStyleEditor";
-  version = "1.0.2";
+  version = "1.1.0";
 
   src = fetchzip {
     url = "http://developer.sw.veikkaus.fi/fse/launcher/FontStyleEditor-linux-x64-${version}.zip";
-    hash = "sha256-0hfdpZYryheevhU19HgrEFCvOAiJflrJUaOjVNqryHc=";
+    hash = "sha256-iQozEm20Ky5otmyazrKAU5aE0BNeoRQXf+r8J+up98Q=";
   };
 
   nativeBuildInputs = with pkgs; [

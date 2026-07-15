@@ -57,6 +57,7 @@
       llama-swap
       llama-cpp
       claude-code
+      claude-desktop
 
       # Custom pkgs
       veikkaus-vpn
