@@ -65,7 +65,7 @@ require("catppuccin").setup({
     },
     transparent_background = true,
     show_end_of_buffer = false,
-    default_integrations = false,
+    auto_integrations = false,
     integrations = {
         blink_cmp = {
             enabled = true,

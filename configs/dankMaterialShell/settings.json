@@ -32,7 +32,7 @@
   "firstDayOfWeek": -1,
   "showWeekNumber": false,
   "calendarBackend": "auto",
-  "use24HourClock": true,
+  "clockFormat": "24h",
   "showSeconds": false,
   "padHours12Hour": false,
   "useFahrenheit": false,
@@ -60,6 +60,7 @@
   "blurEnabled": false,
   "blurForegroundLayers": true,
   "blurLayerOutlineOpacity": 0.12,
+  "blurBorderEnabled": true,
   "blurBorderColor": "outline",
   "blurBorderCustomColor": "#ffffff",
   "blurBorderOpacity": 1,
@@ -243,12 +244,10 @@
   "greeterEnableFprint": false,
   "greeterEnableU2f": false,
   "greeterWallpaperPath": "",
-  "greeterUse24HourClock": true,
-  "greeterShowSeconds": false,
-  "greeterPadHours12Hour": false,
   "greeterLockDateFormat": "",
   "greeterFontFamily": "",
   "greeterWallpaperFillMode": "",
+  "greeterPamExternallyManaged": false,
   "greeterSyncPending": false,
   "greeterSyncBaseline": {},
   "mediaSize": 1,
@@ -266,6 +265,7 @@
   "spotlightSectionViewModes": {},
   "appDrawerSectionViewModes": {},
   "niriOverviewOverlayEnabled": true,
+  "niriOverviewLauncherStyle": "full",
   "dankLauncherV2Size": "compact",
   "dankLauncherV2ShowSourceBadges": true,
   "dankLauncherV2BorderEnabled": false,
@@ -379,6 +379,7 @@
   "batteryLowNotificationType": 0,
   "batteryCriticalNotificationType": 0,
   "batteryAutoPowerSaver": false,
+  "lowerDisplayRefreshRateOnBattery": false,
   "lockBeforeSuspend": false,
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": false,
@@ -473,6 +474,7 @@
   "notificationOverlayEnabled": false,
   "notificationPopupShadowEnabled": true,
   "notificationPopupPrivacyMode": false,
+  "notificationForegroundLayers": true,
   "modalDarkenBackground": true,
   "lockScreenShowPowerActions": true,
   "lockScreenShowSystemIcons": true,
@@ -487,6 +489,11 @@
   "maxFprintTries": 3,
   "enableU2f": false,
   "u2fMode": "or",
+  "lockPamPath": "",
+  "lockPamInlineFprint": false,
+  "lockPamInlineU2f": false,
+  "lockPamExternallyManaged": false,
+  "lockU2fPamPath": "",
   "lockScreenInactiveColor": "#000000",
   "lockScreenNotificationMode": 0,
   "lockScreenVideoEnabled": false,
@@ -550,6 +557,7 @@
   "updaterIntervalSeconds": 1800,
   "updaterIncludeFlatpak": true,
   "updaterAllowAUR": true,
+  "updaterIgnoredPackages": [],
   "displayNameMode": "model",
   "screenPreferences": {},
   "showOnLastDisplay": {},
@@ -578,6 +586,20 @@
   "activeDisplayProfile": {
     "niri": "profile_1770917895938_421frm"
   },
+  "activeDisplayProfileModes": {
+    "niri": {
+      "Acer Technologies XB271HU #ASOE4vm0VOrd": {
+        "mode": "2560x1440@143.998"
+      },
+      "ASUSTek COMPUTER INC XG27AQMR R5LMTF030397": {
+        "mode": "2560x1440@270.001"
+      },
+      "ASUSTek COMPUTER INC PG27AQWP-W TBLMAS011736": {
+        "mode": "2560x1440@540.000"
+      }
+    }
+  },
+  "displayPreviousRefreshModes": {},
   "displayProfileAutoSelect": false,
   "displayShowDisconnected": false,
   "displaySnapToEdge": true,

@@ -15,8 +15,12 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dankMaterialShell = {
+    dank-material-shell = {
       url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dank-greeter = {
+      url = "github:AvengeMedia/dank-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

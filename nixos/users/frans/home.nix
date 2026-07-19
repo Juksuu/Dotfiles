@@ -11,7 +11,7 @@
   home.stateVersion = "24.05";
 
   # Import homemanager modules
-  imports = [ inputs.dankMaterialShell.homeModules.dank-material-shell ];
+  imports = [ inputs.dank-material-shell.homeModules.dank-material-shell ];
 
   nixpkgs.overlays =
     let

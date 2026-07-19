@@ -12,10 +12,10 @@
 
     ../common/core.nix
 
-    inputs.dankMaterialShell.nixosModules.greeter
+    inputs.dank-greeter.nixosModules.default
   ];
 
-  # Obs camera 
+  # Obs camera
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     kernelModules = [ "v4l2loopback" ];
@@ -41,7 +41,7 @@
     ];
   };
 
-  programs.dank-material-shell.greeter = {
+  programs.dms-greeter = {
     enable = true;
     compositor = {
       name = "niri"; # Required. Can be also "hyprland" or "sway"

@@ -12,14 +12,14 @@
 
     ../common/core.nix
 
-    inputs.dankMaterialShell.nixosModules.greeter
+    inputs.dank-greeter.nixosModules.default
   ];
 
   networking.hostName = "homenix";
 
   programs.steam.enable = true;
 
-  programs.dank-material-shell.greeter = {
+  programs.dms-greeter = {
     enable = true;
     compositor = {
       name = "niri"; # Required. Can be also "hyprland" or "sway"
