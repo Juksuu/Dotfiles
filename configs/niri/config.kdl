@@ -6,6 +6,7 @@ include "dms/cursor.kdl"
 include "dms/outputs.kdl"
 include "dms/wpblur.kdl"
 include "dms/windowrules.kdl"
+include "dms/input.kdl"
 
 // Default workspaces for main monitor
 workspace "coding"
@@ -21,10 +22,6 @@ input {
 
         repeat-delay 250
         repeat-rate 35
-    }
-
-    mouse {
-       accel-profile "flat"
     }
 
     focus-follows-mouse max-scroll-amount="95%"
