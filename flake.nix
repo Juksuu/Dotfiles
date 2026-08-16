@@ -10,7 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri.url = "github:sodiboo/niri-flake";
+    niri = {
+      url = "github:niri-wm/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,7 +47,7 @@
     let
       overlays = [
         inputs.neovim-overlay.overlays.default
-        inputs.niri.overlays.niri
+        inputs.niri.overlays.default
         inputs.claude-desktop.overlays.default
         inputs.quickshell.overlays.default
         (final: prev: {

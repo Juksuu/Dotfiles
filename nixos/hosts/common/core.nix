@@ -8,8 +8,6 @@
 {
   system.stateVersion = "24.05";
 
-  imports = [ inputs.niri.nixosModules.niri ];
-
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = "nix-command flakes";
@@ -177,10 +175,9 @@
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  systemd.user.services.niri-flake-polkit.enable = false;
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable.overrideAttrs (
+    package = pkgs.niri.overrideAttrs (
       finalAttrs: previousAttrs: {
         preInstall = ''
           echo "org.freedesktop.impl.portal.FileChooser=gtk;" >> "resources/niri-portals.conf"
