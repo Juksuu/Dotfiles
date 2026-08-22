@@ -7,6 +7,7 @@ include "dms/outputs.kdl"
 include "dms/wpblur.kdl"
 include "dms/windowrules.kdl"
 include "dms/input.kdl"
+include "dms/layout.kdl"
 
 // Default workspaces for main monitor
 workspace "coding"
@@ -51,8 +52,6 @@ screenshot-path "~/Pictures/Screenshots/Screenshot_%Y-%m-%d_%H-%M-%S.png"
 
 // Layout
 layout {
-    gaps 16
-
     always-center-single-column
     center-focused-column "never"
 

@@ -146,9 +146,9 @@
           "enabled": true
         }
       ],
-      "spacing": 4,
+      "spacing": 6,
       "innerPadding": 4,
-      "bottomGap": 0,
+      "bottomGap": 6,
       "transparency": 0.7,
       "widgetTransparency": 1,
       "squareCorners": false,
@@ -204,5 +204,5 @@
       "trigger": "?"
     }
   },
-  "configVersion": 15
+  "configVersion": 16
 }
