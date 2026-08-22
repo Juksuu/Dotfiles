@@ -6,21 +6,10 @@ models:
       --port ''${PORT}
       --chat-template-kwargs '{"reasoning_effort": "medium"}'
 
-  "qwen3-coder:30b-a3b-instruct":
+  "Qwen 3.8 27B":
     cmd: |
       llama-server
-      -hf unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF
-      --port ''${PORT}
-
-  "Qwen3.6-27B-MTP":
-    cmd: |
-      llama-server
-      -hf unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL
-      --temp 0.6
-      --top-p 0.95
-      --top-k 20
-      --min-p 0.00
-      --spec-type draft-mtp --spec-draft-n-max 2
+      -hf unsloth/Qwen3.8-27B-GGUF
       --port ''${PORT}
 
 # TTL keeps models in memory for specified seconds after last use
