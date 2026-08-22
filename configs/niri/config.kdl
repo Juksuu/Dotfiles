@@ -111,7 +111,7 @@ binds {
     Mod+BracketRight { spawn-sh "niri msg action set-dynamic-cast-window --id $(niri msg --json pick-window | jq .id)"; }
     Mod+BracketLeft { spawn-sh "niri msg action set-dynamic-cast-monitor"; }
 
-    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
 
     // DankMaterialShell
     XF86AudioRaiseVolume allow-when-locked=true {
