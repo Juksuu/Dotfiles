@@ -5,30 +5,14 @@ require("snacks").setup({
     scope = { enabled = true },
     scroll = { enabled = true },
     words = { enabled = true },
-    picker = {
-        enabled = true,
-        actions = {
-            opencode_send = function(...)
-                return require("opencode").snacks_picker_send(...)
-            end,
-        },
-        win = {
-            input = {
-                keys = {
-                    ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-                },
-            },
-        },
-    },
-    explorer = {
-        trash = true,
-    },
+    picker = { enabled = true },
+    explorer = { trash = true },
 })
 
 -- stylua: ignore start
 -- Keymaps for snacks modules
 vim.keymap.set("n", "<leader>s", function() Snacks.scratch() end)
-vim.keymap.set("n", "<leader>ss", function() Snacks.scratch.select() end)
+vim.keymap.set("n", "<leader>S", function() Snacks.scratch.select() end)
 vim.keymap.set("n", "<leader>bd", function() Snacks.bufdelete() end)
 vim.keymap.set("n", "<leader>gb", function() Snacks.git.blame_line() end)
 vim.keymap.set("n", "]]", function() Snacks.words.jump(vim.v.count1) end)

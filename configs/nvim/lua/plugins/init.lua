@@ -55,7 +55,6 @@ vim.pack.add({
     "https://github.com/folke/trouble.nvim",
     "https://github.com/folke/todo-comments.nvim",
     "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-    "https://github.com/sudo-tee/opencode.nvim",
     "https://github.com/saghen/blink.cmp",
     "https://github.com/saghen/blink.lib",
     "https://github.com/Bekaboo/dropbar.nvim",
@@ -84,7 +83,7 @@ require("tmux").setup({
 })
 require("render-markdown").setup({
     anti_conceal = { enabled = false },
-    file_types = { "markdown", "opencode_output" },
+    file_types = { "markdown" },
 })
 
 vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
@@ -92,16 +91,15 @@ vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
 -- Load plugin files
 require("plugins.catppuccin")
 require("plugins.treesitter")
+require("plugins.lsp")
 require("plugins.heirline")
 require("plugins.blink-cmp")
-require("plugins.lsp")
 require("plugins.conform")
 require("plugins.lint")
 require("plugins.dap")
 require("plugins.nvim-pasta")
 require("plugins.snacks")
 require("plugins.trouble")
-require("plugins.opencode")
 
 -- Load worktrees plugin last as it has extra functionality if other plugins are loaded
 require("worktrees").setup({})
