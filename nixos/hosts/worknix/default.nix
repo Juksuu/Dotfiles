@@ -52,8 +52,5 @@
 
     # Custom config files for non-standard config locations
     configFiles = [ "/home/work/.config/DankMaterialShell/settings.json" ];
-
-    # Custom Quickshell Package
-    quickshell.package = pkgs.quickshell;
   };
 }

@@ -14,12 +14,8 @@
       url = "github:niri-wm/niri";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     dank-material-shell = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell?rev=dca1bd35917710900e9b4f97c91c2d9cbeca015b";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dank-greeter = {
@@ -35,10 +31,6 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    openconnect-pulse-launcher = {
-      url = "github:erahhal/openconnect-pulse-launcher";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
   };
 
@@ -46,10 +38,9 @@
     inputs:
     let
       overlays = [
-        inputs.neovim-overlay.overlays.default
         inputs.niri.overlays.default
+        inputs.neovim-overlay.overlays.default
         inputs.claude-desktop.overlays.default
-        inputs.quickshell.overlays.default
         (final: prev: {
           zen-browser =
             inputs.zen-browser.packages.${prev.pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
@@ -58,10 +49,6 @@
                   prev.pkgs.libgbm
                 ];
               });
-        })
-        (final: prev: {
-          openconnect-pulse-launcher =
-            inputs.openconnect-pulse-launcher.packages.${prev.pkgs.stdenv.hostPlatform.system}.openconnect-pulse-launcher;
         })
       ];
       utils = import ./nixos/utils.nix { inherit inputs overlays; };

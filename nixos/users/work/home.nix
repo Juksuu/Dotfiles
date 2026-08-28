@@ -219,12 +219,11 @@
 
   programs.dank-material-shell = {
     enable = true;
-    systemd = {
-      enable = false;
-    };
-    quickshell = {
-      package = pkgs.quickshell;
-    };
     enableCalendarEvents = false;
+
+    systemd = {
+      enable = true; # Systemd service for auto-start
+      restartIfChanged = true; # Auto-restart dms.service when dank-material-shell changes
+    };
   };
 }
