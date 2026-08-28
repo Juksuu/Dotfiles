@@ -32,6 +32,7 @@ vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/direnv/direnv.vim",
     "https://github.com/tpope/vim-sleuth",
@@ -92,7 +93,8 @@ vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
 require("plugins.catppuccin")
 require("plugins.treesitter")
 require("plugins.lsp")
-require("plugins.heirline")
+-- require("plugins.heirline")
+require("plugins.lualine")
 require("plugins.blink-cmp")
 require("plugins.conform")
 require("plugins.lint")
