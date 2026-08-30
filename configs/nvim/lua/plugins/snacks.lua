@@ -5,8 +5,47 @@ require("snacks").setup({
     scope = { enabled = true },
     scroll = { enabled = true },
     words = { enabled = true },
-    picker = { enabled = true },
     explorer = { trash = true },
+
+    scratch = {
+        win = {
+            backdrop = false,
+        },
+    },
+
+    picker = {
+        layouts = {
+            rounded = {
+                layout = {
+                    box = "horizontal",
+                    backdrop = false,
+                    width = 0.8,
+                    height = 0.8,
+
+                    {
+                        box = "vertical",
+                        border = "rounded",
+                        title = "{title} {live} {flags}",
+                        title_pos = "center",
+
+                        { win = "input", height = 1, border = "bottom" },
+                        { win = "list", border = "none" },
+                    },
+
+                    {
+                        win = "preview",
+                        title = "{preview}",
+                        border = "rounded",
+                        width = 0.5,
+                    },
+                },
+            },
+        },
+
+        layout = {
+            preset = "rounded",
+        },
+    },
 })
 
 -- stylua: ignore start
