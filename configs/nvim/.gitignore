@@ -1,2 +1,6 @@
 vim.log
 *.luarc.json
+
+# Dms colors
+colors/dms.lua
+lua/lualine/themes/dms.lua

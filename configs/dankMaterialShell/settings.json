@@ -1,6 +1,7 @@
 {
   "currentThemeName": "dynamic",
   "currentThemeCategory": "dynamic",
+  "matugenScheme": "scheme-smart",
   "widgetBackgroundColor": "sth",
   "cornerRadius": 12,
   "mouseAccelProfile": "flat",
@@ -70,11 +71,22 @@
   "matugenTemplateEquibop": false,
   "matugenTemplateFoot": false,
   "matugenTemplateAlacritty": false,
+  "matugenTemplateNeovim": true,
   "matugenTemplateWezterm": false,
   "matugenTemplateKcolorscheme": false,
   "matugenTemplateVscode": false,
   "matugenTemplateEmacs": false,
   "matugenTemplateZed": false,
+  "matugenTemplateNeovimSettings": {
+    "dark": {
+      "baseTheme": "default-dark",
+      "harmony": 0.3
+    },
+    "light": {
+      "baseTheme": "default-light",
+      "harmony": 0.5
+    }
+  },
   "maxFprintTries": 3,
   "notificationCompactMode": true,
   "osdAlwaysShowValue": true,

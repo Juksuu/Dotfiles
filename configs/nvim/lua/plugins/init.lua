@@ -32,6 +32,7 @@ vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/AvengeMedia/base46",
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/folke/lazydev.nvim",
     "https://github.com/direnv/direnv.vim",
@@ -72,6 +73,9 @@ vim.pack.add({
 
 vim.cmd.packadd("nvim.undotree")
 
+-- Load colorscheme
+require("dynamic_colors").initColors()
+
 require("gitsigns").setup()
 require("fidget").setup({})
 require("mini.pairs").setup()
@@ -90,7 +94,6 @@ require("render-markdown").setup({
 vim.keymap.set("n", "<leader>gs", "<cmd>Neogit<CR>")
 
 -- Load plugin files
-require("plugins.catppuccin")
 require("plugins.treesitter")
 require("plugins.lsp")
 -- require("plugins.heirline")

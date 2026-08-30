@@ -1,6 +1,6 @@
 require("lualine").setup({
     options = {
-        theme = "catppuccin-nvim",
+        theme = require("dynamic_colors").getLualineTheme(),
     },
     sections = {
         lualine_a = { "mode" },
