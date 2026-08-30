@@ -79,12 +79,12 @@
   "matugenTemplateZed": false,
   "matugenTemplateNeovimSettings": {
     "dark": {
-      "baseTheme": "default-dark",
+      "baseTheme": "everforest",
       "harmony": 0.3
     },
     "light": {
-      "baseTheme": "default-light",
-      "harmony": 0.5
+      "baseTheme": "rosepine-dawn",
+      "harmony": 0.3
     }
   },
   "maxFprintTries": 3,

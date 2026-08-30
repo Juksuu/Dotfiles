@@ -3,8 +3,12 @@ require("base46").setup({
         NormalFloat = { link = "Normal" },
 
         NeogitDiffAdd = { link = "DiffAdd" },
+        NeogitDiffAddHighlight = { link = "DiffAdd" },
         NeogitDiffDelete = { link = "DiffDelete" },
         NeogitDiffDeleteHighlight = { link = "DiffDelete" },
+    },
+    hl_add = {
+        SnacksPickerListCursorLine = { link = "Pmenu" },
     },
 })
 vim.cmd.colorscheme("dms")
