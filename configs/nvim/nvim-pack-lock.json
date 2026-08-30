@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "base46": {
+      "rev": "83522e02c6c3b4ea901c4bffd9e0a5e0371c1fe6",
+      "src": "https://github.com/AvengeMedia/base46"
+    },
     "blink-ripgrep.nvim": {
       "rev": "5ed7bac817777994cb80abccd052b73eb844166c",
       "src": "https://github.com/mikavilpas/blink-ripgrep.nvim",
@@ -82,7 +86,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "3928e638fdedf195b23ae5a18f024afa487982bc",
+      "rev": "684cb45c2faa24ce463b4fe9aaf011bfe1e0fb26",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -94,7 +98,7 @@
       "src": "https://github.com/hrsh7th/nvim-pasta"
     },
     "nvim-treesitter": {
-      "rev": "8b98b4470eb326f1c7b50dae79f8c963568e5720",
+      "rev": "857651fce37eba032ebe28f3a206283cdc65c45a",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {

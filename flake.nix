@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dank-material-shell = {
-      url = "github:AvengeMedia/DankMaterialShell?rev=dca1bd35917710900e9b4f97c91c2d9cbeca015b";
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dank-greeter = {
