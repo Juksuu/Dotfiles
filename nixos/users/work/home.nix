@@ -118,6 +118,7 @@
       wtc = "~/scripts/git/wtc.sh";
       gib = "~/scripts/git/gib.sh";
       llm = "llama-swap --config ~/.config/llama-swap/config.yaml --listen localhost:42069";
+      sync-zen-colors = "~/scripts/sync-zen-colors.sh";
     };
 
     plugins = [

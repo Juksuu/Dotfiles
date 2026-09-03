@@ -2,15 +2,22 @@
   "currentThemeName": "dynamic",
   "currentThemeCategory": "dynamic",
   "matugenScheme": "scheme-smart",
+  "popupTransparency": 0.8,
+  "floatingWindowTransparency": 0.8,
+  "floatingWindowForegroundTransparency": 0.8,
   "widgetBackgroundColor": "sth",
   "cornerRadius": 12,
   "mouseAccelProfile": "flat",
   "clockFormat": "24h",
   "animationSpeed": 2,
-  "m3ElevationColorMode": "surfaceVariant",
+  "m3ElevationIntensity": 5,
+  "m3ElevationOpacity": 15,
+  "m3ElevationColorMode": "primary",
+  "m3ElevationLightDirection": "autoBar",
   "blurEnabled": true,
-  "blurBorderEnabled": false,
-  "blurBorderOpacity": 1,
+  "foregroundLayerTransparency": 0.8,
+  "blurLayerOutlineOpacity": 0.1,
+  "blurBorderOpacity": 0.12,
   "blurredWallpaperLayer": true,
   "controlCenterShowVpnIcon": false,
   "controlCenterWidgets": [
@@ -39,6 +46,8 @@
   "workspaceDragReorder": false,
   "keyboardLayoutNameCompactMode": true,
   "runningAppsCurrentWorkspace": false,
+  "niriOverviewLauncherStyle": "spotlight",
+  "launcherStyle": "spotlight",
   "cursorSettings": {
     "theme": "Bibata-Modern-Ice",
     "size": 24,
@@ -67,12 +76,12 @@
   "matugenTemplateQt5ct": false,
   "matugenTemplateFirefox": false,
   "matugenTemplatePywalfox": false,
-  "matugenTemplateZenBrowser": false,
   "matugenTemplateEquibop": false,
   "matugenTemplateFoot": false,
   "matugenTemplateAlacritty": false,
   "matugenTemplateNeovim": true,
   "matugenTemplateWezterm": false,
+  "matugenTemplateDgop": false,
   "matugenTemplateKcolorscheme": false,
   "matugenTemplateVscode": false,
   "matugenTemplateEmacs": false,
@@ -89,6 +98,40 @@
   },
   "maxFprintTries": 3,
   "notificationCompactMode": true,
+  "dankIslandTransparency": 0.7,
+  "dankIslandHomeLayout": [
+    {
+      "id": "media",
+      "enabled": true
+    },
+    {
+      "id": "clock",
+      "enabled": true
+    },
+    {
+      "id": "weather",
+      "enabled": true
+    },
+    {
+      "id": "status",
+      "enabled": false
+    },
+    {
+      "id": "volume",
+      "enabled": false
+    },
+    {
+      "id": "brightness",
+      "enabled": false
+    },
+    {
+      "id": "notifications",
+      "enabled": false
+    }
+  ],
+  "dankIslandSatelliteBackground": true,
+  "dankIslandSatelliteTransparency": 0.7,
+  "dankIslandSatelliteSwoopRadius": 6,
   "osdAlwaysShowValue": true,
   "osdMediaPlaybackEnabled": true,
   "osdPowerProfileEnabled": true,
@@ -182,7 +225,11 @@
       "widgetOutlineEnabled": false,
       "iconScale": 1,
       "widgetPadding": 8,
-      "shadowIntensity": 0
+      "shadowIntensity": 0,
+      "attachToScreenEdge": false,
+      "maximizeDetection": true,
+      "barInsetPadding": 4,
+      "hoverPopouts": false
     }
   ],
   "desktopClockCustomColor": {
@@ -214,6 +261,15 @@
   "builtInPluginSettings": {
     "dms_settings_search": {
       "trigger": "?"
+    },
+    "dms_clipboard_search": {
+      "trigger": "cb"
+    },
+    "dms_power": {
+      "trigger": "pw"
+    },
+    "dms_qr_generator": {
+      "trigger": "qrg"
     }
   },
   "configVersion": 16
