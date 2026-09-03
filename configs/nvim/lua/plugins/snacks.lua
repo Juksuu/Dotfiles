@@ -5,7 +5,10 @@ require("snacks").setup({
     scope = { enabled = true },
     scroll = { enabled = true },
     words = { enabled = true },
-    explorer = { trash = true },
+    explorer = {
+        trash = true,
+        replace_netrw = false,
+    },
 
     scratch = {
         win = {

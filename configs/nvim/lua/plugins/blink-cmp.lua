@@ -20,6 +20,13 @@ require("blink.cmp").setup({
                 opts = {
                     backend = {
                         use = "gitgrep-or-ripgrep",
+                        gitgrep = {
+                            additional_gitgrep_options = {
+                                -- exclude files marked with the 'blink-ripgrep-ignore' attribute in
+                                -- .gitattributes
+                                ":(exclude,attr:ripgrep-ignore)",
+                            },
+                        },
                     },
                 },
                 score_offset = -2,
