@@ -98,40 +98,6 @@
   },
   "maxFprintTries": 3,
   "notificationCompactMode": true,
-  "dankIslandTransparency": 0.7,
-  "dankIslandHomeLayout": [
-    {
-      "id": "media",
-      "enabled": true
-    },
-    {
-      "id": "clock",
-      "enabled": true
-    },
-    {
-      "id": "weather",
-      "enabled": true
-    },
-    {
-      "id": "status",
-      "enabled": false
-    },
-    {
-      "id": "volume",
-      "enabled": false
-    },
-    {
-      "id": "brightness",
-      "enabled": false
-    },
-    {
-      "id": "notifications",
-      "enabled": false
-    }
-  ],
-  "dankIslandSatelliteBackground": true,
-  "dankIslandSatelliteTransparency": 0.7,
-  "dankIslandSatelliteSwoopRadius": 6,
   "osdAlwaysShowValue": true,
   "osdMediaPlaybackEnabled": true,
   "osdPowerProfileEnabled": true,
@@ -272,5 +238,5 @@
       "trigger": "qrg"
     }
   },
-  "configVersion": 16
+  "configVersion": 18
 }
